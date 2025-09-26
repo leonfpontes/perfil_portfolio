@@ -539,23 +539,22 @@ li + li {
   box-shadow: var(--shadow-soft);
 }
 
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
 .certification-card {
   background: var(--color-surface-alt);
   border-radius: var(--radius-md);
   padding: 1.7rem 1.9rem;
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: var(--shadow-soft);
-  flex: 0 0 var(
-    --carousel-card-width,
-    calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3)
-  );
-  scroll-snap-align: start;
   position: relative;
   overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease,
-    background 0.35s ease, opacity 0.35s ease;
-  opacity: 0.7;
-  transform: scale(0.94);
+    background 0.35s ease;
 }
 
 .certification-card h3 {
@@ -579,103 +578,10 @@ li + li {
   text-transform: uppercase;
 }
 
-.certification-card--focus,
-.certification-card.is-active {
+.certification-card--focus {
   border: 1px solid rgba(246, 183, 60, 0.55);
   background: linear-gradient(150deg, rgba(246, 183, 60, 0.16), rgba(91, 128, 255, 0.1));
   box-shadow: 0 32px 60px rgba(10, 13, 35, 0.7);
-  opacity: 1;
-  transform: scale(1);
-}
-
-.carousel {
-  position: relative;
-  --carousel-gap: 1.5rem;
-  --carousel-visible: 3;
-  --carousel-card-max-width: 320px;
-  --carousel-viewport-width: min(
-    100%,
-    calc(
-      var(--carousel-visible, 3) * var(--carousel-card-max-width, 320px) +
-        (var(--carousel-visible, 3) - 1) * var(--carousel-gap, 1.5rem)
-    )
-  );
-}
-
-.carousel__viewport {
-  --carousel-card-width: calc(
-    (100% - (var(--carousel-visible, 3) - 1) * var(--carousel-gap, 1.5rem)) /
-      var(--carousel-visible, 3)
-  );
-  display: flex;
-  align-items: stretch;
-  gap: var(--carousel-gap, 1.5rem);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-snap-stop: always;
-  padding: 0.5rem 0 0.75rem;
-  margin: 0;
-  width: 100%;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(246, 183, 60, 0.5) rgba(255, 255, 255, 0.05);
-}
-
-.carousel__viewport::-webkit-scrollbar {
-  height: 8px;
-}
-
-.carousel__viewport::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 999px;
-}
-
-.carousel__viewport::-webkit-scrollbar-thumb {
-  background: rgba(246, 183, 60, 0.45);
-  border-radius: 999px;
-}
-
-.carousel__control {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(12, 16, 32, 0.75);
-  color: var(--color-text);
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  z-index: 2;
-}
-
-.carousel__control:hover,
-.carousel__control:focus {
-  transform: translateY(calc(-50% - 2px));
-  border-color: rgba(246, 183, 60, 0.6);
-  background: rgba(12, 16, 32, 0.95);
-}
-
-.carousel__control[disabled] {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.carousel__control--prev {
-  left: 0.5rem;
-}
-
-.carousel__control--next {
-  right: 0.5rem;
-}
-
-.carousel__hint {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: rgba(229, 233, 255, 0.6);
 }
 
 .testimonial-grid {
@@ -811,19 +717,13 @@ li + li {
 }
 
 @media (max-width: 1080px) {
-  .carousel {
-    --carousel-visible: 2;
+  .certifications-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 720px) {
-  .carousel {
-    --carousel-gap: 1rem;
-    --carousel-visible: 1;
-    --carousel-card-max-width: min(320px, 86vw);
-  }
-
-  .carousel__control {
-    display: none;
+  .certifications-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
