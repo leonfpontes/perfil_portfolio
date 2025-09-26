@@ -707,10 +707,28 @@
           return;
         }
 
+        const readVisibleSetting = (element) => {
+          if (!element) {
+            return undefined;
+          }
+
+          const styles = window.getComputedStyle(element);
+          const rawValue = styles.getPropertyValue('--carousel-visible').trim();
+          if (!rawValue) {
+            return undefined;
+          }
+
+          const parsed = Number.parseInt(rawValue, 10);
+          if (!Number.isNaN(parsed) && parsed > 0) {
+            return parsed;
+          }
+
+          return undefined;
+        };
+
         const getCardsPerView = () => {
-          const styles = window.getComputedStyle(viewport);
-          const visible = Number.parseInt(styles.getPropertyValue('--carousel-visible'), 10);
-          if (!Number.isNaN(visible) && visible > 0) {
+          const visible = readVisibleSetting(carousel) ?? readVisibleSetting(viewport);
+          if (typeof visible === 'number') {
             return visible;
           }
 
@@ -807,7 +825,9 @@
         viewport.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', () => goToCard(activeIndex, { smooth: false }));
 
-        goToCard(0, { smooth: false });
+        window.requestAnimationFrame(() => {
+          goToCard(0, { smooth: false });
+        });
 
       });
     </script>
