@@ -458,7 +458,7 @@ li + li {
   padding: 1.7rem 1.9rem;
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: var(--shadow-soft);
-  flex: 0 0 var(--carousel-card-width);
+  flex: 0 0 var(--carousel-card-width, calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3));
   scroll-snap-align: center;
   position: relative;
   overflow: hidden;
@@ -506,14 +506,15 @@ li + li {
 }
 
 .carousel__viewport {
-  --carousel-card-width: calc((100% - 2 * var(--carousel-gap)) / 3);
+  --carousel-gap: 1.5rem;
+  --carousel-card-width: calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3);
   display: flex;
   align-items: stretch;
-  gap: var(--carousel-gap);
+  gap: var(--carousel-gap, 1.5rem);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-snap-stop: always;
-  scroll-padding-inline: calc((100% - var(--carousel-card-width)) / 2);
+  scroll-padding-inline: calc((100% - var(--carousel-card-width, calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3))) / 2);
   padding: 0.5rem 0 0.75rem;
   width: 100%;
   scrollbar-width: thin;
@@ -668,7 +669,7 @@ li + li {
 
 @media (max-width: 1080px) {
   .carousel__viewport {
-    --carousel-card-width: calc((100% - var(--carousel-gap)) / 2);
+    --carousel-card-width: calc((100% - var(--carousel-gap, 1.5rem)) / 2);
   }
 }
 
