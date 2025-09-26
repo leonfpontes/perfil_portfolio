@@ -158,6 +158,17 @@ li + li {
   align-items: start;
 }
 
+@media (min-width: 960px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .hero__panel {
+    align-self: stretch;
+  }
+}
+
 .hero__profile h1 {
   font-size: clamp(2.2rem, 3.9vw, 3.4rem);
   margin-bottom: 1.25rem;
