@@ -406,22 +406,22 @@
               <span aria-hidden="true">&#10094;</span>
             </button>
             <div class="carousel__viewport" data-carousel-viewport>
-              <article class="certification-card certification-card--focus">
+              <article class="certification-card">
                 <h3>Transitioning from Waterfall to Agile Project Management</h3>
                 <p>LinkedIn Learning · Emitido jan 2020</p>
                 <span class="certification-card__tag">Agile Leadership</span>
               </article>
-              <article class="certification-card certification-card--focus">
+              <article class="certification-card">
                 <h3>Scrum: Advanced</h3>
                 <p>LinkedIn Learning · Emitido jan 2020</p>
                 <span class="certification-card__tag">Scrum Mastery</span>
               </article>
-              <article class="certification-card certification-card--focus">
+              <article class="certification-card">
                 <h3>OKR Bootcamp</h3>
                 <p>Sympla · Emitido jul 2019</p>
                 <span class="certification-card__tag">Governança &amp; Métricas</span>
               </article>
-              <article class="certification-card certification-card--focus">
+              <article class="certification-card">
                 <h3>Kanban Foundation Certificate</h3>
                 <p>Certiprof · Emitido set 2020</p>
                 <span class="certification-card__tag">Fluxo Contínuo</span>
@@ -686,34 +686,103 @@
         const viewport = carousel.querySelector('[data-carousel-viewport]');
         const prevButton = carousel.querySelector('[data-carousel-prev]');
         const nextButton = carousel.querySelector('[data-carousel-next]');
+        const cards = viewport ? Array.from(viewport.querySelectorAll('.certification-card')) : [];
 
-        if (!viewport) {
+        if (!viewport || !cards.length) {
           return;
         }
 
-        const getScrollAmount = () => Math.max(viewport.clientWidth * 0.8, 240);
+        const clampIndex = (index) => Math.max(0, Math.min(index, cards.length - 1));
+        const applyActiveState = (index) => {
+          cards.forEach((card, cardIndex) => {
+            card.classList.toggle('is-active', cardIndex === index);
+          });
+        };
+
+        const scrollToCard = (index, smooth = true) => {
+          const targetCard = cards[clampIndex(index)];
+          if (!targetCard) {
+            return;
+          }
+
+          const availableScroll = viewport.scrollWidth - viewport.clientWidth;
+          const offset = targetCard.offsetLeft - (viewport.clientWidth - targetCard.offsetWidth) / 2;
+          const targetScroll = Math.min(Math.max(offset, 0), availableScroll);
+
+          viewport.scrollTo({
+            left: targetScroll,
+            behavior: smooth ? 'smooth' : 'auto',
+          });
+        };
+
+        let activeIndex = clampIndex(cards.length > 1 ? 1 : 0);
 
         const updateControls = () => {
-          const maxScroll = viewport.scrollWidth - viewport.clientWidth;
           if (prevButton) {
-            prevButton.disabled = viewport.scrollLeft <= 8;
+            prevButton.disabled = activeIndex <= 0;
           }
           if (nextButton) {
-            nextButton.disabled = viewport.scrollLeft >= maxScroll - 8;
+            nextButton.disabled = activeIndex >= cards.length - 1;
           }
         };
 
-        prevButton?.addEventListener('click', () => {
-          viewport.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-        });
+        const goToCard = (index, { smooth = true } = {}) => {
+          const nextIndex = clampIndex(index);
+          if (nextIndex === activeIndex && smooth) {
+            scrollToCard(nextIndex, smooth);
+            return;
+          }
 
-        nextButton?.addEventListener('click', () => {
-          viewport.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-        });
+          activeIndex = nextIndex;
+          applyActiveState(activeIndex);
+          updateControls();
+          scrollToCard(activeIndex, smooth);
+        };
 
-        viewport.addEventListener('scroll', updateControls, { passive: true });
-        window.addEventListener('resize', updateControls);
+        const findClosestIndex = () => {
+          const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
+          let closest = activeIndex;
+          let minDistance = Number.POSITIVE_INFINITY;
+
+          cards.forEach((card, index) => {
+            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+            const distance = Math.abs(viewportCenter - cardCenter);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closest = index;
+            }
+          });
+
+          return closest;
+        };
+
+        let ticking = false;
+        const handleScroll = () => {
+          if (ticking) {
+            return;
+          }
+
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            const closestIndex = findClosestIndex();
+            if (closestIndex !== activeIndex) {
+              activeIndex = closestIndex;
+              applyActiveState(activeIndex);
+              updateControls();
+            }
+            ticking = false;
+          });
+        };
+
+        prevButton?.addEventListener('click', () => goToCard(activeIndex - 1));
+        nextButton?.addEventListener('click', () => goToCard(activeIndex + 1));
+
+        viewport.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', () => goToCard(activeIndex, { smooth: false }));
+
+        applyActiveState(activeIndex);
         updateControls();
+        scrollToCard(activeIndex, false);
       });
     </script>
   </body>

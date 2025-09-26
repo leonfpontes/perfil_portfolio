@@ -399,10 +399,14 @@ li + li {
   padding: 1.7rem 1.9rem;
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: var(--shadow-soft);
-  flex: 0 0 clamp(260px, 28vw, 320px);
-  scroll-snap-align: start;
+  flex: 0 0 var(--carousel-card-width);
+  scroll-snap-align: center;
   position: relative;
   overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease,
+    background 0.35s ease, opacity 0.35s ease;
+  opacity: 0.7;
+  transform: scale(0.94);
 }
 
 .certification-card h3 {
@@ -426,13 +430,17 @@ li + li {
   text-transform: uppercase;
 }
 
-.certification-card--focus {
+.certification-card--focus,
+.certification-card.is-active {
   border: 1px solid rgba(246, 183, 60, 0.55);
   background: linear-gradient(150deg, rgba(246, 183, 60, 0.16), rgba(91, 128, 255, 0.1));
   box-shadow: 0 32px 60px rgba(10, 13, 35, 0.7);
+  opacity: 1;
+  transform: scale(1);
 }
 
 .carousel {
+  --carousel-gap: 1.5rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -440,10 +448,14 @@ li + li {
 }
 
 .carousel__viewport {
+  --carousel-card-width: calc((100% - 2 * var(--carousel-gap)) / 3);
   display: flex;
-  gap: 1.5rem;
+  align-items: stretch;
+  gap: var(--carousel-gap);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+  scroll-padding-inline: calc((100% - var(--carousel-card-width)) / 2);
   padding: 0.5rem 0 0.75rem;
   width: 100%;
   scrollbar-width: thin;
@@ -596,17 +608,30 @@ li + li {
   }
 }
 
+@media (max-width: 1080px) {
+  .carousel__viewport {
+    --carousel-card-width: calc((100% - var(--carousel-gap)) / 2);
+  }
+}
+
 @media (max-width: 720px) {
   .carousel {
     gap: 0.5rem;
   }
 
+  .carousel__viewport {
+    --carousel-gap: 1rem;
+    --carousel-card-width: min(320px, 86vw);
+  }
+
   .carousel__control {
     display: none;
   }
+}
 
-  .certification-card {
-    flex-basis: clamp(240px, 80vw, 320px);
+@media (max-width: 520px) {
+  .carousel__viewport {
+    --carousel-card-width: 100%;
   }
 }
 
