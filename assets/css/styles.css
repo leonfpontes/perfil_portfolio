@@ -469,8 +469,11 @@ li + li {
   padding: 1.7rem 1.9rem;
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: var(--shadow-soft);
-  flex: 0 0 var(--carousel-card-width, calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3));
-  scroll-snap-align: center;
+  flex: 0 0 var(
+    --carousel-card-width,
+    calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3)
+  );
+  scroll-snap-align: start;
   position: relative;
   overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease,
@@ -511,23 +514,32 @@ li + li {
 
 .carousel {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  --carousel-gap: 1.5rem;
+  --carousel-visible: 3;
+  --carousel-card-max-width: 320px;
+  --carousel-viewport-width: min(
+    100%,
+    calc(
+      var(--carousel-visible, 3) * var(--carousel-card-max-width, 320px) +
+        (var(--carousel-visible, 3) - 1) * var(--carousel-gap, 1.5rem)
+    )
+  );
 }
 
 .carousel__viewport {
-  --carousel-gap: 1.5rem;
-  --carousel-card-width: calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3);
+  --carousel-card-width: calc(
+    (100% - (var(--carousel-visible, 3) - 1) * var(--carousel-gap, 1.5rem)) /
+      var(--carousel-visible, 3)
+  );
   display: flex;
   align-items: stretch;
   gap: var(--carousel-gap, 1.5rem);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-snap-stop: always;
-  scroll-padding-inline: calc((100% - var(--carousel-card-width, calc((100% - 2 * var(--carousel-gap, 1.5rem)) / 3))) / 2);
   padding: 0.5rem 0 0.75rem;
-  width: 100%;
+  margin: 0 auto;
+  width: var(--carousel-viewport-width, 100%);
   scrollbar-width: thin;
   scrollbar-color: rgba(246, 183, 60, 0.5) rgba(255, 255, 255, 0.05);
 }
@@ -557,12 +569,16 @@ li + li {
   background: rgba(12, 16, 32, 0.75);
   color: var(--color-text);
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  z-index: 2;
 }
 
 .carousel__control:hover,
 .carousel__control:focus {
-  transform: translateY(-2px);
+  transform: translateY(calc(-50% - 2px));
   border-color: rgba(246, 183, 60, 0.6);
   background: rgba(12, 16, 32, 0.95);
 }
@@ -570,6 +586,14 @@ li + li {
 .carousel__control[disabled] {
   opacity: 0.35;
   cursor: not-allowed;
+}
+
+.carousel__control--prev {
+  left: calc((100% - var(--carousel-viewport-width, 100%)) / 2 + 0.5rem);
+}
+
+.carousel__control--next {
+  right: calc((100% - var(--carousel-viewport-width, 100%)) / 2 + 0.5rem);
 }
 
 .carousel__hint {
@@ -679,19 +703,16 @@ li + li {
 }
 
 @media (max-width: 1080px) {
-  .carousel__viewport {
-    --carousel-card-width: calc((100% - var(--carousel-gap, 1.5rem)) / 2);
+  .carousel {
+    --carousel-visible: 2;
   }
 }
 
 @media (max-width: 720px) {
   .carousel {
-    gap: 0.5rem;
-  }
-  
-  .carousel__viewport {
     --carousel-gap: 1rem;
-    --carousel-card-width: min(320px, 86vw);
+    --carousel-visible: 1;
+    --carousel-card-max-width: min(320px, 86vw);
   }
 
   .carousel__control {
