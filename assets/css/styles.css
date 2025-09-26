@@ -538,8 +538,8 @@ li + li {
   scroll-snap-type: x mandatory;
   scroll-snap-stop: always;
   padding: 0.5rem 0 0.75rem;
-  margin: 0 auto;
-  width: var(--carousel-viewport-width, 100%);
+  margin: 0;
+  width: 100%;
   scrollbar-width: thin;
   scrollbar-color: rgba(246, 183, 60, 0.5) rgba(255, 255, 255, 0.05);
 }
@@ -589,11 +589,11 @@ li + li {
 }
 
 .carousel__control--prev {
-  left: calc((100% - var(--carousel-viewport-width, 100%)) / 2 + 0.5rem);
+  left: 0.5rem;
 }
 
 .carousel__control--next {
-  right: calc((100% - var(--carousel-viewport-width, 100%)) / 2 + 0.5rem);
+  right: 0.5rem;
 }
 
 .carousel__hint {
