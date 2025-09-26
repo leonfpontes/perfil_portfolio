@@ -681,6 +681,20 @@
         yearElement.textContent = new Date().getFullYear();
       }
 
+      const topbar = document.querySelector('.topbar');
+      const updateTopbarOffset = () => {
+        if (!topbar) {
+          return;
+        }
+
+        const offset = topbar.offsetHeight + 24;
+        document.documentElement.style.setProperty('--topbar-offset', `${offset}px`);
+      };
+
+      updateTopbarOffset();
+      window.addEventListener('load', updateTopbarOffset);
+      window.addEventListener('resize', updateTopbarOffset);
+
       const carousels = document.querySelectorAll('[data-carousel]');
       carousels.forEach((carousel) => {
         const viewport = carousel.querySelector('[data-carousel-viewport]');

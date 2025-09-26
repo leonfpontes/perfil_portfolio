@@ -17,6 +17,7 @@
   --radius-md: 20px;
   --radius-sm: 14px;
   --container-width: min(1160px, 92vw);
+  --topbar-offset: 104px;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -139,6 +140,11 @@ li + li {
 .menu a:hover,
 .menu a:focus {
   color: var(--color-text);
+}
+
+.hero,
+.section {
+  scroll-margin-top: var(--topbar-offset);
 }
 
 .hero {
