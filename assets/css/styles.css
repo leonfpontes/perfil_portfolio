@@ -587,7 +587,7 @@ li + li {
 .testimonial-grid {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .testimonial-card {
@@ -617,8 +617,8 @@ li + li {
 
 .testimonial-card__header {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .testimonial-card__name {
@@ -632,17 +632,6 @@ li + li {
   color: rgba(229, 233, 255, 0.7);
 }
 
-.testimonial-card__relationship {
-  align-self: flex-start;
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  background: rgba(246, 183, 60, 0.18);
-  color: var(--color-accent);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
 
 .testimonial-card__context {
   margin: 0;
@@ -650,24 +639,48 @@ li + li {
   color: rgba(229, 233, 255, 0.65);
 }
 
-.testimonial-card blockquote {
+.testimonial-card__quote {
   margin: 0;
-  padding: 0;
+  padding: 1.1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(246, 183, 60, 0.16), rgba(91, 128, 255, 0.12));
+  border-left: 3px solid rgba(246, 183, 60, 0.6);
+  border-radius: calc(var(--radius-sm) * 1.1);
   color: var(--color-text);
-  font-size: 0.98rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-style: italic;
 }
 
-.testimonial-card blockquote p {
+.testimonial-card__quote p {
   margin: 0;
   color: inherit;
 }
 
 .testimonial-card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   font-size: 0.8rem;
-  color: rgba(229, 233, 255, 0.6);
+  color: rgba(229, 233, 255, 0.75);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 0.85rem;
+  padding-top: 1rem;
+}
+
+.testimonial-card__competencies {
+  display: block;
+}
+
+.testimonial-card__relationship {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(246, 183, 60, 0.2);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 640px) {
@@ -675,12 +688,14 @@ li + li {
     padding: 1.5rem;
   }
 
-  .testimonial-card__header {
-    flex-direction: column;
+  .testimonial-grid {
+    grid-template-columns: 1fr;
   }
+}
 
-  .testimonial-card__relationship {
-    align-self: flex-start;
+@media (max-width: 1080px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
