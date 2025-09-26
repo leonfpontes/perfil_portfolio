@@ -707,68 +707,80 @@
           return;
         }
 
-        const clampIndex = (index) => Math.max(0, Math.min(index, cards.length - 1));
-        const applyActiveState = (index) => {
+        const getCardsPerView = () => {
+          const styles = window.getComputedStyle(viewport);
+          const visible = Number.parseInt(styles.getPropertyValue('--carousel-visible'), 10);
+          if (!Number.isNaN(visible) && visible > 0) {
+            return visible;
+          }
+
+          const firstCardWidth = cards[0]?.getBoundingClientRect().width || viewport.clientWidth;
+          if (!firstCardWidth) {
+            return 1;
+          }
+
+          return Math.max(1, Math.round(viewport.clientWidth / firstCardWidth));
+        };
+
+        const clampIndex = (index) => {
+          const perView = getCardsPerView();
+          const maxIndex = Math.max(0, cards.length - perView);
+          return Math.max(0, Math.min(index, maxIndex));
+        };
+
+        let activeIndex = 0;
+
+        const applyActiveState = () => {
+          const perView = getCardsPerView();
           cards.forEach((card, cardIndex) => {
-            card.classList.toggle('is-active', cardIndex === index);
+            const isActive = cardIndex >= activeIndex && cardIndex < activeIndex + perView;
+            card.classList.toggle('is-active', isActive);
           });
         };
 
         const scrollToCard = (index, smooth = true) => {
-          const targetCard = cards[clampIndex(index)];
+          const targetIndex = clampIndex(index);
+          const targetCard = cards[targetIndex];
           if (!targetCard) {
             return;
           }
 
-          const availableScroll = viewport.scrollWidth - viewport.clientWidth;
-          const offset = targetCard.offsetLeft - (viewport.clientWidth - targetCard.offsetWidth) / 2;
-          const targetScroll = Math.min(Math.max(offset, 0), availableScroll);
-
           viewport.scrollTo({
-            left: targetScroll,
+            left: targetCard.offsetLeft,
             behavior: smooth ? 'smooth' : 'auto',
           });
         };
 
-        let activeIndex = clampIndex(cards.length > 1 ? 1 : 0);
-
         const updateControls = () => {
+          const perView = getCardsPerView();
+          const maxIndex = Math.max(0, cards.length - perView);
           if (prevButton) {
             prevButton.disabled = activeIndex <= 0;
           }
           if (nextButton) {
-            nextButton.disabled = activeIndex >= cards.length - 1;
+            nextButton.disabled = activeIndex >= maxIndex;
           }
         };
 
         const goToCard = (index, { smooth = true } = {}) => {
           const nextIndex = clampIndex(index);
-          if (nextIndex === activeIndex && smooth) {
-            scrollToCard(nextIndex, smooth);
-            return;
-          }
-
           activeIndex = nextIndex;
-          applyActiveState(activeIndex);
+          applyActiveState();
           updateControls();
           scrollToCard(activeIndex, smooth);
         };
 
-        const findClosestIndex = () => {
-          const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
-          let closest = activeIndex;
-          let minDistance = Number.POSITIVE_INFINITY;
+        const findFirstVisibleIndex = () => {
+          const scrollLeft = viewport.scrollLeft;
+          let firstVisible = 0;
 
           cards.forEach((card, index) => {
-            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-            const distance = Math.abs(viewportCenter - cardCenter);
-            if (distance < minDistance) {
-              minDistance = distance;
-              closest = index;
+            if (card.offsetLeft <= scrollLeft + 1) {
+              firstVisible = index;
             }
           });
 
-          return closest;
+          return clampIndex(firstVisible);
         };
 
         let ticking = false;
@@ -779,25 +791,23 @@
 
           ticking = true;
           window.requestAnimationFrame(() => {
-            const closestIndex = findClosestIndex();
+            const closestIndex = findFirstVisibleIndex();
             if (closestIndex !== activeIndex) {
               activeIndex = closestIndex;
-              applyActiveState(activeIndex);
+              applyActiveState();
               updateControls();
             }
             ticking = false;
           });
         };
 
-        prevButton?.addEventListener('click', () => goToCard(activeIndex - 1));
-        nextButton?.addEventListener('click', () => goToCard(activeIndex + 1));
+        prevButton?.addEventListener('click', () => goToCard(activeIndex - getCardsPerView()));
+        nextButton?.addEventListener('click', () => goToCard(activeIndex + getCardsPerView()));
 
         viewport.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', () => goToCard(activeIndex, { smooth: false }));
 
-        applyActiveState(activeIndex);
-        updateControls();
-        scrollToCard(activeIndex, false);
+        goToCard(0, { smooth: false });
 
       });
     </script>
