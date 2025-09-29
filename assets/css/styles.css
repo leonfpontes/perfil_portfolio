@@ -708,7 +708,8 @@ li + li {
 
 .testimonial-carousel__viewport {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .testimonial-carousel[data-enhanced='false'] .testimonial-carousel__viewport {
