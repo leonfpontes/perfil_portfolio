@@ -6,7 +6,9 @@ informações de carreira, competências, certificações e canais de contato.
 ## Estrutura
 
 - `index.html` — página principal do portfólio.
-- `assets/css/styles.css` — estilos globais do site.
+- `css/styles.css` — estilos globais do site.
+- `img/` — diretório para ativos visuais do projeto.
+- `js/` — diretório para scripts JavaScript do projeto.
 
 ## Como visualizar
 
