@@ -318,6 +318,41 @@
               </ul>
             </article>
           </div>
+          <div class="competency-insight">
+            <figure class="competency-insight__chart" aria-labelledby="competency-radar-title">
+              <figcaption id="competency-radar-title">Mapa radar das competências principais</figcaption>
+              <canvas id="competency-radar" role="img" aria-label="Gráfico radar destacando cinco competências"></canvas>
+            </figure>
+            <div class="competency-insight__legend">
+              <p>
+                Os eixos foram definidos a partir dos destaques mais recorrentes do portfólio: liderança de pessoas,
+                governança de PMO, visão estratégica de produto, agilidade em processos e comunicação executiva. Cada
+                nível representa a intensidade dessas habilidades descritas ao longo do site.
+              </p>
+              <dl class="competency-insight__scale">
+                <div>
+                  <dt>Liderança de Pessoas</dt>
+                  <dd>Experiência consolidada formando squads, promovendo feedbacks e cultura colaborativa.</dd>
+                </div>
+                <div>
+                  <dt>Governança &amp; PMO</dt>
+                  <dd>Estruturação de escritórios de projetos, rituais executivos e métricas de performance.</dd>
+                </div>
+                <div>
+                  <dt>Visão de Produto</dt>
+                  <dd>Tradução de necessidades em roadmaps e evolução contínua de soluções digitais.</dd>
+                </div>
+                <div>
+                  <dt>Agilidade &amp; Processos</dt>
+                  <dd>Aplicação de frameworks como Scrum, Lean e SAFe para garantir entregas iterativas.</dd>
+                </div>
+                <div>
+                  <dt>Comunicação Executiva</dt>
+                  <dd>Conexão entre stakeholders técnicos e de negócios com relatórios e insights acionáveis.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -786,6 +821,80 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" integrity="sha384-Og5We2L5zIwV6pHpAy/Z9mtiOqsCsJkT9EKyhWcIUeWBRSDmEr9YbwPwCLaAr6au" crossorigin="anonymous"></script>
+    <script>
+      const competencyCanvas = document.getElementById('competency-radar');
+      if (competencyCanvas && window.Chart) {
+        const competencyRadar = new Chart(competencyCanvas, {
+          type: 'radar',
+          data: {
+            labels: [
+              'Liderança de Pessoas',
+              'Governança & PMO',
+              'Visão de Produto',
+              'Agilidade & Processos',
+              'Comunicação Executiva',
+            ],
+            datasets: [
+              {
+                label: 'Nível de proficiência (0-100)',
+                data: [95, 92, 90, 88, 94],
+                fill: true,
+                backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                borderColor: 'rgba(59, 130, 246, 0.75)',
+                pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(37, 99, 235, 1)',
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            scales: {
+              r: {
+                suggestedMin: 60,
+                suggestedMax: 100,
+                ticks: {
+                  showLabelBackdrop: false,
+                  stepSize: 10,
+                },
+                grid: {
+                  circular: true,
+                },
+                angleLines: {
+                  lineWidth: 1,
+                },
+                pointLabels: {
+                  font: {
+                    size: 12,
+                    family: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                callbacks: {
+                  label(context) {
+                    return `${context.formattedValue} · ${context.label}`;
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        competencyCanvas.setAttribute(
+          'aria-description',
+          'Radar destaca liderança de pessoas, governança de PMO, visão de produto, agilidade em processos e comunicação executiva com níveis próximos ao topo.'
+        );
+      }
+    </script>
     <script>
       const yearElement = document.getElementById('year');
       if (yearElement) {
