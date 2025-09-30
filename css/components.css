@@ -204,7 +204,7 @@
   margin-top: 1.6rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(229, 233, 255, 0.55);
+  color: var(--color-text-subtle);
 }
 
 .competency-grid {

@@ -303,7 +303,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(229, 233, 255, 0.52);
+  color: var(--color-text-subtle);
   margin-bottom: 0.5rem;
 }
 
@@ -344,7 +344,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(229, 233, 255, 0.45);
+  color: var(--color-text-subtle);
 }
 
 .callout {

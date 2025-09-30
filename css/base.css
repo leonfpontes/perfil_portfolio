@@ -4,7 +4,8 @@
   --color-surface-alt: rgba(12, 16, 32, 0.85);
   --color-surface-strong: rgba(255, 255, 255, 0.05);
   --color-text: #f5f8ff;
-  --color-text-muted: rgba(229, 233, 255, 0.7);
+  --color-text-muted: rgba(229, 233, 255, 0.78);
+  --color-text-subtle: rgba(229, 233, 255, 0.62);
   --color-accent: #f6b73c;
   --color-accent-soft: rgba(246, 183, 60, 0.18);
   --color-border: rgba(255, 255, 255, 0.12);
