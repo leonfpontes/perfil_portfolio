@@ -6,7 +6,9 @@ informações de carreira, competências, certificações e canais de contato.
 ## Estrutura
 
 - `index.html` — página principal do portfólio.
-- `css/styles.css` — estilos globais do site.
+- `css/base.css`, `css/layout.css`, `css/components.css` — módulos de estilo
+  separados para fundamentos, layout e componentes. Podem ser combinados via
+  pré-processador (como Sass) para gerar um bundle único em produção.
 - `img/` — diretório para ativos visuais do projeto.
 - `js/` — diretório para scripts JavaScript do projeto.
 
