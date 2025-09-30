@@ -658,6 +658,17 @@ li + li {
   color: var(--color-text-muted);
 }
 
+.timeline__details {
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.timeline__detail {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
 .timeline h4 {
   font-size: 0.95rem;
   margin-top: 1.6rem;
