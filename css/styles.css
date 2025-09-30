@@ -236,9 +236,73 @@ li + li {
 }
 
 .brand__name {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   margin: 0;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
   font-size: 1.05rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: letter-spacing 260ms ease, transform 260ms ease,
+    text-shadow 260ms ease;
+}
+
+.brand__name::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  z-index: -2;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(246, 183, 60, 0.55), rgba(91, 128, 255, 0.45));
+  opacity: 0;
+  transform: scale(0.86);
+  filter: blur(18px);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.brand__name::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(246, 183, 60, 0.95), rgba(91, 128, 255, 0.95));
+  opacity: 0;
+  transform: scaleX(0.45);
+  transform-origin: left;
+  transition: transform 280ms ease, opacity 280ms ease;
+}
+
+.brand__name:hover,
+.brand__name:focus-visible {
+  letter-spacing: 0.08em;
+  transform: translateY(-1px);
+  text-shadow: 0 14px 30px rgba(10, 17, 42, 0.45);
+  text-decoration: none;
+}
+
+.brand__name:hover::before,
+.brand__name:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.brand__name:hover::after,
+.brand__name:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.brand__name:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(246, 183, 60, 0.35);
 }
 
 .brand__role {
