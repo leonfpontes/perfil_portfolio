@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 28" role="img" aria-labelledby="title">
+  <title>Flag of the United States</title>
+  <rect width="40" height="28" fill="#b22234" rx="4" />
+  <g fill="#fff">
+    <rect y="4" width="40" height="2" />
+    <rect y="8" width="40" height="2" />
+    <rect y="12" width="40" height="2" />
+    <rect y="16" width="40" height="2" />
+    <rect y="20" width="40" height="2" />
+    <rect y="24" width="40" height="2" />
+  </g>
+  <rect width="18" height="14" fill="#3c3b6e" rx="2" />
+  <g fill="#fff" transform="translate(2 2)">
+    <circle cx="2" cy="2" r="0.7" />
+    <circle cx="6" cy="2" r="0.7" />
+    <circle cx="10" cy="2" r="0.7" />
+    <circle cx="14" cy="2" r="0.7" />
+    <circle cx="4" cy="5" r="0.7" />
+    <circle cx="8" cy="5" r="0.7" />
+    <circle cx="12" cy="5" r="0.7" />
+    <circle cx="2" cy="8" r="0.7" />
+    <circle cx="6" cy="8" r="0.7" />
+    <circle cx="10" cy="8" r="0.7" />
+    <circle cx="14" cy="8" r="0.7" />
+  </g>
+</svg>

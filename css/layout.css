@@ -9,10 +9,11 @@
 
 .topbar__inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
   padding: 1.25rem 0;
-  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .topbar__toggle {
@@ -80,21 +81,29 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
-.brand {
+.topbar__brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-sm);
+  padding-block: 0.25rem;
+}
+
+.topbar__brand-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
 }
 
 .brand__monogram {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.12);
   background: linear-gradient(135deg, rgba(246, 183, 60, 0.32), rgba(91, 128, 255, 0.32));
 }
 
@@ -179,85 +188,98 @@
   margin: 0;
   font-size: 0.9rem;
   color: var(--color-text-muted);
+  line-height: 1.4;
 }
 
-.menu {
+.topbar__nav {
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 2vw, 1.6rem);
-  flex-wrap: nowrap;
-  margin-left: auto;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
   font-size: 0.95rem;
+  min-width: 0;
+  padding-block: 0.25rem;
 }
 
-.menu > * {
+.topbar__nav > * {
   flex-shrink: 0;
 }
 
-.menu a {
+.topbar__nav a {
   color: var(--color-text-muted);
   font-weight: 500;
   letter-spacing: 0.02em;
   white-space: nowrap;
+  padding-block: 0.25rem;
 }
 
-.menu a:hover,
-.menu a:focus {
+.topbar__nav a:hover,
+.topbar__nav a:focus {
   color: var(--color-text);
 }
 
-.language-switcher {
-  display: inline-flex;
+.topbar__lang-switch {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin-left: auto;
-  padding-left: clamp(1.5rem, 3vw, 3rem);
-  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
 .language-switcher__button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.65rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(12, 16, 32, 0.7);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(229, 233, 255, 0.28);
+  background: none;
   color: var(--color-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.2;
   cursor: pointer;
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease,
-    box-shadow 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease,
+    background-color 180ms ease, box-shadow 180ms ease;
   flex-shrink: 0;
 }
 
 .language-switcher__flag {
-  font-size: 1.05rem;
-  line-height: 1;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 .language-switcher__button:hover,
 .language-switcher__button:focus-visible {
   border-color: rgba(246, 183, 60, 0.65);
-  background: rgba(12, 16, 32, 0.9);
+  background-color: rgba(12, 16, 32, 0.6);
   color: var(--color-text);
-  outline: none;
-  box-shadow: 0 12px 28px rgba(9, 12, 28, 0.45);
 }
 
 .language-switcher__button:focus-visible {
-  box-shadow: 0 0 0 3px rgba(246, 183, 60, 0.4);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(246, 183, 60, 0.35);
 }
 
 .language-switcher__button[aria-pressed='true'],
-.language-switcher__button.is-active {
-  border-color: rgba(91, 128, 255, 0.7);
-  background: rgba(20, 26, 52, 0.9);
+.language-switcher__button.is-active,
+.language-switcher__button.active {
+  border-color: rgba(91, 128, 255, 0.6);
+  background-color: var(--color-surface-alt);
   color: var(--color-text);
-  box-shadow: 0 10px 24px rgba(10, 17, 42, 0.45);
+  box-shadow: 0 10px 24px rgba(10, 17, 42, 0.35);
 }
 
 .language-switcher__label {
@@ -288,6 +310,30 @@
 }
 
 @media (max-width: 768px) {
+  .topbar__nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    justify-content: flex-start;
+  }
+
+  .topbar__lang-switch {
+    order: -1;
+    width: 100%;
+    justify-content: flex-end;
+    margin-left: 0;
+    padding-bottom: var(--spacing-xs);
+  }
+
+  .language-switcher {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
   .hero__inner {
     grid-template-columns: 1fr;
   }
@@ -501,11 +547,10 @@
 @media (max-width: 960px) {
   .topbar__inner {
     flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1rem;
+    gap: var(--spacing-sm);
   }
 
-  .menu {
+  .topbar__nav {
     justify-content: flex-start;
   }
 
@@ -545,37 +590,28 @@
     display: inline-flex;
   }
 
-  .menu {
-    width: 100%;
-    margin-left: 0;
-    padding: 0.75rem 0 0.25rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    gap: 0.75rem;
-    flex-direction: column;
-  }
-
-  .menu[data-visible='false'] {
+  .topbar__nav {
     display: none;
   }
 
-  .menu[data-visible='true'] {
-    display: grid;
+  .topbar__nav[data-visible='true'] {
+    display: flex;
   }
 
-  .menu a {
+  .topbar__nav a {
     display: block;
     width: 100%;
-    padding: 0.5rem 0;
+  }
+
+  .topbar__lang-switch {
+    justify-content: center;
+    margin-bottom: var(--spacing-xs);
+    padding-bottom: 0;
   }
 
   .language-switcher {
-    width: 100%;
-    margin-left: 0;
-    padding-top: 0.5rem;
-    padding-left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
     justify-content: center;
-    gap: 0.75rem;
+    gap: var(--spacing-sm);
   }
 
   .language-switcher__button {
@@ -602,14 +638,13 @@
 }
 
 @media (max-width: 540px) {
-  .brand {
+  .topbar__brand {
     gap: 0.75rem;
   }
 
   .brand__monogram {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
+    width: 40px;
+    height: 40px;
   }
 
   .brand__name {
