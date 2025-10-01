@@ -9,6 +9,10 @@
   --color-accent: #f6b73c;
   --color-accent-soft: rgba(246, 183, 60, 0.18);
   --color-border: rgba(255, 255, 255, 0.12);
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
   --gradient-hero: radial-gradient(circle at 20% 20%, rgba(246, 183, 60, 0.25), transparent 55%),
     radial-gradient(circle at 80% 0%, rgba(72, 113, 248, 0.3), transparent 55%),
     linear-gradient(135deg, rgba(9, 12, 28, 0.95), rgba(5, 8, 22, 0.95));
