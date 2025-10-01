@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-language="pt-br">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Leonardo Fonseca Pontes · Perfil Profissional</title>
+    <title data-i18n-key="documentTitle">Leonardo Fonseca Pontes · Perfil Profissional</title>
     <meta
       name="description"
       content="Perfil profissional de Leonardo Fonseca Pontes, gerente de projetos especializado em transformação digital, educação e tecnologia."
+      data-i18n-attrs="content:metaDescription"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,11 +24,11 @@
       <div class="container topbar__inner">
         <div class="brand">
           <span class="brand__monogram">
-            <img src="img/profile_photo.png" alt="Foto de Leonardo Fonseca Pontes" />
+            <img src="img/profile_photo.png" alt="Foto de Leonardo Fonseca Pontes" data-i18n-attrs="alt:brandPhotoAlt" />
           </span>
           <div>
-            <a class="brand__name" href="#inicio">Leonardo Fonseca Pontes</a>
-            <p class="brand__role">Gerente de Projetos · Transformação Digital</p>
+            <a class="brand__name" href="#inicio" data-i18n-key="brandName">Leonardo Fonseca Pontes</a>
+            <p class="brand__role" data-i18n-key="brandRole">Gerente de Projetos · Transformação Digital</p>
           </div>
         </div>
         <button
@@ -35,8 +36,10 @@
           type="button"
           aria-expanded="false"
           aria-controls="primary-nav"
+          aria-label="Alternar menu de navegação"
+          data-i18n-attrs="aria-label:menuToggleAria"
         >
-          <span class="sr-only">Alternar menu de navegação</span>
+          <span class="sr-only" data-i18n-key="menuToggleLabel">Alternar menu de navegação</span>
           <span class="topbar__toggle-icon" aria-hidden="true"></span>
         </button>
         <nav
@@ -44,14 +47,44 @@
           id="primary-nav"
           aria-label="Navegação principal"
           data-visible="false"
+          data-i18n-attrs="aria-label:primaryNavAria"
         >
-          <a href="#resumo">Sobre</a>
-          <a href="#experiencia">Experiência</a>
-          <a href="#formacao">Formação</a>
-          <a href="#competencias">Competências</a>
-          <a href="#certificacoes">Certificações</a>
-          <a href="#depoimentos">Depoimentos</a>
-          <a href="#contato">Contato</a>
+          <a href="#resumo" data-i18n-key="navAbout">Sobre</a>
+          <a href="#experiencia" data-i18n-key="navExperience">Experiência</a>
+          <a href="#formacao" data-i18n-key="navEducation">Formação</a>
+          <a href="#competencias" data-i18n-key="navSkills">Competências</a>
+          <a href="#certificacoes" data-i18n-key="navCertifications">Certificações</a>
+          <a href="#depoimentos" data-i18n-key="navTestimonials">Depoimentos</a>
+          <a href="#contato" data-i18n-key="navContact">Contato</a>
+          <div
+            class="language-switcher"
+            role="group"
+            data-i18n-attrs="aria-label:languageSwitcherAria"
+            aria-label="Selecionar idioma"
+          >
+            <button
+              type="button"
+              class="language-switcher__button"
+              data-language="pt-br"
+              title="Português"
+              data-i18n-attrs="title:languagePortugueseTitle;aria-label:languagePortugueseLabel"
+              aria-label="Português"
+            >
+              <span aria-hidden="true">🇧🇷</span>
+              <span class="language-switcher__label" data-i18n-key="languagePortugueseText">Português</span>
+            </button>
+            <button
+              type="button"
+              class="language-switcher__button"
+              data-language="en"
+              title="English"
+              data-i18n-attrs="title:languageEnglishTitle;aria-label:languageEnglishLabel"
+              aria-label="English"
+            >
+              <span aria-hidden="true">🇺🇸</span>
+              <span class="language-switcher__label" data-i18n-key="languageEnglishText">English</span>
+            </button>
+          </div>
         </nav>
       </div>
     </header>
@@ -60,65 +93,67 @@
       <section id="inicio" class="hero">
         <div class="container hero__inner">
           <div class="hero__profile">
-            <span class="hero__badge">Disponível para liderar projetos estratégicos</span>
-            <h1>Construo experiências digitais que conectam educação e tecnologia.</h1>
-            <p>
-              Atuando como gerente de projetos, conduzo times multidisciplinares do discovery à entrega,
-              garantindo impacto real para clientes e parceiros do ecossistema educacional e tecnológico.
+            <span class="hero__badge" data-i18n-key="heroBadge">Disponível para liderar projetos estratégicos</span>
+            <h1 data-i18n-key="heroTitle">Construo experiências digitais que conectam educação e tecnologia.</h1>
+            <p data-i18n-key="heroDescription">
+              Atuando como gerente de projetos, conduzo times multidisciplinares do discovery à entrega, garantindo impacto real
+              para clientes e parceiros do ecossistema educacional e tecnológico.
             </p>
             <div class="hero__actions">
-              <a class="button" href="mailto:leonfpontes@gmail.com">Fale comigo</a>
+              <a class="button" href="mailto:leonfpontes@gmail.com" data-i18n-key="heroContactCta">Fale comigo</a>
               <a
                 class="button button--ghost"
                 href="https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-i18n-key="heroLinkedinCta"
                 >LinkedIn</a
               >
             </div>
-            <div class="hero__stats" aria-label="Principais indicadores profissionais">
+            <div class="hero__stats" aria-label="Principais indicadores profissionais" data-i18n-attrs="aria-label:heroStatsAria">
               <article class="stat-card">
-                <p class="stat-card__value">30+</p>
-                <p class="stat-card__label">Projetos digitais orquestrados</p>
+                <p class="stat-card__value" data-i18n-key="statProjectsValue">30+</p>
+                <p class="stat-card__label" data-i18n-key="statProjectsLabel">Projetos digitais orquestrados</p>
               </article>
               <article class="stat-card">
-                <p class="stat-card__value">6 anos</p>
-                <p class="stat-card__label">Liderando times de produto e projeto</p>
+                <p class="stat-card__value" data-i18n-key="statYearsValue">6 anos</p>
+                <p class="stat-card__label" data-i18n-key="statYearsLabel">Liderando times de produto e projeto</p>
               </article>
               <article class="stat-card">
-                <p class="stat-card__value">3 pilares</p>
-                <p class="stat-card__label">Estratégia · Agilidade · Entrega de valor</p>
+                <p class="stat-card__value" data-i18n-key="statPillarsValue">3 pilares</p>
+                <p class="stat-card__label" data-i18n-key="statPillarsLabel">Estratégia · Agilidade · Entrega de valor</p>
               </article>
             </div>
           </div>
 
-          <aside class="hero__panel" aria-label="Informações rápidas">
+          <aside class="hero__panel" aria-label="Informações rápidas" data-i18n-attrs="aria-label:heroPanelAria">
             <ul class="hero__details">
               <li>
-                <span class="detail__label">Localização</span>
-                <span class="detail__value">Ribeirão Preto · São Paulo · Brasil</span>
+                <span class="detail__label" data-i18n-key="detailLocationLabel">Localização</span>
+                <span class="detail__value" data-i18n-key="detailLocationValue">Ribeirão Preto · São Paulo · Brasil</span>
               </li>
               <li>
-                <span class="detail__label">Contato</span>
-                <a class="detail__value" href="tel:+5516991091234">+55 16 99109-1234</a>
+                <span class="detail__label" data-i18n-key="detailPhoneLabel">Contato</span>
+                <a class="detail__value" href="tel:+5516991091234" data-i18n-key="detailPhoneValue">+55 16 99109-1234</a>
               </li>
               <li>
-                <span class="detail__label">E-mail</span>
-                <a class="detail__value" href="mailto:leonfpontes@gmail.com">leonfpontes@gmail.com</a>
+                <span class="detail__label" data-i18n-key="detailEmailLabel">E-mail</span>
+                <a class="detail__value" href="mailto:leonfpontes@gmail.com" data-i18n-key="detailEmailValue">leonfpontes@gmail.com</a>
               </li>
               <li>
-                <span class="detail__label">LinkedIn</span>
+                <span class="detail__label" data-i18n-key="detailLinkedinLabel">LinkedIn</span>
                 <a
                   class="detail__value"
                   href="https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103"
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-i18n-key="detailLinkedinValue"
                   >/in/leonardo-fonseca-pontes</a
                 >
               </li>
               <li>
-                <span class="detail__label">Idiomas</span>
-                <span class="detail__value">Português (Nativo) · Inglês (Avançado · Não nativo)</span>
+                <span class="detail__label" data-i18n-key="detailLanguagesLabel">Idiomas</span>
+                <span class="detail__value" data-i18n-key="detailLanguagesValue">Português (Nativo) · Inglês (Avançado · Não nativo)</span>
               </li>
             </ul>
           </aside>
@@ -128,33 +163,49 @@
       <section id="resumo" class="section">
         <div class="container section__content">
           <header class="section__header">
-            <span class="section__eyebrow">Sobre</span>
-            <h2>Resumo Executivo</h2>
-            <p>
-              Liderança focada em resolver desafios complexos com estratégia, tecnologia e colaboração.
-              Atuação end-to-end, da concepção de produtos digitais ao acompanhamento de resultados e evolução contínua.
+            <span class="section__eyebrow" data-i18n-key="aboutEyebrow">Sobre</span>
+            <h2 data-i18n-key="aboutTitle">Resumo Executivo</h2>
+            <p data-i18n-key="aboutDescription">
+              Liderança focada em resolver desafios complexos com estratégia, tecnologia e colaboração. Atuação end-to-end, da
+              concepção de produtos digitais ao acompanhamento de resultados e evolução contínua.
             </p>
           </header>
           <div class="feature-grid">
             <article class="feature-card">
-              <h3>Motivações</h3>
+              <h3 data-i18n-key="aboutMotivationsTitle">Motivações</h3>
               <ul>
-                <li>Transformação digital com impacto – foco em projetos que gerem valor real para clientes e usuários.</li>
-                <li>Experiência memorável – unir estratégia, produto e tecnologia para entregar experiências marcantes e desenvolver pessoas e cultura colaborativa.</li>
+                <li data-i18n-key="aboutMotivationsItem1">
+                  Transformação digital com impacto – foco em projetos que gerem valor real para clientes e usuários.
+                </li>
+                <li data-i18n-key="aboutMotivationsItem2">
+                  Experiência memorável – unir estratégia, produto e tecnologia para entregar experiências marcantes e
+                  desenvolver pessoas e cultura colaborativa.
+                </li>
               </ul>
             </article>
             <article class="feature-card">
-              <h3>Foco estratégico</h3>
+              <h3 data-i18n-key="aboutFocusTitle">Foco estratégico</h3>
               <ul>
-                <li>Gestão de projetos ponta a ponta – do planejamento orientado a resultados até a liderança de squads multidisciplinares (presenciais ou remotos).</li>
-                <li>Governança e melhoria contínua – medindo indicadores de negócio e implementando práticas de otimização constantes.</li>
+                <li data-i18n-key="aboutFocusItem1">
+                  Gestão de projetos ponta a ponta – do planejamento orientado a resultados até a liderança de squads
+                  multidisciplinares (presenciais ou remotos).
+                </li>
+                <li data-i18n-key="aboutFocusItem2">
+                  Governança e melhoria contínua – medindo indicadores de negócio e implementando práticas de otimização
+                  constantes.
+                </li>
               </ul>
             </article>
             <article class="feature-card">
-              <h3>Competências-chave</h3>
+              <h3 data-i18n-key="aboutCompetenciesTitle">Competências-chave</h3>
               <ul>
-                <li>Roadmaps e facilitação – traduzir necessidades em roadmaps de produto e conduzir workshops de discovery.</li>
-                <li>Stakeholders e PMO – comunicação eficaz com equipes técnicas e executivas, estruturação de PMOs e cultura de feedback.</li>
+                <li data-i18n-key="aboutCompetenciesItem1">
+                  Roadmaps e facilitação – traduzir necessidades em roadmaps de produto e conduzir workshops de discovery.
+                </li>
+                <li data-i18n-key="aboutCompetenciesItem2">
+                  Stakeholders e PMO – comunicação eficaz com equipes técnicas e executivas, estruturação de PMOs e cultura de
+                  feedback.
+                </li>
               </ul>
             </article>
           </div>
@@ -164,143 +215,166 @@
       <section id="experiencia" class="section section--accent">
         <div class="container section__content">
           <header class="section__header">
-            <span class="section__eyebrow">Trajetória</span>
-            <h2>Experiência Profissional</h2>
-            <p>
-              Projetos liderados em educação, tecnologia e serviços digitais, com foco em gerar valor mensurável para clientes e parceiros.
+            <span class="section__eyebrow" data-i18n-key="experienceEyebrow">Trajetória</span>
+            <h2 data-i18n-key="experienceTitle">Experiência Profissional</h2>
+            <p data-i18n-key="experienceDescription">
+              Projetos liderados em educação, tecnologia e serviços digitais, com foco em gerar valor mensurável para clientes e
+              parceiros.
             </p>
           </header>
           <div class="timeline">
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">ago 2024 · atual</p>
-                <h3>Gerente de Projetos e PMO · Educacross</h3>
-                <p class="timeline__location">Localidade confidencial · Brasil</p>
+                <p class="timeline__period" data-i18n-key="experience1Period">ago 2024 · atual</p>
+                <h3 data-i18n-key="experience1Title">Gerente de Projetos e PMO · Educacross</h3>
+                <p class="timeline__location" data-i18n-key="experience1Location">Localidade confidencial · Brasil</p>
               </header>
               <ul>
-                <li>Estruturou a governança de portfólio e o escritório de projetos, definindo métricas e relatórios executivos.</li>
-                <li>Liderou integração entre áreas (tecnologia, dados, produto e operações), entregando projetos de alta complexidade.</li>
-                <li>Orquestrou cronogramas de produtos e eventos educacionais em várias cidades.</li>
+                <li data-i18n-key="experience1Item1">
+                  Estruturou a governança de portfólio e o escritório de projetos, definindo métricas e relatórios executivos.
+                </li>
+                <li data-i18n-key="experience1Item2">
+                  Liderou integração entre áreas (tecnologia, dados, produto e operações), entregando projetos de alta
+                  complexidade.
+                </li>
+                <li data-i18n-key="experience1Item3">Orquestrou cronogramas de produtos e eventos educacionais em várias cidades.</li>
               </ul>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">mai 2022 · ago 2024</p>
-                <h3>Gerente de Projetos e Operações · Digi.ai</h3>
-                <p class="timeline__location">Ribeirão Preto, São Paulo</p>
+                <p class="timeline__period" data-i18n-key="experience2Period">mai 2022 · ago 2024</p>
+                <h3 data-i18n-key="experience2Title">Gerente de Projetos e Operações · Digi.ai</h3>
+                <p class="timeline__location" data-i18n-key="experience2Location">Ribeirão Preto, São Paulo</p>
               </header>
               <ul>
-                <li>Implantou o PMO e coordenou squads multidisciplinares para integração de plataformas, otimização de ERPs de transporte e criação de jornadas digitais.</li>
-                <li>Promoveu a cultura de feedback e alinhamento de marca, liderando owners e times ágeis.</li>
-                <li>Conduziu projetos de grande porte com foco em escalabilidade e valor ao cliente.</li>
+                <li data-i18n-key="experience2Item1">
+                  Implantou o PMO e coordenou squads multidisciplinares para integração de plataformas, otimização de ERPs de
+                  transporte e criação de jornadas digitais.
+                </li>
+                <li data-i18n-key="experience2Item2">Promoveu a cultura de feedback e alinhamento de marca, liderando owners e times ágeis.</li>
+                <li data-i18n-key="experience2Item3">Conduziu projetos de grande porte com foco em escalabilidade e valor ao cliente.</li>
               </ul>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">mar 2021 · mar 2024</p>
-                <h3>Product Owner · Digi.ai &amp; parceiros</h3>
-                <p class="timeline__location">Ribeirão Preto, São Paulo</p>
+                <p class="timeline__period" data-i18n-key="experience3Period">mar 2021 · mar 2024</p>
+                <h3 data-i18n-key="experience3Title">Product Owner · Digi.ai &amp; parceiros</h3>
+                <p class="timeline__location" data-i18n-key="experience3Location">Ribeirão Preto, São Paulo</p>
               </header>
               <ul>
-                <li>Modernizou ERPs legados, migrando softwares para .NET/React e integrando serviços de arrecadação.</li>
-                <li>Liderou squads no desenvolvimento de produtos próprios e solução para prefeituras.</li>
-                <li>Atuou como facilitador entre negócios, tecnologia e design, aplicando Scrum, Lean e SAFe.</li>
+                <li data-i18n-key="experience3Item1">Modernizou ERPs legados, migrando softwares para .NET/React e integrando serviços de arrecadação.</li>
+                <li data-i18n-key="experience3Item2">Liderou squads no desenvolvimento de produtos próprios e solução para prefeituras.</li>
+                <li data-i18n-key="experience3Item3">Atuou como facilitador entre negócios, tecnologia e design, aplicando Scrum, Lean e SAFe.</li>
               </ul>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">jun 2019 · mar 2021</p>
-                <h3>Product Owner · Conexia Educação</h3>
-                <p class="timeline__location">Ribeirão Preto, São Paulo</p>
+                <p class="timeline__period" data-i18n-key="experience4Period">jun 2019 · mar 2021</p>
+                <h3 data-i18n-key="experience4Title">Product Owner · Conexia Educação</h3>
+                <p class="timeline__location" data-i18n-key="experience4Location">Ribeirão Preto, São Paulo</p>
               </header>
               <ul>
-                <li>Geriu backlog e sprints de produtos educacionais como APP Concept e AZ Applications.</li>
-                <li>Conduziu workshops de design thinking e discovery com equipes multidisciplinares.</li>
-                <li>Acompanhou métricas e evolução de habilidades do time.</li>
+                <li data-i18n-key="experience4Item1">Geriu backlog e sprints de produtos educacionais como APP Concept e AZ Applications.</li>
+                <li data-i18n-key="experience4Item2">Conduziu workshops de design thinking e discovery com equipes multidisciplinares.</li>
+                <li data-i18n-key="experience4Item3">Acompanhou métricas e evolução de habilidades do time.</li>
               </ul>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">ago 2018 · jun 2019</p>
-                <h3>Project Analyst · Conexia Educação</h3>
-                <p class="timeline__location">Ribeirão Preto, São Paulo</p>
+                <p class="timeline__period" data-i18n-key="experience5Period">ago 2018 · jun 2019</p>
+                <h3 data-i18n-key="experience5Title">Project Analyst · Conexia Educação</h3>
+                <p class="timeline__location" data-i18n-key="experience5Location">Ribeirão Preto, São Paulo</p>
               </header>
               <ul>
-                <li>Levantamento e documentação de requisitos com stakeholders.</li>
-                <li>Gestão de cronogramas, apresentações e demonstrações.</li>
-                <li>Otimização de processos internos e suporte a times terceirizados.</li>
-                <li>Atuação em recrutamento, formação de times e facilitação ágil.</li>
+                <li data-i18n-key="experience5Item1">Levantamento e documentação de requisitos com stakeholders.</li>
+                <li data-i18n-key="experience5Item2">Gestão de cronogramas, apresentações e demonstrações.</li>
+                <li data-i18n-key="experience5Item3">Otimização de processos internos e suporte a times terceirizados.</li>
+                <li data-i18n-key="experience5Item4">Atuação em recrutamento, formação de times e facilitação ágil.</li>
               </ul>
             </article>
           </div>
         </div>
       </section>
-
       <section id="competencias" class="section">
         <div class="container section__content">
           <header class="section__header">
-            <span class="section__eyebrow">Habilidades</span>
-            <h2>Competências &amp; Ferramentas</h2>
-            <p>
+            <span class="section__eyebrow" data-i18n-key="skillsEyebrow">Habilidades</span>
+            <h2 data-i18n-key="skillsTitle">Competências &amp; Ferramentas</h2>
+            <p data-i18n-key="skillsDescription">
               Uma combinação de liderança, processos e visão de produto para conduzir transformações digitais sustentáveis.
             </p>
           </header>
           <div class="competency-grid">
             <article class="competency-card">
-              <h3>Liderança &amp; Pessoas</h3>
+              <h3 data-i18n-key="skillsLeadershipTitle">Liderança &amp; Pessoas</h3>
               <ul>
-                <li>Formação e maturidade de squads com base no modelo de Tuckman.</li>
-                <li>Feedback contínuo, clima colaborativo e cuidado com as pessoas.</li>
-                <li>Contratação estruturada e desenvolvimento de profissionais.</li>
+                <li data-i18n-key="skillsLeadershipItem1">Formação e maturidade de squads com base no modelo de Tuckman.</li>
+                <li data-i18n-key="skillsLeadershipItem2">Feedback contínuo, clima colaborativo e cuidado com as pessoas.</li>
+                <li data-i18n-key="skillsLeadershipItem3">Contratação estruturada e desenvolvimento de profissionais.</li>
               </ul>
             </article>
             <article class="competency-card">
-              <h3>Agilidade &amp; Processos</h3>
+              <h3 data-i18n-key="skillsAgilityTitle">Agilidade &amp; Processos</h3>
               <ul>
-                <li>Aplicação de Scrum, Lean e SAFe em diferentes contextos.</li>
-                <li>Mapeamento de habilidades, health check e planos de evolução.</li>
-                <li>Governança e melhoria contínua em PMOs orientados a resultados.</li>
+                <li data-i18n-key="skillsAgilityItem1">Aplicação de Scrum, Lean e SAFe em diferentes contextos.</li>
+                <li data-i18n-key="skillsAgilityItem2">Mapeamento de habilidades, health check e planos de evolução.</li>
+                <li data-i18n-key="skillsAgilityItem3">Governança e melhoria contínua em PMOs orientados a resultados.</li>
               </ul>
             </article>
             <article class="competency-card">
-              <h3>Entrega de Valor</h3>
+              <h3 data-i18n-key="skillsValueTitle">Entrega de Valor</h3>
               <ul>
-                <li>Roadmaps ligados a objetivos estratégicos do negócio.</li>
-                <li>Workshops de design thinking para priorização e discovery.</li>
-                <li>Comunicação executiva, governança e alinhamento de stakeholders.</li>
+                <li data-i18n-key="skillsValueItem1">Roadmaps ligados a objetivos estratégicos do negócio.</li>
+                <li data-i18n-key="skillsValueItem2">Workshops de design thinking para priorização e discovery.</li>
+                <li data-i18n-key="skillsValueItem3">Comunicação executiva, governança e alinhamento de stakeholders.</li>
               </ul>
             </article>
           </div>
           <div class="competency-insight">
             <figure class="competency-insight__chart" aria-labelledby="competency-radar-title">
-              <figcaption id="competency-radar-title">Mapa radar das competências principais</figcaption>
-              <canvas id="competency-radar" role="img" aria-label="Gráfico radar destacando cinco competências"></canvas>
+              <figcaption id="competency-radar-title" data-i18n-key="competencyRadarTitle">Mapa radar das competências principais</figcaption>
+              <canvas
+                id="competency-radar"
+                role="img"
+                aria-label="Gráfico radar destacando cinco competências"
+                data-i18n-attrs="aria-label:competencyRadarAriaLabel"
+              ></canvas>
             </figure>
             <div class="competency-insight__legend">
               <dl class="competency-insight__scale">
                 <div>
-                  <dt>Liderança de Pessoas</dt>
-                  <dd>Experiência consolidada formando squads, promovendo feedbacks e cultura colaborativa.</dd>
+                  <dt data-i18n-key="competencyLegendLeadershipTitle">Liderança de Pessoas</dt>
+                  <dd data-i18n-key="competencyLegendLeadershipDesc">
+                    Experiência consolidada formando squads, promovendo feedbacks e cultura colaborativa.
+                  </dd>
                 </div>
                 <div>
-                  <dt>Governança &amp; PMO</dt>
-                  <dd>Estruturação de escritórios de projetos, rituais executivos e métricas de performance.</dd>
+                  <dt data-i18n-key="competencyLegendGovernanceTitle">Governança &amp; PMO</dt>
+                  <dd data-i18n-key="competencyLegendGovernanceDesc">
+                    Estruturação de escritórios de projetos, rituais executivos e métricas de performance.
+                  </dd>
                 </div>
                 <div>
-                  <dt>Visão de Produto</dt>
-                  <dd>Tradução de necessidades em roadmaps e evolução contínua de soluções digitais.</dd>
+                  <dt data-i18n-key="competencyLegendProductTitle">Visão de Produto</dt>
+                  <dd data-i18n-key="competencyLegendProductDesc">
+                    Tradução de necessidades em roadmaps e evolução contínua de soluções digitais.
+                  </dd>
                 </div>
                 <div>
-                  <dt>Agilidade &amp; Processos</dt>
-                  <dd>Aplicação de frameworks como Scrum, Lean e SAFe para garantir entregas iterativas.</dd>
+                  <dt data-i18n-key="competencyLegendAgilityTitle">Agilidade &amp; Processos</dt>
+                  <dd data-i18n-key="competencyLegendAgilityDesc">
+                    Aplicação de frameworks como Scrum, Lean e SAFe para garantir entregas iterativas.
+                  </dd>
                 </div>
                 <div>
-                  <dt>Comunicação Executiva</dt>
-                  <dd>Conexão entre stakeholders técnicos e de negócios com relatórios e insights acionáveis.</dd>
+                  <dt data-i18n-key="competencyLegendCommunicationTitle">Comunicação Executiva</dt>
+                  <dd data-i18n-key="competencyLegendCommunicationDesc">
+                    Conexão entre stakeholders técnicos e de negócios com relatórios e insights acionáveis.
+                  </dd>
                 </div>
               </dl>
             </div>
@@ -311,62 +385,66 @@
       <section id="formacao" class="section section--accent">
         <div class="container section__content">
           <header class="section__header">
-            <span class="section__eyebrow">Percurso acadêmico</span>
-            <h2>Formação &amp; Especializações</h2>
-            <p>Base sólida em gestão de projetos, tecnologia e inovação educacional.</p>
+            <span class="section__eyebrow" data-i18n-key="educationEyebrow">Percurso acadêmico</span>
+            <h2 data-i18n-key="educationTitle">Formação &amp; Especializações</h2>
+            <p data-i18n-key="educationDescription">Base sólida em gestão de projetos, tecnologia e inovação educacional.</p>
           </header>
           <div class="timeline">
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">mai 2024 · jun 2025</p>
-                <h3>MBA em Gestão de Projetos · USP - Universidade de São Paulo</h3>
-                <p class="timeline__location">Escola de Negócios</p>
+                <p class="timeline__period" data-i18n-key="education1Period">mai 2024 · jun 2025</p>
+                <h3 data-i18n-key="education1Title">MBA em Gestão de Projetos · USP - Universidade de São Paulo</h3>
+                <p class="timeline__location" data-i18n-key="education1Location">Escola de Negócios</p>
               </header>
-              <p class="timeline__summary">
-                Ênfase em frameworks ágeis, governança de portfólio, planejamento estratégico e liderança de PMO para projetos de alta complexidade.
+              <p class="timeline__summary" data-i18n-key="education1Summary">
+                Ênfase em frameworks ágeis, governança de portfólio, planejamento estratégico e liderança de PMO para projetos de
+                alta complexidade.
               </p>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">2016 · 2020</p>
-                <h3>Bacharelado em Ciência da Computação · Estácio</h3>
-                <p class="timeline__location">Centro de Tecnologia</p>
+                <p class="timeline__period" data-i18n-key="education2Period">2016 · 2020</p>
+                <h3 data-i18n-key="education2Title">Bacharelado em Ciência da Computação · Estácio</h3>
+                <p class="timeline__location" data-i18n-key="education2Location">Centro de Tecnologia</p>
               </header>
-              <p class="timeline__summary">
+              <p class="timeline__summary" data-i18n-key="education2Summary">
                 Formação com foco em fundamentos de desenvolvimento de software, estruturas de dados e arquitetura de sistemas.
               </p>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">2017</p>
-                <h3>Python 3 · Codecademy</h3>
-                <p class="timeline__location">Certificação online</p>
+                <p class="timeline__period" data-i18n-key="education3Period">2017</p>
+                <h3 data-i18n-key="education3Title">Python 3 · Codecademy</h3>
+                <p class="timeline__location" data-i18n-key="education3Location">Certificação online</p>
               </header>
-              <p class="timeline__summary">
+              <p class="timeline__summary" data-i18n-key="education3Summary">
                 Programa intensivo concluído com 100% de aproveitamento, cobrindo fundamentos da linguagem e automação de rotinas.
               </p>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">2013 · 2014</p>
-                <h3>Técnico em Informática para Internet · IFSP</h3>
-                <p class="timeline__location">Instituto Federal</p>
+                <p class="timeline__period" data-i18n-key="education4Period">2013 · 2014</p>
+                <h3 data-i18n-key="education4Title">Técnico em Informática para Internet · IFSP</h3>
+                <p class="timeline__location" data-i18n-key="education4Location">Instituto Federal</p>
               </header>
-              <p class="timeline__summary">
-                Desenvolvimento de aplicações web responsivas, manutenção de redes e fundamentos de gestão de projetos tecnológicos.
+              <p class="timeline__summary" data-i18n-key="education4Summary">
+                Desenvolvimento de aplicações web responsivas, manutenção de redes e fundamentos de gestão de projetos
+                tecnológicos.
               </p>
             </article>
 
             <article class="timeline__item">
               <header class="timeline__meta">
-                <p class="timeline__period">2013 · 2014</p>
-                <h3>Tecnólogo em Análise e Desenvolvimento de Sistemas · Centro Universitário Moura Lacerda</h3>
-                <p class="timeline__location">Escola de Tecnologia</p>
+                <p class="timeline__period" data-i18n-key="education5Period">2013 · 2014</p>
+                <h3 data-i18n-key="education5Title">
+                  Tecnólogo em Análise e Desenvolvimento de Sistemas · Centro Universitário Moura Lacerda
+                </h3>
+                <p class="timeline__location" data-i18n-key="education5Location">Escola de Tecnologia</p>
               </header>
-              <p class="timeline__summary">
+              <p class="timeline__summary" data-i18n-key="education5Summary">
                 Base em engenharia de software, análise de requisitos e integração entre áreas de negócio e tecnologia.
               </p>
             </article>
@@ -377,9 +455,9 @@
       <section id="certificacoes" class="section section--accent">
         <div class="container section__content">
           <header class="section__header">
-            <span class="section__eyebrow">Atualização contínua</span>
-            <h2>Certificações &amp; Cursos</h2>
-            <p>Capacitações que fortalecem a atuação em gestão de projetos e produtos digitais.</p>
+            <span class="section__eyebrow" data-i18n-key="certificationsEyebrow">Atualização contínua</span>
+            <h2 data-i18n-key="certificationsTitle">Certificações &amp; Cursos</h2>
+            <p data-i18n-key="certificationsDescription">Capacitações que fortalecem a atuação em gestão de projetos e produtos digitais.</p>
           </header>
           <div
             class="testimonial-carousel certifications-carousel"
@@ -387,124 +465,73 @@
             data-enhanced="false"
             data-carousel-item-label="Conjunto de certificações"
             data-carousel-indicator-prefix="Ir para conjunto de"
+            data-i18n-attrs="data-carousel-item-label:certificationsCarouselItemLabel;data-carousel-indicator-prefix:certificationsCarouselIndicatorPrefix"
           >
             <button
               class="testimonial-carousel__control testimonial-carousel__control--prev"
               type="button"
               data-carousel-prev
               aria-label="Ver conjunto anterior de certificações"
+              data-i18n-attrs="aria-label:certificationsPrevAria"
             >
               <span aria-hidden="true">&#8249;</span>
             </button>
             <div class="testimonial-carousel__viewport">
               <div class="testimonial-carousel__track" data-carousel-track>
-                <div
-                  class="testimonial-carousel__slide"
-                  data-carousel-slide
-                  data-carousel-label="Certificações 1 a 3"
-                >
+                <div class="testimonial-carousel__slide" data-carousel-slide data-carousel-label="Certificações 1 a 3" data-i18n-attrs="data-carousel-label:certificationsSlide1Label">
                   <div class="certifications-slide-grid">
                     <article class="certification-card">
-                      <h3>Transitioning from Waterfall to Agile Project Management</h3>
-                      <p>LinkedIn Learning · Emitido jan 2020</p>
-                      <span class="certification-card__tag">Agile Leadership</span>
+                      <h3 data-i18n-key="certification1Title">Transitioning from Waterfall to Agile Project Management</h3>
+                      <p data-i18n-key="certification1Issuer">LinkedIn Learning · Emitido jan 2020</p>
+                      <span class="certification-card__tag" data-i18n-key="certification1Tag">Agile Leadership</span>
                     </article>
                     <article class="certification-card">
-                      <h3>Scrum: Advanced</h3>
-                      <p>LinkedIn Learning · Emitido jan 2020</p>
-                      <span class="certification-card__tag">Scrum Mastery</span>
+                      <h3 data-i18n-key="certification2Title">Scrum: Advanced</h3>
+                      <p data-i18n-key="certification2Issuer">LinkedIn Learning · Emitido jan 2020</p>
+                      <span class="certification-card__tag" data-i18n-key="certification2Tag">Scrum Mastery</span>
                     </article>
                     <article class="certification-card">
-                      <h3>OKR Bootcamp</h3>
-                      <p>Sympla · Emitido jul 2019</p>
-                      <span class="certification-card__tag">Governança &amp; Métricas</span>
+                      <h3 data-i18n-key="certification3Title">OKR Bootcamp</h3>
+                      <p data-i18n-key="certification3Issuer">Sympla · Emitido jul 2019</p>
+                      <span class="certification-card__tag" data-i18n-key="certification3Tag">Governança &amp; Métricas</span>
                     </article>
                   </div>
                 </div>
-                <div
-                  class="testimonial-carousel__slide"
-                  data-carousel-slide
-                  data-carousel-label="Certificações 4 a 6"
-                >
+                <div class="testimonial-carousel__slide" data-carousel-slide data-carousel-label="Certificações 4 a 6" data-i18n-attrs="data-carousel-label:certificationsSlide2Label">
                   <div class="certifications-slide-grid">
                     <article class="certification-card">
-                      <h3>Kanban Foundation Certificate</h3>
-                      <p>Certiprof · Emitido set 2020</p>
-                      <span class="certification-card__tag">Fluxo Contínuo</span>
+                      <h3 data-i18n-key="certification4Title">Kanban Foundation Certificate</h3>
+                      <p data-i18n-key="certification4Issuer">Certiprof · Emitido set 2020</p>
+                      <span class="certification-card__tag" data-i18n-key="certification4Tag">Fluxo Contínuo</span>
                     </article>
                     <article class="certification-card">
-                      <h3>JavaScript: explorando a manipulação de elementos e da localStorage</h3>
-                      <p>Alura · Emitido fev 2024</p>
-                      <span class="certification-card__tag">Front-end</span>
+                      <h3 data-i18n-key="certification5Title">JavaScript: explorando a manipulação de elementos e da localStorage</h3>
+                      <p data-i18n-key="certification5Issuer">Alura · Emitido fev 2024</p>
+                      <span class="certification-card__tag" data-i18n-key="certification5Tag">Front-end</span>
                     </article>
                     <article class="certification-card">
-                      <h3>JavaScript na Web: armazenando dados no navegador</h3>
-                      <p>Alura · Emitido fev 2024</p>
-                      <span class="certification-card__tag">Front-end</span>
+                      <h3 data-i18n-key="certification6Title">Product Discovery</h3>
+                      <p data-i18n-key="certification6Issuer">How Bootcamps · Emitido nov 2019</p>
+                      <span class="certification-card__tag" data-i18n-key="certification6Tag">Product Strategy</span>
                     </article>
                   </div>
                 </div>
-                <div
-                  class="testimonial-carousel__slide"
-                  data-carousel-slide
-                  data-carousel-label="Certificações 7 a 9"
-                >
+                <div class="testimonial-carousel__slide" data-carousel-slide data-carousel-label="Certificações 7 a 9" data-i18n-attrs="data-carousel-label:certificationsSlide3Label">
                   <div class="certifications-slide-grid">
                     <article class="certification-card">
-                      <h3>JavaScript para Web: Crie páginas dinâmicas</h3>
-                      <p>Alura · Emitido fev 2024</p>
-                      <span class="certification-card__tag">Front-end</span>
+                      <h3 data-i18n-key="certification7Title">Product Growth</h3>
+                      <p data-i18n-key="certification7Issuer">How Bootcamps · Emitido jun 2020</p>
+                      <span class="certification-card__tag" data-i18n-key="certification7Tag">Crescimento</span>
                     </article>
                     <article class="certification-card">
-                      <h3>JavaScript: consumindo e tratando dados de uma API</h3>
-                      <p>Alura · Emitido fev 2024</p>
-                      <span class="certification-card__tag">Integrações</span>
+                      <h3 data-i18n-key="certification8Title">Product Marketing</h3>
+                      <p data-i18n-key="certification8Issuer">How Bootcamps · Emitido jun 2020</p>
+                      <span class="certification-card__tag" data-i18n-key="certification8Tag">Go-to-market</span>
                     </article>
                     <article class="certification-card">
-                      <h3>JavaScript: manipulando o DOM</h3>
-                      <p>Alura · Emitido fev 2024</p>
-                      <span class="certification-card__tag">Interatividade</span>
-                    </article>
-                  </div>
-                </div>
-                <div
-                  class="testimonial-carousel__slide"
-                  data-carousel-slide
-                  data-carousel-label="Certificações 10 a 12"
-                >
-                  <div class="certifications-slide-grid">
-                    <article class="certification-card">
-                      <h3>JavaScript: validações e reconhecimento de voz</h3>
-                      <p>Alura · Emitido fev 2024</p>
-                      <span class="certification-card__tag">Experiência do Usuário</span>
-                    </article>
-                    <article class="certification-card">
-                      <h3>HTML e CSS: ambientes de desenvolvimento, estrutura e tags</h3>
-                      <p>Alura · Emitido jan 2024</p>
-                      <span class="certification-card__tag">Fundamentos Web</span>
-                    </article>
-                    <article class="certification-card">
-                      <h3>HTML e CSS: cabeçalho, footer e variáveis CSS</h3>
-                      <p>Alura · Emitido jan 2024</p>
-                      <span class="certification-card__tag">UI Engineering</span>
-                    </article>
-                  </div>
-                </div>
-                <div
-                  class="testimonial-carousel__slide"
-                  data-carousel-slide
-                  data-carousel-label="Certificações 13 e 14"
-                >
-                  <div class="certifications-slide-grid">
-                    <article class="certification-card">
-                      <h3>HTML e CSS: classes, posicionamento e Flexbox</h3>
-                      <p>Alura · Emitido jan 2024</p>
-                      <span class="certification-card__tag">Layout</span>
-                    </article>
-                    <article class="certification-card">
-                      <h3>HTML e CSS: praticando HTML/CSS</h3>
-                      <p>Alura · Emitido jan 2024</p>
-                      <span class="certification-card__tag">Boas Práticas</span>
+                      <h3 data-i18n-key="certification9Title">Product Management</h3>
+                      <p data-i18n-key="certification9Issuer">How Bootcamps · Emitido abr 2020</p>
+                      <span class="certification-card__tag" data-i18n-key="certification9Tag">Product Leadership</span>
                     </article>
                   </div>
                 </div>
@@ -515,6 +542,7 @@
               type="button"
               data-carousel-next
               aria-label="Ver próximo conjunto de certificações"
+              data-i18n-attrs="aria-label:certificationsNextAria"
             >
               <span aria-hidden="true">&#8250;</span>
             </button>
@@ -522,27 +550,35 @@
               class="testimonial-carousel__indicators"
               data-carousel-indicators
               aria-label="Progresso das certificações"
+              data-i18n-attrs="aria-label:certificationsIndicatorsAria"
             ></div>
           </div>
         </div>
       </section>
-
       <section id="depoimentos" class="section">
         <div class="container section__content">
           <header class="section__header">
-            <span class="section__eyebrow">Reconhecimento</span>
-            <h2>Depoimentos de Parceiros &amp; Lideranças</h2>
-            <p>
+            <span class="section__eyebrow" data-i18n-key="testimonialsEyebrow">Reconhecimento</span>
+            <h2 data-i18n-key="testimonialsTitle">Depoimentos de Parceiros &amp; Lideranças</h2>
+            <p data-i18n-key="testimonialsDescription">
               A visão externa de quem atuou comigo em times de produto, operações e liderança reforça minha capacidade de
               conectar estratégia, execução e relacionamento com stakeholders.
             </p>
           </header>
-          <div class="testimonial-carousel" data-carousel data-enhanced="false">
+          <div
+            class="testimonial-carousel"
+            data-carousel
+            data-enhanced="false"
+            data-carousel-item-label="Depoimento"
+            data-carousel-indicator-prefix="Ir para"
+            data-i18n-attrs="data-carousel-item-label:testimonialsCarouselItemLabel;data-carousel-indicator-prefix:testimonialsCarouselIndicatorPrefix"
+          >
             <button
               class="testimonial-carousel__control testimonial-carousel__control--prev"
               type="button"
               data-carousel-prev
               aria-label="Ver depoimento anterior"
+              data-i18n-attrs="aria-label:testimonialsPrevAria"
             >
               <span aria-hidden="true">&#8249;</span>
             </button>
@@ -552,23 +588,23 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Rebeca Andrade</h3>
-                      <p class="testimonial-card__role">
+                      <p class="testimonial-card__role" data-i18n-key="testimonial1Role">
                         Learning Experience Designer · Content Designer · Learning &amp; Development Consultant
                       </p>
                     </header>
-                    <p class="testimonial-card__context">7 dez 2021 · Trabalhou comigo na Educacross</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial1Context">7 dez 2021 · Trabalhou comigo na Educacross</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
-                        “O Leo tem em si qualidades muito caras a um excelente profissional: integridade, honestidade,
-                        capacidade de encorajar o time, foco em resultados e adaptação. Se eu pudesse resumí-lo, diria que ele
-                        é um profissional incansável! Trabalhar com ele foi uma experiência inesquecível.”
+                      <p data-i18n-key="testimonial1Quote">
+                        “O Leo tem em si qualidades muito caras a um excelente profissional: integridade, honestidade, capacidade
+                        de encorajar o time, foco em resultados e adaptação. Se eu pudesse resumí-lo, diria que ele é um
+                        profissional incansável! Trabalhar com ele foi uma experiência inesquecível.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial1Competencies"
                         >Competências citadas: liderança de times, foco em resultados, adaptabilidade.</span
                       >
-                      <span class="testimonial-card__relationship">1º grau</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial1Relationship">1º grau</span>
                     </footer>
                   </article>
                 </div>
@@ -577,21 +613,21 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Endhe Soares</h3>
-                      <p class="testimonial-card__role">Engineering Leader · Head of Engineering · ex-Nubank</p>
+                      <p class="testimonial-card__role" data-i18n-key="testimonial2Role">Engineering Leader · Head of Engineering · ex-Nubank</p>
                     </header>
-                    <p class="testimonial-card__context">26 jul 2021 · Gerenciou meu trabalho na Conexia Educação</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial2Context">26 jul 2021 · Gerenciou meu trabalho na Conexia Educação</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
+                      <p data-i18n-key="testimonial2Quote">
                         “Leo é um grande profissional. Tem genuína preocupação com o bem-estar do time e com a entrega de
                         resultados. É uma pessoa equilibrada que traduz necessidades e demandas do produto em resultados
                         excepcionais.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial2Competencies"
                         >Competências citadas: cuidado com pessoas, entrega consistente, visão de produto.</span
                       >
-                      <span class="testimonial-card__relationship">Gestor direto</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial2Relationship">Gestor direto</span>
                     </footer>
                   </article>
                 </div>
@@ -600,20 +636,20 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Denise Vallone Maggi</h3>
-                      <p class="testimonial-card__role">CRM · Business Intelligence · Growth Marketing</p>
+                      <p class="testimonial-card__role" data-i18n-key="testimonial3Role">CRM · Business Intelligence · Growth Marketing</p>
                     </header>
-                    <p class="testimonial-card__context">30 ago 2021 · Atuamos em projetos conjuntos</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial3Context">30 ago 2021 · Atuamos em projetos conjuntos</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
-                        “O Leo, além de um grande profissional, é uma pessoa inspiradora e proativa. Possui excelente
-                        habilidade em coordenação de projetos e liderança de equipe, sempre muito atencioso e organizado.”
+                      <p data-i18n-key="testimonial3Quote">
+                        “O Leo, além de um grande profissional, é uma pessoa inspiradora e proativa. Possui excelente habilidade em
+                        coordenação de projetos e liderança de equipe, sempre muito atencioso e organizado.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial3Competencies"
                         >Competências citadas: coordenação de projetos, liderança de equipe, organização.</span
                       >
-                      <span class="testimonial-card__relationship">Parceira de squad</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial3Relationship">Parceira de squad</span>
                     </footer>
                   </article>
                 </div>
@@ -622,20 +658,20 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Joeriverson Santos</h3>
-                      <p class="testimonial-card__role">Coordenador de Projetos e PMO · Pleno</p>
+                      <p class="testimonial-card__role" data-i18n-key="testimonial4Role">Coordenador de Projetos e PMO · Pleno</p>
                     </header>
-                    <p class="testimonial-card__context">27 ago 2021 · Trabalhou comigo na Conexia Educação</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial4Context">27 ago 2021 · Trabalhou comigo na Conexia Educação</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
+                      <p data-i18n-key="testimonial4Quote">
                         “Leonardo é um excelente profissional, sempre disposto a ajudar e a aprender novas coisas. Trabalhamos
                         juntos na Conexia, onde pude observar seu comprometimento, proatividade e inteligência emocional.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial4Competencies"
                         >Competências citadas: proatividade, inteligência emocional, colaboração.</span
                       >
-                      <span class="testimonial-card__relationship">1º grau</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial4Relationship">1º grau</span>
                     </footer>
                   </article>
                 </div>
@@ -644,20 +680,20 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Marcel Santos</h3>
-                      <p class="testimonial-card__role">Product Manager · Agile Coach · SAFe Practitioner</p>
+                      <p class="testimonial-card__role" data-i18n-key="testimonial5Role">Product Manager · Agile Coach · SAFe Practitioner</p>
                     </header>
-                    <p class="testimonial-card__context">27 ago 2021 · Atuamos em tribos diferentes na Conexia</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial5Context">27 ago 2021 · Atuamos em tribos diferentes na Conexia</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
+                      <p data-i18n-key="testimonial5Quote">
                         “Leo é um profissional completo. Possui forte capacidade para mentorar Product Owners, mantendo alto
                         alinhamento entre stakeholders e times Scrum. Entrega valor consistente em múltiplos projetos.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial5Competencies"
                         >Competências citadas: mentoria, governança ágil, entrega de valor.</span
                       >
-                      <span class="testimonial-card__relationship">1º grau</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial5Relationship">1º grau</span>
                     </footer>
                   </article>
                 </div>
@@ -666,21 +702,21 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Leonardo Brito Bittencourt</h3>
-                      <p class="testimonial-card__role">Senior Software Engineer · Full Stack · TypeScript · Node.js · React</p>
+                      <p class="testimonial-card__role" data-i18n-key="testimonial6Role">Senior Software Engineer · Full Stack · TypeScript · Node.js · React</p>
                     </header>
-                    <p class="testimonial-card__context">11 mar 2021 · Co-lideramos squads na Conexia Educação</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial6Context">11 mar 2021 · Co-lideramos squads na Conexia Educação</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
-                        “Leonardo é um excelente profissional e uma ótima pessoa. Tive a oportunidade de estar ao lado dele por
-                        anos, sendo co-coordenadores de squads na Conexia Educação. É criativo, orientado a resultados e
+                      <p data-i18n-key="testimonial6Quote">
+                        “Leonardo é um excelente profissional e uma ótima pessoa. Tive a oportunidade de estar ao lado dele por anos,
+                        sendo co-coordenadores de squads na Conexia Educação. É criativo, orientado a resultados e
                         multidisciplinar.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial6Competencies"
                         >Competências citadas: co-liderança de squads, criatividade, foco em resultados.</span
                       >
-                      <span class="testimonial-card__relationship">Parceiro técnico</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial6Relationship">Parceiro técnico</span>
                     </footer>
                   </article>
                 </div>
@@ -689,23 +725,23 @@
                   <article class="testimonial-card">
                     <header class="testimonial-card__header">
                       <h3 class="testimonial-card__name">Karen Kroll</h3>
-                      <p class="testimonial-card__role">
+                      <p class="testimonial-card__role" data-i18n-key="testimonial7Role">
                         Consultora em Inovação · Programas de Crescimento · Governança do Conhecimento
                       </p>
                     </header>
-                    <p class="testimonial-card__context">12 fev 2021 · Trabalhou comigo na Conexia Educação</p>
+                    <p class="testimonial-card__context" data-i18n-key="testimonial7Context">12 fev 2021 · Trabalhou comigo na Conexia Educação</p>
                     <blockquote class="testimonial-card__quote">
-                      <p>
-                        “Tive a grata oportunidade de trabalhar com Leonardo, profissional extremamente competente, focado em
-                        ótimas entregas e fortalecedor de experiências imersivas. Ele domina a gestão de stakeholders, cultiva
-                        ritos colaborativos e promove resultados de alto impacto.”
+                      <p data-i18n-key="testimonial7Quote">
+                        “Tive a grata oportunidade de trabalhar com Leonardo, profissional extremamente competente, focado em ótimas
+                        entregas e fortalecedor de experiências imersivas. Ele domina a gestão de stakeholders, cultiva ritos
+                        colaborativos e promove resultados de alto impacto.”
                       </p>
                     </blockquote>
                     <footer class="testimonial-card__footer">
-                      <span class="testimonial-card__competencies"
+                      <span class="testimonial-card__competencies" data-i18n-key="testimonial7Competencies"
                         >Competências citadas: gestão de stakeholders, facilitação de ritos, impacto em experiências.</span
                       >
-                      <span class="testimonial-card__relationship">1º grau</span>
+                      <span class="testimonial-card__relationship" data-i18n-key="testimonial7Relationship">1º grau</span>
                     </footer>
                   </article>
                 </div>
@@ -716,10 +752,11 @@
               type="button"
               data-carousel-next
               aria-label="Ver próximo depoimento"
+              data-i18n-attrs="aria-label:testimonialsNextAria"
             >
               <span aria-hidden="true">&#8250;</span>
             </button>
-            <div class="testimonial-carousel__indicators" data-carousel-indicators aria-label="Progresso dos depoimentos"></div>
+            <div class="testimonial-carousel__indicators" data-carousel-indicators aria-label="Progresso dos depoimentos" data-i18n-attrs="aria-label:testimonialsIndicatorsAria"></div>
           </div>
         </div>
       </section>
@@ -727,19 +764,20 @@
       <section id="contato" class="section section--highlight">
         <div class="container callout">
           <div>
-            <h2>Vamos conversar?</h2>
-            <p>
-              Busco conectar estratégia e execução para elevar o impacto de produtos digitais.
-              Vamos construir o próximo projeto juntos.
+            <h2 data-i18n-key="contactTitle">Vamos conversar?</h2>
+            <p data-i18n-key="contactDescription">
+              Busco conectar estratégia e execução para elevar o impacto de produtos digitais. Vamos construir o próximo projeto
+              juntos.
             </p>
           </div>
           <div class="callout__actions">
-            <a class="button" href="mailto:leonfpontes@gmail.com">Enviar e-mail</a>
+            <a class="button" href="mailto:leonfpontes@gmail.com" data-i18n-key="contactEmailCta">Enviar e-mail</a>
             <a
               class="button button--ghost"
               href="https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103"
               target="_blank"
               rel="noopener noreferrer"
+              data-i18n-key="contactLinkedinCta"
               >Conectar no LinkedIn</a
             >
           </div>
@@ -749,7 +787,11 @@
 
     <footer class="footer">
       <div class="container footer__content">
-        <p>&copy; <span id="year"></span> Leonardo Fonseca Pontes. Todos os direitos reservados.</p>
+        <p>
+          &copy; <span id="year"></span>
+          <span data-i18n-key="footerOwner">Leonardo Fonseca Pontes</span>.
+          <span data-i18n-key="footerRights">Todos os direitos reservados.</span>
+        </p>
       </div>
     </footer>
 
