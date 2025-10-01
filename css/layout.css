@@ -183,16 +183,22 @@
 
 .menu {
   display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  font-size: 0.95rem;
   align-items: center;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  flex-wrap: nowrap;
+  margin-left: auto;
+  font-size: 0.95rem;
+}
+
+.menu > * {
+  flex-shrink: 0;
 }
 
 .menu a {
   color: var(--color-text-muted);
   font-weight: 500;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .menu a:hover,
@@ -205,6 +211,8 @@
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+  flex-shrink: 0;
 }
 
 .language-switcher__button {
@@ -223,9 +231,10 @@
   cursor: pointer;
   transition: border-color 180ms ease, background 180ms ease, color 180ms ease,
     box-shadow 180ms ease;
+  flex-shrink: 0;
 }
 
-.language-switcher__button span[aria-hidden='true'] {
+.language-switcher__flag {
   font-size: 1.05rem;
   line-height: 1;
 }
@@ -566,6 +575,7 @@
 
   .menu {
     width: 100%;
+    margin-left: 0;
     padding: 0.75rem 0 0.25rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     gap: 0.75rem;
@@ -590,6 +600,7 @@
     width: 100%;
     margin-left: 0;
     padding-top: 0.5rem;
+    padding-left: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     justify-content: center;
     gap: 0.75rem;
