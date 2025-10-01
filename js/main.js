@@ -93,6 +93,29 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
 
   const languageButtons = Array.from(document.querySelectorAll('.language-switcher__button'));
 
+  const ensureLanguageButtonFlag = (button) => {
+    if (!(button instanceof HTMLElement)) {
+      return;
+    }
+
+    const flagSymbol = button.dataset.flag?.trim();
+    if (!flagSymbol) {
+      return;
+    }
+
+    let flagElement = button.querySelector('.language-switcher__flag');
+    if (!flagElement) {
+      flagElement = document.createElement('span');
+      flagElement.className = 'language-switcher__flag';
+      flagElement.setAttribute('aria-hidden', 'true');
+      button.insertBefore(flagElement, button.firstChild);
+    }
+
+    if (flagElement.textContent !== flagSymbol) {
+      flagElement.textContent = flagSymbol;
+    }
+  };
+
   const updateLanguageButtons = (lang) => {
     languageButtons.forEach((button) => {
       const isActive = button.dataset.language === lang;
@@ -128,6 +151,7 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
     }
 
     updateLanguageButtons(normalized);
+    languageButtons.forEach(ensureLanguageButtonFlag);
     updateTopbarOffset();
 
     const dictionary = translations[normalized] || translations[DEFAULT_LANGUAGE] || {};
@@ -188,6 +212,7 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
   }
 
   languageButtons.forEach((button) => {
+    ensureLanguageButtonFlag(button);
     button.addEventListener('click', () => {
       const targetLanguage = button.dataset.language;
       setLanguage(targetLanguage);
