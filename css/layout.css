@@ -603,7 +603,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .footer__content p {
@@ -613,10 +612,13 @@
 }
 
 .footer__meta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
 }
 
 .footer__text {
