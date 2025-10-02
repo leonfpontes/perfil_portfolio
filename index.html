@@ -101,7 +101,6 @@
 
     <main>
       <section id="inicio" class="hero">
-        <div class="hero__bg" aria-hidden="true"></div>
         <div class="container hero__inner">
           <div class="hero__profile">
             <span class="hero__badge" data-i18n-key="heroBadge">Disponível para liderar projetos estratégicos</span>
@@ -110,17 +109,13 @@
               Atuando como gerente de projetos, conduzo times multidisciplinares do discovery à entrega, garantindo impacto real
               para clientes e parceiros do ecossistema educacional e tecnológico.
             </p>
-            <div class="hero__actions">
-              <a class="button" href="mailto:leonfpontes@gmail.com" data-i18n-key="heroContactCta">Fale comigo</a>
-              <a
-                class="button button--ghost"
-                href="https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n-key="heroLinkedinCta"
-                >LinkedIn</a
-              >
-            </div>
+            <figure class="hero__portrait">
+              <img
+                src="img/lateral_photo.png"
+                alt="Retrato de Leonardo Fonseca Pontes"
+                data-i18n-attrs="alt:heroPortraitAlt"
+              />
+            </figure>
             <div class="hero__stats" aria-label="Principais indicadores profissionais" data-i18n-attrs="aria-label:heroStatsAria">
               <article class="stat-card">
                 <p class="stat-card__value" data-i18n-key="statProjectsValue">30+</p>
@@ -168,6 +163,40 @@
               </li>
             </ul>
           </aside>
+        </div>
+      </section>
+
+      <section class="section section--quick-actions" aria-labelledby="quick-actions-title">
+        <div class="container section__content quick-actions__content">
+          <header class="section__header quick-actions__header">
+            <span class="section__eyebrow" data-i18n-key="quickActionsEyebrow">Conexões</span>
+            <h2 id="quick-actions-title" data-i18n-key="quickActionsTitle">Como posso ajudar hoje?</h2>
+            <p data-i18n-key="quickActionsDescription">
+              Escolha a forma de contato que funciona melhor para você e vamos conversar sobre os próximos passos.
+            </p>
+          </header>
+          <div class="quick-actions__grid" role="list">
+            <a class="quick-action-card" href="mailto:leonfpontes@gmail.com" role="listitem">
+              <span class="quick-action-card__label" data-i18n-key="detailEmailLabel">E-mail</span>
+              <span class="quick-action-card__title" data-i18n-key="heroContactCta">Fale comigo</span>
+              <span class="quick-action-card__description" data-i18n-key="quickActionsEmailDescription">
+                Retorno em até 24 horas úteis com os próximos passos da conversa.
+              </span>
+            </a>
+            <a
+              class="quick-action-card quick-action-card--ghost"
+              href="https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="listitem"
+            >
+              <span class="quick-action-card__label" data-i18n-key="detailLinkedinLabel">LinkedIn</span>
+              <span class="quick-action-card__title" data-i18n-key="heroLinkedinCta">LinkedIn</span>
+              <span class="quick-action-card__description" data-i18n-key="quickActionsLinkedinDescription">
+                Conecte-se para acompanhar projetos, publicações e oportunidades de colaboração.
+              </span>
+            </a>
+          </div>
         </div>
       </section>
 
