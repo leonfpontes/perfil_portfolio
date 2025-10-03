@@ -32,32 +32,6 @@
             <p class="brand__role" data-i18n-key="brandRole">Gerente de Projetos · Transformação Digital</p>
           </div>
         </div>
-        <button
-          class="topbar__toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-nav"
-          aria-label="Alternar menu de navegação"
-          data-i18n-attrs="aria-label:menuToggleAria"
-        >
-          <span class="sr-only" data-i18n-key="menuToggleLabel">Alternar menu de navegação</span>
-          <span class="topbar__toggle-icon" aria-hidden="true"></span>
-        </button>
-        <nav
-          class="topbar__nav"
-          id="primary-nav"
-          aria-label="Navegação principal"
-          data-visible="false"
-          data-i18n-attrs="aria-label:primaryNavAria"
-        >
-          <a href="#resumo" data-i18n-key="navAbout">Sobre</a>
-          <a href="#experiencia" data-i18n-key="navExperience">Experiência</a>
-          <a href="#formacao" data-i18n-key="navEducation">Formação</a>
-          <a href="#competencias" data-i18n-key="navSkills">Competências</a>
-          <a href="#certificacoes" data-i18n-key="navCertifications">Certificações</a>
-          <a href="#depoimentos" data-i18n-key="navTestimonials">Depoimentos</a>
-          <a href="#contato" data-i18n-key="navContact">Contato</a>
-        </nav>
         <div
           class="topbar__lang-switch language-switcher"
           role="group"
@@ -135,18 +109,49 @@
           </figure>
         </div>
       </section>
+      <div class="content-layout">
+        <nav
+          class="side-nav"
+          aria-label="Navegação principal"
+          data-i18n-attrs="aria-label:primaryNavAria"
+        >
+          <ul class="side-nav__list">
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#resumo" data-i18n-key="navAbout">Sobre</a>
+            </li>
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#experiencia" data-i18n-key="navExperience">Experiência</a>
+            </li>
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#formacao" data-i18n-key="navEducation">Formação</a>
+            </li>
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#competencias" data-i18n-key="navSkills">Competências</a>
+            </li>
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#certificacoes" data-i18n-key="navCertifications">Certificações</a>
+            </li>
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#depoimentos" data-i18n-key="navTestimonials">Depoimentos</a>
+            </li>
+            <li class="side-nav__item">
+              <a class="side-nav__link" href="#contato" data-i18n-key="navContact">Contato</a>
+            </li>
+          </ul>
+        </nav>
 
-      <section id="resumo" class="section">
-        <div class="container section__content">
-          <header class="section__header">
-            <span class="section__eyebrow" data-i18n-key="aboutEyebrow">Sobre</span>
-            <h2 data-i18n-key="aboutTitle">Resumo Executivo</h2>
-            <p data-i18n-key="aboutDescription">
-              Liderança focada em resolver desafios complexos com estratégia, tecnologia e colaboração. Atuação end-to-end, da
-              concepção de produtos digitais ao acompanhamento de resultados e evolução contínua.
-            </p>
-          </header>
-          <div class="feature-grid">
+        <div class="content-layout__sections">
+          <section id="resumo" class="section">
+            <div class="container section__content">
+              <header class="section__header">
+                <span class="section__eyebrow" data-i18n-key="aboutEyebrow">Sobre</span>
+                <h2 data-i18n-key="aboutTitle">Resumo Executivo</h2>
+                <p data-i18n-key="aboutDescription">
+                  Liderança focada em resolver desafios complexos com estratégia, tecnologia e colaboração. Atuação end-to-end,
+                  da concepção de produtos digitais ao acompanhamento de resultados e evolução contínua.
+                </p>
+              </header>
+              <div class="feature-grid">
             <article class="feature-card">
               <h3 data-i18n-key="aboutMotivationsTitle">Motivações</h3>
               <ul>
@@ -759,6 +764,8 @@
           </div>
         </div>
       </section>
+        </div>
+      </div>
     </main>
 
     <footer class="footer">
