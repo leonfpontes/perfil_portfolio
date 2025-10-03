@@ -973,8 +973,8 @@
   gap: 1rem;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
-  text-align: left;
+  justify-content: center;
+  text-align: center;
 }
 
 .footer__text {
