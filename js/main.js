@@ -528,6 +528,111 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
 
   initializeTestimonialCarousels();
 
+  // Ensure .section--highlight backgrounds align with the viewport edges
+  const adjustHighlightSections = () => {
+    // Placeholder kept for backward compatibility. The precise full-bleed
+    // background is handled by a global backdrop element created below.
+    return;
+  };
+
+  let adjustTimer = null;
+  const scheduleAdjustHighlights = () => {
+    if (adjustTimer) clearTimeout(adjustTimer);
+    adjustTimer = setTimeout(() => {
+      adjustHighlightSections();
+      adjustTimer = null;
+    }, 60);
+  };
+
+  window.addEventListener('load', adjustHighlightSections);
+  window.addEventListener('resize', scheduleAdjustHighlights);
+
+  // --- Global backdrop approach (Option B) ---
+  // Create a single backdrop element that we position behind the target highlight section.
+  const BACKDROP_CLASS = 'global-highlight-backdrop';
+  let backdropEl = document.querySelector(`.${BACKDROP_CLASS}`);
+  if (!backdropEl) {
+    backdropEl = document.createElement('div');
+    backdropEl.className = BACKDROP_CLASS;
+    document.body.appendChild(backdropEl);
+  }
+
+  const updateBackdropForSection = (section) => {
+    if (!section || !backdropEl) return;
+    const rect = section.getBoundingClientRect();
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    // Position the backdrop fixed to the viewport, matching the section's vertical position
+    backdropEl.style.top = `${rect.top + scrollY}px`;
+    backdropEl.style.height = `${rect.height}px`;
+    // ensure backdrop is visible
+    backdropEl.style.opacity = '1';
+
+  // Stacking is handled by CSS: backdrop has z-index:0 and section uses z-index:1
+  backdropEl.style.zIndex = '0';
+  };
+
+  const findPrimaryHighlight = () => document.querySelector('.section--highlight');
+
+  const refreshBackdrop = () => {
+    const section = findPrimaryHighlight();
+    if (!section) {
+      if (backdropEl) backdropEl.style.opacity = '0';
+      return;
+    }
+    updateBackdropForSection(section);
+  };
+
+  // Translate the section element so its left edge aligns with the viewport left
+  const alignSectionToViewportLeft = () => {
+    const section = findPrimaryHighlight();
+    if (!section) return;
+
+    // clear previous inline transforms/margins to measure correctly
+    section.style.transform = '';
+    section.style.left = '';
+    section.style.marginLeft = '';
+    section.style.width = '';
+
+    const rect = section.getBoundingClientRect();
+    const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+
+    // Shift the section left by its current left offset so its left edge becomes 0
+    // Use position: relative to avoid removing it from document flow.
+    section.style.position = section.style.position || 'relative';
+    section.style.left = `-${Math.round(rect.left)}px`;
+    // keep the visual width equal to the viewport to ensure the background fills the width
+    section.style.width = `${viewportWidth}px`;
+  };
+
+  const scheduleAlignSection = () => {
+    scheduleBackdropRefresh();
+    // run align after backdrop refresh to use latest geometry
+    scheduleBackdropRefresh();
+    // also run align directly (debounced)
+    if (backdropTimer) clearTimeout(backdropTimer);
+    backdropTimer = setTimeout(() => {
+      alignSectionToViewportLeft();
+      backdropTimer = null;
+    }, 60);
+  };
+
+  // sync on load/resize/scroll (debounced)
+  let backdropTimer = null;
+  const scheduleBackdropRefresh = () => {
+    if (backdropTimer) clearTimeout(backdropTimer);
+    backdropTimer = setTimeout(() => {
+      refreshBackdrop();
+      backdropTimer = null;
+    }, 50);
+  };
+
+  window.addEventListener('load', () => { refreshBackdrop(); scheduleAlignSection(); });
+  window.addEventListener('resize', () => { scheduleBackdropRefresh(); scheduleAlignSection(); });
+  window.addEventListener('scroll', () => { scheduleBackdropRefresh(); scheduleAlignSection(); }, { passive: true });
+
+  // icons are inline <img> elements now; no runtime fallback required
+
   updateTopbarOffset();
   window.addEventListener('load', updateTopbarOffset);
   window.addEventListener('resize', updateTopbarOffset);
