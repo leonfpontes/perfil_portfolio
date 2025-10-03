@@ -32,6 +32,17 @@
             <p class="brand__role" data-i18n-key="brandRole">Gerente de Projetos · Transformação Digital</p>
           </div>
         </div>
+        <button
+          class="topbar__toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="side-nav"
+          aria-label="Alternar menu"
+        >
+          <span class="sr-only">Alternar menu</span>
+          <span class="topbar__toggle-icon" aria-hidden="true"></span>
+        </button>
+
         <div
           class="topbar__lang-switch language-switcher"
           role="group"
@@ -111,11 +122,13 @@
       </section>
       <div class="content-layout">
         <nav
+          id="side-nav"
           class="side-nav"
           aria-label="Navegação principal"
           data-i18n-attrs="aria-label:primaryNavAria"
         >
-          <ul class="side-nav__list">
+          <div class="side-nav__col side-nav__col--left">
+            <ul class="side-nav__list">
             <li class="side-nav__item">
               <a class="side-nav__link" href="#resumo" data-i18n-key="navAbout">Sobre</a>
             </li>
@@ -137,7 +150,26 @@
             <li class="side-nav__item">
               <a class="side-nav__link" href="#contato" data-i18n-key="navContact">Contato</a>
             </li>
-          </ul>
+            </ul>
+
+            <!-- language switcher duplicated inside the mobile panel (moved below the list) -->
+            <div class="side-nav__lang">
+            <span class="side-nav__lang-label">Idioma</span>
+            <div class="topbar__lang-switch language-switcher" role="group" aria-label="Selecionar idioma" data-i18n-attrs="aria-label:languageSwitcherAria">
+              <button type="button" class="language-switcher__button" data-language="pt-br" title="Portuguese" data-i18n-attrs="title:languagePortugueseTitle;aria-label:languagePortugueseLabel" aria-label="Português">
+                <img class="language-switcher__flag" src="img/flag-brazil.svg" alt="Bandeira do Brasil" title="Bandeira do Brasil" />
+                <!-- label intentionally removed to keep only the flag visible; aria-label remains for screen readers -->
+              </button>
+              <button type="button" class="language-switcher__button" data-language="en" title="English" data-i18n-attrs="title:languageEnglishTitle;aria-label:languageEnglishLabel" aria-label="English">
+                <img class="language-switcher__flag" src="img/flag-usa.svg" alt="Flag of the United States" title="Flag of the United States" />
+                <!-- label intentionally removed to keep only the flag visible; aria-label remains for screen readers -->
+              </button>
+            </div>
+            </div>
+          </div>
+
+          <div class="side-nav__col side-nav__col--right" aria-hidden="true"></div>
+
         </nav>
 
         <div class="content-layout__sections">

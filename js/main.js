@@ -6,6 +6,48 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
     yearElement.textContent = new Date().getFullYear();
   }
 
+  // Mobile: wire hamburger toggle to show/hide side-nav panel
+  const topbarToggle = document.querySelector('.topbar__toggle');
+  const sideNavEl = document.getElementById('side-nav');
+  if (topbarToggle && sideNavEl) {
+    topbarToggle.addEventListener('click', () => {
+      const expanded = topbarToggle.getAttribute('aria-expanded') === 'true';
+      topbarToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      sideNavEl.dataset.visible = expanded ? 'false' : 'true';
+    });
+
+    // Close panel when a link is clicked (smooth scroll already handled above via anchor behavior)
+    sideNavEl.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 960px)').matches) {
+          sideNavEl.dataset.visible = 'false';
+          topbarToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // also close panel when language buttons inside panel are clicked (mobile)
+    sideNavEl.querySelectorAll('.language-switcher__button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 960px)').matches) {
+          sideNavEl.dataset.visible = 'false';
+          topbarToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Ensure panel is closed when resizing to desktop
+    const ensureClosedOnDesktop = () => {
+      if (!window.matchMedia('(max-width: 960px)').matches) {
+        sideNavEl.dataset.visible = 'false';
+        topbarToggle.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    window.addEventListener('resize', ensureClosedOnDesktop);
+    ensureClosedOnDesktop();
+  }
+
   const topbar = document.querySelector('.topbar');
   const updateTopbarOffset = () => {
     if (!topbar) {
