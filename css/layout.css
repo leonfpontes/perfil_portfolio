@@ -802,7 +802,37 @@
 }
 
 .section--highlight {
+  /* full-bleed visual like .hero: apply the hero gradient to the section itself
+     so it spans the full viewport width (left and right) */
+  position: relative;
+  overflow: hidden;
+  z-index: 1; /* sit above the backdrop */
+  background: var(--gradient-hero);
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  /* force the section to span the full viewport width so the background
+    visually reaches the left and right edges like the hero.
+    Adjust margins to account for the parent `.content-layout__sections` padding
+    (padding-inline-start: 0.5rem; padding-inline-end: 2rem) so the gradient
+    aligns exactly with the page edges. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw - 0.5rem);
+  margin-right: calc(50% - 50vw - 2rem);
+}
+
+/* Global backdrop used for precise full-bleed highlights (positioned by JS) */
+.global-highlight-backdrop {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  z-index: 0; /* sit above the page background but behind the highlighted section */
+  /* radial focal point to match the hero treatment (more natural spotlight) */
   background: radial-gradient(circle at 30% 20%, rgba(246, 183, 60, 0.22), rgba(5, 8, 22, 0.94));
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  transition: opacity 260ms ease;
+  opacity: 0;
 }
 
 .section__content {
@@ -869,12 +899,54 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center; /* center buttons */
   gap: 0.75rem 1rem;
 }
 
 .callout__actions .button {
   min-width: 180px;
+}
+
+/* Button icon styles */
+.button__icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  transform-origin: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Use background images for the CTA icons for consistent sizing and faster loading */
+.button__icon {
+  /* icons are inline <img> now; ensure their size and spacing remain */
+  width: 20px;
+  height: 20px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+/* Slightly reduce text weight on CTA labels and keep them readable */
+.button--cta span {
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.callout__actions .button:hover .button__icon,
+.callout__actions .button:focus-visible .button__icon {
+  transform: scale(1.06);
+}
+
+@media (max-width: 640px) {
+  .callout__actions {
+    justify-content: center;
+  }
+
+  .button__icon { width: 18px; height: 18px; margin-right: 0.5rem; }
+  .callout__actions .button { min-width: 140px; }
 }
 
 .footer {
