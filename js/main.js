@@ -16,10 +16,6 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
     document.documentElement.style.setProperty('--topbar-offset', `${offset}px`);
   };
 
-  const navigation = document.getElementById('primary-nav');
-  const navigationToggle = document.querySelector('.topbar__toggle');
-  const desktopQuery = window.matchMedia('(min-width: 721px)');
-
   const htmlElement = document.documentElement;
   const supportedLanguageSet = new Set(
     Array.isArray(SUPPORTED_LANGUAGES)
@@ -165,52 +161,6 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
     );
   };
 
-  if (navigation && navigationToggle) {
-    const closeMenu = () => {
-      navigation.dataset.visible = 'false';
-      navigationToggle.setAttribute('aria-expanded', 'false');
-      updateTopbarOffset();
-    };
-
-    const setMenuForViewport = (mq) => {
-      if (mq.matches) {
-        navigation.dataset.visible = 'true';
-        navigationToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        closeMenu();
-      }
-
-      updateTopbarOffset();
-    };
-
-    navigationToggle.addEventListener('click', () => {
-      const isExpanded = navigationToggle.getAttribute('aria-expanded') === 'true';
-      if (isExpanded) {
-        closeMenu();
-      } else {
-        navigation.dataset.visible = 'true';
-        navigationToggle.setAttribute('aria-expanded', 'true');
-        updateTopbarOffset();
-      }
-    });
-
-    navigation.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        if (!desktopQuery.matches) {
-          closeMenu();
-        }
-      });
-    });
-
-    setMenuForViewport(desktopQuery);
-
-    if (typeof desktopQuery.addEventListener === 'function') {
-      desktopQuery.addEventListener('change', setMenuForViewport);
-    } else if (typeof desktopQuery.addListener === 'function') {
-      desktopQuery.addListener(setMenuForViewport);
-    }
-  }
-
   languageButtons.forEach((button) => {
     ensureLanguageButtonFlag(button);
     button.addEventListener('click', () => {
@@ -229,6 +179,85 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, translations } from './i18n.js';
 
   const browserLanguage = normalizeLanguage(navigator.language || navigator.userLanguage);
   setLanguage(storedLanguage || browserLanguage || DEFAULT_LANGUAGE, { force: true });
+
+  window.addEventListener('resize', updateTopbarOffset);
+
+  const sideNav = document.querySelector('.side-nav');
+  if (sideNav) {
+    const navLinks = Array.from(sideNav.querySelectorAll('a[href^="#"], a[href^="./#"]'));
+    const observedSections = [];
+
+    const normalizeTarget = (value) => {
+      if (!value) {
+        return '';
+      }
+
+      let normalized = value.trim();
+      if (normalized.startsWith('./')) {
+        normalized = normalized.slice(2);
+      }
+      if (normalized.startsWith('#')) {
+        normalized = normalized.slice(1);
+      }
+
+      return normalized;
+    };
+
+    const activateLink = (id) => {
+      if (!id) {
+        return;
+      }
+
+      const normalizedId = normalizeTarget(id);
+
+      navLinks.forEach((link) => {
+        const linkTarget = link.getAttribute('href') || '';
+        const linkId = normalizeTarget(linkTarget);
+        const isActive = linkId === normalizedId;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    navLinks.forEach((link) => {
+      const target = normalizeTarget(link.getAttribute('href'));
+      if (!target) {
+        return;
+      }
+      const element = document.getElementById(target);
+      if (element && !observedSections.includes(element)) {
+        observedSections.push(element);
+      }
+
+      link.addEventListener('click', () => {
+        activateLink(target);
+      });
+    });
+
+    if (observedSections.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+            .forEach((entry) => {
+              activateLink(entry.target.id);
+            });
+        },
+        {
+          rootMargin: '-45% 0px -45% 0px',
+          threshold: [0.1, 0.25, 0.5, 0.75],
+        }
+      );
+
+      observedSections.forEach((section) => observer.observe(section));
+      activateLink(observedSections[0].id);
+    }
+  }
 
   const initializeTestimonialCarousels = () => {
     const carousels = document.querySelectorAll('[data-carousel]');
