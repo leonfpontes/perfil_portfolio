@@ -44,6 +44,63 @@
     0 12px 30px rgba(246, 183, 60, 0.12);
 }
 
+.button--cta {
+  position: relative;
+  overflow: hidden;
+  color: rgba(5, 8, 22, 0.95);
+  border: none;
+  --cta-gradient: linear-gradient(135deg, rgba(246, 183, 60, 0.98), rgba(255, 215, 128, 0.95));
+  --cta-gradient-hover: linear-gradient(135deg, rgba(255, 199, 98, 1), rgba(255, 230, 168, 0.98));
+  background: var(--cta-gradient);
+  background-size: 180% 180%;
+  box-shadow: 0 18px 42px rgba(12, 16, 32, 0.5);
+}
+
+.button--cta:hover,
+.button--cta:focus-visible {
+  background: var(--cta-gradient-hover);
+  background-position: 100% 0;
+  box-shadow: 0 24px 55px rgba(12, 16, 32, 0.55);
+}
+
+.button--cta:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.button--email {
+  --cta-gradient: linear-gradient(135deg, rgba(246, 183, 60, 0.98), rgba(255, 215, 128, 0.95));
+  --cta-gradient-hover: linear-gradient(135deg, rgba(255, 205, 110, 1), rgba(255, 227, 168, 0.98));
+  color: rgba(5, 8, 22, 0.94);
+}
+
+.button--email:hover,
+.button--email:focus-visible {
+  color: rgba(5, 8, 22, 0.98);
+}
+
+.button--whatsapp {
+  --cta-gradient: linear-gradient(135deg, rgba(52, 199, 89, 0.96), rgba(17, 142, 63, 0.96));
+  --cta-gradient-hover: linear-gradient(135deg, rgba(87, 219, 118, 0.98), rgba(21, 162, 76, 0.98));
+  color: rgba(5, 8, 22, 0.92);
+}
+
+.button--whatsapp:hover,
+.button--whatsapp:focus-visible {
+  color: rgba(5, 8, 22, 0.98);
+}
+
+.button--linkedin {
+  --cta-gradient: linear-gradient(135deg, rgba(91, 128, 255, 0.96), rgba(42, 82, 203, 0.96));
+  --cta-gradient-hover: linear-gradient(135deg, rgba(124, 154, 255, 0.98), rgba(54, 96, 215, 0.98));
+  color: rgba(5, 8, 22, 0.95);
+}
+
+.button--linkedin:hover,
+.button--linkedin:focus-visible {
+  color: rgba(5, 8, 22, 0.99);
+}
+
 .feature-grid {
   display: grid;
   gap: 1.8rem;
