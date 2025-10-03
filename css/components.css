@@ -166,6 +166,9 @@
   --timeline-line-left: 22px;
   --timeline-line-width: 2px;
   --timeline-dot-size: 20px;
+  /* ensure timeline respects container width and doesn't cause horizontal overflow */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .timeline::before {
@@ -187,6 +190,11 @@
   );
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: var(--shadow-soft);
+  /* prevent cards extending beyond their container */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .timeline__item::before {

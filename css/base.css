@@ -92,6 +92,8 @@ li + li {
 .container {
   width: var(--container-width);
   margin: 0 auto;
+  /* ensure minimum horizontal breathing space inside container */
+  padding-inline: 0.5rem;
 }
 
 @media (max-width: 720px) {

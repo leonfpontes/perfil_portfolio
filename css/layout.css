@@ -405,15 +405,20 @@
   display: grid;
   grid-template-columns: minmax(180px, 210px) minmax(0, 1fr);
   gap: clamp(2rem, 4vw, 3rem);
-  width: min(100%, calc(var(--container-width) + 220px));
+  /* keep layout within page container wider area but respect container padding */
+  width: 100%;
+  max-width: calc(var(--container-width) + 220px);
   margin: clamp(3rem, 7vw, 5rem) auto;
   align-items: start;
+  box-sizing: border-box;
 }
 
 .content-layout__sections {
   width: 100%;
   max-width: var(--container-width);
-  margin-left: auto;
+  /* respect the container padding so content never touches edges */
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 2rem; /* more breathing space on the right */
   min-width: 0;
 }
 
@@ -429,6 +434,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 18px 42px rgba(5, 9, 24, 0.45);
   backdrop-filter: blur(12px);
+  z-index: 1000; /* ensure the nav stays above section backgrounds */
 }
 
 .side-nav__list {
@@ -551,6 +557,7 @@
     visibility: visible;
     opacity: 1;
     box-shadow: 0 24px 60px rgba(3,6,16,0.6);
+    z-index: 1000;
   }
 
   .side-nav__list { flex-direction: column; gap: 0.65rem; }
@@ -764,6 +771,31 @@
 }
 
 .section--accent {
+  /* keep rules for compatibility, but create a full-bleed pseudo element
+     so the accent background always spans the full viewport width */
+  position: relative;
+  z-index: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.section--accent::before {
+  /* background moved to the inner .section__content to align with the content container */
+  display: none;
+}
+
+.section--accent .section__content {
+  position: relative;
+}
+
+.section--accent .section__content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
   background: linear-gradient(160deg, rgba(15, 19, 38, 0.85), rgba(7, 10, 24, 0.85));
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -776,6 +808,30 @@
 .section__content {
   display: grid;
   gap: 3rem;
+}
+
+/* horizontal breathing space for all sections: at least 0.5rem each side
+   and responsive scaling on larger viewports */
+.section {
+  padding-inline: 0.5rem;
+}
+
+.section__content {
+  /* keep content inset from the section edges */
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 1rem;
+}
+
+/* slightly larger gutter for accented sections to make the background feel contained */
+.section--accent {
+  padding-inline: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+@media (min-width: 960px) {
+  .section__content {
+    padding-inline-start: 1rem;
+    padding-inline-end: 3rem;
+  }
 }
 
 .section__header {
