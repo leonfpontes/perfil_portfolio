@@ -136,16 +136,16 @@
   content: '';
   position: absolute;
   top: 6px;
-  left: calc(
-    var(--timeline-line-left) - (var(--timeline-dot-size) / 2) +
-      (var(--timeline-line-width) / 2)
-  );
+  /* place the dot at the line center and center it with translateX(-50%)
+     this prevents visual shift caused by borders, box-shadow or subpixel rounding */
+  left: calc(var(--timeline-line-left) + (var(--timeline-line-width) / 2));
   width: var(--timeline-dot-size);
   height: var(--timeline-dot-size);
   border-radius: 999px;
   border: 3px solid rgba(5, 8, 22, 0.85);
   background: linear-gradient(135deg, rgba(246, 183, 60, 0.9), rgba(91, 128, 255, 0.7));
   box-shadow: 0 0 0 6px rgba(246, 183, 60, 0.1);
+  transform: translateX(-50%);
   transition: transform 220ms ease, box-shadow 220ms ease,
     background 220ms ease;
 }
@@ -167,7 +167,8 @@
 .timeline__item:focus-within::before {
   box-shadow: 0 0 0 10px rgba(246, 183, 60, 0.22);
   background: linear-gradient(135deg, rgba(246, 183, 60, 1), rgba(91, 128, 255, 0.9));
-  transform: scale(1.05);
+  /* keep horizontal centering while scaling on hover */
+  transform: translateX(-50%) scale(1.05);
 }
 
 .timeline__meta h3 {
