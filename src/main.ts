@@ -11,7 +11,6 @@ import { ScrollSpy } from './components/ScrollSpy';
 import { Carousel } from './components/Carousel';
 import { Chart } from './components/Chart';
 import { DevtoolsEasterEgg } from './components/DevtoolsEasterEgg';
-import { ThemeSwitcher } from './components/ThemeSwitcher';
 
 // Initialize i18n system
 initializeI18n();
@@ -31,8 +30,7 @@ new Chart();
 // Initialize DevTools easter eggs (non-blocking, progressive)
 new DevtoolsEasterEgg();
 
-// Initialize Theme Switcher (injects button near language switcher)
-new ThemeSwitcher();
+// Theme switcher removed; default light theme applied via CSS variables
 
 // Update year in footer
 const yearElement = document.querySelector<HTMLElement>('[data-year]');
