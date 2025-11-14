@@ -64,6 +64,15 @@ export class Chart {
 
       const localizedConfig = this.buildLocalizedConfig();
 
+      // Read themed colors from CSS variables
+      const styles = getComputedStyle(document.documentElement);
+      const cFill = styles.getPropertyValue('--chart-fill').trim() || 'rgba(59, 130, 246, 0.15)';
+      const cStroke = styles.getPropertyValue('--chart-stroke').trim() || 'rgba(59, 130, 246, 0.75)';
+      const cPoint = styles.getPropertyValue('--chart-point').trim() || 'rgba(37, 99, 235, 1)';
+      const cGrid = styles.getPropertyValue('--chart-grid').trim() || 'rgba(37, 99, 235, 0.25)';
+      const cAngles = styles.getPropertyValue('--chart-angles').trim() || 'rgba(37, 99, 235, 0.35)';
+      const cTick = styles.getPropertyValue('--chart-tick').trim() || '#1f2937';
+
       // Create chart
       this.chartInstance = new Chart(this.canvas, {
         type: 'radar',
@@ -74,12 +83,12 @@ export class Chart {
               label: localizedConfig.datasetLabel,
               data: [95, 92, 90, 88, 94],
               fill: true,
-              backgroundColor: 'rgba(59, 130, 246, 0.15)',
-              borderColor: 'rgba(59, 130, 246, 0.75)',
-              pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+              backgroundColor: cFill,
+              borderColor: cStroke,
+              pointBackgroundColor: cPoint,
               pointBorderColor: '#fff',
               pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgba(37, 99, 235, 1)',
+              pointHoverBorderColor: cPoint,
               borderWidth: 2,
             },
           ],
@@ -93,15 +102,15 @@ export class Chart {
               ticks: {
                 showLabelBackdrop: false,
                 stepSize: 10,
-                color: '#1f2937',
+                color: cTick,
               },
               grid: {
                 circular: true,
-                color: 'rgba(37, 99, 235, 0.25)',
+                color: cGrid,
                 lineWidth: 1,
               },
               angleLines: {
-                color: 'rgba(37, 99, 235, 0.35)',
+                color: cAngles,
                 lineWidth: 1,
               },
               pointLabels: {
