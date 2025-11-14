@@ -8,13 +8,13 @@
   --color-accent: var(--accent-color);
   --color-border: rgba(2, 6, 23, 0.08);
 
-  /* Chart */
-  --chart-fill: rgba(59, 130, 246, 0.15);
-  --chart-stroke: rgba(37, 99, 235, 0.75);
-  --chart-point: rgba(37, 99, 235, 1);
-  --chart-grid: rgba(37, 99, 235, 0.2);
-  --chart-angles: rgba(37, 99, 235, 0.25);
-  --chart-tick: #334155;
+  /* Chart (tuned for light theme contrast) */
+  --chart-fill: rgba(37, 99, 235, 0.12);   /* blue-600 @ 12% */
+  --chart-stroke: #2563eb;                 /* blue-600 */
+  --chart-point: #2563eb;                  /* blue-600 */
+  --chart-grid: rgba(2, 6, 23, 0.10);      /* near-black @ 10% */
+  --chart-angles: rgba(2, 6, 23, 0.12);    /* slightly stronger than grid */
+  --chart-tick: #475569;                   /* slate-600 */
 
   /* Typography */
   --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
