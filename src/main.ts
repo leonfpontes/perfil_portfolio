@@ -11,6 +11,7 @@ import { ScrollSpy } from './components/ScrollSpy';
 import { Carousel } from './components/Carousel';
 import { Chart } from './components/Chart';
 import { DevtoolsEasterEgg } from './components/DevtoolsEasterEgg';
+import { initAnalyticsBindings } from './utils/analytics';
 
 // Initialize i18n system
 initializeI18n();
@@ -31,6 +32,9 @@ new Chart();
 new DevtoolsEasterEgg();
 
 // Theme switcher removed; default light theme applied via CSS variables
+
+// Bind basic analytics events (CTA, nav, language)
+initAnalyticsBindings();
 
 // Update year in footer
 const yearElement = document.querySelector<HTMLElement>('[data-year]');
