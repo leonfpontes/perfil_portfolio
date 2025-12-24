@@ -123,8 +123,8 @@ export class Chart {
                   family: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                 },
                 padding: 20,
-                callback(label) {
-                  if (typeof label !== 'string') return label;
+                callback(label): string | string[] {
+                  if (typeof label !== 'string') return String(label);
                   if (label.includes(' & ')) {
                     const parts = label.split(' & ');
                     if (parts.length === 2) {
