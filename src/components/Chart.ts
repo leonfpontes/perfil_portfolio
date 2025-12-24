@@ -127,7 +127,7 @@ export class Chart {
                   if (typeof label !== 'string') return String(label);
                   if (label.includes(' & ')) {
                     const parts = label.split(' & ');
-                    if (parts.length === 2) {
+                    if (parts.length === 2 && parts[0] && parts[1]) {
                       return [`${parts[0]} &`, parts[1]];
                     }
                   }
