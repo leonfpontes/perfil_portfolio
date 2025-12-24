@@ -198,7 +198,7 @@ export const translations = {
     "statProjectsLabel": "Projetos digitais orquestrados",
     "statProjectsValue": "30+",
     "statYearsLabel": "Liderando times de produto e projeto",
-    "statYearsValue": "6 anos",
+    "statYearsValue": "+7 anos",
     "testimonial1Competencies": "Competências citadas: liderança de times, foco em resultados, adaptabilidade.",
     "testimonial1Context": "7 dez 2021 · Trabalhou comigo na Educacross",
     "testimonial1Quote": "“O Leo tem em si qualidades muito caras a um excelente profissional: integridade, honestidade, capacidade\n                        de encorajar o time, foco em resultados e adaptação. Se eu pudesse resumí-lo, diria que ele é um\n                        profissional incansável! Trabalhar com ele foi uma experiência inesquecível.”",

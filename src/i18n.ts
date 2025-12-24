@@ -67,7 +67,13 @@ export function applyTextTranslations(lang: LanguageCode): void {
       if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) {
         element.value = translation;
       } else {
-        element.textContent = translation;
+        // Para botões com ícones, atualiza apenas o span de texto
+        const textSpan = element.querySelector('span');
+        if (textSpan) {
+          textSpan.textContent = translation;
+        } else {
+          element.textContent = translation;
+        }
       }
     }
   });

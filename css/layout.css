@@ -1,10 +1,14 @@
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 1200; /* keep header above floating navigation elements */
   backdrop-filter: blur(14px);
-  background: rgba(5, 8, 22, 0.85);
+  background: rgba(5, 8, 22, 0.92);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .topbar__inner {
@@ -296,8 +300,8 @@
 .hero {
   position: relative;
   overflow: hidden;
-  /* reduced vertical spacing: half again */
-  padding: 1.375rem 0 1rem;
+  /* reduced vertical spacing: half again + topbar height to prevent header overlap */
+  padding: calc(104px + 1.375rem) 0 1rem;
   background: var(--gradient-hero);
 }
 
@@ -407,19 +411,21 @@
   gap: clamp(2rem, 4vw, 3rem);
   /* keep layout within page container wider area but respect container padding */
   width: 100%;
-  max-width: calc(var(--container-width) + 220px);
+  max-width: min(calc(var(--container-width) + 220px), calc(100vw - 2rem));
   margin: clamp(3rem, 7vw, 5rem) auto;
+  margin-top: calc(clamp(3rem, 7vw, 5rem) + 104px); /* add topbar height to first margin */
   align-items: start;
   box-sizing: border-box;
 }
 
 .content-layout__sections {
   width: 100%;
-  max-width: var(--container-width);
+  max-width: 100%;
   /* respect the container padding so content never touches edges */
   padding-inline-start: 0.5rem;
-  padding-inline-end: 2rem; /* more breathing space on the right */
+  padding-inline-end: 1rem;
   min-width: 0;
+  overflow: hidden;
 }
 
 .side-nav {
@@ -444,29 +450,44 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: stretch;
+}
+
+.side-nav__item {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .side-nav__link {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 0.85rem 0.65rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
   font-weight: 500;
   letter-spacing: 0.02em;
+  line-height: 1.5;
+  height: 40px;
+  box-sizing: border-box;
+  margin: 0;
+  vertical-align: middle;
   transition: color 180ms ease, background-color 180ms ease, transform 180ms ease,
     box-shadow 180ms ease;
 }
 
 .side-nav__link::before {
   content: '';
+  display: block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: rgba(91, 128, 255, 0.35);
   box-shadow: 0 0 0 0 rgba(91, 128, 255, 0.4);
+  flex-shrink: 0;
   transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -512,17 +533,26 @@
     background: rgba(12, 16, 32, 0.82);
     box-shadow: 0 14px 30px rgba(5, 9, 24, 0.4);
     max-width: 100%;
+    justify-content: center;
   }
 
   .side-nav__list {
     flex-direction: row;
     gap: 0.35rem;
     min-width: max-content;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .side-nav__item {
+    display: block;
   }
 
   .side-nav__link {
-    padding: 0.55rem 0.85rem;
+    padding: 0.7rem 0.95rem;
     white-space: nowrap;
+    height: 40px;
   }
 
   .content-layout__sections {
@@ -838,18 +868,26 @@
 .section__content {
   display: grid;
   gap: 3rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* horizontal breathing space for all sections: at least 0.5rem each side
    and responsive scaling on larger viewports */
 .section {
   padding-inline: 0.5rem;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .section__content {
   /* keep content inset from the section edges */
   padding-inline-start: 0.5rem;
   padding-inline-end: 1rem;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* slightly larger gutter for accented sections to make the background feel contained */
@@ -879,10 +917,10 @@
 
 .callout {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.75rem 2.5rem;
+  text-align: center;
+  gap: 2rem;
   padding: 3rem 3.25rem;
   background: linear-gradient(135deg, rgba(21, 26, 46, 0.92), rgba(12, 16, 32, 0.88));
   border-radius: var(--radius-lg);
@@ -1033,7 +1071,7 @@
   }
 
   .callout__actions {
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 

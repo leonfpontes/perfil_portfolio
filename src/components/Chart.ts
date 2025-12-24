@@ -69,9 +69,9 @@ export class Chart {
       const cFill = styles.getPropertyValue('--chart-fill').trim() || 'rgba(59, 130, 246, 0.15)';
       const cStroke = styles.getPropertyValue('--chart-stroke').trim() || 'rgba(59, 130, 246, 0.75)';
       const cPoint = styles.getPropertyValue('--chart-point').trim() || 'rgba(37, 99, 235, 1)';
-      const cGrid = styles.getPropertyValue('--chart-grid').trim() || 'rgba(37, 99, 235, 0.25)';
-      const cAngles = styles.getPropertyValue('--chart-angles').trim() || 'rgba(37, 99, 235, 0.35)';
-      const cTick = styles.getPropertyValue('--chart-tick').trim() || '#1f2937';
+      const cGrid = styles.getPropertyValue('--chart-grid').trim() || 'rgba(255, 255, 255, 0.9)';
+      const cAngles = styles.getPropertyValue('--chart-angles').trim() || 'rgba(255, 255, 255, 0.9)';
+      const cTick = styles.getPropertyValue('--chart-tick').trim() || '#f3f4f6';
 
       // Create chart
       this.chartInstance = new Chart(this.canvas, {
@@ -81,7 +81,7 @@ export class Chart {
           datasets: [
             {
               label: localizedConfig.datasetLabel,
-              data: [95, 92, 90, 88, 94],
+              data: [95, 92, 90, 88, 94, 93],
               fill: true,
               backgroundColor: cFill,
               borderColor: cStroke,
@@ -103,20 +103,42 @@ export class Chart {
                 showLabelBackdrop: false,
                 stepSize: 10,
                 color: cTick,
+                backdropColor: 'transparent',
+                display: true,
               },
               grid: {
                 circular: true,
                 color: cGrid,
-                lineWidth: 1,
+                lineWidth: 2,
+                display: true,
               },
               angleLines: {
                 color: cAngles,
-                lineWidth: 1,
+                lineWidth: 1.8,
+                display: true,
               },
               pointLabels: {
                 font: {
                   size: 12,
                   family: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                },
+                padding: 20,
+                callback(label) {
+                  if (typeof label !== 'string') return label;
+                  if (label.includes(' & ')) {
+                    const parts = label.split(' & ');
+                    if (parts.length === 2) {
+                      return [`${parts[0]} &`, parts[1]];
+                    }
+                  }
+                  if (label.length > 18) {
+                    const words = label.split(' ');
+                    if (words.length > 1) {
+                      const mid = Math.ceil(words.length / 2);
+                      return [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+                    }
+                  }
+                  return label;
                 },
               },
             },
@@ -131,6 +153,14 @@ export class Chart {
                   return `${context.formattedValue} · ${context.label}`;
                 },
               },
+            },
+          },
+          layout: {
+            padding: {
+              top: 36,
+              right: 44,
+              bottom: 36,
+              left: 44,
             },
           },
         },
@@ -162,6 +192,7 @@ export class Chart {
           'Visão de Produto',
           'Agilidade & Processos',
           'Comunicação Executiva',
+          'Tecnologia & IA',
         ];
 
     const datasetLabelTranslation = getTranslation(lang, 'competencyRadarDatasetLabel');
