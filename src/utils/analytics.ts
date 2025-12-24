@@ -34,6 +34,7 @@ export function bindCtaTracking(): void {
     { selector: '.button--email', action: 'click_cta', label: 'email' },
     { selector: '.button--whatsapp', action: 'click_cta', label: 'whatsapp' },
     { selector: '.button--linkedin', action: 'click_cta', label: 'linkedin' },
+    { selector: '.button--github', action: 'click_cta', label: 'github' },
   ];
   map.forEach(({ selector, action, label }) => {
     document.querySelectorAll<HTMLAnchorElement>(selector).forEach((el) => {
