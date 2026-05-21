@@ -146,6 +146,7 @@
 .feature-card,
 .competency-card,
 .certification-card,
+.product-card,
 .timeline__item {
   transition: transform 220ms ease, box-shadow 220ms ease,
     border-color 220ms ease, background 220ms ease;
@@ -179,7 +180,9 @@
 .competency-card:hover,
 .competency-card:focus-within,
 .certification-card:hover,
-.certification-card:focus-within {
+.certification-card:focus-within,
+.product-card:hover,
+.product-card:focus-within {
   transform: translateY(-6px);
   box-shadow: 0 28px 55px rgba(9, 12, 28, 0.55),
     0 0 0 1px rgba(246, 183, 60, 0.45);
@@ -445,6 +448,85 @@
   box-shadow: 0 32px 60px rgba(10, 13, 35, 0.7);
 }
 
+/* Products section */
+.products-grid {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.product-card {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  padding: 1.7rem 1.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.product-card__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(246, 183, 60, 0.18);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.product-card h3 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.product-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.product-card ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.product-card ul li {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.product-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+  padding: 0.55rem 1.25rem;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 999px;
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.product-card__cta:hover,
+.product-card__cta:focus-visible {
+  background: var(--color-accent);
+  color: #0a0d23;
+}
+
 .certifications-carousel .testimonial-carousel__track {
   gap: 1.5rem;
 }
@@ -482,6 +564,12 @@
 
 @media (max-width: 720px) {
   .certifications-slide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .products-grid {
     grid-template-columns: 1fr;
   }
 }
