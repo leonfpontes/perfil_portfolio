@@ -464,6 +464,38 @@
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Colored top stripe per card */
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+/* GiraHub — amber/orange */
+.product-card:nth-child(1) {
+  background: linear-gradient(160deg, rgba(246, 183, 60, 0.1) 0%, var(--color-surface-alt) 45%);
+  border-color: rgba(246, 183, 60, 0.25);
+}
+
+.product-card:nth-child(1)::before {
+  background: linear-gradient(90deg, #f6b73c, #f97316);
+}
+
+/* PortalPMO — indigo/violet */
+.product-card:nth-child(2) {
+  background: linear-gradient(160deg, rgba(99, 130, 249, 0.12) 0%, var(--color-surface-alt) 45%);
+  border-color: rgba(99, 130, 249, 0.25);
+}
+
+.product-card:nth-child(2)::before {
+  background: linear-gradient(90deg, #4871f8, #8b5cf6);
 }
 
 .product-card__tag {
@@ -471,8 +503,6 @@
   align-items: center;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  background: rgba(246, 183, 60, 0.18);
-  color: var(--color-accent);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -480,9 +510,27 @@
   align-self: flex-start;
 }
 
+.product-card:nth-child(1) .product-card__tag {
+  background: rgba(246, 183, 60, 0.18);
+  color: #f6b73c;
+}
+
+.product-card:nth-child(2) .product-card__tag {
+  background: rgba(99, 130, 249, 0.18);
+  color: #818cf8;
+}
+
 .product-card h3 {
   font-size: 1.15rem;
   margin: 0;
+}
+
+.product-card:nth-child(1) h3 {
+  color: #fcd05a;
+}
+
+.product-card:nth-child(2) h3 {
+  color: #818cf8;
 }
 
 .product-card p {
@@ -511,20 +559,53 @@
   gap: 0.45rem;
   margin-top: 0.25rem;
   padding: 0.55rem 1.25rem;
-  border: 1.5px solid var(--color-accent);
   border-radius: 999px;
-  color: var(--color-accent);
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
   align-self: flex-start;
-  transition: background 180ms ease, color 180ms ease;
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
 
-.product-card__cta:hover,
-.product-card__cta:focus-visible {
-  background: var(--color-accent);
+.product-card:nth-child(1) .product-card__cta {
+  border: 1.5px solid #f6b73c;
+  color: #f6b73c;
+}
+
+.product-card:nth-child(1) .product-card__cta:hover,
+.product-card:nth-child(1) .product-card__cta:focus-visible {
+  background: #f6b73c;
   color: #0a0d23;
+  box-shadow: 0 0 18px rgba(246, 183, 60, 0.45);
+}
+
+.product-card:nth-child(2) .product-card__cta {
+  border: 1.5px solid #818cf8;
+  color: #818cf8;
+}
+
+.product-card:nth-child(2) .product-card__cta:hover,
+.product-card:nth-child(2) .product-card__cta:focus-visible {
+  background: #818cf8;
+  color: #0a0d23;
+  box-shadow: 0 0 18px rgba(129, 140, 248, 0.45);
+}
+
+/* Per-card hover glow override */
+.product-card:nth-child(1):hover,
+.product-card:nth-child(1):focus-within {
+  box-shadow: 0 28px 55px rgba(9, 12, 28, 0.55),
+    0 0 0 1px rgba(246, 183, 60, 0.5),
+    0 0 40px rgba(246, 183, 60, 0.12);
+  border-color: rgba(246, 183, 60, 0.55);
+}
+
+.product-card:nth-child(2):hover,
+.product-card:nth-child(2):focus-within {
+  box-shadow: 0 28px 55px rgba(9, 12, 28, 0.55),
+    0 0 0 1px rgba(99, 130, 249, 0.5),
+    0 0 40px rgba(99, 130, 249, 0.12);
+  border-color: rgba(99, 130, 249, 0.55);
 }
 
 .certifications-carousel .testimonial-carousel__track {
