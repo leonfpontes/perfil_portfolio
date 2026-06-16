@@ -20,7 +20,7 @@ initializeI18n();
 new LanguageSwitcher();
 new MobileNav();
 
-const mainNav = document.querySelector<HTMLElement>('.topbar__nav');
+const mainNav = document.querySelector<HTMLElement>('#side-nav');
 if (mainNav) {
   new ScrollSpy(mainNav);
 }

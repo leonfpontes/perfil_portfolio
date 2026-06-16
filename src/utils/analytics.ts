@@ -54,10 +54,10 @@ export function bindNavTracking(): void {
 
 export function bindLanguageTracking(): void {
   document.addEventListener('languagechange', (e: Event) => {
-    // i18n dispatches CustomEvent with detail.lang, but fallback defensively
+    // i18n dispatches CustomEvent with detail.language, but fallback defensively
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const detail = (e as any)?.detail;
-    const lang = detail?.lang || document.documentElement.getAttribute('data-language') || 'unknown';
+    const lang = detail?.language || document.documentElement.getAttribute('data-language') || 'unknown';
     trackEvent('language_change', { category: 'i18n', label: String(lang) });
   });
 }
