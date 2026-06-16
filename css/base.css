@@ -112,3 +112,17 @@ li + li {
     --topbar-offset: 76px;
   }
 }
+
+/* Scroll Entrance Animations */
+[data-animate="fade-up"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-animate="fade-up"].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

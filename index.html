@@ -9,13 +9,27 @@
       content="Perfil profissional de Leonardo Fonseca Pontes, gerente de projetos especializado em transformação digital, educação e tecnologia."
       data-i18n-attrs="content:metaDescription"
     />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://leonardofonsecapontes.vercel.app/" />
+    <meta property="og:title" content="Leonardo Fonseca Pontes · Perfil Profissional" data-i18n-attrs="content:documentTitle" />
+    <meta property="og:description" content="Perfil profissional de Leonardo Fonseca Pontes, gerente de projetos especializado em transformação digital, educação e tecnologia." data-i18n-attrs="content:metaDescription" />
+    <meta property="og:image" content="https://leonardofonsecapontes.vercel.app/img/profile_photo.webp" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://leonardofonsecapontes.vercel.app/" />
+    <meta property="twitter:title" content="Leonardo Fonseca Pontes · Perfil Profissional" data-i18n-attrs="content:documentTitle" />
+    <meta property="twitter:description" content="Perfil profissional de Leonardo Fonseca Pontes, gerente de projetos especializado em transformação digital, educação e tecnologia." data-i18n-attrs="content:metaDescription" />
+    <meta property="twitter:image" content="https://leonardofonsecapontes.vercel.app/img/profile_photo.webp" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/png" href="img/profile_photo.png" />
+    <link rel="icon" type="image/webp" href="img/profile_photo.webp" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-843HEPMCYR"></script>
     <script>
@@ -30,11 +44,12 @@
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
+    <div id="scroll-progress" aria-hidden="true" style="position: fixed; top: 0; left: 0; height: 3px; background: var(--color-accent); z-index: 1300; width: 0%; transition: width 80ms ease;"></div>
     <header class="topbar">
       <div class="container topbar__inner">
         <div class="topbar__brand">
           <span class="brand__monogram">
-            <img src="img/profile_photo.png" alt="Foto de Leonardo Fonseca Pontes" data-i18n-attrs="alt:brandPhotoAlt" />
+            <img src="img/profile_photo.webp" alt="Foto de Leonardo Fonseca Pontes" data-i18n-attrs="alt:brandPhotoAlt" width="44" height="44" />
           </span>
           <div class="topbar__brand-info">
             <a class="brand__name" href="#inicio" data-i18n-key="brandName">Leonardo Fonseca Pontes</a>
@@ -122,9 +137,11 @@
 
           <figure class="hero__portrait">
             <img
-              src="img/lateral_photo.png"
+              src="img/lateral_photo.webp"
               alt="Retrato de Leonardo Fonseca Pontes"
               data-i18n-attrs="alt:heroPortraitAlt"
+              width="320"
+              height="320"
             />
           </figure>
         </div>
@@ -185,7 +202,7 @@
         </nav>
 
         <div class="content-layout__sections">
-          <section id="resumo" class="section">
+          <section id="resumo" class="section" data-animate="fade-up">
             <div class="container section__content">
               <header class="section__header">
                 <span class="section__eyebrow" data-i18n-key="aboutEyebrow">Sobre</span>
@@ -237,7 +254,7 @@
         </div>
       </section>
 
-      <section id="experiencia" class="section section--accent">
+      <section id="experiencia" class="section section--accent" data-animate="fade-up">
         <div class="container section__content">
           <header class="section__header">
             <span class="section__eyebrow" data-i18n-key="experienceEyebrow">Trajetória</span>
@@ -339,7 +356,7 @@
           </div>
         </div>
       </section>
-      <section id="competencias" class="section">
+      <section id="competencias" class="section" data-animate="fade-up">
         <div class="container section__content">
           <header class="section__header">
             <span class="section__eyebrow" data-i18n-key="skillsEyebrow">Habilidades</span>
@@ -422,7 +439,7 @@
         </div>
       </section>
 
-      <section id="produtos" class="section">
+      <section id="produtos" class="section" data-animate="fade-up">
         <div class="container section__content">
           <header class="section__header">
             <span class="section__eyebrow" data-i18n-key="productsEyebrow">Produtos Autorais</span>
@@ -468,7 +485,7 @@
         </div>
       </section>
 
-      <section id="formacao" class="section section--accent">
+      <section id="formacao" class="section section--accent" data-animate="fade-up">
         <div class="container section__content">
           <header class="section__header">
             <span class="section__eyebrow" data-i18n-key="educationEyebrow">Percurso acadêmico</span>
@@ -538,7 +555,7 @@
         </div>
       </section>
 
-      <section id="certificacoes" class="section section--accent">
+      <section id="certificacoes" class="section section--accent" data-animate="fade-up">
         <div class="container section__content">
           <header class="section__header">
             <span class="section__eyebrow" data-i18n-key="certificationsEyebrow">Atualização contínua</span>
@@ -641,7 +658,7 @@
           </div>
         </div>
       </section>
-      <section id="depoimentos" class="section">
+      <section id="depoimentos" class="section" data-animate="fade-up">
         <div class="container section__content">
           <header class="section__header">
             <span class="section__eyebrow" data-i18n-key="testimonialsEyebrow">Reconhecimento</span>
@@ -850,7 +867,7 @@
         </div>
       </div>
 
-    <section id="contato" class="section section--highlight">
+    <section id="contato" class="section section--highlight" data-animate="fade-up">
       <div class="container callout">
         <div>
           <h2 data-i18n-key="contactTitle">Vamos conversar?</h2>

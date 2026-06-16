@@ -12,6 +12,7 @@ import { Carousel } from './components/Carousel';
 import { Chart } from './components/Chart';
 import { DevtoolsEasterEgg } from './components/DevtoolsEasterEgg';
 import { initAnalyticsBindings } from './utils/analytics';
+import { ScrollAnimation } from './utils/scrollAnimation';
 
 // Initialize i18n system
 initializeI18n();
@@ -35,6 +36,20 @@ new DevtoolsEasterEgg();
 
 // Bind basic analytics events (CTA, nav, language)
 initAnalyticsBindings();
+
+// Initialize Scroll Entrance Animations
+new ScrollAnimation();
+
+// Initialize Scroll Progress Bar
+const progressEl = document.getElementById('scroll-progress');
+if (progressEl) {
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressEl.style.width = `${scrollPercent}%`;
+  });
+}
 
 // Update year in footer
 const yearElement = document.querySelector<HTMLElement>('[data-year]');

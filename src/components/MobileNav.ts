@@ -50,7 +50,7 @@ export class MobileNav {
   }
 
   private isMobile(): boolean {
-    return window.matchMedia('(max-width: 960px)').matches;
+    return window.matchMedia('(max-width: 1200px)').matches;
   }
 
   private togglePanel(): void {
