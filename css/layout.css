@@ -365,6 +365,13 @@
   max-width: 520px;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin: 1.5rem 0 2rem;
+}
+
 .hero__badge {
   display: inline-flex;
   align-items: center;
