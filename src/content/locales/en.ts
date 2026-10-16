@@ -632,6 +632,9 @@ export const en: SiteContent = {
     imageCredits: 'Images: Unsplash',
   },
   ui: {
+    readMore: 'Read more',
+    readLess: 'Read less',
+    seeAll: 'See all',
     scrollHint: 'Scroll to explore',
     illustrativeImage: 'Illustrative image · Unsplash',
     previous: 'Previous',

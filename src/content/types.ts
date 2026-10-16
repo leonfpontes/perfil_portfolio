@@ -219,6 +219,9 @@ export interface Contact extends SectionHeading {
 
 /** Rótulos de interface reutilizados por vários componentes. */
 export interface UiStrings {
+  readMore: string;
+  readLess: string;
+  seeAll: string;
   illustrativeImage: string;
   scrollHint: string;
   previous: string;

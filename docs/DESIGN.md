@@ -40,6 +40,18 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 
 **Arte generativa** (`components/art`): campo de fluxo, meio-tom de fotos e capas por produto (selo, gates, radar e curvas de nível). Tudo é desenhado em canvas na cor da tinta da cena e pausa fora da tela.
 
+**Transição de cor:** tons próximos são misturados com `color-mix`. Inversões (claro↔escuro, vermelhão↔escuro) usam uma **cortina**: o novo fundo varre a tela no sentido do scroll, sem passar por um cinza intermediário.
+
+**Celular — trilhos horizontais:** no mobile, as seções com vários itens viram trilhos guiados pelo scroll (`HorizontalTrack`):
+- planos, gates da jornada, depoimentos, serviços, produtos e trajetória;
+- cada painel cabe inteiro numa tela e "encaixa" ao soltar o dedo;
+- nada é cortado e um painel custa cerca de meia tela de rolagem.
+
+Também no celular:
+- as cenas não se apagam enquanto você lê (só a entrada é animada);
+- textos longos ficam atrás de "Ler mais";
+- as certificações mostram as 5 primeiras.
+
 **Acessibilidade do movimento:**
 - Com `prefers-reduced-motion`, não há Lenis, pins, scrubs nem SplitText. O site vira o layout estático e os depoimentos e serviços viram carrosséis com botões.
 - No celular, só as cenas que cabem na tela ficam fixas.
@@ -72,7 +84,8 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 | `motion/Scene` | Cena: tom de cor, entrada e saída coreografadas |
 | `motion/SplitReveal` | Texto por linhas, palavras, caracteres ou "leitura" |
 | `motion/CountUp`, `motion/Magnetic` | Números que contam e botões magnéticos |
-| `motion/SceneIndicator` | Marcador "§ 03 / 10" e régua de progresso |
+| `motion/HorizontalTrack` | Trilho horizontal guiado pelo scroll (com encaixe), em qualquer breakpoint |
+| `motion/SceneIndicator` | Marcador "§ 03 / 10" e régua de progresso (telas ≥ 1536px) |
 | `art/FlowField`, `art/Halftone`, `art/GenerativeCover` | Arte generativa em canvas |
 | `Reveal` | Entrada discreta (fade + 8px) |
 | `TrackedLink` | Link com evento de analytics e `rel` seguro para links externos |

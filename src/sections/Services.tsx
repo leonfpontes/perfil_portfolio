@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Arrow } from '@/components/common/Arrow';
 import { Container, SectionHeader } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
+import { HorizontalTrack } from '@/components/motion/HorizontalTrack';
 import { Scene } from '@/components/motion/Scene';
 import { useSteppedScene, useStepTransition } from '@/hooks/useSteppedScene';
 import { useContent } from '@/lib/i18n/LocaleProvider';
@@ -33,7 +34,7 @@ function ServicesStage() {
   const { services, ui } = useContent();
   const ref = useRef<HTMLDivElement>(null);
   const count = services.items.length;
-  const { index, goTo } = useSteppedScene({ count, scopeRef: ref, stepLength: 55 });
+  const { index, goTo } = useSteppedScene({ count, scopeRef: ref, stepLength: 45 });
   useStepTransition(ref, index);
 
   useGSAP(
@@ -50,7 +51,7 @@ function ServicesStage() {
 
   return (
     <div ref={ref} className="grid items-center gap-10 lg:grid-cols-12">
-      <div aria-hidden="true" className="relative mx-auto aspect-square w-56 sm:w-72 lg:col-span-5 lg:w-full lg:max-w-sm">
+      <div aria-hidden="true" className="relative mx-auto hidden aspect-square lg:col-span-5 lg:block lg:w-full lg:max-w-sm">
         <div className="absolute inset-0 text-foreground/70">
           <ServiceSeal words={services.items.map((s) => s.title.split(' ').slice(0, 2).join(' '))} />
         </div>
@@ -67,19 +68,24 @@ function ServicesStage() {
         </div>
       </div>
 
-      <div className="lg:col-span-7">
-        <div className="grid" aria-live="polite">
+      <div className="min-w-0 lg:col-span-7">
+        <HorizontalTrack media="mobile" label={services.eyebrow} className="max-lg:flex max-lg:gap-5 lg:grid">
           {services.items.map((service, i) => (
             <article
               key={service.title}
               data-step-item
-              aria-hidden={i !== index}
-              className={cn('[grid-area:1/1]', i === index ? 'visible opacity-100' : 'invisible opacity-0')}
+              className={cn(
+                'max-lg:w-[84vw] max-lg:shrink-0 max-lg:snap-center lg:[grid-area:1/1]',
+                i === index ? 'lg:visible lg:opacity-100' : 'lg:invisible lg:opacity-0',
+              )}
             >
+              <span aria-hidden="true" className="text-outline mb-4 block font-serif text-8xl leading-none lg:hidden">
+                {pad(i + 1)}
+              </span>
               <p className="label-mono">
                 {ui.audience}: {service.audience}
               </p>
-              <h3 className="display mt-4 text-5xl sm:text-6xl">{service.title}</h3>
+              <h3 className="display mt-4 text-4xl sm:text-6xl">{service.title}</h3>
               <p className="mt-5 max-w-xl text-lg text-pretty">{service.description}</p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {service.deliverables.map((d) => (
@@ -90,9 +96,9 @@ function ServicesStage() {
               </ul>
             </article>
           ))}
-        </div>
+        </HorizontalTrack>
 
-        <nav aria-label={services.eyebrow} className="mt-12 flex items-center gap-2">
+        <nav aria-label={services.eyebrow} className="mt-12 hidden items-center gap-2 lg:flex">
           {services.items.map((service, i) => (
             <button
               key={service.title}

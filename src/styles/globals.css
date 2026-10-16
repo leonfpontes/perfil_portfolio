@@ -60,7 +60,7 @@
 .tone-night { --background: oklch(0.25 0.045 255); --foreground: oklch(0.94 0.014 85); --signal: oklch(0.72 0.16 45); --signal-foreground: oklch(0.15 0.01 40); }
 
 .dark .tone-paper { --background: oklch(0.17 0.006 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.68 0.17 40); --signal-foreground: oklch(0.15 0.01 40); }
-.dark .tone-sand { --background: oklch(0.22 0.014 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.7 0.16 42); --signal-foreground: oklch(0.15 0.01 40); }
+.dark .tone-sand { --background: oklch(0.3 0.04 62); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.7 0.16 42); --signal-foreground: oklch(0.15 0.01 40); }
 .dark .tone-ink { --background: oklch(0.93 0.014 85); --foreground: oklch(0.17 0.006 70); --signal: oklch(0.55 0.19 34); --signal-foreground: oklch(0.985 0.005 85); }
 .dark .tone-night { --background: oklch(0.2 0.04 255); --foreground: oklch(0.94 0.014 85); --signal: oklch(0.72 0.16 45); --signal-foreground: oklch(0.15 0.01 40); }
 

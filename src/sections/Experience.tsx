@@ -1,24 +1,28 @@
 import { useRef } from 'react';
 import { Container, SectionHeader } from '@/components/common/Section';
+import { HorizontalTrack } from '@/components/motion/HorizontalTrack';
 import { Scene } from '@/components/motion/Scene';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
+import { cn } from '@/lib/utils';
 
 /** Primeiro ano que aparece no período ("ago 2024 — dez 2025" → "2024"). */
 const startYear = (period: string) => period.match(/\d{4}/)?.[0] ?? '';
 
 /**
- * Trajetória como uma pilha de fichas: cada experiência para no topo
- * (sticky) e a seguinte desliza por cima, empurrando a anterior para trás.
+ * Trajetória:
+ * - desktop: pilha de fichas — cada experiência para no topo (sticky) e a
+ *   seguinte desliza por cima, empurrando a anterior para o fundo;
+ * - celular: trilho horizontal, uma ficha por tela.
  */
 export function Experience() {
   const { experience } = useContent();
-  const ref = useRef<HTMLOListElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.motion, () => {
+      mm.add(MEDIA.desktop, () => {
         const cards = gsap.utils.toArray<HTMLElement>('[data-card]', ref.current);
         cards.forEach((card, i) => {
           const next = cards[i + 1];
@@ -39,42 +43,54 @@ export function Experience() {
     <Scene id="experiencia" label={experience.eyebrow} tone="paper">
       <Container>
         <SectionHeader id="experiencia" heading={experience} />
-        <ol ref={ref} className="relative">
-          {experience.items.map((item, i) => (
-            <li key={`${item.company}-${item.period}`} data-card className="sticky pb-8" style={{ top: `calc(5rem + ${i * 14}px)` }}>
-              <article className="relative grid origin-top gap-6 overflow-hidden border-t-4 border-foreground bg-card p-6 shadow-[0_-1px_0_var(--border)] sm:p-10 lg:min-h-[64vh] lg:grid-cols-12">
-                <span aria-hidden="true" className="text-outline pointer-events-none absolute -right-4 -bottom-10 font-serif text-[9rem] leading-none opacity-40 sm:text-[14rem]">
-                  {startYear(item.period)}
-                </span>
-                <div className="relative lg:col-span-4">
-                  <p className="label-mono">{item.period}</p>
-                  {item.current && (
-                    <p className="label-mono mt-2 flex items-center gap-2 text-signal">
-                      <span aria-hidden="true" className="size-2 bg-signal" />
-                      {experience.currentLabel}
-                    </p>
+        <div ref={ref}>
+          <HorizontalTrack media="mobile" label={experience.title} className="max-lg:flex max-lg:gap-4 lg:block">
+            {experience.items.map((item, i) => (
+              <div
+                key={`${item.company}-${item.period}`}
+                data-card
+                className="max-lg:w-[86vw] max-lg:shrink-0 max-lg:snap-center lg:sticky lg:pb-8"
+                style={{ top: `calc(5rem + ${i * 14}px)` }}
+              >
+                <article
+                  className={cn(
+                    'relative grid h-full origin-top gap-5 overflow-hidden border-t-4 border-foreground bg-card p-5 sm:p-10 lg:min-h-[54vh] lg:grid-cols-12 lg:gap-6',
+                    'ring-1 ring-foreground/10 lg:shadow-[0_-28px_60px_-24px_rgb(0_0_0/0.55)]',
                   )}
-                  <p className="label-mono mt-6 text-muted-foreground">{item.location}</p>
-                  <p className="mt-1 font-serif text-3xl text-signal">{item.company}</p>
-                </div>
-                <div className="relative lg:col-span-8">
-                  <h3 className="display text-4xl sm:text-5xl">{item.role}</h3>
-                  <p className="mt-5 max-w-2xl text-lg text-pretty">{item.summary}</p>
-                  <ul className="mt-5 max-w-2xl space-y-2">
-                    {item.achievements.map((a) => (
-                      <li key={a} className="flex gap-4 text-muted-foreground">
-                        <span aria-hidden="true" className="text-signal">
-                          —
-                        </span>
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            </li>
-          ))}
-        </ol>
+                >
+                  <span aria-hidden="true" className="text-outline pointer-events-none absolute -right-3 -bottom-6 font-serif text-[7rem] leading-none opacity-30 sm:text-[14rem] lg:-bottom-10">
+                    {startYear(item.period)}
+                  </span>
+                  <div className="relative lg:col-span-4">
+                    <p className="label-mono">{item.period}</p>
+                    {item.current && (
+                      <p className="label-mono mt-2 flex items-center gap-2 text-signal">
+                        <span aria-hidden="true" className="size-2 bg-signal" />
+                        {experience.currentLabel}
+                      </p>
+                    )}
+                    <p className="label-mono mt-3 text-muted-foreground max-lg:hidden lg:mt-6">{item.location}</p>
+                    <p className="mt-1 font-serif text-2xl text-signal lg:text-3xl">{item.company}</p>
+                  </div>
+                  <div className="relative lg:col-span-8">
+                    <h3 className="display text-3xl sm:text-5xl">{item.role}</h3>
+                    <p className="mt-3 text-pretty lg:mt-5 lg:max-w-2xl lg:text-lg">{item.summary}</p>
+                    <ul className="mt-3 space-y-1.5 text-sm lg:mt-5 lg:max-w-2xl lg:space-y-2 lg:text-base">
+                      {item.achievements.map((a) => (
+                        <li key={a} className="flex gap-3 text-muted-foreground lg:gap-4">
+                          <span aria-hidden="true" className="text-signal">
+                            —
+                          </span>
+                          {a}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </HorizontalTrack>
+        </div>
       </Container>
     </Scene>
   );

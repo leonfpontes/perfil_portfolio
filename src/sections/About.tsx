@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Halftone } from '@/components/art/Halftone';
 import { Container, SectionHeader } from '@/components/common/Section';
 import { Scene } from '@/components/motion/Scene';
@@ -6,11 +6,13 @@ import { SplitReveal } from '@/components/motion/SplitReveal';
 import { stockImages } from '@/content/profile';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
+import { cn } from '@/lib/utils';
 
 export function About() {
   const { about, ui } = useContent();
   const [lead, ...rest] = about.story;
   const ref = useRef<HTMLDivElement>(null);
+  const [expanded, setExpanded] = useState(false);
 
   useGSAP(
     () => {
@@ -26,6 +28,8 @@ export function About() {
           scrollTrigger: { trigger: '[data-pillars]', start: 'top 88%', toggleActions: 'play none none reverse' },
         });
         // A foto "derrapa" levemente contra o texto (parallax).
+      });
+      mm.add(MEDIA.desktop, () => {
         gsap.fromTo('[data-about-photo]', { yPercent: 8 }, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: ref.current, scrub: true } });
       });
     },
@@ -40,18 +44,28 @@ export function About() {
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               {lead && (
-                <SplitReveal mode="read" className="font-serif text-3xl leading-snug text-pretty sm:text-4xl">
+                <SplitReveal mode="read" className="font-serif text-2xl leading-snug text-pretty sm:text-4xl">
                   {lead}
                 </SplitReveal>
               )}
-              <div className="mt-8 grid gap-6 text-muted-foreground sm:grid-cols-2">
+              {/* No celular, a história completa fica atrás de "Ler mais" para encurtar a página. */}
+              <div id="sobre-mais" className={cn('mt-6 gap-6 text-muted-foreground sm:grid-cols-2 lg:mt-8 lg:grid', expanded ? 'grid' : 'hidden')}>
                 {rest.map((paragraph) => (
                   <p key={paragraph.slice(0, 32)} className="text-pretty">
                     {paragraph}
                   </p>
                 ))}
               </div>
-              <dl data-facts className="mt-10 divide-y border-y">
+              <button
+                type="button"
+                aria-expanded={expanded}
+                aria-controls="sobre-mais"
+                onClick={() => setExpanded((v) => !v)}
+                className="link-rule mt-4 cursor-pointer text-sm lg:hidden"
+              >
+                {expanded ? ui.readLess : ui.readMore}
+              </button>
+              <dl data-facts className="mt-8 divide-y border-y lg:mt-10">
                 {about.facts.map((fact) => (
                   <div key={fact.label} data-fact className="grid grid-cols-3 gap-4 py-3">
                     <dt className="label-mono pt-0.5 text-muted-foreground">{fact.label}</dt>
@@ -63,7 +77,7 @@ export function About() {
 
             <figure className="lg:col-span-5">
               <div data-about-photo>
-                <Halftone src={stockImages.team} alt={about.imageAlt} cell={8} className="aspect-[4/5] w-full text-foreground" />
+                <Halftone src={stockImages.team} alt={about.imageAlt} cell={8} className="aspect-[16/10] w-full text-foreground lg:aspect-[4/5]" />
               </div>
               <figcaption className="label-mono mt-3 flex gap-3 text-muted-foreground">
                 <span className="text-foreground">Fig. 2</span>
@@ -72,11 +86,11 @@ export function About() {
             </figure>
           </div>
 
-          <ol data-pillars className="mt-20 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <ol data-pillars className="mt-12 grid grid-cols-2 gap-px bg-border lg:mt-20 lg:grid-cols-4">
             {about.pillars.map((pillar, i) => (
-              <li key={pillar.title} data-pillar className="bg-background p-6 pt-5">
+              <li key={pillar.title} data-pillar className="bg-background p-4 pt-4 lg:p-6 lg:pt-5">
                 <p className="label-mono text-signal">{String(i + 1).padStart(2, '0')}</p>
-                <h3 className="mt-6 font-serif text-3xl">{pillar.title}</h3>
+                <h3 className="mt-3 font-serif text-2xl lg:mt-6 lg:text-3xl">{pillar.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{pillar.description}</p>
               </li>
             ))}

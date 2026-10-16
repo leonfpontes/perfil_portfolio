@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { SectionId } from '@/content/types';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useTheme } from '@/lib/theme/ThemeProvider';
-import { createDomToneReader, SceneThemeController, type Tone } from './SceneThemeController';
+import { createDomToneReader, SceneThemeController, type ScrollDirection, type Tone } from './SceneThemeController';
 
 export interface SceneInfo {
   /** id do elemento (âncora). */
@@ -15,7 +15,7 @@ export interface SceneInfo {
 
 interface SceneDirectorValue {
   active: SceneInfo | null;
-  activate: (scene: SceneInfo) => void;
+  activate: (scene: SceneInfo, direction?: number) => void;
 }
 
 const SceneDirectorContext = createContext<SceneDirectorValue>({ active: null, activate: () => {} });
@@ -28,10 +28,11 @@ export function SceneDirector({ children }: { children: ReactNode }) {
   const { theme } = useTheme();
   const reduced = useReducedMotion();
   const controllerRef = useRef<SceneThemeController | null>(null);
+  const curtainRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<SceneInfo | null>(null);
 
   useEffect(() => {
-    const controller = new SceneThemeController(document.documentElement, createDomToneReader());
+    const controller = new SceneThemeController(document.documentElement, createDomToneReader(), curtainRef.current);
     controllerRef.current = controller;
     return () => controller.dispose();
   }, []);
@@ -42,15 +43,22 @@ export function SceneDirector({ children }: { children: ReactNode }) {
   }, [theme]);
 
   const activate = useCallback(
-    (scene: SceneInfo) => {
-      controllerRef.current?.apply(scene.tone, { immediate: reduced });
+    (scene: SceneInfo, direction = 1) => {
+      const dir: ScrollDirection = direction < 0 ? -1 : 1;
+      controllerRef.current?.apply(scene.tone, { immediate: reduced, direction: dir });
       setActive((prev) => (prev?.id === scene.id ? prev : scene));
     },
     [reduced],
   );
 
   const value = useMemo(() => ({ active, activate }), [active, activate]);
-  return <SceneDirectorContext.Provider value={value}>{children}</SceneDirectorContext.Provider>;
+  return (
+    <SceneDirectorContext.Provider value={value}>
+      {/* Cortina: camada fixa atrás de todo o conteúdo (z negativo no contexto raiz). */}
+      <div ref={curtainRef} aria-hidden="true" className="pointer-events-none invisible fixed inset-0 -z-10" />
+      {children}
+    </SceneDirectorContext.Provider>
+  );
 }
 
 export function useSceneDirector(): SceneDirectorValue {
