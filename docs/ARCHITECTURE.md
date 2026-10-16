@@ -18,10 +18,14 @@ src/
 │   ├── theme/            #   ThemeProvider (claro/escuro, persistido)
 │   ├── services.tsx      #   container de DI (ServicesProvider/useServices)
 │   └── storage.ts        #   localStorage tolerante a falhas
-├── hooks/                # comportamento reutilizável (useInView, useActiveSection)
+│   ├── motion/           #   GSAP (registro), SceneThemeController, SceneDirector, SmoothScroll (Lenis)
+│   └── art/              #   PRNG e noise determinísticos para a arte generativa
+├── hooks/                # useInView, useSteppedScene, useCanvas, useReducedMotion
 ├── components/
 │   ├── ui/               # primitivas shadcn/ui (button, sheet, accordion)
-│   ├── common/           # peças do design system (Section, Container, Figure, Reveal…)
+│   ├── common/           # peças do design system (Container, SectionHeader, Reveal…)
+│   ├── motion/           # Scene, SplitReveal, CountUp, Magnetic, SceneIndicator
+│   ├── art/              # FlowField, Halftone, GenerativeCover (+ covers.ts: estratégias)
 │   └── layout/           # Header, Footer
 ├── sections/             # APRESENTAÇÃO — uma seção da página por arquivo
 ├── App.tsx               # composição: registro seção → componente
@@ -40,6 +44,10 @@ O fluxo de dependências é **sections → components/common → lib → content
 | **Registro de seções (`SECTION_ORDER` + mapa em `App.tsx`)** | A ordem da página e a numeração dos cabeçalhos vêm da mesma lista. Reordenar o funil é editar uma linha. |
 | **shadcn/ui** | Os componentes ficam no repositório, então são adaptáveis ao design editorial (ex.: a variante `signal` do `Button`). O Radix fornece a acessibilidade do Sheet e do Accordion. |
 | **Analytics como abstração** | Trocar o GA4 por Plausible, PostHog etc. é criar uma nova classe que implementa `AnalyticsTracker`, sem tocar em componentes. |
+| **Cenas com GSAP + ScrollTrigger + Lenis** | GSAP é o padrão da indústria para animação orientada a scroll (pins, scrub, SplitText). O Lenis suaviza o scroll e roda no mesmo relógio do GSAP, o que evita tremidas nos pins. Toda animação fica dentro de `gsap.matchMedia()`, então é revertida sozinha com reduced motion ou ao mudar de breakpoint. |
+| **`SceneThemeController` como classe** | Encapsula o estado do tom atual e a interpolação. Recebe o `root` e um `ToneReader` por injeção, por isso é testável sem DOM real. A interpolação usa `color-mix` do próprio navegador e dispensa converter oklch em JS. |
+| **Capas generativas por estratégia** | `coverPainters: Record<variant, painter>`. Um produto novo ganha arte nova adicionando uma entrada, sem tocar no componente (OCP). |
+| **Pins resolvem o `<section>` via `closest()`** | No React a ref do pai só é ligada depois dos efeitos de layout dos filhos, então o filho localiza a própria cena no DOM (`sceneSectionOf`). |
 | **Sem roteador** | É uma página única com âncoras. Menos dependências e melhor SEO para uma landing page. |
 
 ## Testes
@@ -50,6 +58,9 @@ O fluxo de dependências é **sections → components/common → lib → content
 | `lib/analytics/AnalyticsTracker.test.ts` | Factory, fallback e tolerância a erro |
 | `lib/i18n/registry.test.ts` | Resolução do idioma inicial |
 | `content/content.test.ts` | Paridade pt-BR/EN, navegação × seções, regra de confidencialidade |
+| `lib/motion/SceneThemeController.test.ts` | Tons, interpolação e descarte |
+| `components/motion/motion.test.tsx` | Contador (parse/format) e localização da cena |
+| `lib/art/*.test.ts`, `components/art/art.test.tsx` | PRNG/noise determinísticos e renderização da arte |
 | `App.test.tsx` | Integração: renderização, CTAs, analytics, troca de idioma, tema, depoimentos |
 
 ```bash

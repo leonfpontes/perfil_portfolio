@@ -12,11 +12,11 @@ export const ptBR: SiteContent = {
   nav: {
     items: [
       { id: 'mentoria', label: 'Mentoria' },
+      { id: 'depoimentos', label: 'Depoimentos' },
       { id: 'servicos', label: 'Serviços' },
       { id: 'sobre', label: 'Sobre' },
       { id: 'produtos', label: 'Produtos' },
       { id: 'experiencia', label: 'Trajetória' },
-      { id: 'depoimentos', label: 'Depoimentos' },
       { id: 'contato', label: 'Contato' },
     ],
     cta: 'Agendar conversa',
@@ -244,6 +244,7 @@ export const ptBR: SiteContent = {
         ],
         stack: ['FastAPI', 'Next.js', 'TypeScript', 'PostgreSQL', 'Docker', 'GitHub Actions', 'Grafana'],
         year: 'em operação',
+        art: 'rings',
         link: { label: 'Conhecer o GiraHub', href: 'https://www.girahub.com.br' },
       },
       {
@@ -259,6 +260,7 @@ export const ptBR: SiteContent = {
         ],
         stack: ['React 19', 'Tailwind 4', 'shadcn/ui', 'Express', 'SQLite', 'Docker', 'Terraform'],
         year: '2026 —',
+        art: 'radar',
       },
       {
         name: 'Portal PMO',
@@ -273,6 +275,7 @@ export const ptBR: SiteContent = {
         ],
         stack: ['Next.js', 'React', 'FastAPI', 'PostgreSQL'],
         year: '2023 — 2026',
+        art: 'gates',
       },
       {
         name: 'PlantMap',
@@ -287,6 +290,7 @@ export const ptBR: SiteContent = {
         ],
         stack: ['Next.js 15', 'TypeScript', 'Tailwind 4', 'Supabase', 'Vercel'],
         year: '2026 —',
+        art: 'contour',
       },
     ],
   },
@@ -628,6 +632,7 @@ export const ptBR: SiteContent = {
     imageCredits: 'Imagens: Unsplash',
   },
   ui: {
+    scrollHint: 'Role para explorar',
     illustrativeImage: 'Imagem ilustrativa · Unsplash',
     previous: 'Anterior',
     next: 'Próximo',

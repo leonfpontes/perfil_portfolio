@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 import { Arrow } from '@/components/common/Arrow';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { Footer } from '@/components/layout/Footer';
+import { SceneIndicator } from '@/components/motion/SceneIndicator';
 import { Header } from '@/components/layout/Header';
 import { SECTION_ORDER } from '@/content/sections';
 import type { SectionId } from '@/content/types';
@@ -21,9 +22,9 @@ import { Testimonials } from '@/sections/Testimonials';
 
 /**
  * Registro seção → componente. A ordem vem de `SECTION_ORDER` (a mesma que
- * numera os cabeçalhos), então reordenar a página é editar uma única lista.
- * Funil: oferta → serviços → prova (sobre, produtos, trajetória, competências,
- * formação, depoimentos) → objeções (FAQ) → ação (contato).
+ * numera os capítulos), então reordenar a página é editar uma única lista.
+ * Funil: oferta (+ jornada) → prova social → serviços → quem sou → produtos →
+ * trajetória → competências → formação → objeções (FAQ) → ação (contato).
  */
 const sectionComponents: Record<(typeof SECTION_ORDER)[number], ComponentType> = {
   mentoria: Offer,
@@ -45,7 +46,7 @@ export function App() {
   return (
     <>
       <Header />
-      <main id="conteudo" className="pb-16 sm:pb-0">
+      <main id="conteudo" className="pb-12 sm:pb-0">
         <Hero />
         {SECTION_ORDER.map((id: SectionId) => {
           const Component = sectionComponents[id as (typeof SECTION_ORDER)[number]];
@@ -53,6 +54,7 @@ export function App() {
         })}
       </main>
       <Footer />
+      <SceneIndicator />
 
       {/* Barra de ação fixa apenas no mobile */}
       <TrackedLink

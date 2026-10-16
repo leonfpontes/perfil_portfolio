@@ -12,6 +12,7 @@ export type Locale = 'pt-BR' | 'en';
 export type SectionId =
   | 'inicio'
   | 'mentoria'
+  | 'jornada'
   | 'servicos'
   | 'sobre'
   | 'produtos'
@@ -114,6 +115,9 @@ export interface Services extends SectionHeading {
   cta: string;
 }
 
+/** Arte generativa da capa do produto (ver components/art/covers.ts). */
+export type ProductArt = 'rings' | 'gates' | 'radar' | 'contour';
+
 export type ProductStatus = 'live' | 'internal' | 'beta' | 'sunset' | 'personal';
 
 export interface Product {
@@ -124,6 +128,7 @@ export interface Product {
   highlights: string[];
   stack: string[];
   year: string;
+  art: ProductArt;
   link?: Link;
 }
 
@@ -215,6 +220,7 @@ export interface Contact extends SectionHeading {
 /** Rótulos de interface reutilizados por vários componentes. */
 export interface UiStrings {
   illustrativeImage: string;
+  scrollHint: string;
   previous: string;
   next: string;
   of: string;

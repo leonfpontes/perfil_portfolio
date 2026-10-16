@@ -2,6 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { LocaleProvider } from './lib/i18n/LocaleProvider';
+import { SceneDirector } from './lib/motion/SceneDirector';
+import { SmoothScrollProvider } from './lib/motion/SmoothScroll';
 import { createDefaultServices, ServicesProvider } from './lib/services';
 import { ThemeProvider } from './lib/theme/ThemeProvider';
 import './styles/globals.css';
@@ -14,7 +16,11 @@ createRoot(container).render(
     <ServicesProvider value={createDefaultServices()}>
       <ThemeProvider>
         <LocaleProvider>
-          <App />
+          <SmoothScrollProvider>
+            <SceneDirector>
+              <App />
+            </SceneDirector>
+          </SmoothScrollProvider>
         </LocaleProvider>
       </ThemeProvider>
     </ServicesProvider>

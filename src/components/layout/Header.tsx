@@ -5,9 +5,9 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
-import { sectionNumber } from '@/content/sections';
-import { useActiveSection } from '@/hooks/useActiveSection';
 import { useLocale } from '@/lib/i18n/LocaleProvider';
+import { useSceneDirector } from '@/lib/motion/SceneDirector';
+import { useSmoothScroll } from '@/lib/motion/SmoothScroll';
 import { useServices } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -18,7 +18,10 @@ export function Header() {
   const { analytics } = useServices();
   const { nav } = content;
   const [open, setOpen] = useState(false);
-  const active = useActiveSection(nav.items.map((i) => i.id));
+  const { active: scene } = useSceneDirector();
+  const { scrollTo } = useSmoothScroll();
+  // Destaca o capítulo atual (a cena "jornada" conta como "mentoria").
+  const active = scene?.chapter ?? null;
 
   const changeLocale = (next: typeof locale) => {
     if (next === locale) return;
@@ -32,7 +35,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/85">
+    <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-foreground focus:px-3 focus:py-2 focus:text-background"
@@ -55,11 +58,11 @@ export function Header() {
                   trackLabel={item.id}
                   aria-current={active === item.id ? 'true' : undefined}
                   className={cn(
-                    'text-sm text-muted-foreground transition-colors hover:text-foreground',
-                    active === item.id && 'text-foreground',
+                    'relative py-1 text-sm text-muted-foreground transition-colors hover:text-foreground',
+                    'after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-signal after:transition-transform after:duration-500',
+                    active === item.id && 'text-foreground after:scale-x-100',
                   )}
                 >
-                  <span className={cn('label-mono mr-1.5', active === item.id && 'text-signal')}>{sectionNumber(item.id)}</span>
                   {item.label}
                 </TrackedLink>
               </li>
@@ -111,11 +114,15 @@ export function Header() {
                         href={`#${item.id}`}
                         trackEvent="nav_click"
                         trackLabel={`mobile_${item.id}`}
-                        onClick={() => setOpen(false)}
+                        onClick={(e) => {
+                          // Fecha o menu antes de rolar: o Sheet trava o scroll enquanto aberto.
+                          e.preventDefault();
+                          setOpen(false);
+                          window.setTimeout(() => scrollTo(`#${item.id}`), 320);
+                        }}
                         className="flex items-baseline gap-3 py-3"
                       >
-                        <span className="label-mono text-muted-foreground">{sectionNumber(item.id)}</span>
-                        <span className="font-serif text-2xl">{item.label}</span>
+                        <span className="font-serif text-3xl">{item.label}</span>
                       </TrackedLink>
                     </li>
                   ))}

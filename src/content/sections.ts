@@ -6,13 +6,13 @@ import type { SectionId } from './types';
  */
 export const SECTION_ORDER = [
   'mentoria',
+  'depoimentos',
   'servicos',
   'sobre',
   'produtos',
   'experiencia',
   'competencias',
   'formacao',
-  'depoimentos',
   'faq',
   'contato',
 ] as const satisfies readonly SectionId[];
