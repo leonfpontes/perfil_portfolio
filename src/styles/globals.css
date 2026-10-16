@@ -51,6 +51,21 @@
   --signal: var(--azul);
   --signal-foreground: var(--cal);
 
+  --destructive: oklch(0.55 0.2 27);
+}
+
+/*
+ * Cores derivadas — declaradas na raiz E em cada tom de cena. Custom properties
+ * herdam o valor já calculado, então cada seção com `.tone-*` precisa recalcular
+ * as derivadas a partir das suas próprias 4 cores primárias.
+ */
+:root,
+.tone-cal,
+.tone-palha,
+.tone-mata,
+.tone-ocre,
+.tone-cobalto,
+.tone-anil {
   --card: color-mix(in oklab, var(--background) 92%, white);
   --card-foreground: var(--foreground);
   --popover: var(--background);
@@ -63,7 +78,6 @@
   --muted-foreground: color-mix(in oklab, var(--foreground) 66%, var(--background));
   --accent: color-mix(in oklab, var(--background) 90%, var(--foreground));
   --accent-foreground: var(--foreground);
-  --destructive: oklch(0.55 0.2 27);
   --border: color-mix(in oklab, var(--background) 78%, var(--foreground));
   --input: var(--border);
   --ring: var(--signal);
@@ -74,12 +88,12 @@
   --foreground: var(--cal);
   --signal: var(--ocre);
   --signal-foreground: var(--breu);
-  --card: color-mix(in oklab, var(--background) 92%, white);
 }
 
 /*
- * Tons de cena. Lidos pelo SceneThemeController (via elemento-sonda) e
- * interpolados no <html> quando a cena entra na tela.
+ * Tons de cena. Cada <section> de cena usa a sua classe `.tone-*` e pinta o
+ * próprio fundo: a nova cor chega subindo junto com a seção, presa à rolagem.
+ * O SceneThemeController lê os mesmos valores para o header e o fundo da página.
  */
 .tone-cal { --background: oklch(0.975 0.005 100); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
 .tone-palha { --background: oklch(0.93 0.045 92); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }

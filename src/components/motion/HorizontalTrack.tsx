@@ -19,7 +19,7 @@ interface HorizontalTrackProps {
   label: string;
   /** Scroll vertical por pixel horizontal (> 1 = mais tempo em cada painel). */
   pace?: number;
-  /** Encaixa no painel mais próximo ao soltar o scroll. */
+  /** Encaixa no painel mais próximo ao soltar o scroll (só no celular). */
   snap?: boolean;
   /** Mostra "01 / 04" e a régua de progresso abaixo do trilho. */
   showProgress?: boolean;
@@ -46,7 +46,11 @@ export function HorizontalTrack({ children, media = 'all', className, label, pac
       const track = trackRef.current;
       if (!pin || !track) return;
       const mm = gsap.matchMedia();
-      mm.add(QUERY[media], () => {
+      mm.add({ on: QUERY[media], narrow: MEDIA.narrow }, (context) => {
+        if (!context.conditions?.on) return;
+        // Encaixe só no celular: no desktop o Lenis já suaviza o scroll, e o
+        // encaixe "puxaria" a página de volta, brigando com ele.
+        const useSnap = snap && !!context.conditions.narrow;
         const panels = track.children.length;
         const distance = () => Math.max(0, track.scrollWidth - pin.clientWidth);
         if (panels < 2 || distance() <= 0) return;
@@ -63,7 +67,7 @@ export function HorizontalTrack({ children, media = 'all', className, label, pac
             scrub: 0.8,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            snap: snap ? { snapTo: 1 / (panels - 1), duration: { min: 0.2, max: 0.6 }, ease: 'power2.inOut', directional: true } : undefined,
+            snap: useSnap ? { snapTo: 1 / (panels - 1), duration: { min: 0.2, max: 0.6 }, ease: 'power2.inOut', directional: true } : undefined,
             onUpdate: (self) => setActive(Math.round(self.progress * (panels - 1))),
           },
         });
