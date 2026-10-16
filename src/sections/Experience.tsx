@@ -55,7 +55,8 @@ export function Experience() {
                 <article
                   className={cn(
                     'relative grid h-full origin-top gap-5 overflow-hidden border-t-4 border-foreground bg-card p-5 sm:p-10 lg:min-h-[54vh] lg:grid-cols-12 lg:gap-6',
-                    'ring-1 ring-foreground/10 lg:shadow-[0_-28px_60px_-24px_rgb(0_0_0/0.55)]',
+                    // Sem sombra desfocada: repintá-la a cada quadro da pilha travava a rolagem.
+                    'ring-1 ring-foreground/10 lg:will-change-transform',
                   )}
                 >
                   <span aria-hidden="true" className="text-outline pointer-events-none absolute -right-3 -bottom-6 font-display text-[7rem] leading-none opacity-30 sm:text-[14rem] lg:-bottom-10">
