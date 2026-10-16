@@ -1,4 +1,4 @@
-import { useEffect, type ComponentType } from 'react';
+import { Suspense, useEffect, type ComponentType } from 'react';
 import { Arrow } from '@/components/common/Arrow';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { Footer } from '@/components/layout/Footer';
@@ -59,7 +59,13 @@ export function App() {
         <Hero />
         {SECTION_ORDER.map((id: SectionId) => {
           const Component = sectionComponents[id as (typeof SECTION_ORDER)[number]];
-          return <Component key={id} />;
+          // Cada seção é uma fronteira de hidratação: o React hidrata a primeira
+          // tela antes e libera a CPU entre as demais (menos travamento no celular).
+          return (
+            <Suspense key={id} fallback={null}>
+              <Component />
+            </Suspense>
+          );
         })}
       </main>
       <Footer />

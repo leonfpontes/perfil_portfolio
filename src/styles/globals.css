@@ -7,16 +7,17 @@
 
 /*
  * Archivo (Omnibus-Type, foundry latino-americana) — fonte variável com eixos de
- * peso (100–900) e largura (62–125%): expandida e pesada nos títulos, como nos
+ * peso (400–800) e largura (100–120%), subconjunto gerado por scripts/subset-font.py:
+ * expandida e pesada nos títulos, como nos
  * cartazes brasileiros dos anos 60; normal no texto. Auto-hospedada e pré-carregada.
  */
 @font-face {
   font-family: "Archivo";
   font-style: normal;
-  font-weight: 100 900;
-  font-stretch: 62% 125%;
+  font-weight: 400 800;
+  font-stretch: 100% 120%;
   font-display: swap;
-  src: url("/fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+  src: url("/fonts/archivo.woff2") format("woff2");
 }
 
 

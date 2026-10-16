@@ -52,6 +52,7 @@ export const ptBR: SiteContent = {
     title: 'Mentoria e consultoria para quem precisa de resultado, não de slide',
     description:
       'Um acompanhamento próximo e prático em governança de portfólio, PMO e gestão de produtos digitais, com a metodologia que eu desenvolvi e validei liderando times reais.',
+    bookingHint: 'ou agende uma conversa gratuita de 30 min',
     founderNote:
       'Turma fundadora: preço especial para os primeiros clientes em troca de um depoimento sincero sobre a experiência.',
     plans: [
@@ -613,6 +614,7 @@ export const ptBR: SiteContent = {
     description:
       'Conte rapidamente o seu contexto. Respondo pessoalmente e, se fizer sentido, marcamos uma conversa gratuita de 30 minutos.',
     channels: {
+      booking: 'Agendar conversa de 30 min',
       whatsapp: 'Chamar no WhatsApp',
       email: 'Enviar e-mail',
       linkedin: 'Conectar no LinkedIn',

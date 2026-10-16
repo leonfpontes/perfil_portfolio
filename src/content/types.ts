@@ -97,6 +97,8 @@ export interface Plan {
 }
 
 export interface Offer extends SectionHeading {
+  /** Link curto sob cada plano, para quem prefere marcar uma conversa antes. */
+  bookingHint: string;
   founderNote: string;
   plans: Plan[];
   journey: { title: string; steps: { title: string; description: string }[] };
@@ -205,6 +207,8 @@ export interface Faq extends SectionHeading {
 
 export interface Contact extends SectionHeading {
   channels: {
+    /** Botão da agenda (Google Agenda) — só aparece se `profile.bookingUrl` estiver definido. */
+    booking: string;
     whatsapp: string;
     email: string;
     linkedin: string;

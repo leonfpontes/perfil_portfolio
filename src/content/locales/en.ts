@@ -52,6 +52,7 @@ export const en: SiteContent = {
     title: 'Mentoring and consulting for people who need results, not slides',
     description:
       'Hands-on, close support in portfolio governance, PMO and digital product management, using the methodology I developed and validated leading real teams.',
+    bookingHint: 'or book a free 30-minute call',
     founderNote:
       'Founder cohort: a special price for the first clients in exchange for an honest testimonial about the experience.',
     plans: [
@@ -613,6 +614,7 @@ export const en: SiteContent = {
     description:
       "Tell me a bit about your context. I reply personally and, if it makes sense, we'll book a free 30-minute conversation.",
     channels: {
+      booking: 'Book a 30-min call',
       whatsapp: 'Message on WhatsApp',
       email: 'Send an email',
       linkedin: 'Connect on LinkedIn',
