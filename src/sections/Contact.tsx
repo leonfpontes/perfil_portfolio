@@ -10,6 +10,7 @@ import { profile } from '@/content/profile';
 import { sectionNumber } from '@/content/sections';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { useServices } from '@/lib/services';
+import { cn } from '@/lib/utils';
 
 /** Encerramento: a página "escurece" e o convite fica sozinho no palco. */
 export function Contact() {
@@ -49,13 +50,30 @@ export function Contact() {
           </div>
 
           <div className="flex flex-col justify-end gap-8 lg:col-span-4">
-            <Magnetic>
-              <Button asChild variant="signal" size="lg" className="group h-16 w-full text-base">
-                <TrackedLink href={contact.whatsapp(copy.whatsappMessage)} trackLabel="contact_whatsapp">
-                  {copy.channels.whatsapp} <Arrow />
-                </TrackedLink>
-              </Button>
-            </Magnetic>
+            {/* Com agenda configurada, ela é a ação principal; o WhatsApp vira secundário. */}
+            <div className="flex flex-col gap-3">
+              {profile.bookingUrl && (
+                <Magnetic>
+                  <Button asChild variant="signal" size="lg" className="group h-16 w-full text-base">
+                    <TrackedLink href={profile.bookingUrl} trackLabel="contact_booking">
+                      {copy.channels.booking} <Arrow direction="up-right" />
+                    </TrackedLink>
+                  </Button>
+                </Magnetic>
+              )}
+              <Magnetic>
+                <Button
+                  asChild
+                  variant={profile.bookingUrl ? 'outline' : 'signal'}
+                  size="lg"
+                  className={cn('group w-full text-base', profile.bookingUrl ? 'h-12 bg-transparent' : 'h-16')}
+                >
+                  <TrackedLink href={contact.whatsapp(copy.whatsappMessage)} trackLabel="contact_whatsapp">
+                    {copy.channels.whatsapp} <Arrow />
+                  </TrackedLink>
+                </Button>
+              </Magnetic>
+            </div>
             <ul className="label-caps divide-y border-y text-muted-foreground">
               {details.map((d) => (
                 <li key={d} className="py-3">

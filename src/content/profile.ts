@@ -12,6 +12,12 @@ export const profile = {
   whatsapp: '5516991091234',
   linkedin: 'https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/',
   github: 'https://github.com/leonfpontes',
+  /**
+   * Página de agendamento do Google Agenda ("Agenda de horários" → compartilhar
+   * → link). Com `null`, os botões de agenda não aparecem e o site usa só
+   * WhatsApp e e-mail.
+   */
+  bookingUrl: null as string | null,
   images: {
     portrait: '/images/leonardo-portrait.webp',
     avatar: '/images/leonardo-avatar.webp',

@@ -6,14 +6,14 @@ import { Container, SectionHeader } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { HorizontalTrack } from '@/components/motion/HorizontalTrack';
 import { Scene, sceneSectionOf } from '@/components/motion/Scene';
-import { stockImages } from '@/content/profile';
+import { profile, stockImages } from '@/content/profile';
 import type { Plan } from '@/content/types';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
 import { useServices } from '@/lib/services';
 import { cn } from '@/lib/utils';
 
-function PlanSheet({ plan, index }: { plan: Plan; index: number }) {
+function PlanSheet({ plan, index, bookingHint }: { plan: Plan; index: number; bookingHint: string }) {
   const { contact } = useServices();
   return (
     <article
@@ -55,6 +55,11 @@ function PlanSheet({ plan, index }: { plan: Plan; index: number }) {
           {plan.cta} <Arrow />
         </TrackedLink>
       </Button>
+      {profile.bookingUrl && (
+        <TrackedLink href={profile.bookingUrl} trackLabel={`plan_${plan.id}_booking`} className="link-rule mt-3 self-center text-sm">
+          {bookingHint}
+        </TrackedLink>
+      )}
     </article>
   );
 }
@@ -86,7 +91,7 @@ function PlansScene() {
           <div data-plans>
             <HorizontalTrack media="mobile" label={offer.title} className="max-lg:flex max-lg:gap-4 lg:grid lg:grid-cols-2 lg:gap-px lg:bg-border">
               {offer.plans.map((plan, i) => (
-                <PlanSheet key={plan.id} plan={plan} index={i} />
+                <PlanSheet key={plan.id} plan={plan} index={i} bookingHint={offer.bookingHint} />
               ))}
             </HorizontalTrack>
           </div>

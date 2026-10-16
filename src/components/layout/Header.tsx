@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
 import { useLocale } from '@/lib/i18n/LocaleProvider';
 import { useSceneDirector } from '@/lib/motion/SceneDirector';
-import { useSmoothScroll } from '@/lib/motion/SmoothScroll';
 import { useServices } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeProvider';
 import { cn } from '@/lib/utils';
+
+const MobileMenu = lazy(() => import('./MobileMenu'));
 
 export function Header() {
   const { content, locale, setLocale } = useLocale();
@@ -18,8 +18,9 @@ export function Header() {
   const { analytics } = useServices();
   const { nav } = content;
   const [open, setOpen] = useState(false);
+  // O menu só é baixado no primeiro toque (ou ao passar o ponteiro por cima).
+  const [menuLoaded, setMenuLoaded] = useState(false);
   const { active: scene } = useSceneDirector();
-  const { scrollTo } = useSmoothScroll();
   // Destaca o capítulo atual (a cena "jornada" conta como "mentoria").
   const active = scene?.chapter ?? null;
 
@@ -92,51 +93,32 @@ export function Header() {
             <Moon className="dark:hidden" />
           </Button>
           <Button asChild variant="signal" className="ml-2 hidden sm:inline-flex lg:hidden xl:inline-flex">
-            <TrackedLink href="#contato" trackLabel="header_cta">
+            {/* Leva direto à agenda quando ela existe; senão, à seção de contato. */}
+            <TrackedLink href={profile.bookingUrl ?? '#contato'} trackLabel="header_cta">
               {nav.cta}
             </TrackedLink>
           </Button>
 
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={nav.openMenu}>
-                <Menu />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-background">
-              <SheetHeader className="border-b">
-                <SheetTitle className="font-display text-2xl font-normal">{profile.shortName}</SheetTitle>
-                <SheetDescription className="label-caps">{profile.brand}</SheetDescription>
-              </SheetHeader>
-              <nav aria-label="Mobile" className="px-4">
-                <ul className="divide-y">
-                  {nav.items.map((item) => (
-                    <li key={item.id}>
-                      <TrackedLink
-                        href={`#${item.id}`}
-                        trackEvent="nav_click"
-                        trackLabel={`mobile_${item.id}`}
-                        onClick={(e) => {
-                          // Fecha o menu antes de rolar: o Sheet trava o scroll enquanto aberto.
-                          e.preventDefault();
-                          setOpen(false);
-                          window.setTimeout(() => scrollTo(`#${item.id}`), 320);
-                        }}
-                        className="flex items-baseline gap-3 py-3"
-                      >
-                        <span className="font-display text-3xl">{item.label}</span>
-                      </TrackedLink>
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild variant="signal" size="lg" className="mt-6 w-full">
-                  <TrackedLink href="#contato" trackLabel="mobile_cta" onClick={() => setOpen(false)}>
-                    {nav.cta}
-                  </TrackedLink>
-                </Button>
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            aria-label={nav.openMenu}
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            onClick={() => {
+              setMenuLoaded(true);
+              setOpen(true);
+            }}
+            onPointerEnter={() => setMenuLoaded(true)}
+          >
+            <Menu />
+          </Button>
+          {menuLoaded && (
+            <Suspense fallback={null}>
+              <MobileMenu open={open} onOpenChange={setOpen} />
+            </Suspense>
+          )}
         </div>
       </Container>
     </header>
