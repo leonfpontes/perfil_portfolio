@@ -31,13 +31,13 @@ function ProductPanel({ product, index, total }: { product: Product; index: numb
         <div data-parallax className="absolute -inset-x-[10%] inset-y-0">
           <GenerativeCover variant={product.art} seed={product.name} label={product.name} className="absolute inset-0 text-foreground" />
         </div>
-        <span className="label-mono absolute top-3 left-3 text-muted-foreground">
+        <span className="label-caps absolute top-3 left-3 text-muted-foreground">
           P/{String(index + 1).padStart(2, '0')} — {String(total).padStart(2, '0')}
         </span>
       </div>
 
       <div className="flex flex-col justify-center">
-        <p className="label-mono flex items-center gap-2 text-muted-foreground">
+        <p className="label-caps flex items-center gap-2 text-muted-foreground">
           <StatusMark status={product.status} />
           {products.statusLabels[product.status]}
         </p>
@@ -56,12 +56,12 @@ function ProductPanel({ product, index, total }: { product: Product; index: numb
         </ul>
         <dl className="mt-6 hidden grid-cols-2 gap-4 border-t pt-4 text-sm lg:grid">
           <div>
-            <dt className="label-mono text-muted-foreground">{ui.year}</dt>
+            <dt className="label-caps text-muted-foreground">{ui.year}</dt>
             <dd className="mt-1">{product.year}</dd>
           </div>
           <div>
-            <dt className="label-mono text-muted-foreground">{products.stackLabel}</dt>
-            <dd className="mt-1 font-mono text-xs leading-relaxed">{product.stack.join(', ')}</dd>
+            <dt className="label-caps text-muted-foreground">{products.stackLabel}</dt>
+            <dd className="mt-1 font-sans text-xs leading-relaxed">{product.stack.join(', ')}</dd>
           </div>
         </dl>
         {product.link && (
@@ -77,7 +77,7 @@ function ProductPanel({ product, index, total }: { product: Product; index: numb
 export function Products() {
   const { products } = useContent();
   return (
-    <Scene id="produtos" label={products.eyebrow} tone="ink" className="py-16">
+    <Scene id="produtos" label={products.eyebrow} tone="cobalto" className="py-16">
       <Container>
         <SectionHeader id="produtos" heading={products} compact />
         {/* Exposição: a área fixa e o trilho corre na horizontal (desktop e celular). */}

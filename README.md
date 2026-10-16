@@ -72,6 +72,8 @@ Para empresas que precisam estruturar governança de portfólio, PMO ou processo
 
 Este site é a vitrine da mentoria e também uma amostra de como eu trabalho: com produto bem definido, código limpo, testes e documentação.
 
+A identidade visual vem do **modernismo brasileiro**: azulejos generativos no espírito de Athos Bulcão, paleta de cal, mata, ocre e cobalto, e a tipografia Archivo expandida, como num cartaz.
+
 A página funciona como uma sequência de **cenas**. Cada capítulo ocupa a tela e muda o fundo, as cores e a arte enquanto você rola:
 - gates que se traçam;
 - depoimentos e serviços que se revezam;
@@ -84,7 +86,7 @@ A página funciona como uma sequência de **cenas**. Cada capítulo ocupa a tela
 |---|---|
 | UI | React 19 + TypeScript (strict) |
 | Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix) |
-| Movimento | GSAP (ScrollTrigger, SplitText) + Lenis, com arte generativa em canvas |
+| Movimento | GSAP (ScrollTrigger, SplitText) + Lenis, com azulejos e arte generativa em canvas |
 | Build | Vite 6 com pré-renderização do HTML (SSG) |
 | Testes | Vitest + Testing Library (62 testes) |
 | Qualidade | Lighthouse 78 (mobile) / 99 (desktop) de performance; 100 em acessibilidade, boas práticas e SEO |
@@ -109,7 +111,7 @@ A página funciona como uma sequência de **cenas**. Cada capítulo ocupa a tela
   - a arte generativa, montada por estratégias.
 - **Acessibilidade:**
   - HTML semântico, *skip link* e `aria-current` na navegação.
-  - Com `prefers-reduced-motion`, todo o movimento é desligado e o layout fica estático.
+  - **Modo suave para quem pede menos movimento:** sem parallax nem scroll travado, mas com as cores e os fades. Um botão permite ver as animações completas.
   - Tema claro/escuro sem flash.
 - **Qualidade verificável:** os testes garantem que pt-BR e EN têm exatamente a mesma estrutura e que nenhum cliente confidencial é citado.
 

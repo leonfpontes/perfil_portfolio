@@ -21,7 +21,7 @@ function ServiceSeal({ words }: { words: string[] }) {
       </defs>
       <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" strokeWidth="0.6" />
       <circle cx="100" cy="100" r="68" fill="none" stroke="currentColor" strokeWidth="0.6" />
-      <text className="fill-current font-mono uppercase" style={{ fontSize: 8.6, letterSpacing: '0.12em' }}>
+      <text className="fill-current font-sans uppercase" style={{ fontSize: 8.6, letterSpacing: '0.12em' }}>
         <textPath href="#seal-path" textLength={515}>
           {text}
         </textPath>
@@ -56,7 +56,7 @@ function ServicesStage() {
           <ServiceSeal words={services.items.map((s) => s.title.split(' ').slice(0, 2).join(' '))} />
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-[1em] overflow-hidden font-serif text-[7rem] leading-none sm:text-[9rem]">
+          <div className="h-[1em] overflow-hidden font-display text-[7rem] leading-none sm:text-[9rem]">
             <div data-odometer className="text-outline" style={{ transform: `translateY(${(-100 / count) * index}%)` }}>
               {services.items.map((_, i) => (
                 <div key={i} className="h-[1em]">
@@ -79,10 +79,10 @@ function ServicesStage() {
                 i === index ? 'lg:visible lg:opacity-100' : 'lg:invisible lg:opacity-0',
               )}
             >
-              <span aria-hidden="true" className="text-outline mb-4 block font-serif text-8xl leading-none lg:hidden">
+              <span aria-hidden="true" className="text-outline mb-4 block font-display text-8xl leading-none lg:hidden">
                 {pad(i + 1)}
               </span>
-              <p className="label-mono">
+              <p className="label-caps">
                 {ui.audience}: {service.audience}
               </p>
               <h3 className="display mt-4 text-4xl sm:text-6xl">{service.title}</h3>
@@ -112,7 +112,7 @@ function ServicesStage() {
             </button>
           ))}
         </nav>
-        <TrackedLink href="#contato" trackLabel="services_cta" className="group link-rule mt-6 inline-block font-serif text-2xl">
+        <TrackedLink href="#contato" trackLabel="services_cta" className="group link-rule mt-6 inline-block font-display text-2xl">
           {services.cta} <Arrow />
         </TrackedLink>
       </div>
@@ -123,7 +123,7 @@ function ServicesStage() {
 export function Services() {
   const { services } = useContent();
   return (
-    <Scene id="servicos" label={services.eyebrow} tone="signal" className="lg:py-16">
+    <Scene id="servicos" label={services.eyebrow} tone="ocre" className="lg:py-16">
       <Container>
         <SectionHeader id="servicos" heading={services} compact />
         <ServicesStage />

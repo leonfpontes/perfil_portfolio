@@ -218,7 +218,17 @@ export interface Contact extends SectionHeading {
 }
 
 /** Rótulos de interface reutilizados por vários componentes. */
+export interface MotionStrings {
+  label: string;
+  gentleNotice: string;
+  enableFull: string;
+  reduce: string;
+  followSystem: string;
+  dismiss: string;
+}
+
 export interface UiStrings {
+  motion: MotionStrings;
   /** Cabeçalhos (só para leitores de tela) da tabela de certificações. */
   certColumns: [string, string, string];
   readMore: string;

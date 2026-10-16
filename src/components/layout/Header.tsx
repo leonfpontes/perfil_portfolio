@@ -44,8 +44,8 @@ export function Header() {
       </a>
       <Container className="flex h-14 items-center justify-between gap-6">
         <a href="#inicio" className="flex items-baseline gap-3">
-          <span className="font-serif text-2xl leading-none whitespace-nowrap">{profile.shortName}</span>
-          <span className="label-mono hidden text-muted-foreground 2xl:inline">{profile.brand}</span>
+          <span className="font-display text-2xl leading-none whitespace-nowrap">{profile.shortName}</span>
+          <span className="label-caps hidden text-muted-foreground 2xl:inline">{profile.brand}</span>
         </a>
 
         <nav aria-label="Principal" className="hidden lg:block">
@@ -71,7 +71,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1">
-          <div role="group" aria-label={nav.toggleLanguage} className="label-mono flex items-center">
+          <div role="group" aria-label={nav.toggleLanguage} className="label-caps flex items-center">
             {(['pt-BR', 'en'] as const).map((code, i) => (
               <span key={code} className="flex items-center">
                 {i > 0 && <span className="px-1 text-muted-foreground">/</span>}
@@ -105,8 +105,8 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-80 bg-background">
               <SheetHeader className="border-b">
-                <SheetTitle className="font-serif text-2xl font-normal">{profile.shortName}</SheetTitle>
-                <SheetDescription className="label-mono">{profile.brand}</SheetDescription>
+                <SheetTitle className="font-display text-2xl font-normal">{profile.shortName}</SheetTitle>
+                <SheetDescription className="label-caps">{profile.brand}</SheetDescription>
               </SheetHeader>
               <nav aria-label="Mobile" className="px-4">
                 <ul className="divide-y">
@@ -124,7 +124,7 @@ export function Header() {
                         }}
                         className="flex items-baseline gap-3 py-3"
                       >
-                        <span className="font-serif text-3xl">{item.label}</span>
+                        <span className="font-display text-3xl">{item.label}</span>
                       </TrackedLink>
                     </li>
                   ))}

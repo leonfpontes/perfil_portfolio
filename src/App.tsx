@@ -4,6 +4,7 @@ import { TrackedLink } from '@/components/common/TrackedLink';
 import { Footer } from '@/components/layout/Footer';
 import { SceneIndicator } from '@/components/motion/SceneIndicator';
 import { Header } from '@/components/layout/Header';
+import { MotionNotice } from '@/components/layout/MotionControls';
 import { SECTION_ORDER } from '@/content/sections';
 import { ScrollTrigger } from '@/lib/motion/gsap';
 import type { SectionId } from '@/content/types';
@@ -63,6 +64,7 @@ export function App() {
       </main>
       <Footer />
       <SceneIndicator />
+      <MotionNotice />
 
       {/* Barra de ação fixa apenas no mobile */}
       <TrackedLink
@@ -70,7 +72,7 @@ export function App() {
         trackLabel="mobile_bar_whatsapp"
         className="group fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-foreground bg-signal px-4 py-3 text-signal-foreground sm:hidden"
       >
-        <span className="label-mono truncate">{hero.badge}</span>
+        <span className="label-caps truncate">{hero.badge}</span>
         <span className="shrink-0 text-sm font-medium whitespace-nowrap">
           WhatsApp <Arrow />
         </span>

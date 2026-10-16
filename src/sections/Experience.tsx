@@ -40,7 +40,7 @@ export function Experience() {
   );
 
   return (
-    <Scene id="experiencia" label={experience.eyebrow} tone="paper">
+    <Scene id="experiencia" label={experience.eyebrow} tone="cal">
       <Container>
         <SectionHeader id="experiencia" heading={experience} />
         <div ref={ref}>
@@ -58,24 +58,24 @@ export function Experience() {
                     'ring-1 ring-foreground/10 lg:shadow-[0_-28px_60px_-24px_rgb(0_0_0/0.55)]',
                   )}
                 >
-                  <span aria-hidden="true" className="text-outline pointer-events-none absolute -right-3 -bottom-6 font-serif text-[7rem] leading-none opacity-30 sm:text-[14rem] lg:-bottom-10">
+                  <span aria-hidden="true" className="text-outline pointer-events-none absolute -right-3 -bottom-6 font-display text-[7rem] leading-none opacity-30 sm:text-[14rem] lg:-bottom-10">
                     {startYear(item.period)}
                   </span>
                   <div className="relative lg:col-span-4">
-                    <p className="label-mono">{item.period}</p>
+                    <p className="label-caps">{item.period}</p>
                     {item.current && (
-                      <p className="label-mono mt-2 flex items-center gap-2 text-signal">
+                      <p className="label-caps mt-2 flex items-center gap-2 text-signal">
                         <span aria-hidden="true" className="size-2 bg-signal" />
                         {experience.currentLabel}
                       </p>
                     )}
-                    <p className="label-mono mt-3 text-muted-foreground max-lg:hidden lg:mt-6">{item.location}</p>
-                    <p className="mt-1 font-serif text-2xl text-signal lg:text-3xl">{item.company}</p>
+                    <p className="label-caps mt-3 text-muted-foreground max-lg:hidden lg:mt-6">{item.location}</p>
+                    <p className="mt-1 font-display text-2xl text-signal lg:text-3xl">{item.company}</p>
                   </div>
                   <div className="relative lg:col-span-8">
                     <h3 className="display text-3xl sm:text-5xl">{item.role}</h3>
                     <p className="mt-3 text-pretty lg:mt-5 lg:max-w-2xl lg:text-lg">{item.summary}</p>
-                    <ul className="mt-3 space-y-1.5 text-sm lg:mt-5 lg:max-w-2xl lg:space-y-2 lg:text-base">
+                    <ul className="mt-3 space-y-1.5 text-[13px] max-lg:[&>li:nth-child(n+4)]:hidden lg:mt-5 lg:max-w-2xl lg:space-y-2 lg:text-base">
                       {item.achievements.map((a) => (
                         <li key={a} className="flex gap-3 text-muted-foreground lg:gap-4">
                           <span aria-hidden="true" className="text-signal">

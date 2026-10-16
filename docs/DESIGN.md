@@ -1,22 +1,23 @@
-# Sistema visual — "dossiê editorial"
+# Sistema visual — modernismo brasileiro
 
-O site de um consultor de governança e produto deve parecer **um relatório bem diagramado**, e não um template de startup. Toda decisão visual parte daí.
+O site precisa parecer **de autor**, e não gerado. A primeira versão (papel creme, laranja-terracota e serifa elegante) caiu justamente na estética padrão das ferramentas de IA de 2026, e foi descartada a partir de feedback real ("esse laranja com essa fonte é super Claude").
+
+A identidade atual vem do modernismo brasileiro: os painéis de azulejo de Athos Bulcão, os cartazes dos anos 60 e a paleta dos jardins e da arquitetura modernista. É pessoal (Brasil, Ribeirão Preto, GiraHub) e não se confunde com template.
 
 ## Fundamentos
 
 | Elemento | Escolha | Token / utilitário |
 |---|---|---|
-| Papel | Off-white quente | `--background` |
-| Tinta | Quase-preto quente | `--foreground` |
-| Sinal | Vermelhão, a **única** cor de destaque | `--signal`, `bg-signal`, `text-signal` |
-| Títulos | *Instrument Serif* em tamanhos grandes, com itálico para ênfase | `display`, `font-serif` |
-| Texto | *Geist* | `font-sans` |
-| Metadados | *Geist Mono* em caixa alta | `label-mono` |
-| Bordas | Fios de 1px; raio quase zero | `border`, `--radius: 0.125rem` |
-| Fotos | P&B com contraste, mescladas ao papel, sempre com legenda "Fig. N" | `print-photo`, `<Figure>` |
-| Links | Sublinhado fino que engrossa e fica vermelhão no hover | `link-rule` |
+| Paleta de marca | **cal** (branco de parede), **palha**, **mata** (verde profundo), **ocre**, **cobalto** (azul), **anil** (noite), **breu** (tinta) | `--cal`, `--palha`, `--mata`, `--ocre`, `--azul`, `--anil`, `--breu` |
+| Tons de cena | Cada capítulo assume um tom: cal, palha, mata, ocre, cobalto ou anil | `.tone-*` |
+| Tipografia | **Archivo** (Omnibus-Type, foundry latino-americana), variável em peso e largura | `font-sans`, `font-display` |
+| Títulos | Archivo expandida (118%) e pesada (750), como em cartaz | `display` |
+| Destaque | Bloco de cor atrás da palavra, no lugar do itálico | `highlight` |
+| Rótulos | Caixa alta, levemente expandida e espaçada (sem fonte mono) | `label-caps` |
+| Bordas | Fios de 1px, cantos retos | `--radius: 0` |
+| Arte | Azulejos generativos, retícula de meio-tom e capas por produto | `art/Azulejo`, `art/Halftone`, `art/GenerativeCover` |
 
-O modo escuro inverte papel e tinta e mantém o vermelhão.
+O modo escuro usa um verde-quase-preto. As cenas "mata" se invertem para cal, para manter o contraste entre capítulos.
 
 ## Movimento — o site em cenas
 
@@ -38,7 +39,12 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 
 **Tons** (`.tone-*` em `globals.css`) definem só 4 cores: fundo, tinta, sinal e texto-sobre-sinal. Todo o resto da paleta deriva delas com `color-mix`, então a transição entre cenas é uma interpolação de 4 variáveis feita pelo próprio navegador.
 
-**Arte generativa** (`components/art`): campo de fluxo, meio-tom de fotos e capas por produto (selo, gates, radar e curvas de nível). Tudo é desenhado em canvas na cor da tinta da cena e pausa fora da tela.
+**Arte generativa** (`components/art`):
+- **Azulejos:** painel com módulos geométricos em cores de marca. A composição muda a cada visita, um azulejo gira de tempos em tempos e o que está sob o cursor também gira.
+- **Meio-tom das fotos.**
+- **Capas por produto:** selo, gates, radar e curvas de nível.
+
+Tudo é desenhado em canvas e pausa fora da tela.
 
 **Transição de cor:** tons próximos são misturados com `color-mix`. Inversões (claro↔escuro, vermelhão↔escuro) usam uma **cortina**: o novo fundo varre a tela no sentido do scroll, sem passar por um cinza intermediário.
 
@@ -52,9 +58,11 @@ Também no celular:
 - textos longos ficam atrás de "Ler mais";
 - as certificações mostram as 5 primeiras.
 
-**Acessibilidade do movimento:**
-- Com `prefers-reduced-motion`, não há Lenis, pins, scrubs nem SplitText. O site vira o layout estático e os depoimentos e serviços viram carrosséis com botões.
-- No celular, só as cenas que cabem na tela ficam fixas.
+**Movimento e acessibilidade — modo suave:** quando o sistema pede "Reduzir movimento", o site *não* fica estático.
+- **Desliga o que pode causar enjoo:** parallax, scroll travado (pins), trilhos forçados, Lenis e SplitText.
+- **Mantém o que dá identidade sem deslocar a tela:** troca de cor das cenas (dissolução curta, sem cortina), fades e a arte (parada).
+- **Escolha do visitante:** um aviso discreto oferece "Ver animações completas", e o rodapé permite alternar entre completo, suave e "seguir o sistema" (`lp:motion`).
+- **No celular,** só as cenas que cabem na tela ficam fixas.
 
 ## Padrões de composição
 
@@ -67,6 +75,7 @@ Também no celular:
 
 ## O que evitamos (anti-genérico)
 
+- A estética padrão das IAs: papel creme com laranja-terracota e serifa "editorial", fontes mono em rótulos, gradiente roxo-azul.
 - Gradientes, texto em gradiente, blobs desfocados e "glassmorphism".
 - Cards idênticos com ícone num quadrado colorido.
 - Badges com ✨, pontos pulsando e emojis decorativos.

@@ -45,7 +45,8 @@ export function SceneDirector({ children }: { children: ReactNode }) {
   const activate = useCallback(
     (scene: SceneInfo, direction = 1) => {
       const dir: ScrollDirection = direction < 0 ? -1 : 1;
-      controllerRef.current?.apply(scene.tone, { immediate: reduced, direction: dir });
+      // Modo suave: troca de cor por dissolução curta, sem a cortina varrendo a tela.
+      controllerRef.current?.apply(scene.tone, { direction: dir, wipe: !reduced, duration: reduced ? 0.5 : 0.9 });
       setActive((prev) => (prev?.id === scene.id ? prev : scene));
     },
     [reduced],

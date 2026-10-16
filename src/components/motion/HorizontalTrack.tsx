@@ -97,14 +97,14 @@ export function HorizontalTrack({ children, media = 'all', className, label, pac
         className={cn(
           className,
           // Sem movimento: carrossel nativo com swipe/scroll horizontal.
-          !horizontal && 'motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto motion-reduce:pb-4',
+          !horizontal && 'reduced:snap-x reduced:snap-mandatory reduced:overflow-x-auto reduced:pb-4',
         )}
       >
         {children}
       </div>
       {showProgress && (
         <div aria-hidden="true" className={cn('mt-5 items-center gap-4', horizontal ? 'flex' : 'hidden')}>
-          <span className="label-mono text-muted-foreground">
+          <span className="label-caps text-muted-foreground">
             {pad(active + 1)} / {pad(count)}
           </span>
           <span className="h-px flex-1 bg-foreground/20">

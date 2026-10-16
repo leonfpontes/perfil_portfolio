@@ -8,8 +8,8 @@ import { gsap, MEDIA, ScrollTrigger, useGSAP } from '@/lib/motion/gsap';
 function SkillRow({ group, index }: { group: SkillGroup; index: number }) {
   const items = (copy: boolean) =>
     group.skills.map((skill) => (
-      <li key={`${copy}-${skill}`} aria-hidden={copy || undefined} className={copy ? 'motion-reduce:hidden' : undefined}>
-        <span className="font-serif text-3xl whitespace-nowrap sm:text-6xl">{skill}</span>
+      <li key={`${copy}-${skill}`} aria-hidden={copy || undefined} className={copy ? 'reduced:hidden' : undefined}>
+        <span className="font-display text-3xl whitespace-nowrap sm:text-6xl">{skill}</span>
         <span aria-hidden="true" className="mx-6 text-signal sm:mx-10">
           ✳
         </span>
@@ -18,13 +18,13 @@ function SkillRow({ group, index }: { group: SkillGroup; index: number }) {
 
   return (
     <div className="group border-t py-3 first:border-t-0 lg:py-5">
-      <p className="label-mono mb-3 flex gap-3 text-muted-foreground">
+      <p className="label-caps mb-3 flex gap-3 text-muted-foreground">
         <span className="text-signal">{String.fromCharCode(97 + index)})</span>
         {group.label} — {group.description}
       </p>
-      <div className="overflow-hidden motion-reduce:overflow-visible">
+      <div className="overflow-hidden reduced:overflow-visible">
         {/* Lista duplicada para o loop sem emenda; a cópia é ignorada por leitores de tela. */}
-        <ul data-marquee={index % 2 ? 'right' : 'left'} className="flex w-max items-baseline motion-reduce:w-auto motion-reduce:flex-wrap">
+        <ul data-marquee={index % 2 ? 'right' : 'left'} className="flex w-max items-baseline reduced:w-auto reduced:flex-wrap">
           {items(false)}
           {items(true)}
         </ul>
@@ -76,7 +76,7 @@ export function Skills() {
   );
 
   return (
-    <Scene id="competencias" label={skills.eyebrow} tone="night">
+    <Scene id="competencias" label={skills.eyebrow} tone="anil">
       <Container>
         <SectionHeader id="competencias" heading={skills} />
       </Container>

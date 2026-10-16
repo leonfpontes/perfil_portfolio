@@ -1,4 +1,5 @@
 import { Container } from '@/components/common/Section';
+import { MotionToggle } from './MotionControls';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
 import { useContent } from '@/lib/i18n/LocaleProvider';
@@ -13,7 +14,7 @@ export function Footer() {
     <footer className="border-t border-foreground">
       <Container className="grid gap-10 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
-          <p className="font-serif text-4xl leading-none">{profile.brand}</p>
+          <p className="font-display text-4xl leading-none">{profile.brand}</p>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">{footer.tagline}</p>
         </div>
         <nav aria-label="Rodapé" className="md:col-span-4">
@@ -45,10 +46,11 @@ export function Footer() {
           </li>
         </ul>
       </Container>
-      <Container className="label-mono flex flex-col gap-2 border-t py-5 text-muted-foreground sm:flex-row sm:justify-between">
+      <Container className="label-caps flex flex-col gap-2 border-t py-5 text-muted-foreground sm:flex-row sm:justify-between">
         <p>
           © {year} {profile.name}. {footer.rights}
         </p>
+        <MotionToggle />
         <p>
           {footer.builtWith} {footer.imageCredits}
         </p>

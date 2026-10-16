@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { FlowField } from '@/components/art/FlowField';
+import { Azulejo } from '@/components/art/Azulejo';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -37,7 +37,6 @@ export function Hero() {
         const exit = { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true };
         gsap.to('[data-hero-title]', { yPercent: -35, opacity: 0, ease: 'none', scrollTrigger: exit });
         gsap.to('[data-hero-figure]', { yPercent: -12, scale: 1.06, ease: 'none', scrollTrigger: exit });
-        gsap.to('[data-hero-art]', { opacity: 0, ease: 'none', scrollTrigger: exit });
         gsap.to('[data-hero-hint]', { opacity: 0, ease: 'none', scrollTrigger: { ...exit, end: '15% top' } });
       });
     },
@@ -49,17 +48,12 @@ export function Hero() {
       <Scene
         id="inicio"
         label={hero.greeting}
-        tone="paper"
+        tone="cal"
         customTransition
         className="pt-24 pb-10"
-        art={
-          <div data-hero-art className="absolute inset-0 text-foreground/70">
-            <FlowField seed="leonardo" className="absolute inset-0 size-full" />
-          </div>
-        }
       >
         <Container>
-          <div className="label-mono flex flex-wrap items-center justify-between gap-3 border-b pb-3 text-muted-foreground">
+          <div className="label-caps flex flex-wrap items-center justify-between gap-3 border-b pb-3 text-muted-foreground">
             <span data-hero-meta>{hero.greeting}</span>
             <span data-hero-meta className="hidden sm:inline">
               {location}
@@ -73,8 +67,8 @@ export function Hero() {
           <div className="grid gap-8 pt-6 lg:grid-cols-12 lg:gap-8 lg:pt-10">
             <div className="lg:col-span-8">
               <div data-hero-title>
-                <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(3rem,8.6vw,8.5rem)] text-balance">
-                  {hero.title} <em className="text-signal">{hero.titleHighlight}</em>
+                <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(2.6rem,6.6vw,6.75rem)] text-balance">
+                  {hero.title} <span className="highlight">{hero.titleHighlight}</span>
                 </SplitReveal>
               </div>
               <p data-hero-fade className="mt-6 max-w-xl text-pretty sm:text-xl lg:mt-8">
@@ -94,7 +88,10 @@ export function Hero() {
 
             <figure data-hero-figure className="relative lg:col-span-4">
               <div className="relative pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
-                <div data-hero-block aria-hidden="true" className="absolute inset-0 bg-signal" />
+                {/* Painel de azulejos generativo atrás do retrato (muda a cada visita). */}
+                <div data-hero-block aria-hidden="true" className="absolute inset-0 overflow-hidden">
+                  <Azulejo seed={`hero-${new Date().getDate()}`} size={52} />
+                </div>
                 <img
                   data-hero-portrait
                   src={profile.images.portrait}
@@ -105,7 +102,7 @@ export function Hero() {
                   className="relative mx-auto h-auto w-full grayscale contrast-110 max-lg:max-h-[42svh] max-lg:w-auto"
                 />
               </div>
-              <figcaption data-hero-fade className="label-mono mt-3 flex justify-between gap-3 text-muted-foreground">
+              <figcaption data-hero-fade className="label-caps mt-3 flex justify-between gap-3 text-muted-foreground">
                 <span className="text-foreground">{profile.name}</span>
                 <span className="text-right">{hero.availability}</span>
               </figcaption>
@@ -118,20 +115,20 @@ export function Hero() {
                 key={stat.label}
                 className={`flex flex-col-reverse justify-end gap-1 border-b py-4 pr-4 md:border-b-0 ${i % 2 ? 'border-l pl-4' : ''} ${i > 0 ? 'md:border-l md:pl-5' : ''}`}
               >
-                <dt className="label-mono text-muted-foreground">{stat.label}</dt>
-                <dd className="font-serif text-4xl leading-none sm:text-6xl">
+                <dt className="label-caps text-muted-foreground">{stat.label}</dt>
+                <dd className="font-display text-4xl leading-none sm:text-6xl">
                   <CountUp value={stat.value} />
                 </dd>
               </div>
             ))}
           </dl>
           <p data-hero-fade className="mt-6 hidden text-sm text-muted-foreground sm:block">
-            <span className="label-mono mr-3 text-foreground">{hero.trustLine}</span>
+            <span className="label-caps mr-3 text-foreground">{hero.trustLine}</span>
             {hero.trustItems.join('  /  ')}
           </p>
         </Container>
 
-        <div data-hero-hint aria-hidden="true" className="label-mono absolute right-6 bottom-6 hidden items-center gap-3 text-muted-foreground lg:flex">
+        <div data-hero-hint aria-hidden="true" className="label-caps absolute right-6 bottom-6 hidden items-center gap-3 text-muted-foreground lg:flex">
           {ui.scrollHint}
           <span className="relative h-10 w-px overflow-hidden bg-foreground/20">
             <span className="absolute inset-x-0 top-0 h-1/2 animate-[scroll-hint_1.8s_ease-in-out_infinite] bg-signal" />
