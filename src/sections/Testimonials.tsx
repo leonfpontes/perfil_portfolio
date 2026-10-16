@@ -33,7 +33,7 @@ function TestimonialStage() {
 
   return (
     <div ref={stageRef} className="grid gap-8 lg:grid-cols-12">
-      <span data-quote-mark aria-hidden="true" className="hidden h-[0.5em] origin-[50%_35%] font-serif text-[11rem] leading-[0.85] text-signal lg:col-span-2 lg:block">
+      <span data-quote-mark aria-hidden="true" className="hidden h-[0.5em] origin-[50%_35%] font-display text-[11rem] leading-[0.85] text-signal lg:col-span-2 lg:block">
         “
       </span>
       <div className="min-w-0 lg:col-span-10">
@@ -48,13 +48,13 @@ function TestimonialStage() {
                 i === index ? 'lg:visible lg:opacity-100' : 'lg:invisible lg:opacity-0',
               )}
             >
-              <span aria-hidden="true" className="block h-12 font-serif text-8xl leading-none text-signal lg:hidden">
+              <span aria-hidden="true" className="block h-12 font-display text-8xl leading-none text-signal lg:hidden">
                 “
               </span>
-              <blockquote className="display text-3xl leading-tight text-pretty sm:text-5xl">{t.quote}</blockquote>
+              <blockquote className="display text-2xl leading-tight [font-weight:560] text-pretty sm:text-5xl">{t.quote}</blockquote>
               <figcaption className="mt-8 border-t pt-4">
                 <p className="font-medium">{t.role}</p>
-                <p className="label-mono mt-1 text-muted-foreground">{t.context}</p>
+                <p className="label-caps mt-1 text-muted-foreground">{t.context}</p>
               </figcaption>
             </figure>
           ))}
@@ -69,14 +69,14 @@ function TestimonialStage() {
               <button type="button" onClick={() => goTo(index - 1)} className="group link-rule cursor-pointer">
                 <Arrow direction="left" /> {ui.previous}
               </button>
-              <span className="label-mono text-muted-foreground">
+              <span className="label-caps text-muted-foreground">
                 {pad(index + 1)} {ui.of} {pad(total)}
               </span>
               <button type="button" onClick={() => goTo(index + 1)} className="group link-rule cursor-pointer">
                 {ui.next} <Arrow />
               </button>
             </div>
-            <TrackedLink href={profile.linkedin} trackEvent="outbound_click" trackLabel="testimonials_linkedin" className="label-mono link-rule text-muted-foreground">
+            <TrackedLink href={profile.linkedin} trackEvent="outbound_click" trackLabel="testimonials_linkedin" className="label-caps link-rule text-muted-foreground">
               {testimonials.sourceNote} <Arrow direction="up-right" />
             </TrackedLink>
           </div>
@@ -90,7 +90,7 @@ function TestimonialStage() {
 export function Testimonials() {
   const { testimonials } = useContent();
   return (
-    <Scene id="depoimentos" label={testimonials.eyebrow} tone="ink" className="lg:py-16">
+    <Scene id="depoimentos" label={testimonials.eyebrow} tone="mata" className="lg:py-16">
       <Container>
         <SectionHeader id="depoimentos" heading={testimonials} compact />
         <TestimonialStage />

@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react';
+import { isGentleMode, readMotionPref } from '@/lib/motion/motionPreference';
 
 const QUERY = '(prefers-reduced-motion: reduce)';
 
@@ -20,10 +21,10 @@ function subscribe(onChange: () => void): () => void {
   return () => mql.removeListener(onChange);
 }
 
-const getSnapshot = (): boolean => getMediaQuery()?.matches ?? false;
+const getSnapshot = (): boolean => isGentleMode(readMotionPref(), getMediaQuery()?.matches ?? false);
 const getServerSnapshot = (): boolean => false;
 
-/** Indica se o usuário pediu menos movimento no sistema; reage a mudanças em tempo real. */
+/** Modo suave efetivo: o sistema pede menos movimento (e o visitante não pediu tudo) ou o visitante pediu menos. */
 export function useReducedMotion(): boolean {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

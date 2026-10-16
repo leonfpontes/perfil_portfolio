@@ -23,18 +23,18 @@ export function Education() {
   );
 
   return (
-    <Scene id="formacao" label={education.eyebrow} tone="sand">
+    <Scene id="formacao" label={education.eyebrow} tone="palha">
       <Container>
         <div ref={ref}>
           <SectionHeader id="formacao" heading={education} />
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <h3 className="label-mono mb-4 text-muted-foreground">{education.degreesTitle}</h3>
+              <h3 className="label-caps mb-4 text-muted-foreground">{education.degreesTitle}</h3>
               <ul data-degrees className="border-b">
                 {education.degrees.map((degree) => (
                   <li key={degree.title} data-degree className="border-t py-4 lg:py-6">
-                    <p className="label-mono text-muted-foreground">{degree.period}</p>
-                    <p className="mt-1 font-serif text-2xl leading-tight lg:mt-2 lg:text-3xl">{degree.title}</p>
+                    <p className="label-caps text-muted-foreground">{degree.period}</p>
+                    <p className="mt-1 font-display text-2xl leading-tight lg:mt-2 lg:text-3xl">{degree.title}</p>
                     <p className="mt-1 text-sm">{degree.institution}</p>
                     <p className="mt-2 hidden text-sm text-muted-foreground lg:block">{degree.description}</p>
                   </li>
@@ -43,7 +43,7 @@ export function Education() {
             </div>
 
             <div className="lg:col-span-7">
-              <h3 className="label-mono mb-4 text-muted-foreground">{education.certificationsTitle}</h3>
+              <h3 className="label-caps mb-4 text-muted-foreground">{education.certificationsTitle}</h3>
               <table data-certs className="w-full border-collapse text-left text-sm">
                 <thead className="sr-only">
                   <tr>
@@ -63,10 +63,10 @@ export function Education() {
                     >
                       <td className="py-3 pr-4">
                         {cert.title}
-                        {cert.inProgress && <span className="label-mono ml-2 text-signal">· {education.inProgressLabel}</span>}
+                        {cert.inProgress && <span className="label-caps ml-2 text-signal">· {education.inProgressLabel}</span>}
                       </td>
                       <td className="hidden py-3 pr-4 text-muted-foreground sm:table-cell">{cert.issuer}</td>
-                      <td className="label-mono py-3 text-right whitespace-nowrap text-muted-foreground">{cert.date}</td>
+                      <td className="label-caps py-3 text-right whitespace-nowrap text-muted-foreground">{cert.date}</td>
                     </tr>
                   ))}
                 </tbody>

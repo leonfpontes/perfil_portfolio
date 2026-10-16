@@ -55,7 +55,8 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
       // (um ancestral transformado vira o "containing block" do position: fixed).
       const layers = outer.querySelectorAll('[data-scene-body], [data-scene-art]');
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.desktop, () => {
+      // Só opacidade: vale também no modo suave (não causa enjoo).
+      mm.add(MEDIA.wide, () => {
         // Entrada e saída se sobrepõem: nunca há uma tela vazia entre cenas.
         gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 60%', scrub: true } });
         gsap.to(layers, {
@@ -67,7 +68,7 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
       });
       // No celular as seções são mais altas que a tela: só a entrada é animada,
       // para que nada se apague enquanto ainda está sendo lido.
-      mm.add(MEDIA.mobile, () => {
+      mm.add(MEDIA.narrow, () => {
         gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 70%', scrub: true } });
       });
     },

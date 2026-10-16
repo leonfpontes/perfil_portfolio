@@ -23,7 +23,7 @@ function PlanSheet({ plan, index }: { plan: Plan; index: number }) {
         plan.highlighted ? 'border-signal' : 'border-foreground',
       )}
     >
-      <p className="label-mono flex justify-between text-muted-foreground">
+      <p className="label-caps flex justify-between text-muted-foreground">
         <span>{plan.tag}</span>
         <span>{String.fromCharCode(65 + index)}</span>
       </p>
@@ -33,10 +33,10 @@ function PlanSheet({ plan, index }: { plan: Plan; index: number }) {
       <div className="mt-5 border-y py-4 sm:mt-8 sm:py-6">
         <p className="flex flex-wrap items-baseline gap-x-3">
           {/* Preço não "conta": contador em preço soa como promoção e mostra valores falsos. */}
-          <span className="font-serif text-5xl leading-none sm:text-7xl">{plan.price}</span>
-          <span className="label-mono">{plan.priceNote}</span>
+          <span className="font-display text-5xl leading-none sm:text-7xl">{plan.price}</span>
+          <span className="label-caps">{plan.priceNote}</span>
         </p>
-        <p className="label-mono mt-3 text-muted-foreground">{plan.regularPrice}</p>
+        <p className="label-caps mt-3 text-muted-foreground">{plan.regularPrice}</p>
       </div>
 
       <ul className="flex-1 divide-y">
@@ -78,7 +78,7 @@ function PlansScene() {
   );
 
   return (
-    <Scene id="mentoria" label={offer.eyebrow} tone="sand">
+    <Scene id="mentoria" label={offer.eyebrow} tone="palha">
       <Container>
         <div ref={ref}>
           <SectionHeader id="mentoria" heading={offer} />
@@ -150,11 +150,11 @@ function JourneyStage() {
                 className="relative pt-8 max-lg:flex max-lg:min-h-[52svh] max-lg:w-[78vw] max-lg:shrink-0 max-lg:snap-center max-lg:flex-col max-lg:justify-end max-lg:border-t max-lg:border-foreground"
               >
                 <span data-node={i} aria-hidden="true" className="absolute -top-[5px] left-0 size-[9px] bg-foreground max-lg:bg-signal" />
-                <span aria-hidden="true" className="text-outline font-serif text-[9rem] leading-none lg:hidden">
+                <span aria-hidden="true" className="text-outline font-display text-[9rem] leading-none lg:hidden">
                   G{i + 1}
                 </span>
-                <p className="label-mono text-muted-foreground max-lg:hidden">G{i + 1}</p>
-                <p className="mt-2 font-serif text-4xl leading-tight">{step.title}</p>
+                <p className="label-caps text-muted-foreground max-lg:hidden">G{i + 1}</p>
+                <p className="mt-2 font-display text-4xl leading-tight">{step.title}</p>
                 <p className="mt-3 text-sm text-muted-foreground">{step.description}</p>
               </div>
             ))}
@@ -164,7 +164,7 @@ function JourneyStage() {
         <div data-isnot className="mt-12 grid items-end gap-10 lg:grid-cols-12">
           <figure className="lg:col-span-7">
             <Halftone src={stockImages.workshop} alt="" className="aspect-[16/9] w-full text-foreground lg:aspect-[16/7] lg:max-h-[34vh]" />
-            <figcaption className="label-mono mt-3 flex gap-3 text-muted-foreground">
+            <figcaption className="label-caps mt-3 flex gap-3 text-muted-foreground">
               <span className="text-foreground">Fig. 1</span>
               <span>{ui.illustrativeImage}</span>
             </figcaption>
@@ -174,7 +174,7 @@ function JourneyStage() {
             <ul className="mt-6 divide-y border-y">
               {offer.isNot.items.map((item) => (
                 <li key={item} className="flex gap-4 py-4">
-                  <span aria-hidden="true" className="font-mono text-signal">
+                  <span aria-hidden="true" className="font-sans text-signal">
                     ×
                   </span>
                   <span className="relative">
@@ -196,7 +196,7 @@ export function Offer() {
   return (
     <>
       <PlansScene />
-      <Scene id="jornada" chapter="mentoria" label={offer.eyebrow} tone="paper" className="lg:py-16">
+      <Scene id="jornada" chapter="mentoria" label={offer.eyebrow} tone="cal" className="lg:py-16">
         <JourneyStage />
       </Scene>
     </>

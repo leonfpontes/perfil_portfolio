@@ -2,11 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { createNoise } from '@/lib/art/noise';
 import { createRandom } from '@/lib/art/random';
-import { FlowField, GenerativeCover, Halftone, coverPainters, type CoverVariant } from './index';
+import { Azulejo, GenerativeCover, Halftone, coverPainters, type CoverVariant } from './index';
 
 describe('arte generativa', () => {
-  it('FlowField renderiza um canvas decorativo', () => {
-    const { container } = render(<FlowField seed="teste" density={0.5} className="absolute inset-0" />);
+  it('Azulejo renderiza um canvas decorativo', () => {
+    const { container } = render(<Azulejo seed="teste" size={40} className="absolute inset-0" />);
     const canvas = container.querySelector('canvas');
     expect(canvas).toBeInTheDocument();
     expect(canvas).toHaveAttribute('aria-hidden', 'true');
@@ -66,7 +66,7 @@ describe('coverPainters', () => {
 });
 
 describe('com contexto 2D simulado', () => {
-  it('FlowField e GenerativeCover executam o quadro inicial', () => {
+  it('Azulejo e GenerativeCover executam o quadro inicial', () => {
     const getContext = vi
       .spyOn(HTMLCanvasElement.prototype, 'getContext')
       .mockImplementation(function (this: HTMLCanvasElement) {
@@ -78,7 +78,7 @@ describe('com contexto 2D simulado', () => {
       .spyOn(HTMLCanvasElement.prototype, 'getBoundingClientRect')
       .mockReturnValue({ width: 800, height: 600, top: 0, left: 0, right: 800, bottom: 600, x: 0, y: 0, toJSON: () => ({}) });
     try {
-      expect(() => render(<FlowField seed="mock" />)).not.toThrow();
+      expect(() => render(<Azulejo seed="mock" />)).not.toThrow();
       for (const variant of Object.keys(coverPainters) as CoverVariant[]) {
         expect(() => render(<GenerativeCover variant={variant} />)).not.toThrow();
       }

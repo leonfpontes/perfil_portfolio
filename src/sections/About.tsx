@@ -37,14 +37,14 @@ export function About() {
   );
 
   return (
-    <Scene id="sobre" label={about.eyebrow} tone="paper">
+    <Scene id="sobre" label={about.eyebrow} tone="cal">
       <Container>
         <div ref={ref}>
           <SectionHeader id="sobre" heading={about} />
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               {lead && (
-                <SplitReveal mode="read" className="font-serif text-2xl leading-snug text-pretty sm:text-4xl">
+                <SplitReveal mode="read" className="font-display text-2xl leading-snug text-pretty sm:text-4xl">
                   {lead}
                 </SplitReveal>
               )}
@@ -68,7 +68,7 @@ export function About() {
               <dl data-facts className="mt-8 divide-y border-y lg:mt-10">
                 {about.facts.map((fact) => (
                   <div key={fact.label} data-fact className="grid grid-cols-3 gap-4 py-3">
-                    <dt className="label-mono pt-0.5 text-muted-foreground">{fact.label}</dt>
+                    <dt className="label-caps pt-0.5 text-muted-foreground">{fact.label}</dt>
                     <dd className="col-span-2">{fact.value}</dd>
                   </div>
                 ))}
@@ -79,7 +79,7 @@ export function About() {
               <div data-about-photo>
                 <Halftone src={stockImages.team} alt={about.imageAlt} cell={8} className="aspect-[16/10] w-full text-foreground lg:aspect-[4/5]" />
               </div>
-              <figcaption className="label-mono mt-3 flex gap-3 text-muted-foreground">
+              <figcaption className="label-caps mt-3 flex gap-3 text-muted-foreground">
                 <span className="text-foreground">Fig. 2</span>
                 <span>{ui.illustrativeImage}</span>
               </figcaption>
@@ -89,8 +89,8 @@ export function About() {
           <ol data-pillars className="mt-12 grid grid-cols-2 gap-px bg-border lg:mt-20 lg:grid-cols-4">
             {about.pillars.map((pillar, i) => (
               <li key={pillar.title} data-pillar className="bg-background p-4 pt-4 lg:p-6 lg:pt-5">
-                <p className="label-mono text-signal">{String(i + 1).padStart(2, '0')}</p>
-                <h3 className="mt-3 font-serif text-2xl lg:mt-6 lg:text-3xl">{pillar.title}</h3>
+                <p className="label-caps text-signal">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="mt-3 font-display text-2xl lg:mt-6 lg:text-3xl">{pillar.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{pillar.description}</p>
               </li>
             ))}

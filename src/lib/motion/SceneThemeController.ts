@@ -1,6 +1,7 @@
 import { gsap } from './gsap';
 
-export type Tone = 'paper' | 'sand' | 'ink' | 'signal' | 'night';
+/** Tons de cena — a paleta do modernismo brasileiro (ver globals.css). */
+export type Tone = 'cal' | 'palha' | 'mata' | 'ocre' | 'cobalto' | 'anil';
 
 /** As únicas variáveis interpoladas — o restante da paleta deriva delas (globals.css). */
 const TONE_VARS = ['--background', '--foreground', '--signal', '--signal-foreground'] as const;
@@ -48,7 +49,7 @@ export class SceneThemeController {
     return this.tone;
   }
 
-  apply(tone: Tone, { immediate = false, duration = 0.9, direction = 1 as ScrollDirection } = {}): void {
+  apply(tone: Tone, { immediate = false, duration = 0.9, direction = 1 as ScrollDirection, wipe = true } = {}): void {
     if (tone === this.tone && !immediate) return;
     const target = this.readTone(tone);
     const from = this.current ?? target;
@@ -60,7 +61,7 @@ export class SceneThemeController {
       return;
     }
 
-    if (this.curtain && this.needsWipe(from, target)) {
+    if (wipe && this.curtain && this.needsWipe(from, target)) {
       this.wipe(this.curtain, target, direction);
       return;
     }

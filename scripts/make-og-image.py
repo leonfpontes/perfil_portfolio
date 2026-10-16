@@ -1,61 +1,102 @@
 """
 Gera public/images/og-image.png (1200x630) — o card exibido quando o link do
 site é compartilhado (LinkedIn, WhatsApp, Slack…). Mesma identidade do site:
-papel, tinta, vermelhão, Instrument Serif e Geist Mono.
+modernismo brasileiro — cal, mata, ocre e cobalto, Archivo expandida e um
+painel de azulejos atrás do retrato.
 
 Uso: python3 scripts/make-og-image.py
 """
+import math
+import random
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
-FONTS = ROOT / "public" / "fonts"
+FONT = ROOT / "public" / "fonts" / "archivo-latin-wdth-normal.woff2"
+PORTRAIT = ROOT / "scripts" / "assets" / "portrait-cutout.png"
 OUT = ROOT / "public" / "images" / "og-image.png"
 
 W, H = 1200, 630
-PAPER = (243, 239, 230)
-INK = (27, 26, 23)
-MUTED = (110, 105, 96)
-SIGNAL = (204, 72, 34)
+CAL = (247, 247, 242)
+BREU = (19, 38, 31)
+MATA = (20, 81, 63)
+OCRE = (240, 180, 41)
+AZUL = (45, 79, 179)
+MUTED = (96, 110, 104)
 
-serif = lambda size: ImageFont.truetype(str(FONTS / "instrument-serif-latin-400-normal.woff2"), size)
-serif_i = lambda size: ImageFont.truetype(str(FONTS / "instrument-serif-latin-400-italic.woff2"), size)
-mono = lambda size: ImageFont.truetype(str(FONTS / "geist-mono-latin-wght-normal.woff2"), size)
 
-img = Image.new("RGB", (W, H), PAPER)
+def font(size: int, weight: int, width: int) -> ImageFont.FreeTypeFont:
+    f = ImageFont.truetype(str(FONT), size)
+    f.set_variation_by_axes([weight, width])
+    return f
+
+
+def azulejo_wall(w: int, h: int, size: int, seed: int) -> Image.Image:
+    """Painel de azulejos (mesmos módulos do componente Azulejo.tsx)."""
+    rnd = random.Random(seed)
+    pairs = [(AZUL, CAL), (CAL, AZUL), (OCRE, BREU), (MATA, OCRE), (CAL, MATA), (AZUL, OCRE), (OCRE, AZUL), (CAL, OCRE)]
+    scale = 4  # desenha grande e reduz (bordas suaves)
+    s = size * scale
+    wall = Image.new("RGB", (math.ceil(w / size) * s, math.ceil(h / size) * s))
+    for row in range(math.ceil(h / size)):
+        for col in range(math.ceil(w / size)):
+            bg, fg = rnd.choice(pairs)
+            tile = Image.new("RGB", (s, s), bg)
+            d = ImageDraw.Draw(tile)
+            motif = rnd.randint(0, 5)
+            if motif == 0:
+                d.pieslice((-s, -s, s, s), 0, 90, fill=fg)
+            elif motif == 1:
+                d.pieslice((0, s // 2, s, s + s // 2), 180, 360, fill=fg)
+            elif motif == 2:
+                d.polygon([(0, 0), (s, 0), (0, s)], fill=fg)
+            elif motif == 3:
+                d.pieslice((-s // 2, -s // 2, s // 2, s // 2), 0, 90, fill=fg)
+                d.pieslice((s // 2, s // 2, s + s // 2, s + s // 2), 180, 270, fill=fg)
+            elif motif == 4:
+                r = int(s * 0.3)
+                d.ellipse((s // 2 - r, s // 2 - r, s // 2 + r, s // 2 + r), fill=fg)
+            else:
+                d.rectangle((0, 0, s, s // 2), fill=fg)
+            wall.paste(tile.rotate(90 * rnd.randint(0, 3)), (col * s, row * s))
+    wall = wall.resize((wall.width // scale, wall.height // scale), Image.LANCZOS)
+    return wall.crop((0, 0, w, h))
+
+
+img = Image.new("RGB", (W, H), CAL)
 d = ImageDraw.Draw(img)
-M = 64  # margem
+M = 64
 
-# Bloco vermelhão + retrato em P&B (mesma composição do hero).
-block = (820, 92, 1136, H)
-d.rectangle(block, fill=SIGNAL)
-portrait = Image.open(ROOT / "scripts" / "assets" / "portrait-cutout.png").convert("RGBA")
-gray = ImageOps.grayscale(portrait.convert("RGB"))
-gray = ImageOps.autocontrast(gray, cutoff=1)
-portrait_bw = Image.merge("RGBA", (gray, gray, gray, portrait.getchannel("A")))
-target_h = H - 112
-scale = target_h / portrait_bw.height
-portrait_bw = portrait_bw.resize((round(portrait_bw.width * scale), target_h), Image.LANCZOS)
-px = block[0] + (block[2] - block[0] - portrait_bw.width) // 2
-img.paste(portrait_bw, (px, H - target_h), portrait_bw)
+# Painel de azulejos + retrato em P&B por cima (mesma composição do hero).
+panel = (812, 0, W, H)
+img.paste(azulejo_wall(panel[2] - panel[0], H, 56, seed=7), (panel[0], 0))
+portrait = Image.open(PORTRAIT).convert("RGBA")
+gray = ImageOps.autocontrast(ImageOps.grayscale(portrait.convert("RGB")), cutoff=1)
+bw = Image.merge("RGBA", (gray, gray, gray, portrait.getchannel("A")))
+target_h = H - 70
+bw = bw.resize((round(bw.width * target_h / bw.height), target_h), Image.LANCZOS)
+img.paste(bw, (panel[0] + (panel[2] - panel[0] - bw.width) // 2, H - target_h), bw)
 
-# Linha de metadados, como o cabeçalho de um relatório.
-d.text((M, 56), "LP | PRODUTO & PORTFÓLIO", font=mono(20), fill=MUTED)
-d.rectangle((M, 96, 760, 97), fill=INK)
+# Rótulo e fio, como no cabeçalho do site.
+d.text((M, 54), "LP  |  PRODUTO & PORTFÓLIO", font=font(19, 650, 112), fill=MUTED)
+d.rectangle((M, 92, 760, 94), fill=BREU)
 
-# Título: "Produto, portfólio e IA que / saem do papel."
-y = 128
-for line in ("Produto, portfólio", "e IA que"):
-    d.text((M - 4, y), line, font=serif(96), fill=INK)
-    y += 92
-d.text((M - 4, y), "saem do papel.", font=serif_i(96), fill=SIGNAL)
+# Título de cartaz: Archivo expandida e pesada, destaque em bloco cobalto.
+title = font(70, 800, 116)
+d.text((M - 3, 116), "Produto,", font=title, fill=BREU)
+d.text((M - 3, 190), "portfólio e IA que", font=title, fill=BREU)
+hl = "saem do papel."
+x0, y0 = M - 3, 270
+bbox = d.textbbox((x0, y0), hl, font=title)
+d.rectangle((bbox[0] - 10, bbox[1] - 10, bbox[2] + 10, bbox[3] + 14), fill=AZUL)
+d.text((x0, y0), hl, font=title, fill=CAL)
 
-# Rodapé: oferta + quem.
-d.rectangle((M, 486, M + 14, 500), fill=SIGNAL)
-d.text((M + 28, 480), "MENTORIA 1:1 · CONSULTORIA · VAGAS FUNDADOR", font=mono(19), fill=INK)
-d.text((M, 528), "Leonardo Pontes", font=serif(44), fill=INK)
-d.text((M, 582), "leopontes.com.br", font=mono(19), fill=MUTED)
+# Oferta + quem.
+d.rectangle((M, 452, M + 14, 466), fill=OCRE)
+d.text((M + 28, 448), "MENTORIA 1:1 · CONSULTORIA · VAGAS FUNDADOR", font=font(17, 650, 112), fill=BREU)
+d.text((M, 510), "Leonardo Pontes", font=font(40, 750, 115), fill=BREU)
+d.text((M, 566), "leopontes.com.br", font=font(19, 500, 100), fill=MUTED)
 
 img.save(OUT, optimize=True)
 print(f"{OUT.relative_to(ROOT)} — {OUT.stat().st_size // 1024} KiB")

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { FlowField } from '@/components/art/FlowField';
+import { Azulejo } from '@/components/art/Azulejo';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -21,11 +21,16 @@ export function Contact() {
     <Scene
       id="contato"
       label={copy.eyebrow}
-      tone="ink"
-      art={<FlowField seed="contato" density={0.6} className="absolute inset-0 size-full text-foreground/45" />}
+      tone="mata"
+      className="pb-36 lg:pb-40"
+      art={
+        <div className="absolute inset-x-0 bottom-0 h-20 lg:h-24">
+          <Azulejo seed="contato" size={48} every={0.6} />
+        </div>
+      }
     >
       <Container>
-        <p className="label-mono border-t border-foreground/40 pt-5 text-muted-foreground">
+        <p className="label-caps border-t border-foreground/40 pt-5 text-muted-foreground">
           § {sectionNumber('contato')} — {copy.eyebrow}
         </p>
         <div className="mt-10 grid gap-12 lg:grid-cols-12">
@@ -37,7 +42,7 @@ export function Contact() {
             <TrackedLink
               href={contact.email(copy.emailSubject)}
               trackLabel="contact_email_big"
-              className="mt-10 inline-block font-serif text-3xl break-all underline decoration-1 underline-offset-8 transition-colors hover:text-signal sm:text-5xl"
+              className="mt-10 inline-block font-display text-3xl break-all underline decoration-1 underline-offset-8 transition-colors hover:text-signal sm:text-5xl"
             >
               {profile.email}
             </TrackedLink>
@@ -51,7 +56,7 @@ export function Contact() {
                 </TrackedLink>
               </Button>
             </Magnetic>
-            <ul className="label-mono divide-y border-y text-muted-foreground">
+            <ul className="label-caps divide-y border-y text-muted-foreground">
               {details.map((d) => (
                 <li key={d} className="py-3">
                   {d}

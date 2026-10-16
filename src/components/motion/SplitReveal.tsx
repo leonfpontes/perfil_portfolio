@@ -38,6 +38,11 @@ export function SplitReveal({ as = 'p', mode: requested = 'lines', children, cla
       const mm = gsap.matchMedia();
       // Celular: sem SplitText (medir cada linha/palavra custa caro na CPU do
       // aparelho). O bloco inteiro sobe uma vez; no hero, nem isso.
+      // Modo suave: só um fade, sem deslocamento.
+      mm.add({ any: 'all', motion: MEDIA.motion }, (ctx) => {
+        if (ctx.conditions?.motion || immediate) return;
+        gsap.from(el, { opacity: 0, duration: 0.6, ease: 'power1.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+      });
       mm.add(MEDIA.mobile, () => {
         if (immediate) return;
         gsap.from(el, { opacity: 0, y: 24, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } });

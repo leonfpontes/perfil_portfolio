@@ -632,6 +632,14 @@ export const ptBR: SiteContent = {
     imageCredits: 'Imagens: Unsplash',
   },
   ui: {
+    motion: {
+      label: 'Animações',
+      gentleNotice: 'Seu sistema pede menos movimento, então mostramos uma versão suave do site.',
+      enableFull: 'Ver animações completas',
+      reduce: 'Reduzir animações',
+      followSystem: 'Seguir o sistema',
+      dismiss: 'Fechar aviso',
+    },
     certColumns: ['Curso', 'Instituição', 'Data'],
     readMore: 'Ler mais',
     readLess: 'Ler menos',

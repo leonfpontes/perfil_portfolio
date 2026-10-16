@@ -632,6 +632,14 @@ export const en: SiteContent = {
     imageCredits: 'Images: Unsplash',
   },
   ui: {
+    motion: {
+      label: 'Animations',
+      gentleNotice: 'Your system asks for less motion, so we are showing a gentle version of the site.',
+      enableFull: 'Show full animations',
+      reduce: 'Reduce animations',
+      followSystem: 'Follow system setting',
+      dismiss: 'Dismiss notice',
+    },
     certColumns: ['Course', 'Issuer', 'Date'],
     readMore: 'Read more',
     readLess: 'Read less',

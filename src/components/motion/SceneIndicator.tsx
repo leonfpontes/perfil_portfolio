@@ -49,7 +49,7 @@ export function SceneIndicator() {
       <span className="relative h-24 w-px bg-foreground/20">
         <span data-progress className="absolute inset-0 origin-top bg-signal" />
       </span>
-      <span className="label-mono overflow-hidden text-foreground [writing-mode:vertical-rl] rotate-180">
+      <span className="label-caps overflow-hidden text-foreground [writing-mode:vertical-rl] rotate-180">
         <span ref={labelRef} className="inline-block">
           {active && number ? `§ ${number} / ${String(SECTION_ORDER.length).padStart(2, '0')} — ${active.label}` : ''}
         </span>

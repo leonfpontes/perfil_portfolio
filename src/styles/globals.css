@@ -2,36 +2,23 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+/* Modo suave (ver motionPreference.ts): classe definida no <html> antes do primeiro paint. */
+@custom-variant reduced (&:where(.reduced-motion, .reduced-motion *));
 
-/* Fontes auto-hospedadas e pré-carregadas (index.html): sem bloqueio de terceiros. */
+/*
+ * Archivo (Omnibus-Type, foundry latino-americana) — fonte variável com eixos de
+ * peso (100–900) e largura (62–125%): expandida e pesada nos títulos, como nos
+ * cartazes brasileiros dos anos 60; normal no texto. Auto-hospedada e pré-carregada.
+ */
 @font-face {
-  font-family: "Instrument Serif";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Geist";
+  font-family: "Archivo";
   font-style: normal;
   font-weight: 100 900;
+  font-stretch: 62% 125%;
   font-display: swap;
-  src: url("/fonts/geist-latin-wght-normal.woff2") format("woff2");
+  src: url("/fonts/archivo-latin-wdth-normal.woff2") format("woff2");
 }
-@font-face {
-  font-family: "Geist Mono";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/geist-mono-latin-wght-normal.woff2") format("woff2");
-}
+
 
 /*
  * Design tokens — direção "dossiê editorial".
@@ -42,16 +29,27 @@
  * hover, e o acento de marca é `--signal`.
  */
 /*
- * Apenas 4 cores são "primárias" (fundo, tinta, sinal e texto-sobre-sinal);
- * todo o resto é derivado com color-mix. Assim cada cena (tom) do scroll só
- * precisa trocar essas 4 variáveis — a paleta inteira acompanha.
+ * Identidade "modernismo brasileiro": cal, palha, mata, ocre, cobalto e anil —
+ * a paleta de azulejos, cartazes e jardins modernistas, não a de uma IA.
+ *
+ * Só 4 cores são "primárias" por cena (fundo, tinta, sinal e texto-sobre-sinal);
+ * o resto deriva com color-mix. As cores de marca (--azul, --ocre…) são fixas
+ * e usadas pela arte generativa (azulejos).
  */
 :root {
-  --radius: 0.125rem;
-  --background: oklch(0.955 0.012 85);
-  --foreground: oklch(0.19 0.008 70);
-  --signal: oklch(0.58 0.19 36);
-  --signal-foreground: oklch(0.985 0.005 85);
+  --radius: 0rem;
+  --cal: oklch(0.975 0.005 100);
+  --palha: oklch(0.93 0.045 92);
+  --mata: oklch(0.34 0.07 163);
+  --ocre: oklch(0.82 0.15 82);
+  --azul: oklch(0.46 0.17 262);
+  --anil: oklch(0.21 0.05 262);
+  --breu: oklch(0.21 0.035 165);
+
+  --background: var(--cal);
+  --foreground: var(--breu);
+  --signal: var(--azul);
+  --signal-foreground: var(--cal);
 
   --card: color-mix(in oklab, var(--background) 92%, white);
   --card-foreground: var(--foreground);
@@ -62,42 +60,42 @@
   --secondary: color-mix(in oklab, var(--background) 92%, var(--foreground));
   --secondary-foreground: var(--foreground);
   --muted: color-mix(in oklab, var(--background) 92%, var(--foreground));
-  --muted-foreground: color-mix(in oklab, var(--foreground) 64%, var(--background));
+  --muted-foreground: color-mix(in oklab, var(--foreground) 66%, var(--background));
   --accent: color-mix(in oklab, var(--background) 90%, var(--foreground));
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.55 0.2 27);
-  --border: color-mix(in oklab, var(--background) 80%, var(--foreground));
+  --border: color-mix(in oklab, var(--background) 78%, var(--foreground));
   --input: var(--border);
   --ring: var(--signal);
 }
 
 .dark {
-  --background: oklch(0.17 0.006 70);
-  --foreground: oklch(0.93 0.014 85);
-  --signal: oklch(0.68 0.17 40);
-  --signal-foreground: oklch(0.15 0.01 40);
-  --card: color-mix(in oklab, var(--background) 94%, white);
+  --background: oklch(0.19 0.03 165);
+  --foreground: var(--cal);
+  --signal: var(--ocre);
+  --signal-foreground: var(--breu);
+  --card: color-mix(in oklab, var(--background) 92%, white);
 }
 
 /*
  * Tons de cena. Lidos pelo SceneThemeController (via elemento-sonda) e
  * interpolados no <html> quando a cena entra na tela.
  */
-.tone-paper { --background: oklch(0.955 0.012 85); --foreground: oklch(0.19 0.008 70); --signal: oklch(0.58 0.19 36); --signal-foreground: oklch(0.985 0.005 85); }
-.tone-sand { --background: oklch(0.9 0.035 78); --foreground: oklch(0.2 0.01 70); --signal: oklch(0.55 0.19 34); --signal-foreground: oklch(0.985 0.005 85); }
-.tone-ink { --background: oklch(0.19 0.008 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.68 0.17 40); --signal-foreground: oklch(0.15 0.01 40); }
-.tone-signal { --background: oklch(0.58 0.19 36); --foreground: oklch(0.985 0.006 85); --signal: oklch(0.19 0.008 70); --signal-foreground: oklch(0.955 0.012 85); }
-.tone-night { --background: oklch(0.25 0.045 255); --foreground: oklch(0.94 0.014 85); --signal: oklch(0.72 0.16 45); --signal-foreground: oklch(0.15 0.01 40); }
+.tone-cal { --background: oklch(0.975 0.005 100); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
+.tone-palha { --background: oklch(0.93 0.045 92); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
+.tone-mata { --background: oklch(0.34 0.07 163); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
+.tone-ocre { --background: oklch(0.82 0.15 82); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
+.tone-cobalto { --background: oklch(0.46 0.17 262); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
+.tone-anil { --background: oklch(0.21 0.05 262); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
 
-.dark .tone-paper { --background: oklch(0.17 0.006 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.68 0.17 40); --signal-foreground: oklch(0.15 0.01 40); }
-.dark .tone-sand { --background: oklch(0.3 0.04 62); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.7 0.16 42); --signal-foreground: oklch(0.15 0.01 40); }
-.dark .tone-ink { --background: oklch(0.93 0.014 85); --foreground: oklch(0.17 0.006 70); --signal: oklch(0.55 0.19 34); --signal-foreground: oklch(0.985 0.005 85); }
-.dark .tone-night { --background: oklch(0.2 0.04 255); --foreground: oklch(0.94 0.014 85); --signal: oklch(0.72 0.16 45); --signal-foreground: oklch(0.15 0.01 40); }
+.dark .tone-cal { --background: oklch(0.19 0.03 165); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
+.dark .tone-palha { --background: oklch(0.27 0.035 95); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
+/* No escuro, a cena "mata" se inverte para cal — o contraste entre capítulos se mantém. */
+.dark .tone-mata { --background: oklch(0.975 0.005 100); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.34 0.07 163); --signal-foreground: oklch(0.975 0.005 100); }
 
 @theme inline {
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: var(--radius);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) * 2);
@@ -125,6 +123,11 @@
 }
 
 @layer base {
+  .font-display {
+    font-weight: 700;
+    font-stretch: 112%;
+    letter-spacing: -0.025em;
+  }
   * {
     @apply border-border outline-ring/50;
   }
@@ -133,15 +136,16 @@
   }
   body {
     @apply bg-background font-sans text-foreground antialiased;
-    font-feature-settings: "ss01", "tnum";
+    font-feature-settings: "tnum";
   }
   ::selection {
     background: var(--signal);
     color: var(--signal-foreground);
   }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* Modo suave: sem animações CSS em loop nem deslocamentos; transições curtas de cor/opacidade continuam. */
+  .reduced-motion *, .reduced-motion *::before, .reduced-motion *::after {
+    animation: none !important;
+    transition-property: color, background-color, border-color, opacity !important;
   }
 }
 
@@ -164,19 +168,32 @@ html.lenis, html.lenis body { height: auto; }
 .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 
-@utility label-mono {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+/* Rótulo em caixa alta, levemente expandido — metadados, números e legendas. */
+@utility label-caps {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-stretch: 112%;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* Título editorial em serifa. */
+/* Título de cartaz: Archivo expandida e pesada. */
 @utility display {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-stretch: 118%;
+  letter-spacing: -0.035em;
   line-height: 0.95;
+}
+
+/* Destaque de cartaz: a palavra ganha um bloco de cor (no lugar do itálico). */
+@utility highlight {
+  background: var(--signal);
+  color: var(--signal-foreground);
+  padding-inline: 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* Sublinhado de link editorial: fio fino que engrossa no hover. */
