@@ -37,7 +37,7 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 | Formação / FAQ | areia / papel | Entradas escalonadas |
 | Contato | tinta | Título por caracteres, botão magnético, campo de fluxo |
 
-**Tons** (`.tone-*` em `globals.css`) definem só 4 cores: fundo, tinta, sinal e texto-sobre-sinal. Todo o resto da paleta deriva delas com `color-mix`, então a transição entre cenas é uma interpolação de 4 variáveis feita pelo próprio navegador.
+**Tons** (`.tone-*` em `globals.css`) definem só 4 cores: fundo, tinta, sinal e texto-sobre-sinal. Todo o resto da paleta deriva delas com `color-mix`, recalculado em cada seção.
 
 **Arte generativa** (`components/art`):
 - **Azulejos:** painel com módulos geométricos em cores de marca. A composição muda a cada visita, um azulejo gira de tempos em tempos e o que está sob o cursor também gira.
@@ -46,7 +46,9 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 
 Tudo é desenhado em canvas e pausa fora da tela.
 
-**Transição de cor:** tons próximos são misturados com `color-mix`. Inversões (claro↔escuro, vermelhão↔escuro) usam uma **cortina**: o novo fundo varre a tela no sentido do scroll, sem passar por um cinza intermediário.
+**Transição de cor presa à rolagem:** cada cena pinta o próprio fundo, e a nova cor sobe junto com a seção, como uma folha deslizando sobre a anterior, com sombra na borda.
+- Não há troca por tempo ("estalo") nem mistura intermediária ("cinza lamacento").
+- Só o header e o fundo da página fazem uma dissolução curta para o tom da cena ativa.
 
 **Celular — trilhos horizontais:** no mobile, as seções com vários itens viram trilhos guiados pelo scroll (`HorizontalTrack`):
 - planos, gates da jornada, depoimentos, serviços, produtos e trajetória;
@@ -60,7 +62,7 @@ Também no celular:
 
 **Movimento e acessibilidade — modo suave:** quando o sistema pede "Reduzir movimento", o site *não* fica estático.
 - **Desliga o que pode causar enjoo:** parallax, scroll travado (pins), trilhos forçados, Lenis e SplitText.
-- **Mantém o que dá identidade sem deslocar a tela:** troca de cor das cenas (dissolução curta, sem cortina), fades e a arte (parada).
+- **Mantém o que dá identidade sem deslocar a tela:** troca de cor das cenas (que já acompanha a rolagem), fades e a arte (parada).
 - **Escolha do visitante:** um aviso discreto oferece "Ver animações completas", e o rodapé permite alternar entre completo, suave e "seguir o sistema" (`lp:motion`).
 - **No celular,** só as cenas que cabem na tela ficam fixas.
 

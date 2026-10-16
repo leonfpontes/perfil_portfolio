@@ -52,29 +52,3 @@ describe('SceneThemeController', () => {
   });
 });
 
-describe('lightnessOf', () => {
-  it('lê o L de cores oklch (decimal ou %)', async () => {
-    const { lightnessOf } = await import('./SceneThemeController');
-    expect(lightnessOf('oklch(0.19 0.008 70)')).toBeCloseTo(0.19);
-    expect(lightnessOf('oklch(58% 0.19 36)')).toBeCloseTo(0.58);
-    expect(lightnessOf('red')).toBeNull();
-  });
-});
-
-describe('cortina', () => {
-  it('usa a cortina em inversões claro↔escuro, mantendo o fundo antigo até cobrir a tela', async () => {
-    const { SceneThemeController } = await import('./SceneThemeController');
-    const tones = {
-      cal: { '--background': 'oklch(0.95 0 0)', '--foreground': 'oklch(0.2 0 0)', '--signal': 'red', '--signal-foreground': 'white' },
-      mata: { '--background': 'oklch(0.2 0 0)', '--foreground': 'oklch(0.95 0 0)', '--signal': 'orange', '--signal-foreground': 'black' },
-    } as const;
-    const root = document.createElement('div');
-    const curtain = document.createElement('div');
-    const controller = new SceneThemeController(root, (t) => tones[t as 'cal' | 'mata'], curtain);
-    controller.apply('cal', { immediate: true });
-    controller.apply('mata');
-    // A cortina é ativada; o fundo da página continua o antigo até ela cobrir tudo.
-    expect(curtain.style.opacity).toBe('1');
-    expect(root.style.getPropertyValue('--background')).toBe('oklch(0.95 0 0)');
-  });
-});

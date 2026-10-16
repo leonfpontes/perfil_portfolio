@@ -29,10 +29,10 @@ interface SceneProps {
 }
 
 /**
- * Uma "cena" do site: ocupa a viewport, assume um tom de cor ao entrar e
- * transforma o conteúdo ao sair — o anterior recua e se apaga enquanto o
- * próximo sobe. O wrapper externo existe para que o gatilho de tom cubra
- * também o tempo em que a seção fica fixada (pin spacer).
+ * Uma "cena" do site: ocupa a viewport, tem o próprio tom de cor (que sobe
+ * com a rolagem) e transforma o conteúdo ao sair — o anterior se apaga
+ * enquanto o próximo aparece. O wrapper externo existe para que o gatilho de
+ * cena (header, indicador) cubra também o tempo em que a seção fica fixada.
  */
 export function Scene({ id, chapter = id, label, tone, children, art, className, customTransition, labelledBy }: SceneProps) {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
         trigger: outer,
         start: 'top 55%',
         end: 'bottom 55%',
-        onToggle: (self) => self.isActive && activate({ id, chapter, label, tone }, self.direction),
+        onToggle: (self) => self.isActive && activate({ id, chapter, label, tone }),
       });
 
       if (customTransition) return;
@@ -81,7 +81,13 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
         id={id}
         data-tone={tone}
         aria-labelledby={labelledBy ?? `${id}-title`}
-        className={cn('relative isolate flex flex-col justify-center overflow-clip py-12 lg:min-h-svh lg:py-24', className)}
+        className={cn(
+          // A seção pinta o próprio tom: a troca de cor acompanha a rolagem (a nova
+          // cena sobe por cima da anterior, com sombra na borda), sem "estalo".
+          `tone-${tone} relative isolate flex flex-col justify-center overflow-clip bg-background py-12 text-foreground lg:min-h-svh lg:py-24`,
+          'shadow-[0_-28px_56px_-32px_rgb(0_0_0/0.45)]',
+          className,
+        )}
       >
         {art && (
           <div data-scene-art aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
