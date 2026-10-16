@@ -632,6 +632,7 @@ export const ptBR: SiteContent = {
     imageCredits: 'Imagens: Unsplash',
   },
   ui: {
+    certColumns: ['Curso', 'Instituição', 'Data'],
     readMore: 'Ler mais',
     readLess: 'Ler menos',
     seeAll: 'Ver todas',

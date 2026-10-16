@@ -45,6 +45,15 @@ export function Education() {
             <div className="lg:col-span-7">
               <h3 className="label-mono mb-4 text-muted-foreground">{education.certificationsTitle}</h3>
               <table data-certs className="w-full border-collapse text-left text-sm">
+                <thead className="sr-only">
+                  <tr>
+                    {ui.certColumns.map((c) => (
+                      <th key={c} scope="col">
+                        {c}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
                 <tbody>
                   {education.certifications.map((cert, i) => (
                     <tr

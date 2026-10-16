@@ -632,6 +632,7 @@ export const en: SiteContent = {
     imageCredits: 'Images: Unsplash',
   },
   ui: {
+    certColumns: ['Course', 'Issuer', 'Date'],
     readMore: 'Read more',
     readLess: 'Read less',
     seeAll: 'See all',

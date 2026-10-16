@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Locale, SiteContent } from '@/content/types';
 import { safeStorage } from '@/lib/storage';
-import { contentByLocale, resolveInitialLocale } from './registry';
+import { contentByLocale, DEFAULT_LOCALE, resolveInitialLocale } from './registry';
 
 const STORAGE_KEY = 'lp:locale';
 
@@ -15,9 +15,15 @@ interface LocaleContextValue {
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
 export function LocaleProvider({ children, initialLocale }: { children: ReactNode; initialLocale?: Locale }) {
-  const [locale, setLocaleState] = useState<Locale>(
-    () => initialLocale ?? resolveInitialLocale(safeStorage.get(STORAGE_KEY), globalThis.navigator?.languages ?? []),
-  );
+  // O primeiro render é sempre o idioma padrão — igual ao HTML pré-renderizado —
+  // e a preferência do visitante é aplicada logo após a hidratação.
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? DEFAULT_LOCALE);
+
+  useEffect(() => {
+    if (initialLocale) return;
+    const preferred = resolveInitialLocale(safeStorage.get(STORAGE_KEY), globalThis.navigator?.languages ?? []);
+    setLocaleState(preferred);
+  }, [initialLocale]);
 
   const content = contentByLocale[locale];
 

@@ -21,7 +21,9 @@ export function Hero() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.motion, () => {
+      // Só no desktop: no celular o hero aparece pronto (é o maior elemento da
+      // primeira tela, e escondê-lo até o JS rodar atrasaria o carregamento percebido).
+      mm.add(MEDIA.desktop, () => {
         // Entrada: bloco de cor sobe, retrato é "impresso" de baixo para cima.
         const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
         // Intro curta: o título começa a subir já no primeiro quadro.

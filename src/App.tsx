@@ -1,10 +1,11 @@
-import type { ComponentType } from 'react';
+import { useEffect, type ComponentType } from 'react';
 import { Arrow } from '@/components/common/Arrow';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { Footer } from '@/components/layout/Footer';
 import { SceneIndicator } from '@/components/motion/SceneIndicator';
 import { Header } from '@/components/layout/Header';
 import { SECTION_ORDER } from '@/content/sections';
+import { ScrollTrigger } from '@/lib/motion/gsap';
 import type { SectionId } from '@/content/types';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { useServices } from '@/lib/services';
@@ -42,6 +43,13 @@ const sectionComponents: Record<(typeof SECTION_ORDER)[number], ComponentType> =
 export function App() {
   const { contact: copy, hero } = useContent();
   const { contact } = useServices();
+
+  // Depois que tudo montou, recalcula uma vez. Sem ScrollTrigger.sort(): a ordem
+  // natural de criação (pins internos antes do gatilho da cena que os contém) é a
+  // correta — ordenar pela posição faria a cena ignorar o espaço do próprio pin.
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, []);
 
   return (
     <>

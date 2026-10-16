@@ -87,7 +87,9 @@ export function Header() {
             ))}
           </div>
           <Button variant="ghost" size="icon" onClick={onToggleTheme} aria-label={nav.toggleTheme}>
-            {theme === 'dark' ? <Sun /> : <Moon />}
+            {/* Os dois ícones vêm no HTML; o CSS escolhe (evita divergência na hidratação). */}
+            <Sun className="hidden dark:block" />
+            <Moon className="dark:hidden" />
           </Button>
           <Button asChild variant="signal" className="ml-2 hidden sm:inline-flex lg:hidden xl:inline-flex">
             <TrackedLink href="#contato" trackLabel="header_cta">
