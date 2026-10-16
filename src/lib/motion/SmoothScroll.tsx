@@ -39,7 +39,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     // Recarregar no meio de uma cena fixada deixaria os pins em estado inconsistente.
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-    let lastHeight = 0;
+    let lastHeight = document.body.scrollHeight;
     let timer = 0;
     const refresh = () => {
       window.clearTimeout(timer);
@@ -54,17 +54,18 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     };
     ScrollTrigger.addEventListener('refresh', onRefresh);
 
-    const observer =
-      typeof ResizeObserver === 'undefined'
-        ? null
-        : new ResizeObserver(() => {
-            if (Math.abs(document.body.scrollHeight - lastHeight) > 2) refresh();
-          });
+    const check = () => {
+      if (Math.abs(document.body.scrollHeight - lastHeight) > 2) refresh();
+    };
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(check);
     observer?.observe(document.body);
+    // Reserva barata: alguns ambientes atrasam ou não entregam o ResizeObserver.
+    const poll = window.setInterval(check, 500);
     document.fonts?.ready.then(refresh).catch(() => {});
 
     return () => {
       window.clearTimeout(timer);
+      window.clearInterval(poll);
       observer?.disconnect();
       ScrollTrigger.removeEventListener('refresh', onRefresh);
     };
