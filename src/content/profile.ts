@@ -6,7 +6,7 @@ export const profile = {
   name: 'Leonardo Fonseca Pontes',
   shortName: 'Leonardo Pontes',
   brand: 'LP | Produto & Portfólio',
-  siteUrl: 'https://leopontes.com.br',
+  siteUrl: 'https://www.leopontes.com.br',
   email: 'leonfpontes@gmail.com',
   /** Apenas dígitos, com DDI — usado para montar links do WhatsApp. */
   whatsapp: '5516991091234',
@@ -22,6 +22,6 @@ export type Profile = typeof profile;
 
 /** Banco de imagens (Unsplash License — uso livre, sem atribuição obrigatória). */
 export const stockImages = {
-  team: '/images/team.jpg',
-  workshop: '/images/workshop.jpg',
+  team: '/images/team.webp',
+  workshop: '/images/workshop.webp',
 } as const;

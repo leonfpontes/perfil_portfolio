@@ -85,8 +85,9 @@ A página funciona como uma sequência de **cenas**. Cada capítulo ocupa a tela
 | UI | React 19 + TypeScript (strict) |
 | Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix) |
 | Movimento | GSAP (ScrollTrigger, SplitText) + Lenis, com arte generativa em canvas |
-| Build | Vite 6 |
-| Testes | Vitest + Testing Library (60 testes) |
+| Build | Vite 6 com pré-renderização do HTML (SSG) |
+| Testes | Vitest + Testing Library (62 testes) |
+| Qualidade | Lighthouse 78 (mobile) / 99 (desktop) de performance; 100 em acessibilidade, boas práticas e SEO |
 | Deploy | Vercel |
 | Analytics | Google Analytics 4 via abstração própria |
 | Imagens | [Unsplash](https://unsplash.com/license), com licença livre |

@@ -48,6 +48,8 @@ O fluxo de dependências é **sections → components/common → lib → content
 | **`SceneThemeController` como classe** | Encapsula o estado do tom atual e a interpolação. Recebe o `root` e um `ToneReader` por injeção, por isso é testável sem DOM real. A interpolação usa `color-mix` do próprio navegador e dispensa converter oklch em JS. |
 | **Capas generativas por estratégia** | `coverPainters: Record<variant, painter>`. Um produto novo ganha arte nova adicionando uma entrada, sem tocar no componente (OCP). |
 | **Pins resolvem o `<section>` via `closest()`** | No React a ref do pai só é ligada depois dos efeitos de layout dos filhos, então o filho localiza a própria cena no DOM (`sceneSectionOf`). |
+| **Pré-renderização no build** (`entry-server.tsx` + `scripts/prerender.mjs`) | O HTML chega pronto e o React só "hidrata", então o conteúdo aparece antes do JS, o que é decisivo no celular. O primeiro render é determinístico (idioma padrão, ícones de tema via CSS, `Reveal` visível) para não divergir do HTML do servidor. |
+| **Gatilhos de scroll se autocorrigem** (`SmoothScroll.tsx`) | Um `ResizeObserver` na página recalcula o ScrollTrigger quando a altura muda depois do cálculo inicial: fontes sem cache, troca de idioma, "Ler mais". Sem isso, cores e cenas disparam no lugar errado após um recarregamento forçado. |
 | **Sem roteador** | É uma página única com âncoras. Menos dependências e melhor SEO para uma landing page. |
 
 ## Testes

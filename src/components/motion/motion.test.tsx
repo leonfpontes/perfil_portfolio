@@ -40,3 +40,11 @@ describe('sceneSectionOf', () => {
     expect(sceneSectionOf(null)).toBeNull();
   });
 });
+
+describe('SplitReveal — textKey', () => {
+  it('achata texto e elementos aninhados', async () => {
+    const { textKey } = await import('./SplitReveal');
+    expect(textKey('Olá')).toBe('Olá');
+    expect(textKey(['Produto ', <em key="e">saem do papel.</em>])).toBe('Produto saem do papel.');
+  });
+});

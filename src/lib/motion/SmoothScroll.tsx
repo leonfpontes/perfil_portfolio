@@ -31,6 +31,45 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const reduced = useReducedMotion();
   const lenisRef = useRef<Lenis | null>(null);
 
+  // Mantém os gatilhos do ScrollTrigger corretos quando a altura da página muda
+  // depois do cálculo inicial: fontes que chegam tarde (recarregamento sem cache),
+  // troca de idioma, "Ler mais" etc. Sem isso, cores e cenas disparariam no lugar errado.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    // Recarregar no meio de uma cena fixada deixaria os pins em estado inconsistente.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    let lastHeight = 0;
+    let timer = 0;
+    const refresh = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+        lenisRef.current?.resize();
+      }, 120);
+    };
+    // Registra a altura "oficial" após cada refresh (pins mudam a altura de propósito).
+    const onRefresh = () => {
+      lastHeight = document.body.scrollHeight;
+    };
+    ScrollTrigger.addEventListener('refresh', onRefresh);
+
+    const observer =
+      typeof ResizeObserver === 'undefined'
+        ? null
+        : new ResizeObserver(() => {
+            if (Math.abs(document.body.scrollHeight - lastHeight) > 2) refresh();
+          });
+    observer?.observe(document.body);
+    document.fonts?.ready.then(refresh).catch(() => {});
+
+    return () => {
+      window.clearTimeout(timer);
+      observer?.disconnect();
+      ScrollTrigger.removeEventListener('refresh', onRefresh);
+    };
+  }, []);
+
   useEffect(() => {
     if (reduced) return;
     let lenis: Lenis;

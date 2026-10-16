@@ -10,17 +10,24 @@
     />
     <meta name="author" content="Leonardo Fonseca Pontes" />
     <meta name="theme-color" content="#f3efe6" />
-    <link rel="canonical" href="https://leopontes.com.br/" />
+    <link rel="canonical" href="https://www.leopontes.com.br/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:url" content="https://leopontes.com.br/" />
+    <meta property="og:url" content="https://www.leopontes.com.br/" />
     <meta property="og:title" content="Leonardo Pontes · LP | Produto & Portfólio" />
     <meta property="og:description" content="Mentoria 1:1 e consultoria em produto digital, governança de portfólio, PMO, dados e IA." />
-    <meta property="og:image" content="https://leopontes.com.br/images/leonardo-og.png" />
+    <meta property="og:site_name" content="LP | Produto & Portfólio" />
+    <meta property="og:image" content="https://www.leopontes.com.br/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Leonardo Pontes — Produto, portfólio e IA que saem do papel. Mentoria 1:1 e consultoria." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Leonardo Pontes · LP | Produto & Portfólio" />
+    <meta name="twitter:description" content="Mentoria 1:1 e consultoria em produto digital, governança de portfólio, PMO, dados e IA." />
+    <meta name="twitter:image" content="https://www.leopontes.com.br/images/og-image.png" />
 
     <!-- Dados estruturados (SEO) -->
     <script type="application/ld+json">
@@ -28,8 +35,8 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Leonardo Fonseca Pontes",
-        "url": "https://leopontes.com.br",
-        "image": "https://leopontes.com.br/images/leonardo-avatar.webp",
+        "url": "https://www.leopontes.com.br",
+        "image": "https://www.leopontes.com.br/images/leonardo-avatar.webp",
         "jobTitle": "Product Designer · Produto, Dados & IA",
         "worksFor": { "@type": "Organization", "name": "LP | Produto & Portfólio" },
         "alumniOf": ["Universidade de São Paulo", "Estácio", "Instituto Federal de São Paulo"],
@@ -38,12 +45,11 @@
       }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fontes do primeiro quadro: pré-carregadas para não "pular" o layout -->
+    <link rel="preload" href="/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/images/leonardo-portrait.webp" as="image" fetchpriority="high" />
 
     <!-- Aplica o tema antes do primeiro paint (evita "flash" claro/escuro) -->
     <script>
@@ -55,13 +61,25 @@
       } catch (e) {}
     </script>
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-843HEPMCYR"></script>
+    <!--
+      Google Analytics 4 — adiado. A fila (dataLayer/gtag) existe desde já, então
+      nenhum evento se perde; o script (≈176 KiB) só baixa com a página ociosa,
+      sem competir com o primeiro carregamento no celular.
+    -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
       gtag('config', 'G-843HEPMCYR');
+      addEventListener('load', function () {
+        var load = function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-843HEPMCYR';
+          document.head.appendChild(s);
+        };
+        'requestIdleCallback' in window ? requestIdleCallback(load, { timeout: 4000 }) : setTimeout(load, 2500);
+      });
     </script>
   </head>
   <body>

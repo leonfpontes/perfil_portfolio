@@ -1,7 +1,14 @@
-import { createElement, useRef, type ElementType, type ReactNode } from 'react';
+import { Children, createElement, isValidElement, useRef, type ElementType, type ReactNode } from 'react';
 import { gsap, MEDIA, SplitText, useGSAP } from '@/lib/motion/gsap';
 
 type Mode = 'lines' | 'words' | 'chars' | 'read';
+
+/** Texto "achatado" dos filhos — muda sempre que o conteúdo visível muda. */
+export function textKey(node: ReactNode): string {
+  return Children.toArray(node)
+    .map((child) => (isValidElement<{ children?: ReactNode }>(child) ? textKey(child.props.children) : String(child)))
+    .join('');
+}
 
 interface SplitRevealProps {
   as?: ElementType;
@@ -19,7 +26,7 @@ interface SplitRevealProps {
  * Revela texto com SplitText:
  * - `lines`/`words`/`chars`: sobem de dentro de uma máscara ao entrar na tela;
  * - `read`: palavras acendem conforme o scroll avança, como um marca-texto de leitura.
- * O texto continua no DOM íntegro para leitores de tela (SplitText aplica aria).
+ * No celular, uma única entrada do bloco (sem dividir o texto).
  */
 export function SplitReveal({ as = 'p', mode: requested = 'lines', children, className, id, delay = 0, immediate = false }: SplitRevealProps) {
   const ref = useRef<HTMLElement>(null);
@@ -29,12 +36,17 @@ export function SplitReveal({ as = 'p', mode: requested = 'lines', children, cla
       const el = ref.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add({ motion: MEDIA.motion, mobile: MEDIA.mobile }, (context) => {
-        if (!context.conditions?.motion) return;
-        // "Leitura" (palavras acendendo com o scroll) só no desktop: no celular o
-        // parágrafo ocupa a tela inteira e ficaria apagado enquanto é lido.
-        const mode = requested === 'read' && context.conditions.mobile ? 'lines' : requested;
+      // Celular: sem SplitText (medir cada linha/palavra custa caro na CPU do
+      // aparelho). O bloco inteiro sobe uma vez; no hero, nem isso.
+      mm.add(MEDIA.mobile, () => {
+        if (immediate) return;
+        gsap.from(el, { opacity: 0, y: 24, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+      });
+      mm.add(MEDIA.desktop, () => {
+        const mode = requested;
         const split = SplitText.create(el, {
+          // O texto continua no DOM íntegro (só envolto em spans); sem aria-label em <p>.
+          aria: 'none',
           type: mode === 'read' ? 'words' : mode === 'chars' ? 'lines,chars' : mode === 'words' ? 'lines,words' : 'lines',
           mask: mode === 'read' ? undefined : 'lines',
           linesClass: 'split-line',
@@ -65,5 +77,8 @@ export function SplitReveal({ as = 'p', mode: requested = 'lines', children, cla
     { scope: ref, dependencies: [children, requested] },
   );
 
-  return createElement(as, { ref, id, className }, children);
+  // O SplitText reescreve o DOM em spans, e o React deixa de conseguir atualizar
+  // esse texto. Quando o conteúdo muda (ex.: troca de idioma), o elemento é
+  // recriado do zero via `key`.
+  return createElement(as, { ref, id, className, key: textKey(children) }, children);
 }

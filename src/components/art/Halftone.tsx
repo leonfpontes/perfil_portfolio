@@ -72,6 +72,9 @@ export function Halftone({ src, alt, className, cell = 9, progress }: HalftonePr
   const lastKeyRef = useRef('');
   const readColors = useRef(createColorReader()).current;
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // A foto só é baixada quando a figura se aproxima da tela (economiza dados no celular).
   useEffect(() => {
     setImage(null);
     if (typeof Image === 'undefined') return;
@@ -81,10 +84,29 @@ export function Halftone({ src, alt, className, cell = 9, progress }: HalftonePr
     img.onload = () => {
       if (!cancelled) setImage(img);
     };
-    img.src = src;
+    const load = () => {
+      img.src = src;
+    };
+    const el = wrapperRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (el && typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            observer?.disconnect();
+            load();
+          }
+        },
+        { rootMargin: '600px 0px' },
+      );
+      observer.observe(el);
+    } else {
+      load();
+    }
     return () => {
       cancelled = true;
       img.onload = null;
+      observer?.disconnect();
     };
   }, [src]);
 
@@ -167,7 +189,7 @@ export function Halftone({ src, alt, className, cell = 9, progress }: HalftonePr
   );
 
   return (
-    <div role="img" aria-label={alt} className={cn('relative overflow-hidden', className)}>
+    <div ref={wrapperRef} role="img" aria-label={alt} className={cn('relative overflow-hidden', className)}>
       <canvas ref={ref} aria-hidden="true" className="absolute inset-0 block h-full w-full" />
     </div>
   );
