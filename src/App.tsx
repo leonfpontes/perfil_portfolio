@@ -44,10 +44,10 @@ export function App() {
   const { contact: copy, hero } = useContent();
   const { contact } = useServices();
 
-  // Os efeitos do React rodam de dentro para fora; os gatilhos são criados fora
-  // da ordem da página. Depois que tudo montou, ordenamos e recalculamos uma vez.
+  // Depois que tudo montou, recalcula uma vez. Sem ScrollTrigger.sort(): a ordem
+  // natural de criação (pins internos antes do gatilho da cena que os contém) é a
+  // correta — ordenar pela posição faria a cena ignorar o espaço do próprio pin.
   useEffect(() => {
-    ScrollTrigger.sort();
     ScrollTrigger.refresh();
   }, []);
 
