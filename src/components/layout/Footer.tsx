@@ -1,7 +1,6 @@
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
-import { sectionNumber } from '@/content/sections';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { useServices } from '@/lib/services';
 
@@ -22,7 +21,6 @@ export function Footer() {
             {nav.items.map((item) => (
               <li key={item.id}>
                 <a href={`#${item.id}`} className="text-muted-foreground hover:text-foreground">
-                  <span className="label-mono mr-2">{sectionNumber(item.id)}</span>
                   {item.label}
                 </a>
               </li>

@@ -72,14 +72,21 @@ Para empresas que precisam estruturar governança de portfólio, PMO ou processo
 
 Este site é a vitrine da mentoria e também uma amostra de como eu trabalho: com produto bem definido, código limpo, testes e documentação.
 
+A página funciona como uma sequência de **cenas**. Cada capítulo ocupa a tela e muda o fundo, as cores e a arte enquanto você rola:
+- gates que se traçam;
+- depoimentos e serviços que se revezam;
+- produtos num trilho horizontal com capas generativas;
+- a trajetória como fichas empilhadas.
+
 ### Stack
 
 | Camada | Escolha |
 |---|---|
 | UI | React 19 + TypeScript (strict) |
 | Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix) |
+| Movimento | GSAP (ScrollTrigger, SplitText) + Lenis, com arte generativa em canvas |
 | Build | Vite 6 |
-| Testes | Vitest + Testing Library (27 testes) |
+| Testes | Vitest + Testing Library (58 testes) |
 | Deploy | Vercel |
 | Analytics | Google Analytics 4 via abstração própria |
 | Imagens | [Unsplash](https://unsplash.com/license), com licença livre |
@@ -95,10 +102,13 @@ Este site é a vitrine da mentoria e também uma amostra de como eu trabalho: co
   - Conteúdo separado da apresentação, com todo texto num modelo tipado.
   - Nomes de domínio e funções pequenas.
   - Nenhuma string solta nos componentes.
-- **Reaproveitamento:** `Section`, `Container`, `Figure`, `Reveal` e `TrackedLink` são as peças-base, usadas em toda a página.
+- **Reaproveitamento:** são as peças-base, usadas em toda a página:
+  - `Scene`, `SplitReveal`, `useSteppedScene`;
+  - `Container`, `SectionHeader`, `TrackedLink`;
+  - a arte generativa, montada por estratégias.
 - **Acessibilidade:**
   - HTML semântico, *skip link* e `aria-current` na navegação.
-  - Respeito a `prefers-reduced-motion`.
+  - Com `prefers-reduced-motion`, todo o movimento é desligado e o layout fica estático.
   - Tema claro/escuro sem flash.
 - **Qualidade verificável:** os testes garantem que pt-BR e EN têm exatamente a mesma estrutura e que nenhum cliente confidencial é citado.
 

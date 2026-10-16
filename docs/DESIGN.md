@@ -18,6 +18,32 @@ O site de um consultor de governança e produto deve parecer **um relatório bem
 
 O modo escuro inverte papel e tinta e mantém o vermelhão.
 
+## Movimento — o site em cenas
+
+A página não é um scroll infinito: é uma sequência de **cenas**. Cada seção ocupa a tela, assume um *tom* de cor e, ao sair, recua e se apaga enquanto a próxima sobe.
+
+| Cena | Tom | Coreografia |
+|---|---|---|
+| Início | papel | Retrato "impresso" de baixo para cima, título por linhas, campo de fluxo em tinta reagindo ao cursor |
+| Mentoria | areia | Propostas chegam de lados opostos; preços contam até o valor |
+| Jornada | papel | **Fixa**: a linha dos gates é traçada e cada etapa acende; depois, o que a mentoria não é vai sendo riscado; foto em meio-tom generativo |
+| Depoimentos | tinta | **Fixa**: um depoimento por passo de scroll; a aspa gigante gira como um carimbo |
+| Serviços | sinal (vermelhão) | **Fixa**: numeral-odômetro dentro de um selo circular que gira; um serviço por vez |
+| Sobre | papel | Texto "acende" conforme a leitura; foto em meio-tom com lente no cursor |
+| Produtos | tinta | **Trilho horizontal fixo** com capas generativas por produto |
+| Trajetória | papel | Fichas empilhadas: cada experiência desliza sobre a anterior |
+| Competências | noite | Faixas tipográficas em loop; o impulso do scroll acelera |
+| Formação / FAQ | areia / papel | Entradas escalonadas |
+| Contato | tinta | Título por caracteres, botão magnético, campo de fluxo |
+
+**Tons** (`.tone-*` em `globals.css`) definem só 4 cores: fundo, tinta, sinal e texto-sobre-sinal. Todo o resto da paleta deriva delas com `color-mix`, então a transição entre cenas é uma interpolação de 4 variáveis feita pelo próprio navegador.
+
+**Arte generativa** (`components/art`): campo de fluxo, meio-tom de fotos e capas por produto (selo, gates, radar e curvas de nível). Tudo é desenhado em canvas na cor da tinta da cena e pausa fora da tela.
+
+**Acessibilidade do movimento:**
+- Com `prefers-reduced-motion`, não há Lenis, pins, scrubs nem SplitText. O site vira o layout estático e os depoimentos e serviços viram carrosséis com botões.
+- No celular, só as cenas que cabem na tela ficam fixas.
+
 ## Padrões de composição
 
 - **Seções numeradas** (`§ 01 — Mentoria`): o fio superior escuro abre cada capítulo, e o rótulo fica numa coluna lateral de 3/12.
@@ -35,6 +61,7 @@ O modo escuro inverte papel e tinta e mantém o vermelhão.
 - Fotos de banco coloridas "de sorriso" sem contexto. Também nunca usamos foto de banco como se fosse screenshot de produto.
 - Sombras difusas para criar hierarquia: a hierarquia vem de tipografia, espaço e fios.
 - Botão flutuante de WhatsApp. No mobile há uma barra discreta no rodapé.
+- Movimento gratuito. Toda animação conta algo: traçar gates, riscar o que não somos, empilhar a trajetória.
 
 ## Componentes
 
@@ -42,8 +69,12 @@ O modo escuro inverte papel e tinta e mantém o vermelhão.
 |---|---|
 | `Section` / `SectionHeader` | Toda seção numerada |
 | `Container` | Largura máxima e gutters (`max-w-7xl`) |
-| `Figure` | Foto de banco com tratamento e legenda |
-| `Reveal` | Entrada discreta (fade + 8px), desligada com `prefers-reduced-motion` |
+| `motion/Scene` | Cena: tom de cor, entrada e saída coreografadas |
+| `motion/SplitReveal` | Texto por linhas, palavras, caracteres ou "leitura" |
+| `motion/CountUp`, `motion/Magnetic` | Números que contam e botões magnéticos |
+| `motion/SceneIndicator` | Marcador "§ 03 / 10" e régua de progresso |
+| `art/FlowField`, `art/Halftone`, `art/GenerativeCover` | Arte generativa em canvas |
+| `Reveal` | Entrada discreta (fade + 8px) |
 | `TrackedLink` | Link com evento de analytics e `rel` seguro para links externos |
 | `Arrow` | Seta tipográfica (→ ← ↗) no lugar de ícones |
 | `ui/button` | Variantes shadcn + `signal` |

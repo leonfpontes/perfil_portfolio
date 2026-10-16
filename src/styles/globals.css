@@ -11,52 +11,58 @@
  * Nomes seguem a convenção do shadcn/ui; `--accent` é a superfície sutil de
  * hover, e o acento de marca é `--signal`.
  */
+/*
+ * Apenas 4 cores são "primárias" (fundo, tinta, sinal e texto-sobre-sinal);
+ * todo o resto é derivado com color-mix. Assim cada cena (tom) do scroll só
+ * precisa trocar essas 4 variáveis — a paleta inteira acompanha.
+ */
 :root {
   --radius: 0.125rem;
   --background: oklch(0.955 0.012 85);
   --foreground: oklch(0.19 0.008 70);
-  --card: oklch(0.975 0.009 85);
-  --card-foreground: oklch(0.19 0.008 70);
-  --popover: oklch(0.975 0.009 85);
-  --popover-foreground: oklch(0.19 0.008 70);
-  --primary: oklch(0.19 0.008 70);
-  --primary-foreground: oklch(0.955 0.012 85);
-  --secondary: oklch(0.915 0.015 85);
-  --secondary-foreground: oklch(0.19 0.008 70);
-  --muted: oklch(0.92 0.014 85);
-  --muted-foreground: oklch(0.45 0.012 70);
-  --accent: oklch(0.915 0.015 85);
-  --accent-foreground: oklch(0.19 0.008 70);
   --signal: oklch(0.58 0.19 36);
   --signal-foreground: oklch(0.985 0.005 85);
+
+  --card: color-mix(in oklab, var(--background) 92%, white);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary: color-mix(in oklab, var(--background) 92%, var(--foreground));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in oklab, var(--background) 92%, var(--foreground));
+  --muted-foreground: color-mix(in oklab, var(--foreground) 64%, var(--background));
+  --accent: color-mix(in oklab, var(--background) 90%, var(--foreground));
+  --accent-foreground: var(--foreground);
   --destructive: oklch(0.55 0.2 27);
-  --border: oklch(0.84 0.018 80);
-  --input: oklch(0.84 0.018 80);
-  --ring: oklch(0.58 0.19 36);
+  --border: color-mix(in oklab, var(--background) 80%, var(--foreground));
+  --input: var(--border);
+  --ring: var(--signal);
 }
 
 .dark {
   --background: oklch(0.17 0.006 70);
   --foreground: oklch(0.93 0.014 85);
-  --card: oklch(0.205 0.007 70);
-  --card-foreground: oklch(0.93 0.014 85);
-  --popover: oklch(0.205 0.007 70);
-  --popover-foreground: oklch(0.93 0.014 85);
-  --primary: oklch(0.93 0.014 85);
-  --primary-foreground: oklch(0.17 0.006 70);
-  --secondary: oklch(0.24 0.008 70);
-  --secondary-foreground: oklch(0.93 0.014 85);
-  --muted: oklch(0.23 0.008 70);
-  --muted-foreground: oklch(0.68 0.014 80);
-  --accent: oklch(0.25 0.008 70);
-  --accent-foreground: oklch(0.93 0.014 85);
   --signal: oklch(0.68 0.17 40);
   --signal-foreground: oklch(0.15 0.01 40);
-  --destructive: oklch(0.65 0.2 27);
-  --border: oklch(0.32 0.01 70);
-  --input: oklch(0.32 0.01 70);
-  --ring: oklch(0.68 0.17 40);
+  --card: color-mix(in oklab, var(--background) 94%, white);
 }
+
+/*
+ * Tons de cena. Lidos pelo SceneThemeController (via elemento-sonda) e
+ * interpolados no <html> quando a cena entra na tela.
+ */
+.tone-paper { --background: oklch(0.955 0.012 85); --foreground: oklch(0.19 0.008 70); --signal: oklch(0.58 0.19 36); --signal-foreground: oklch(0.985 0.005 85); }
+.tone-sand { --background: oklch(0.9 0.035 78); --foreground: oklch(0.2 0.01 70); --signal: oklch(0.55 0.19 34); --signal-foreground: oklch(0.985 0.005 85); }
+.tone-ink { --background: oklch(0.19 0.008 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.68 0.17 40); --signal-foreground: oklch(0.15 0.01 40); }
+.tone-signal { --background: oklch(0.58 0.19 36); --foreground: oklch(0.985 0.006 85); --signal: oklch(0.19 0.008 70); --signal-foreground: oklch(0.955 0.012 85); }
+.tone-night { --background: oklch(0.25 0.045 255); --foreground: oklch(0.94 0.014 85); --signal: oklch(0.72 0.16 45); --signal-foreground: oklch(0.15 0.01 40); }
+
+.dark .tone-paper { --background: oklch(0.17 0.006 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.68 0.17 40); --signal-foreground: oklch(0.15 0.01 40); }
+.dark .tone-sand { --background: oklch(0.22 0.014 70); --foreground: oklch(0.93 0.014 85); --signal: oklch(0.7 0.16 42); --signal-foreground: oklch(0.15 0.01 40); }
+.dark .tone-ink { --background: oklch(0.93 0.014 85); --foreground: oklch(0.17 0.006 70); --signal: oklch(0.55 0.19 34); --signal-foreground: oklch(0.985 0.005 85); }
+.dark .tone-night { --background: oklch(0.2 0.04 255); --foreground: oklch(0.94 0.014 85); --signal: oklch(0.72 0.16 45); --signal-foreground: oklch(0.15 0.01 40); }
 
 @theme inline {
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
@@ -93,7 +99,6 @@
     @apply border-border outline-ring/50;
   }
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 4.5rem;
   }
   body {
@@ -111,6 +116,24 @@
 }
 
 /* Rótulo técnico em mono, caixa alta — usado em metadados, números e legendas. */
+/* Contorno de texto para numerais gigantes (traço na cor da tinta da cena). */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--foreground);
+}
+
+/* Linha de SplitText com máscara (para revelar linhas "de baixo para cima"). */
+.split-line {
+  overflow: clip;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
 @utility label-mono {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -138,12 +161,12 @@
   }
 }
 
-/* Fotografia tratada como impressão: P&B, contraste e mescla com o papel. */
-@utility print-photo {
-  filter: grayscale(1) contrast(1.15);
-  mix-blend-mode: multiply;
-  .dark & {
-    mix-blend-mode: luminosity;
-    opacity: 0.8;
-  }
+
+@keyframes scroll-hint {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
 }

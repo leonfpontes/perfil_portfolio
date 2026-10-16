@@ -19,6 +19,7 @@ export default defineConfig({
         manualChunks: {
           react: ['react', 'react-dom', 'react-dom/client'],
           radix: ['radix-ui'],
+          motion: ['gsap', 'gsap/ScrollTrigger', 'gsap/SplitText', '@gsap/react', 'lenis'],
         },
       },
     },
