@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens — direção "dossiê editorial".
+ *
+ * Papel quente + tinta preta + um único acento (vermelhão). Sem gradientes,
+ * sem sombras difusas, sem vidro: hierarquia vem de tipografia, fios e espaço.
+ * Nomes seguem a convenção do shadcn/ui; `--accent` é a superfície sutil de
+ * hover, e o acento de marca é `--signal`.
+ */
+:root {
+  --radius: 0.125rem;
+  --background: oklch(0.955 0.012 85);
+  --foreground: oklch(0.19 0.008 70);
+  --card: oklch(0.975 0.009 85);
+  --card-foreground: oklch(0.19 0.008 70);
+  --popover: oklch(0.975 0.009 85);
+  --popover-foreground: oklch(0.19 0.008 70);
+  --primary: oklch(0.19 0.008 70);
+  --primary-foreground: oklch(0.955 0.012 85);
+  --secondary: oklch(0.915 0.015 85);
+  --secondary-foreground: oklch(0.19 0.008 70);
+  --muted: oklch(0.92 0.014 85);
+  --muted-foreground: oklch(0.45 0.012 70);
+  --accent: oklch(0.915 0.015 85);
+  --accent-foreground: oklch(0.19 0.008 70);
+  --signal: oklch(0.58 0.19 36);
+  --signal-foreground: oklch(0.985 0.005 85);
+  --destructive: oklch(0.55 0.2 27);
+  --border: oklch(0.84 0.018 80);
+  --input: oklch(0.84 0.018 80);
+  --ring: oklch(0.58 0.19 36);
+}
+
+.dark {
+  --background: oklch(0.17 0.006 70);
+  --foreground: oklch(0.93 0.014 85);
+  --card: oklch(0.205 0.007 70);
+  --card-foreground: oklch(0.93 0.014 85);
+  --popover: oklch(0.205 0.007 70);
+  --popover-foreground: oklch(0.93 0.014 85);
+  --primary: oklch(0.93 0.014 85);
+  --primary-foreground: oklch(0.17 0.006 70);
+  --secondary: oklch(0.24 0.008 70);
+  --secondary-foreground: oklch(0.93 0.014 85);
+  --muted: oklch(0.23 0.008 70);
+  --muted-foreground: oklch(0.68 0.014 80);
+  --accent: oklch(0.25 0.008 70);
+  --accent-foreground: oklch(0.93 0.014 85);
+  --signal: oklch(0.68 0.17 40);
+  --signal-foreground: oklch(0.15 0.01 40);
+  --destructive: oklch(0.65 0.2 27);
+  --border: oklch(0.32 0.01 70);
+  --input: oklch(0.32 0.01 70);
+  --ring: oklch(0.68 0.17 40);
+}
+
+@theme inline {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 2);
+  --radius-xl: calc(var(--radius) * 3);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: "ss01", "tnum";
+  }
+  ::selection {
+    background: var(--signal);
+    color: var(--signal-foreground);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+/* Rótulo técnico em mono, caixa alta — usado em metadados, números e legendas. */
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Título editorial em serifa. */
+@utility display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+/* Sublinhado de link editorial: fio fino que engrossa no hover. */
+@utility link-rule {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-thickness 150ms, color 150ms;
+  &:hover {
+    text-decoration-thickness: 2px;
+    color: var(--signal);
+  }
+}
+
+/* Fotografia tratada como impressão: P&B, contraste e mescla com o papel. */
+@utility print-photo {
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+  .dark & {
+    mix-blend-mode: luminosity;
+    opacity: 0.8;
+  }
+}

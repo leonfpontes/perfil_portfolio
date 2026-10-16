@@ -1,33 +1,29 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
 
 export default defineConfig({
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-    },
-  },
-  css: {
-    modules: {
-      localsConvention: 'camelCase',
-      generateScopedName: '[name]__[local]__[hash:base64:5]',
     },
   },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-    minify: 'terser',
     rollupOptions: {
       output: {
         manualChunks: {
-          'chart': ['chart.js'],
+          react: ['react', 'react-dom', 'react-dom/client'],
+          radix: ['radix-ui'],
         },
       },
     },
   },
   server: {
-    port: 3000,
-    open: true,
+    port: Number(process.env.PORT) || 3000,
   },
 });

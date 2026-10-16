@@ -1,156 +1,130 @@
-# Perfil Profissional · Leonardo Fonseca Pontes
+<div align="center">
 
-Site moderno e performático que apresenta o perfil profissional de Leonardo Fonseca Pontes, com
-informações de carreira, competências, certificações e canais de contato.
+# Leonardo Pontes
 
-## 🚀 Tech Stack
+**Produto, portfólio, dados e IA que saem do papel.**
 
-- **Build Tool**: Vite 5.4
-- **Language**: TypeScript 5.6 (strict mode)
-- **Testing**: Vitest 2.1 with happy-dom
-- **Styling**: CSS Modules + original stylesheets
-- **Charts**: Chart.js 4.4 (dynamic import)
-- **Deployment**: Vercel
+Mentoria 1:1 e consultoria em gestão de produtos digitais, governança de portfólio e PMO
+— por quem lidera, constrói e coloca produtos em produção há mais de 8 anos.
 
-## 📂 Estrutura do Projeto
+[**leopontes.com.br**](https://leopontes.com.br) ·
+[LinkedIn](https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/) ·
+[WhatsApp](https://wa.me/5516991091234) ·
+[leonfpontes@gmail.com](mailto:leonfpontes@gmail.com)
 
-```
-perfil_portfolio/
-├── src/
-│   ├── components/          # Componentes TypeScript modulares
-│   │   ├── Carousel.ts      # Carrossel com navegação por teclado
-│   │   ├── Chart.ts         # Gráfico radar com carregamento lazy
-│   │   ├── LanguageSwitcher.ts
-│   │   ├── MobileNav.ts
-│   │   └── ScrollSpy.ts
-│   ├── styles/
-│   │   └── main.css         # Entry point dos estilos
-│   ├── types/               # Definições TypeScript
-│   ├── utils/               # Funções utilitárias
-│   ├── i18n.ts              # Sistema de internacionalização
-│   ├── i18n-data.ts         # Traduções pt-BR e EN
-│   └── main.ts              # Entry point da aplicação
-├── css/                     # Estilos originais
-│   ├── base.css
-│   ├── layout.css
-│   └── components.css
-├── img/                     # Assets visuais
-├── dist/                    # Build de produção (gerado)
-├── index.html               # HTML principal
-├── vite.config.ts           # Configuração Vite
-├── tsconfig.json            # Configuração TypeScript
-├── vitest.config.ts         # Configuração testes
-└── vercel.json              # Configuração Vercel
-```
+![Página inicial do site](docs/assets/hero.jpg)
 
-## 🛠️ Setup e Desenvolvimento
-
-### Pré-requisitos
-
-- Node.js 18+ 
-- npm ou yarn
-
-### Instalação
-
-```bash
-npm install
-```
-
-### Comandos Disponíveis
-
-```bash
-# Desenvolvimento com HMR
-npm run dev
-
-# Build de produção
-npm run build
-
-# Preview do build
-npm run preview
-
-# Executar testes
-npm test
-
-# Testes com UI
-npm run test:ui
-
-# Cobertura de testes
-npm run test:coverage
-```
-
-## ✨ Features
-
-- ⚡ **Fast**: Vite para HMR instantâneo e builds otimizados
-- 🎯 **Type-Safe**: TypeScript strict mode em toda a codebase
-- 🌍 **i18n**: Suporte completo para PT-BR e EN
-- ♿ **Accessible**: Componentes com suporte ARIA e navegação por teclado
-- 📊 **Dynamic Charts**: Chart.js carregado apenas quando necessário
-- 🎠 **Interactive Carousels**: Com prefersReducedMotion e IntersectionObserver
-- 🧪 **Tested**: Setup de testes com Vitest
-
-## 🌐 Deployment
-
-O projeto está configurado para deploy automático na Vercel:
-
-- **Branch principal**: `main` (deploy automático)
-- **Branch de desenvolvimento**: `refactor/vite-migration`
-
-### Build local
-
-```bash
-npm run build
-npm run preview
-```
-
-O build gera um diretório `dist/` otimizado com:
-- CSS minificado e tree-shaken
-- JavaScript com code splitting (Chart.js em chunk separado)
-- Assets com hash para cache imutável
-- HTML minificado
-
-## 📊 Migration Status
-
-### ✅ Completo
-- [x] Configuração Vite + TypeScript + Vitest
-- [x] Migração sistema i18n
-- [x] Componentes TypeScript (Carousel, Chart, LanguageSwitcher, MobileNav, ScrollSpy)
-- [x] Build pipeline funcionando
-- [x] Dev server com HMR
-
-### 🚧 Próximos Passos
-- [ ] CSS Modules (pendente refatoração)
-- [ ] Testes unitários dos componentes
-- [ ] Otimização de imagens
-- [ ] PWA support (opcional)
-
-## 🐛 Troubleshooting
-
-### Build falha
-
-Verifique se todas as dependências estão instaladas:
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Dev server não inicia
-
-Porta 3000 pode estar em uso. Altere em `vite.config.ts`:
-```ts
-server: { port: 3001 }
-```
-
-### Testes falhando
-
-Limpe o cache do Vitest:
-```bash
-npm test -- --clearCache
-```
-
-## 📝 License
-
-Este é um projeto pessoal de portfólio.
+</div>
 
 ---
 
-Desenvolvido com ❤️ usando Vite + TypeScript
+## Em 30 segundos
+
+| | |
+|---|---|
+| **Hoje** | Product Designer · Produto, Dados & IA na **ATRA**, uma consultoria de dados e IA com mais de 15 anos de mercado. Fundador da **LP \| Produto & Portfólio**. |
+| **Antes** | Gerente de Tecnologia, Dados & IA e de PMO na **Educacross** · Gerente de Projetos e Operações de um portfólio com **mais de 40 devs** na **Digi.ai** · Product Owner de 4 produtos na **Conexia Educação** |
+| **Formação** | MBA em Gestão de Projetos (**USP**) · Ciência da Computação · trilha Google Cloud *Professional ML Engineer* |
+| **Produtos próprios** | **GiraHub** (SaaS multi-tenant em produção) · **LP Diagnóstico** · **Portal PMO** (2023–2026) · **PlantMap** |
+| **Base** | Ribeirão Preto, SP · remoto ou híbrido em São Paulo · português e inglês |
+
+## O que eu ofereço
+
+### Mentoria 1:1 em Produto & Portfólio · *R$ 997/mês (preço fundador)*
+Para POs, PMs, Product Designers, gerentes de projeto e líderes de PMO que querem evoluir na carreira e resolver desafios reais.
+
+- 2 sessões por mês, de 60 minutos.
+- Suporte pelo WhatsApp entre as sessões.
+- Plano de desenvolvimento individual.
+- Templates de governança, discovery e roadmap.
+- Sem fidelidade: o preço fundador vale para as **5 primeiras vagas**.
+
+### Diagnóstico de Maturidade + Implementação · *R$ 2.500 (preço fundador)*
+Para empresas que precisam estruturar governança de portfólio, PMO ou processos de produto.
+
+- Em 2–3 semanas: entrevistas, score de maturidade por *gates*, roadmap priorizado e apresentação executiva.
+- A implementação é feita sob proposta.
+
+### Também atuo com
+- Discovery e UX de produtos digitais: avaliação heurística, WCAG 2.2 e protótipos.
+- Produto & IA aplicada: agentes, relatórios automatizados, segurança e produtização de apps gerados por IA.
+- Workshops in company de 4h a 30h, em análise de dados para negócios, produto, agilidade e PMO.
+
+> **O que não é:** curso gravado, fábrica de software ou consultoria de PowerPoint.
+> É acompanhamento próximo, com uma metodologia validada liderando times reais.
+
+**→ [Agendar uma conversa gratuita de 30 minutos](https://wa.me/5516991091234)**
+
+## Resultados que eu posso mostrar
+
+- **Diagnóstico de usabilidade** do app de uma instituição financeira de médio porte: mais de 40 telas, cerca de 100 pontos priorizados e apresentação à diretoria.
+- **Governança de portfólio** com mais de 40 desenvolvedores em squads, cobrindo horas, custos, valor e capacidade.
+- **Data lake + BI** com cerca de 30 indicadores para uma rede de 300 escolas, e relatórios automatizados com IA para a liderança.
+- **GiraHub**, um SaaS que construí do zero:
+  - isolamento multi-tenant em 3 camadas e conformidade com a LGPD;
+  - **874 testes automatizados**;
+  - lint e `any` zerados.
+- **Workshop corporativo de 30h** de Análise de Dados para Negócios.
+
+---
+
+## Sobre este repositório
+
+Este site é a vitrine da mentoria e também uma amostra de como eu trabalho: com produto bem definido, código limpo, testes e documentação.
+
+### Stack
+
+| Camada | Escolha |
+|---|---|
+| UI | React 19 + TypeScript (strict) |
+| Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix) |
+| Build | Vite 6 |
+| Testes | Vitest + Testing Library (27 testes) |
+| Deploy | Vercel |
+| Analytics | Google Analytics 4 via abstração própria |
+| Imagens | [Unsplash](https://unsplash.com/license), com licença livre |
+
+### Princípios aplicados
+
+- **SOLID**:
+  - Cada serviço tem uma responsabilidade (`ContactLinkBuilder`, `AnalyticsTracker`).
+  - Os componentes dependem de abstrações injetadas por contexto (DIP).
+  - Novos idiomas e seções entram por registro, sem alterar quem consome (OCP).
+- **POO onde agrega:** serviços são classes com estado encapsulado e validação no construtor. A UI segue funcional, que é o idiomático em React.
+- **Clean Code:**
+  - Conteúdo separado da apresentação, com todo texto num modelo tipado.
+  - Nomes de domínio e funções pequenas.
+  - Nenhuma string solta nos componentes.
+- **Reaproveitamento:** `Section`, `Container`, `Figure`, `Reveal` e `TrackedLink` são as peças-base, usadas em toda a página.
+- **Acessibilidade:**
+  - HTML semântico, *skip link* e `aria-current` na navegação.
+  - Respeito a `prefers-reduced-motion`.
+  - Tema claro/escuro sem flash.
+- **Qualidade verificável:** os testes garantem que pt-BR e EN têm exatamente a mesma estrutura e que nenhum cliente confidencial é citado.
+
+### Rodando localmente
+
+```bash
+npm install
+npm run dev          # http://localhost:3000
+npm test             # testes unitários e de integração
+npm run build        # typecheck + build de produção em dist/
+```
+
+### Documentação
+
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): camadas, fluxo de dados e decisões.
+- [`docs/CONTENT.md`](docs/CONTENT.md): como editar textos, preços, produtos e idiomas.
+- [`docs/DESIGN.md`](docs/DESIGN.md): o sistema visual "dossiê editorial" e as regras anti-genérico.
+
+---
+
+<div align="center">
+
+**Precisa estruturar o portfólio da sua empresa ou acelerar a sua carreira em produto?**
+
+[Fale comigo no WhatsApp](https://wa.me/5516991091234) · [Conecte-se no LinkedIn](https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/)
+
+<sub>© Leonardo Fonseca Pontes · LP | Produto & Portfólio</sub>
+
+</div>
