@@ -86,7 +86,7 @@ A página funciona como uma sequência de **cenas**. Cada capítulo ocupa a tela
 | Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix) |
 | Movimento | GSAP (ScrollTrigger, SplitText) + Lenis, com arte generativa em canvas |
 | Build | Vite 6 |
-| Testes | Vitest + Testing Library (58 testes) |
+| Testes | Vitest + Testing Library (60 testes) |
 | Deploy | Vercel |
 | Analytics | Google Analytics 4 via abstração própria |
 | Imagens | [Unsplash](https://unsplash.com/license), com licença livre |

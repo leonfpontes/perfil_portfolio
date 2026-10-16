@@ -9,7 +9,7 @@ function SkillRow({ group, index }: { group: SkillGroup; index: number }) {
   const items = (copy: boolean) =>
     group.skills.map((skill) => (
       <li key={`${copy}-${skill}`} aria-hidden={copy || undefined} className={copy ? 'motion-reduce:hidden' : undefined}>
-        <span className="font-serif text-4xl whitespace-nowrap sm:text-6xl">{skill}</span>
+        <span className="font-serif text-3xl whitespace-nowrap sm:text-6xl">{skill}</span>
         <span aria-hidden="true" className="mx-6 text-signal sm:mx-10">
           ✳
         </span>
@@ -17,7 +17,7 @@ function SkillRow({ group, index }: { group: SkillGroup; index: number }) {
     ));
 
   return (
-    <div className="group border-t py-5 first:border-t-0">
+    <div className="group border-t py-3 first:border-t-0 lg:py-5">
       <p className="label-mono mb-3 flex gap-3 text-muted-foreground">
         <span className="text-signal">{String.fromCharCode(97 + index)})</span>
         {group.label} — {group.description}

@@ -19,7 +19,7 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ id, heading, compact = false }: SectionHeaderProps) {
   return (
-    <Reveal className={cn('grid gap-6 border-t border-foreground pt-5 lg:grid-cols-12', compact ? 'mb-10' : 'mb-14 lg:mb-20')}>
+    <Reveal className={cn('grid gap-6 border-t border-foreground pt-5 lg:grid-cols-12', compact ? 'mb-8 lg:mb-10' : 'mb-10 lg:mb-20')}>
       <p className="label-mono text-muted-foreground lg:col-span-3">
         § {sectionNumber(id)} — {heading.eyebrow}
       </p>
@@ -27,11 +27,11 @@ export function SectionHeader({ id, heading, compact = false }: SectionHeaderPro
         <SplitReveal
           as="h2"
           id={`${id}-title`}
-          className={cn('display max-w-4xl text-balance', compact ? 'text-4xl sm:text-5xl' : 'text-5xl sm:text-6xl lg:text-7xl')}
+          className={cn('display max-w-4xl text-balance', compact ? 'text-4xl sm:text-5xl' : 'text-[2.6rem] leading-[1] sm:text-6xl lg:text-7xl')}
         >
           {heading.title}
         </SplitReveal>
-        {!compact && <p className="mt-6 max-w-2xl text-lg text-pretty text-muted-foreground">{heading.description}</p>}
+        {!compact && <p className="mt-4 max-w-2xl text-pretty text-muted-foreground lg:mt-6 lg:text-lg">{heading.description}</p>}
       </div>
     </Reveal>
   );

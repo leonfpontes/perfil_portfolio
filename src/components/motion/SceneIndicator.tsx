@@ -4,7 +4,7 @@ import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
 import { useSceneDirector } from '@/lib/motion/SceneDirector';
 
 /**
- * Marcador de capítulo fixo (desktop): "§ 03 / 11 — Serviços" + régua de
+ * Marcador de capítulo fixo (só em telas ≥ 1536px, onde há margem livre ao lado do conteúdo): "§ 03 / 11 — Serviços" + régua de
  * progresso da página. Dá a sensação de capítulos, não de scroll infinito.
  */
 export function SceneIndicator() {
@@ -17,7 +17,7 @@ export function SceneIndicator() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.desktop, () => {
+      mm.add(`${MEDIA.desktop} and (min-width: 1536px)`, () => {
         gsap.fromTo(
           '[data-progress]',
           { scaleY: 0 },
@@ -44,7 +44,7 @@ export function SceneIndicator() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="pointer-events-none fixed bottom-8 left-6 z-40 hidden items-end gap-3 mix-blend-normal lg:flex"
+      className="pointer-events-none fixed bottom-8 left-6 z-40 hidden items-end gap-3 2xl:flex"
     >
       <span className="relative h-24 w-px bg-foreground/20">
         <span data-progress className="absolute inset-0 origin-top bg-signal" />

@@ -1,12 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Container, SectionHeader } from '@/components/common/Section';
 import { Scene } from '@/components/motion/Scene';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
+import { cn } from '@/lib/utils';
 
 export function Education() {
-  const { education } = useContent();
+  const { education, ui } = useContent();
   const ref = useRef<HTMLDivElement>(null);
+  const [allCerts, setAllCerts] = useState(false);
+  const MOBILE_CERTS = 5;
 
   useGSAP(
     () => {
@@ -24,16 +27,16 @@ export function Education() {
       <Container>
         <div ref={ref}>
           <SectionHeader id="formacao" heading={education} />
-          <div className="grid gap-16 lg:grid-cols-12">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <h3 className="label-mono mb-4 text-muted-foreground">{education.degreesTitle}</h3>
               <ul data-degrees className="border-b">
                 {education.degrees.map((degree) => (
-                  <li key={degree.title} data-degree className="border-t py-6">
+                  <li key={degree.title} data-degree className="border-t py-4 lg:py-6">
                     <p className="label-mono text-muted-foreground">{degree.period}</p>
-                    <p className="mt-2 font-serif text-3xl leading-tight">{degree.title}</p>
+                    <p className="mt-1 font-serif text-2xl leading-tight lg:mt-2 lg:text-3xl">{degree.title}</p>
                     <p className="mt-1 text-sm">{degree.institution}</p>
-                    <p className="mt-2 text-sm text-muted-foreground">{degree.description}</p>
+                    <p className="mt-2 hidden text-sm text-muted-foreground lg:block">{degree.description}</p>
                   </li>
                 ))}
               </ul>
@@ -43,8 +46,12 @@ export function Education() {
               <h3 className="label-mono mb-4 text-muted-foreground">{education.certificationsTitle}</h3>
               <table data-certs className="w-full border-collapse text-left text-sm">
                 <tbody>
-                  {education.certifications.map((cert) => (
-                    <tr key={cert.title} data-cert className="border-t align-baseline last:border-b">
+                  {education.certifications.map((cert, i) => (
+                    <tr
+                      key={cert.title}
+                      data-cert
+                      className={cn('border-t align-baseline last:border-b', !allCerts && i >= MOBILE_CERTS && 'max-lg:hidden')}
+                    >
                       <td className="py-3 pr-4">
                         {cert.title}
                         {cert.inProgress && <span className="label-mono ml-2 text-signal">· {education.inProgressLabel}</span>}
@@ -55,6 +62,11 @@ export function Education() {
                   ))}
                 </tbody>
               </table>
+              {!allCerts && education.certifications.length > MOBILE_CERTS && (
+                <button type="button" onClick={() => setAllCerts(true)} className="link-rule mt-4 cursor-pointer text-sm lg:hidden">
+                  {ui.seeAll} ({education.certifications.length})
+                </button>
+              )}
             </div>
           </div>
         </div>

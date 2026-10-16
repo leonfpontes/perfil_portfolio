@@ -21,7 +21,7 @@ interface SplitRevealProps {
  * - `read`: palavras acendem conforme o scroll avança, como um marca-texto de leitura.
  * O texto continua no DOM íntegro para leitores de tela (SplitText aplica aria).
  */
-export function SplitReveal({ as = 'p', mode = 'lines', children, className, id, delay = 0, immediate = false }: SplitRevealProps) {
+export function SplitReveal({ as = 'p', mode: requested = 'lines', children, className, id, delay = 0, immediate = false }: SplitRevealProps) {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -29,7 +29,11 @@ export function SplitReveal({ as = 'p', mode = 'lines', children, className, id,
       const el = ref.current;
       if (!el) return;
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.motion, () => {
+      mm.add({ motion: MEDIA.motion, mobile: MEDIA.mobile }, (context) => {
+        if (!context.conditions?.motion) return;
+        // "Leitura" (palavras acendendo com o scroll) só no desktop: no celular o
+        // parágrafo ocupa a tela inteira e ficaria apagado enquanto é lido.
+        const mode = requested === 'read' && context.conditions.mobile ? 'lines' : requested;
         const split = SplitText.create(el, {
           type: mode === 'read' ? 'words' : mode === 'chars' ? 'lines,chars' : mode === 'words' ? 'lines,words' : 'lines',
           mask: mode === 'read' ? undefined : 'lines',
@@ -58,7 +62,7 @@ export function SplitReveal({ as = 'p', mode = 'lines', children, className, id,
         return () => split.revert();
       });
     },
-    { scope: ref, dependencies: [children, mode] },
+    { scope: ref, dependencies: [children, requested] },
   );
 
   return createElement(as, { ref, id, className }, children);

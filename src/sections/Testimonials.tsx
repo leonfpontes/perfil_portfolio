@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Arrow } from '@/components/common/Arrow';
 import { Container, SectionHeader } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
+import { HorizontalTrack } from '@/components/motion/HorizontalTrack';
 import { Scene } from '@/components/motion/Scene';
 import { profile } from '@/content/profile';
 import { useSteppedScene, useStepTransition } from '@/hooks/useSteppedScene';
@@ -15,7 +16,7 @@ function TestimonialStage() {
   const { testimonials, ui } = useContent();
   const stageRef = useRef<HTMLDivElement>(null);
   const total = testimonials.items.length;
-  const { index, goTo } = useSteppedScene({ count: total, scopeRef: stageRef, stepLength: 60 });
+  const { index, goTo } = useSteppedScene({ count: total, scopeRef: stageRef, stepLength: 45 });
   useStepTransition(stageRef, index);
 
   // A aspa gigante gira um pouco a cada depoimento — um "carimbo" que acompanha a troca.
@@ -32,18 +33,24 @@ function TestimonialStage() {
 
   return (
     <div ref={stageRef} className="grid gap-8 lg:grid-cols-12">
-      <span data-quote-mark aria-hidden="true" className="block h-[0.5em] origin-[50%_35%] font-serif text-[9rem] leading-[0.85] text-signal lg:col-span-2 lg:text-[11rem]">
+      <span data-quote-mark aria-hidden="true" className="hidden h-[0.5em] origin-[50%_35%] font-serif text-[11rem] leading-[0.85] text-signal lg:col-span-2 lg:block">
         “
       </span>
-      <div className="lg:col-span-10">
-        <div className="grid" aria-live="polite">
+      <div className="min-w-0 lg:col-span-10">
+        {/* Desktop: um depoimento por vez (empilhados). Celular: trilho horizontal guiado pelo scroll. */}
+        <HorizontalTrack media="mobile" label={testimonials.eyebrow} className="max-lg:flex max-lg:gap-5 lg:grid">
           {testimonials.items.map((t, i) => (
             <figure
               key={t.role}
               data-step-item
-              aria-hidden={i !== index}
-              className={cn('[grid-area:1/1]', i === index ? 'visible opacity-100' : 'invisible opacity-0')}
+              className={cn(
+                'max-lg:w-[84vw] max-lg:shrink-0 max-lg:snap-center lg:[grid-area:1/1]',
+                i === index ? 'lg:visible lg:opacity-100' : 'lg:invisible lg:opacity-0',
+              )}
             >
+              <span aria-hidden="true" className="block h-12 font-serif text-8xl leading-none text-signal lg:hidden">
+                “
+              </span>
               <blockquote className="display text-3xl leading-tight text-pretty sm:text-5xl">{t.quote}</blockquote>
               <figcaption className="mt-8 border-t pt-4">
                 <p className="font-medium">{t.role}</p>
@@ -51,14 +58,14 @@ function TestimonialStage() {
               </figcaption>
             </figure>
           ))}
-        </div>
+        </HorizontalTrack>
 
         <div className="mt-10">
-          <div aria-hidden="true" className="h-px bg-foreground/20">
+          <div aria-hidden="true" className="hidden h-px bg-foreground/20 lg:block">
             <div data-quote-progress className="h-full origin-left bg-signal" style={{ transform: `scaleX(${(index + 1) / total})` }} />
           </div>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-6">
+            <div className="hidden items-center gap-6 lg:flex">
               <button type="button" onClick={() => goTo(index - 1)} className="group link-rule cursor-pointer">
                 <Arrow direction="left" /> {ui.previous}
               </button>

@@ -48,8 +48,8 @@ export function Header() {
           <span className="label-mono hidden text-muted-foreground 2xl:inline">{profile.brand}</span>
         </a>
 
-        <nav aria-label="Principal" className="hidden xl:block">
-          <ul className="flex items-center gap-5">
+        <nav aria-label="Principal" className="hidden lg:block">
+          <ul className="flex items-center gap-4 xl:gap-5">
             {nav.items.map((item) => (
               <li key={item.id}>
                 <TrackedLink
@@ -89,7 +89,7 @@ export function Header() {
           <Button variant="ghost" size="icon" onClick={onToggleTheme} aria-label={nav.toggleTheme}>
             {theme === 'dark' ? <Sun /> : <Moon />}
           </Button>
-          <Button asChild variant="signal" className="ml-2 hidden sm:inline-flex">
+          <Button asChild variant="signal" className="ml-2 hidden sm:inline-flex lg:hidden xl:inline-flex">
             <TrackedLink href="#contato" trackLabel="header_cta">
               {nav.cta}
             </TrackedLink>
@@ -97,7 +97,7 @@ export function Header() {
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="xl:hidden" aria-label={nav.openMenu}>
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={nav.openMenu}>
                 <Menu />
               </Button>
             </SheetTrigger>

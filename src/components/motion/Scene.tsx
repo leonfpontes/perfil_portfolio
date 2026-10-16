@@ -47,26 +47,28 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
         trigger: outer,
         start: 'top 55%',
         end: 'bottom 55%',
-        onToggle: (self) => self.isActive && activate({ id, chapter, label, tone }),
+        onToggle: (self) => self.isActive && activate({ id, chapter, label, tone }, self.direction),
       });
 
       if (customTransition) return;
+      // Só opacidade: transform no corpo da cena quebraria os pins internos
+      // (um ancestral transformado vira o "containing block" do position: fixed).
+      const layers = outer.querySelectorAll('[data-scene-body], [data-scene-art]');
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.motion, () => {
-        const layers = outer.querySelectorAll('[data-scene-body], [data-scene-art]');
-        gsap.fromTo(
-          layers,
-          { opacity: 0, y: () => window.innerHeight * 0.08 },
-          { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: outer, start: 'top 95%', end: 'top 45%', scrub: true } },
-        );
+      mm.add(MEDIA.desktop, () => {
+        // Entrada e saída se sobrepõem: nunca há uma tela vazia entre cenas.
+        gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 60%', scrub: true } });
         gsap.to(layers, {
           opacity: 0,
-          y: () => -window.innerHeight * 0.08,
-          scale: 0.97,
           ease: 'none',
           immediateRender: false,
-          scrollTrigger: { trigger: outer, start: 'bottom 75%', end: 'bottom 20%', scrub: true },
+          scrollTrigger: { trigger: outer, start: 'bottom 40%', end: 'bottom 5%', scrub: true },
         });
+      });
+      // No celular as seções são mais altas que a tela: só a entrada é animada,
+      // para que nada se apague enquanto ainda está sendo lido.
+      mm.add(MEDIA.mobile, () => {
+        gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 70%', scrub: true } });
       });
     },
     { scope: outerRef, dependencies: [activate, tone, label] },
@@ -78,14 +80,14 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
         id={id}
         data-tone={tone}
         aria-labelledby={labelledBy ?? `${id}-title`}
-        className={cn('relative isolate flex min-h-svh flex-col justify-center overflow-clip py-24', className)}
+        className={cn('relative isolate flex flex-col justify-center overflow-clip py-12 lg:min-h-svh lg:py-24', className)}
       >
         {art && (
           <div data-scene-art aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
             {art}
           </div>
         )}
-        <div data-scene-body className="relative w-full origin-top">
+        <div data-scene-body className="relative w-full">
           {children}
         </div>
       </section>

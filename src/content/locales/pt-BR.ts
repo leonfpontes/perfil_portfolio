@@ -632,6 +632,9 @@ export const ptBR: SiteContent = {
     imageCredits: 'Imagens: Unsplash',
   },
   ui: {
+    readMore: 'Ler mais',
+    readLess: 'Ler menos',
+    seeAll: 'Ver todas',
     scrollHint: 'Role para explorar',
     illustrativeImage: 'Imagem ilustrativa · Unsplash',
     previous: 'Anterior',

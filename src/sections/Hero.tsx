@@ -24,11 +24,12 @@ export function Hero() {
       mm.add(MEDIA.motion, () => {
         // Entrada: bloco de cor sobe, retrato é "impresso" de baixo para cima.
         const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+        // Intro curta: o título começa a subir já no primeiro quadro.
         intro
-          .from('[data-hero-meta]', { opacity: 0, y: -12, duration: 0.8, stagger: 0.08 })
-          .from('[data-hero-block]', { scaleY: 0, transformOrigin: 'bottom', duration: 1.2 }, 0.15)
-          .from('[data-hero-portrait]', { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.4 }, 0.35)
-          .from('[data-hero-fade]', { opacity: 0, y: 24, duration: 1, stagger: 0.1 }, 0.6);
+          .from('[data-hero-meta]', { opacity: 0, y: -12, duration: 0.6, stagger: 0.06 })
+          .from('[data-hero-block]', { scaleY: 0, transformOrigin: 'bottom', duration: 0.9 }, 0.05)
+          .from('[data-hero-portrait]', { clipPath: 'inset(100% 0% 0% 0%)', duration: 1 }, 0.2)
+          .from('[data-hero-fade]', { opacity: 0, y: 20, duration: 0.8, stagger: 0.08 }, 0.3);
 
         // Saída: título acelera para cima, retrato se aproxima, a arte se dissolve.
         const exit = { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: true };
@@ -67,14 +68,14 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="grid gap-10 pt-10 lg:grid-cols-12 lg:gap-8">
+          <div className="grid gap-8 pt-6 lg:grid-cols-12 lg:gap-8 lg:pt-10">
             <div className="lg:col-span-8">
               <div data-hero-title>
-                <SplitReveal as="h1" id="inicio-title" immediate delay={0.2} className="display text-[clamp(3.25rem,8.6vw,8.5rem)] text-balance">
+                <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(3rem,8.6vw,8.5rem)] text-balance">
                   {hero.title} <em className="text-signal">{hero.titleHighlight}</em>
                 </SplitReveal>
               </div>
-              <p data-hero-fade className="mt-8 max-w-xl text-lg text-pretty sm:text-xl">
+              <p data-hero-fade className="mt-6 max-w-xl text-pretty sm:text-xl lg:mt-8">
                 {hero.description}
               </p>
               <div data-hero-fade className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
@@ -90,7 +91,7 @@ export function Hero() {
             </div>
 
             <figure data-hero-figure className="relative lg:col-span-4">
-              <div className="relative pt-8">
+              <div className="relative pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
                 <div data-hero-block aria-hidden="true" className="absolute inset-0 bg-signal" />
                 <img
                   data-hero-portrait
@@ -99,7 +100,7 @@ export function Hero() {
                   width={408}
                   height={612}
                   fetchPriority="high"
-                  className="relative mx-auto h-auto w-full max-w-xs grayscale contrast-110 lg:max-w-none"
+                  className="relative mx-auto h-auto w-full grayscale contrast-110 max-lg:max-h-[42svh] max-lg:w-auto"
                 />
               </div>
               <figcaption data-hero-fade className="label-mono mt-3 flex justify-between gap-3 text-muted-foreground">
@@ -109,20 +110,20 @@ export function Hero() {
             </figure>
           </div>
 
-          <dl data-hero-fade className="mt-12 grid grid-cols-2 border-t border-foreground md:grid-cols-4">
+          <dl data-hero-fade className="mt-10 grid grid-cols-2 border-t border-foreground md:grid-cols-4 lg:mt-12">
             {hero.stats.map((stat, i) => (
               <div
                 key={stat.label}
                 className={`flex flex-col-reverse justify-end gap-1 border-b py-4 pr-4 md:border-b-0 ${i % 2 ? 'border-l pl-4' : ''} ${i > 0 ? 'md:border-l md:pl-5' : ''}`}
               >
                 <dt className="label-mono text-muted-foreground">{stat.label}</dt>
-                <dd className="font-serif text-5xl leading-none sm:text-6xl">
+                <dd className="font-serif text-4xl leading-none sm:text-6xl">
                   <CountUp value={stat.value} />
                 </dd>
               </div>
             ))}
           </dl>
-          <p data-hero-fade className="mt-6 text-sm text-muted-foreground">
+          <p data-hero-fade className="mt-6 hidden text-sm text-muted-foreground sm:block">
             <span className="label-mono mr-3 text-foreground">{hero.trustLine}</span>
             {hero.trustItems.join('  /  ')}
           </p>

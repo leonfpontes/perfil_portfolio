@@ -56,8 +56,9 @@ export function useSteppedScene({ count, scopeRef, stepLength = 70 }: SteppedSce
 }
 
 /**
- * Coreografa a troca entre itens empilhados (mesma célula de grid):
- * o anterior sai para cima, o novo entra por baixo.
+ * Coreografa a troca entre itens empilhados (mesma célula de grid, desktop):
+ * o anterior sai primeiro e só então o novo entra — nunca dois textos
+ * sobrepostos, mesmo com scroll rápido.
  */
 export function useStepTransition(scopeRef: RefObject<HTMLElement | null>, index: number, selector = '[data-step-item]') {
   const prev = useRef(index);
@@ -67,13 +68,18 @@ export function useStepTransition(scopeRef: RefObject<HTMLElement | null>, index
       prev.current = index;
       if (from === index) return;
       const mm = gsap.matchMedia();
-      mm.add(MEDIA.motion, () => {
+      mm.add(MEDIA.desktop, () => {
         const items = gsap.utils.toArray<HTMLElement>(selector, scopeRef.current);
         const out = items[from];
         const inn = items[index];
         const dir = index > from ? 1 : -1;
-        if (out) gsap.fromTo(out, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -48 * dir, duration: 0.45, ease: 'power2.in', clearProps: 'all' });
-        if (inn) gsap.fromTo(inn, { autoAlpha: 0, y: 56 * dir }, { autoAlpha: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'expo.out', clearProps: 'transform' });
+        // Interrompe qualquer troca anterior e esconde os demais na hora.
+        gsap.killTweensOf(items);
+        items.forEach((el) => el !== out && el !== inn && gsap.set(el, { clearProps: 'all' }));
+        const tl = gsap.timeline();
+        if (out) tl.fromTo(out, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -32 * dir, duration: 0.28, ease: 'power2.in' });
+        if (inn) tl.fromTo(inn, { autoAlpha: 0, y: 40 * dir }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'expo.out' });
+        tl.add(() => items.forEach((el) => gsap.set(el, { clearProps: 'all' })));
       });
     },
     { dependencies: [index], scope: scopeRef },
