@@ -7,6 +7,7 @@ Todo texto do site fica em `src/content/`. **Nenhum componente precisa ser alter
 | Quero mudar… | Arquivo | Campo |
 |---|---|---|
 | Nome, e-mail, WhatsApp, LinkedIn, GitHub | `src/content/profile.ts` | `profile` |
+| Link da agenda (Google Agenda) | `src/content/profile.ts` | `profile.bookingUrl` |
 | Preços e itens da mentoria/diagnóstico | `src/content/locales/*.ts` | `offer.plans` |
 | Mensagem pré-preenchida do WhatsApp | `src/content/locales/*.ts` | `plans[].whatsappMessage`, `contact.whatsappMessage` |
 | Serviços | `src/content/locales/*.ts` | `services.items` |
@@ -31,3 +32,17 @@ Todo texto do site fica em `src/content/`. **Nenhum componente precisa ser alter
 2. Adicione `'es'` ao tipo `Locale` em `types.ts`.
 3. Registre o idioma em `src/lib/i18n/registry.ts`.
 4. Adicione o botão no seletor do `Header`.
+
+## Agenda (Google Agenda)
+
+1. No Google Agenda, crie uma **Agenda de horários** com uma conversa de 30 min.
+2. Em **Compartilhar**, copie o link da página de agendamento (algo como `https://calendar.app.google/...`).
+3. Cole o link em `profile.bookingUrl` (`src/content/profile.ts`).
+
+Com o link definido:
+- o botão "Agendar conversa" do header passa a abrir a agenda;
+- cada plano ganha o link "ou agende uma conversa gratuita de 30 min";
+- no contato, a agenda vira a ação principal e o WhatsApp passa a secundário.
+
+Com `null`, nada disso aparece e o site usa só WhatsApp e e-mail.
+

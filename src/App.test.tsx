@@ -44,6 +44,13 @@ describe('<App />', () => {
     expect(cta).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('sem agenda configurada, não mostra botões de agendamento e mantém o WhatsApp', () => {
+    renderApp();
+    const contact = document.getElementById('contato')!;
+    expect(within(contact).queryByRole('link', { name: /agendar conversa de 30 min/i })).toBeNull();
+    expect(within(contact).getByRole('link', { name: /whatsapp/i })).toHaveAttribute('href', expect.stringContaining('wa.me'));
+  });
+
   it('registra o clique de CTA no analytics', async () => {
     const { track, user } = renderApp();
     await user.click(screen.getAllByRole('link', { name: /conhecer a mentoria/i })[0]!);
