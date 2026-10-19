@@ -232,3 +232,40 @@ html.lenis, html.lenis body { height: auto; }
 @keyframes marquee {
   to { transform: translateX(-50%); }
 }
+
+/*
+ * Navegação entre o site e a Área do cliente (/entrar): View Transitions entre documentos.
+ * A marca "Leonardo Pontes" tem o mesmo nome nas duas páginas e voa de um cabeçalho para o
+ * outro; o resto troca num esmaecer curto (a cortina de /entrar faz o resto: src/entrar/entrar.css).
+ * Navegadores sem a API trocam de página normalmente.
+ */
+@view-transition {
+  navigation: auto;
+}
+
+.marca-lp {
+  view-transition-name: marca-lp;
+}
+
+::view-transition-group(marca-lp) {
+  animation-duration: 650ms;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* Modo suave do site: sem voo nem esmaecer. */
+:root.reduced-motion::view-transition-group(*),
+:root.reduced-motion::view-transition-old(*),
+:root.reduced-motion::view-transition-new(*) {
+  animation: none;
+}

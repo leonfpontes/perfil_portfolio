@@ -20,6 +20,7 @@ export const ptBR: SiteContent = {
       { id: 'contato', label: 'Contato' },
     ],
     cta: 'Agendar conversa',
+    clientArea: 'Área do cliente',
     toggleTheme: 'Alternar tema claro/escuro',
     toggleLanguage: 'Switch to English',
     openMenu: 'Abrir menu',

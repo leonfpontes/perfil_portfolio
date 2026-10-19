@@ -20,6 +20,7 @@ export const en: SiteContent = {
       { id: 'contato', label: 'Contact' },
     ],
     cta: 'Book a call',
+    clientArea: 'Client area',
     toggleTheme: 'Toggle light/dark theme',
     toggleLanguage: 'Mudar para português',
     openMenu: 'Open menu',

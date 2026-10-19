@@ -47,6 +47,8 @@ export interface Meta {
 export interface Navigation {
   items: { id: SectionId; label: string }[];
   cta: string;
+  /** Link para a Área do cliente (/entrar), onde mentorados e empresas entram. */
+  clientArea: string;
   toggleTheme: string;
   toggleLanguage: string;
   openMenu: string;

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react';
-import { Menu, Moon, Sun } from 'lucide-react';
+import { LogIn, Menu, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -44,7 +44,8 @@ export function Header() {
         {nav.skipToContent}
       </a>
       <Container className="flex h-14 items-center justify-between gap-6">
-        <a href="#inicio" className="flex items-baseline gap-3">
+        {/* `marca-lp`: a marca voa daqui para o cabeçalho da Área do cliente (globals.css). */}
+        <a href="#inicio" className="marca-lp flex items-baseline gap-3">
           <span className="font-display text-2xl leading-none whitespace-nowrap">{profile.shortName}</span>
           <span className="label-caps hidden text-muted-foreground 2xl:inline">{profile.brand}</span>
         </a>
@@ -87,6 +88,16 @@ export function Header() {
               </span>
             ))}
           </div>
+          {/* A Área do cliente: página própria (/entrar), aberta com a passagem animada. */}
+          <TrackedLink
+            href="/entrar"
+            trackLabel="header_client_area"
+            className="inline-flex min-h-11 items-center gap-1.5 px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <LogIn className="size-4" aria-hidden />
+            <span className="hidden md:inline">{nav.clientArea}</span>
+            <span className="sr-only md:hidden">{nav.clientArea}</span>
+          </TrackedLink>
           <Button variant="ghost" size="icon" onClick={onToggleTheme} aria-label={nav.toggleTheme}>
             {/* Os dois ícones vêm no HTML; o CSS escolhe (evita divergência na hidratação). */}
             <Sun className="hidden dark:block" />
