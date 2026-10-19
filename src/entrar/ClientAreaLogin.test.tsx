@@ -24,12 +24,16 @@ function fakeApp(routes: Record<string, Route>) {
   return calls;
 }
 
+const REQUEST_ID = '6f1c1a8e-3b9a-4c1e-9c3e-1f2a3b4c5d6e';
+
 const ANA = { user: { id: 'u1', name: 'Ana Souza', email: 'ana@exemplo.com' }, roles: ['mentee'] };
 
 describe('Área do cliente (/entrar)', () => {
   let goTo: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
+    localStorage.clear();
+    sessionStorage.clear();
     // Sem animação nos testes: a troca de página acontece na hora.
     document.documentElement.classList.add('reduced-motion');
     goTo = vi.spyOn(navegador, 'ir').mockImplementation(() => {});
@@ -92,13 +96,62 @@ describe('Área do cliente (/entrar)', () => {
     expect(window.location.search).toBe('');
   });
 
-  it('explains an expired link and offers a new one', async () => {
+  it('explains an expired link and sends a new one to the remembered address with one tap', async () => {
+    localStorage.setItem('lp:entrar:email', 'ana@exemplo.com');
     window.history.replaceState(null, '', '/entrar?token=velho');
-    fakeApp({ 'POST /magic-link/verify': () => ({ status: 400, body: { error: 'Link inválido.' } }) });
+    const calls = fakeApp({
+      'POST /magic-link/verify': () => ({ status: 401, body: { error: 'Este link expirou ou já foi usado.' } }),
+      'POST /magic-link': () => ({ status: 202, body: { requestId: REQUEST_ID } }),
+    });
     render(<ClientAreaLogin />);
 
-    expect(await screen.findByRole('alert')).toHaveTextContent('já foi usado ou expirou');
-    expect(screen.getByRole('button', { name: /Enviar link de acesso/ })).toBeInTheDocument();
+    expect(await screen.findByRole('alert')).toHaveTextContent('valem por 15 minutos e funcionam uma vez');
+    await userEvent.click(screen.getByRole('button', { name: 'Mandar um novo para ana@exemplo.com' }));
+    expect(await screen.findByRole('heading', { name: 'Confira seu e-mail' })).toBeInTheDocument();
+    expect(calls.find((call) => call.path === 'POST /magic-link')?.body).toEqual({ email: 'ana@exemplo.com' });
+  });
+
+  it('signs in with the code from the e-mail, typed (or pasted) on this page', async () => {
+    const calls = fakeApp({
+      'POST /magic-link': () => ({ status: 202, body: { requestId: REQUEST_ID } }),
+      'POST /magic-link/code': (body) =>
+        (body as { code: string }).code === '482913'
+          ? { status: 200, body: ANA }
+          : { status: 401, body: { error: 'Código incorreto ou vencido.' } },
+    });
+    render(<ClientAreaLogin />);
+    await userEvent.type(screen.getByLabelText('E-mail'), 'ana@gmail.com');
+    await userEvent.click(screen.getByRole('button', { name: /Enviar link de acesso/ }));
+
+    const box = await screen.findByLabelText('Código de 6 números');
+    expect(screen.getByRole('link', { name: /Abrir o Gmail/ })).toHaveAttribute('target', '_blank');
+    await userEvent.type(box, '111111');
+    expect(await screen.findByRole('alert')).toHaveTextContent('Código incorreto');
+
+    await userEvent.clear(box);
+    await userEvent.type(box, '482 913');
+    await waitFor(() => expect(goTo).toHaveBeenCalledWith(`${APP_URL}/`));
+    expect(calls.filter((call) => call.path === 'POST /magic-link/code').at(-1)?.body).toEqual({
+      requestId: REQUEST_ID,
+      code: '482913',
+    });
+    // Signed in: nothing of the request stays on the device.
+    expect(sessionStorage.getItem('lp:entrar:pedido')).toBeNull();
+    expect(localStorage.getItem('lp:entrar:email')).toBe('ana@gmail.com');
+  });
+
+  it('still waits for the code after a trip to the mail app, and resends after a minute', async () => {
+    sessionStorage.setItem(
+      'lp:entrar:pedido',
+      JSON.stringify({ email: 'ana@exemplo.com', requestId: REQUEST_ID, sentAt: Date.now() - 61_000 })
+    );
+    const calls = fakeApp({ 'POST /magic-link': () => ({ status: 202, body: { requestId: REQUEST_ID } }) });
+    render(<ClientAreaLogin />);
+
+    expect(await screen.findByLabelText('Código de 6 números')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'reenviar' }));
+    await waitFor(() => expect(calls.filter((call) => call.path === 'POST /magic-link')).toHaveLength(1));
+    expect(await screen.findByText(/reenvie em/)).toBeInTheDocument();
   });
 
   it('never sends the person to another site through ?next=', async () => {

@@ -1,9 +1,10 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from 'react';
-import { ArrowLeft, ArrowRight, Check, KeyRound, Mail, MailCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, KeyRound, Mail } from 'lucide-react';
 import { AzulejoEstatico } from '@/components/art/AzulejoEstatico';
 import { cn } from '@/lib/utils';
 import { api, APP_URL, destination, isTwoFactorStep, type Principal, type SignInResult, SignInError } from './api';
 import { sairPara } from './passagem';
+import { caixaDeEntrada, emailLembrado, guardarPedido, lembrarEmail, pedidoEmAndamento, type Pedido } from './lembrar';
 
 /**
  * /entrar — a porta da Área do cliente, no site. Mentorados e empresas entram por um link no
@@ -19,7 +20,8 @@ type Mode = 'link' | 'senha';
 
 type Step =
   | { kind: 'form' }
-  | { kind: 'sent'; email: string }
+  | { kind: 'sent'; pedido: Pedido }
+  | { kind: 'expirado' }
   | { kind: 'twofactor'; challenge: string }
   | { kind: 'verifying' }
   | { kind: 'entering'; name: string }
@@ -59,15 +61,19 @@ export function ClientAreaLogin() {
         .verifyLink(token)
         .then(finish)
         .catch((caught: Error) => {
-          setStep({ kind: 'form' });
-          setError(
-            caught instanceof SignInError && caught.status === 400
-              ? 'Este link de acesso já foi usado ou expirou. Peça um novo abaixo.'
-              : caught.message,
-          );
+          // Vencido, já usado ou trocado por um pedido mais novo: um toque manda outro.
+          if (caught instanceof SignInError && (caught.status === 401 || caught.status === 400)) {
+            setStep({ kind: 'expirado' });
+          } else {
+            setStep({ kind: 'form' });
+            setError(caught.message);
+          }
         });
       return;
     }
+    // Voltou do app de e-mail (e a página recarregou): o pedido continua esperando o código.
+    const pedido = pedidoEmAndamento();
+    if (pedido) setStep({ kind: 'sent', pedido });
     api
       .me()
       .then((principal) => principal && setStep({ kind: 'already', principal }))
@@ -83,12 +89,30 @@ export function ClientAreaLogin() {
   }, []);
 
   function finish(result: SignInResult) {
+    guardarPedido(null);
     if (isTwoFactorStep(result)) {
       setStep({ kind: 'twofactor', challenge: result.challenge });
       return;
     }
     setStep({ kind: 'entering', name: firstName(result.user.name) });
     void sairPara(destination(next.current));
+  }
+
+  /** O pedido saiu (ou o servidor manteve o que já havia): a página espera o código. */
+  function enviado(email: string, requestId: string | undefined) {
+    lembrarEmail(email);
+    if (!requestId) {
+      // Um app antigo, sem código: só o link.
+      setStep({ kind: 'sent', pedido: { email, requestId: '', sentAt: Date.now() } });
+      return;
+    }
+    const pedido = { email, requestId, sentAt: Date.now() };
+    guardarPedido(pedido);
+    setStep({ kind: 'sent', pedido });
+  }
+
+  function pedir(email: string) {
+    return run(async () => enviado(email, (await api.requestLink(email)).requestId));
   }
 
   async function run(action: () => Promise<void>) {
@@ -144,23 +168,32 @@ export function ClientAreaLogin() {
             <AzulejoEstatico seed="area-do-cliente" cols={12} rows={1} className="mb-8 aspect-[12/1] w-full md:hidden" />
             <p className="label-caps text-signal">Área do cliente</p>
             {step.kind === 'form' && (
-              <FormStep mode={mode} onMode={setMode} busy={busy} error={error} onFinish={finish} onSent={(email) => setStep({ kind: 'sent', email })} run={run} />
+              <FormStep mode={mode} onMode={setMode} busy={busy} error={error} onFinish={finish} onSent={enviado} run={run} />
             )}
             {step.kind === 'sent' && (
-              <Message
-                icon={<MailCheck className="size-6" aria-hidden />}
-                title="Confira seu e-mail"
-                body={
-                  <>
-                    Se <strong className="text-foreground">{step.email}</strong> tem acesso, o link chega em instantes.
-                    Ele vale por 15 minutos e entra direto, sem senha.
-                  </>
-                }
-                action={
-                  <button type="button" className={LINK} onClick={() => setStep({ kind: 'form' })}>
-                    Usar outro e-mail
-                  </button>
-                }
+              <SentStep
+                pedido={step.pedido}
+                busy={busy}
+                error={error}
+                onCode={(code) => run(async () => finish(await api.verifyCode(step.pedido.requestId, code)))}
+                onResend={() => pedir(step.pedido.email)}
+                onOtherEmail={() => {
+                  guardarPedido(null);
+                  setError(null);
+                  setStep({ kind: 'form' });
+                }}
+              />
+            )}
+            {step.kind === 'expirado' && (
+              <ExpiredStep
+                email={emailLembrado()}
+                busy={busy}
+                error={error}
+                onResend={(email) => pedir(email)}
+                onOtherEmail={() => {
+                  setError(null);
+                  setStep({ kind: 'form' });
+                }}
               />
             )}
             {step.kind === 'twofactor' && (
@@ -293,11 +326,11 @@ function FormStep({
   busy: boolean;
   error: string | null;
   onFinish: (result: SignInResult) => void;
-  onSent: (email: string) => void;
+  onSent: (email: string, requestId: string | undefined) => void;
   run: (action: () => Promise<void>) => Promise<void>;
 }) {
   const ids = { email: useId(), password: useId(), error: useId() };
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(() => emailLembrado());
   const [password, setPassword] = useState('');
 
   function submit(event: FormEvent) {
@@ -305,8 +338,7 @@ function FormStep({
     const address = email.trim();
     void run(async () => {
       if (mode === 'link') {
-        await api.requestLink(address);
-        onSent(address);
+        onSent(address, (await api.requestLink(address)).requestId);
       } else {
         onFinish(await api.login(address, password));
       }
@@ -320,7 +352,7 @@ function FormStep({
       </h1>
       <p className="mt-3 text-base text-muted-foreground">
         {mode === 'link'
-          ? 'Mentorados e empresas: enviamos um link de acesso para o seu e-mail, sem senha.'
+          ? 'Mentorados e empresas: mandamos um código e um link de acesso para o seu e-mail, sem senha.'
           : 'Entre com o e-mail e a senha da sua conta. Quem usa a verificação em duas etapas confirma com o código.'}
       </p>
 
@@ -387,6 +419,167 @@ function FormStep({
           {!busy && <ArrowRight className="size-4" aria-hidden />}
         </button>
       </form>
+    </>
+  );
+}
+
+/** Depois do pedido: o código do e-mail entra aqui; o link do e-mail também serve, em qualquer aparelho. */
+function SentStep({
+  pedido,
+  busy,
+  error,
+  onCode,
+  onResend,
+  onOtherEmail,
+}: {
+  pedido: Pedido;
+  busy: boolean;
+  error: string | null;
+  onCode: (code: string) => void;
+  onResend: () => void;
+  onOtherEmail: () => void;
+}) {
+  const ids = { code: useId(), error: useId(), hint: useId() };
+  const [code, setCode] = useState('');
+  const [agora, setAgora] = useState(() => Date.now());
+  const [reenviado, setReenviado] = useState(false);
+  useEffect(() => {
+    const relogio = setInterval(() => setAgora(Date.now()), 1000);
+    return () => clearInterval(relogio);
+  }, []);
+  const espera = Math.max(0, Math.ceil((pedido.sentAt + 60_000 - agora) / 1000));
+  const caixa = caixaDeEntrada(pedido.email);
+  const comCodigo = Boolean(pedido.requestId);
+
+  function digitar(value: string) {
+    const digitos = value.replace(/\D/g, '').slice(0, 6);
+    setCode(digitos);
+    // Seis números (digitados, colados ou preenchidos pelo celular): entra sem precisar de botão.
+    if (digitos.length === 6 && !busy) onCode(digitos);
+  }
+
+  return (
+    <>
+      <h1 className="mt-3 font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%]">
+        Confira seu e-mail
+      </h1>
+      <p className="mt-3 text-base text-muted-foreground" id={ids.hint}>
+        Se <strong className="text-foreground">{pedido.email}</strong> tem acesso,{' '}
+        {comCodigo
+          ? 'o código e o link chegam em instantes. Digite o código aqui ou toque no link do e-mail.'
+          : 'o link chega em instantes e entra direto, sem senha.'}{' '}
+        Valem por 15 minutos.
+      </p>
+
+      {comCodigo && (
+        <form
+          noValidate
+          className="mt-8 flex flex-col gap-4"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (code.length === 6) onCode(code);
+          }}
+        >
+          <div className="flex flex-col gap-2">
+            <label htmlFor={ids.code} className="text-sm font-semibold">
+              Código de 6 números
+            </label>
+            <input
+              id={ids.code}
+              name="code"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              pattern="[0-9]*"
+              autoFocus
+              value={code}
+              onChange={(event) => digitar(event.target.value)}
+              placeholder="000000"
+              className={cn(INPUT, 'text-center font-mono text-3xl tracking-[0.5em] placeholder:text-muted-foreground/40')}
+              aria-describedby={[ids.hint, error ? ids.error : null].filter(Boolean).join(' ')}
+              aria-invalid={error ? true : undefined}
+            />
+          </div>
+          {error && <ErrorText id={ids.error}>{error}</ErrorText>}
+          <button type="submit" disabled={busy || code.length < 6} className={PRIMARY}>
+            {busy ? <Spinner /> : null}
+            Entrar
+          </button>
+        </form>
+      )}
+
+      <div className="mt-6 flex flex-col gap-3 border-t pt-5 text-sm">
+        {caixa && (
+          <a href={caixa.href} target="_blank" rel="noopener noreferrer" className={cn(LINK, 'inline-flex items-center gap-1.5')}>
+            <Mail className="size-4" aria-hidden />
+            Abrir o {caixa.nome}
+          </a>
+        )}
+        <p className="text-muted-foreground" aria-live="polite">
+          Não chegou? Veja no spam ou{' '}
+          {espera > 0 ? (
+            <span>
+              reenvie em <span className="tabular-nums">0:{String(espera).padStart(2, '0')}</span>
+            </span>
+          ) : (
+            <button
+              type="button"
+              className={LINK}
+              disabled={busy}
+              onClick={() => {
+                setReenviado(true);
+                setCode('');
+                onResend();
+              }}
+            >
+              reenviar
+            </button>
+          )}
+          .{reenviado && espera > 0 ? ' Mandamos de novo; vale o e-mail mais recente.' : ''}
+        </p>
+        <button type="button" className={cn(LINK, 'self-start')} onClick={onOtherEmail}>
+          Usar outro e-mail
+        </button>
+      </div>
+    </>
+  );
+}
+
+/** O link do e-mail venceu, já foi usado ou foi trocado por um mais novo: um toque manda outro. */
+function ExpiredStep({
+  email,
+  busy,
+  error,
+  onResend,
+  onOtherEmail,
+}: {
+  email: string;
+  busy: boolean;
+  error: string | null;
+  onResend: (email: string) => void;
+  onOtherEmail: () => void;
+}) {
+  const ids = { error: useId() };
+  return (
+    <>
+      <h1 className="mt-3 font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%]">
+        Este link já não vale
+      </h1>
+      <p className="mt-3 text-base text-muted-foreground" role="alert">
+        Links e códigos valem por 15 minutos e funcionam uma vez, e um pedido novo cancela os anteriores. Sem problema:
+        mandamos outro.
+      </p>
+      <div className="mt-8 flex flex-col gap-4">
+        {error && <ErrorText id={ids.error}>{error}</ErrorText>}
+        {email ? (
+          <button type="button" className={PRIMARY} disabled={busy} onClick={() => onResend(email)}>
+            {busy ? <Spinner /> : <Mail className="size-4" aria-hidden />}
+            Mandar um novo para {email}
+          </button>
+        ) : null}
+        <button type="button" className={cn(email ? LINK : PRIMARY, email && 'self-center text-sm')} onClick={onOtherEmail}>
+          {email ? 'Usar outro e-mail' : 'Pedir um novo link'}
+        </button>
+      </div>
     </>
   );
 }
