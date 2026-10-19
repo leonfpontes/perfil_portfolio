@@ -15,7 +15,7 @@ A identidade atual vem do modernismo brasileiro: os painéis de azulejo de Athos
 | Destaque | Bloco de cor atrás da palavra, no lugar do itálico | `highlight` |
 | Rótulos | Caixa alta, levemente expandida e espaçada (sem fonte mono) | `label-caps` |
 | Bordas | Fios de 1px, cantos retos | `--radius: 0` |
-| Arte | Azulejos generativos, retícula de meio-tom e capas por produto | `art/Azulejo`, `art/Halftone`, `art/GenerativeCover` |
+| Arte | Azulejos generativos, fotos que se revelam (retícula → duotônico) e capas por produto | `art/Azulejo`, `art/Halftone`, `art/GenerativeCover` |
 
 O modo escuro usa um verde-quase-preto. As cenas "mata" se invertem para cal, para manter o contraste entre capítulos.
 
@@ -27,10 +27,10 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 |---|---|---|
 | Início | papel | Retrato "impresso" de baixo para cima, título por linhas, campo de fluxo em tinta reagindo ao cursor |
 | Mentoria | areia | Propostas chegam de lados opostos; preços contam até o valor |
-| Jornada | papel | **Fixa**: a linha dos gates é traçada e cada etapa acende; depois, o que a mentoria não é vai sendo riscado; foto em meio-tom generativo |
+| Jornada | papel | **Fixa**: a linha dos gates é traçada e cada etapa acende; depois, o que a mentoria não é vai sendo riscado; foto que se revela de retícula em duotônico |
 | Depoimentos | tinta | **Fixa**: um depoimento por passo de scroll; a aspa gigante gira como um carimbo |
 | Serviços | sinal (vermelhão) | **Fixa**: numeral-odômetro dentro de um selo circular que gira; um serviço por vez |
-| Sobre | papel | Texto "acende" conforme a leitura; foto em meio-tom com lente no cursor |
+| Sobre | papel | Texto "acende" conforme a leitura; foto que se revela, com lupa no cursor |
 | Produtos | tinta | **Trilho horizontal fixo** com capas generativas por produto |
 | Trajetória | papel | Fichas empilhadas: cada experiência desliza sobre a anterior |
 | Competências | noite | Faixas tipográficas em loop; o impulso do scroll acelera |
@@ -41,7 +41,14 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 
 **Arte generativa** (`components/art`):
 - **Azulejos:** painel com módulos geométricos em cores de marca. A composição muda a cada visita, um azulejo gira de tempos em tempos e o que está sob o cursor também gira.
-- **Meio-tom das fotos.**
+- **Fotos que se revelam:**
+  - a foto entra como retícula de impressão;
+  - ao chegar no centro da tela, os pontos se fundem num duotônico da marca (breu sobre cal);
+  - no desktop, o cursor é uma lupa que mostra a foto antes;
+  - as cores são fixas, então em qualquer tema a foto é uma impressão positiva (nunca negativo);
+  - no modo suave, aparece pronta.
+
+  A retícula pura foi descartada porque as pessoas não reconheciam o que as fotos mostravam.
 - **Capas por produto:** selo, gates, radar e curvas de nível.
 
 Tudo é desenhado em canvas e pausa fora da tela.
