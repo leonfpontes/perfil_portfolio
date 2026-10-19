@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { createColorReader, useCanvas } from '@/hooks/useCanvas';
+import { useCanvas } from '@/hooks/useCanvas';
 import { cn } from '@/lib/utils';
 
 export interface HalftoneProps {
@@ -8,70 +8,112 @@ export interface HalftoneProps {
   className?: string;
   /** Lado da célula da retícula em px CSS. */
   cell?: number;
-  /** Revelação controlada (0..1). Se omitido, anima sozinho na primeira vez que aparece. */
-  progress?: number;
 }
 
-const AUTO_DURATION = 1.4;
-const FEATHER = 0.28;
-const LENS_RADIUS = 120;
-const LENS_GAIN = 0.6;
+/** Raio da lupa (desktop) em px CSS. */
+const LENS_RADIUS = 110;
+/** Parte da revelação ocupada só pela retícula; depois ela se funde à foto. */
+const DOTS_PHASE = 0.35;
 
-interface Grid {
+type RGB = [number, number, number];
+
+interface Prepared {
   key: string;
   cols: number;
   rows: number;
-  /** Escuridão por célula, 0 (papel) a 1 (tinta cheia). */
+  /** Escuridão por célula da retícula, 0 (papel) a 1 (tinta cheia). */
   dark: Float32Array;
+  /** Foto em duotônico da marca, na resolução real do canvas. */
+  duotone: HTMLCanvasElement;
+  ink: string;
+  paper: string;
 }
 
-const easeOutCubic = (t: number) => 1 - (1 - t) ** 3;
 const clamp01 = (t: number) => (t < 0 ? 0 : t > 1 ? 1 : t);
+const smoothstep = (a: number, b: number, t: number) => {
+  const x = clamp01((t - a) / (b - a));
+  return x * x * (3 - 2 * x);
+};
 
-/** Amostra a luminância da imagem na resolução da grade, com semântica de object-fit: cover. */
-function sampleGrid(img: HTMLImageElement, cols: number, rows: number): Float32Array | null {
-  const off = document.createElement('canvas');
-  off.width = cols;
-  off.height = rows;
-  let octx: CanvasRenderingContext2D | null = null;
+/** Converte qualquer cor CSS (inclusive oklch) em RGB, pintando 1 pixel. */
+function cssToRgb(color: string, fallback: RGB): RGB {
   try {
-    octx = off.getContext('2d', { willReadFrequently: true });
+    const c = document.createElement('canvas');
+    c.width = c.height = 1;
+    const x = c.getContext('2d', { willReadFrequently: true });
+    if (!x) return fallback;
+    x.fillStyle = color;
+    x.fillRect(0, 0, 1, 1);
+    const [r, g, b] = x.getImageData(0, 0, 1, 1).data;
+    return [r!, g!, b!];
   } catch {
-    octx = null;
+    return fallback;
   }
-  if (!octx || !img.naturalWidth || !img.naturalHeight) return null;
-  const scale = Math.max(cols / img.naturalWidth, rows / img.naturalHeight);
+}
+
+/** Desenha a imagem com semântica de object-fit: cover num canvas novo de w×h. */
+function cover(img: HTMLImageElement, w: number, h: number): CanvasRenderingContext2D | null {
+  const c = document.createElement('canvas');
+  c.width = Math.max(1, Math.round(w));
+  c.height = Math.max(1, Math.round(h));
+  let x: CanvasRenderingContext2D | null = null;
+  try {
+    x = c.getContext('2d', { willReadFrequently: true });
+  } catch {
+    x = null;
+  }
+  if (!x || !img.naturalWidth || !img.naturalHeight) return null;
+  const scale = Math.max(c.width / img.naturalWidth, c.height / img.naturalHeight);
   const dw = img.naturalWidth * scale;
   const dh = img.naturalHeight * scale;
-  octx.imageSmoothingQuality = 'high';
-  octx.drawImage(img, (cols - dw) / 2, (rows - dh) / 2, dw, dh);
-  const data = octx.getImageData(0, 0, cols, rows).data;
+  x.imageSmoothingQuality = 'high';
+  x.drawImage(img, (c.width - dw) / 2, (c.height - dh) / 2, dw, dh);
+  return x;
+}
+
+const luminance = (d: Uint8ClampedArray, i: number) => (0.2126 * d[i]! + 0.7152 * d[i + 1]! + 0.0722 * d[i + 2]!) / 255;
+
+/** Prepara a grade da retícula e a versão duotônica da foto (uma vez por tamanho). */
+function prepare(img: HTMLImageElement, width: number, height: number, dpr: number, cell: number, ink: RGB, paper: RGB): Omit<Prepared, 'key' | 'ink' | 'paper'> | null {
+  const cols = Math.ceil(width / cell);
+  const rows = Math.ceil(height / cell);
+  const small = cover(img, cols, rows);
+  const full = cover(img, width * dpr, height * dpr);
+  if (!small || !full) return null;
+
+  const sd = small.getImageData(0, 0, cols, rows).data;
   const dark = new Float32Array(cols * rows);
   for (let i = 0; i < dark.length; i++) {
-    const r = data[i * 4]!;
-    const g = data[i * 4 + 1]!;
-    const b = data[i * 4 + 2]!;
-    const a = data[i * 4 + 3]! / 255;
-    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
     // Leve curva de contraste: meio-tons de foto tendem a "lavar" na retícula.
-    dark[i] = clamp01((1 - lum) * a * 1.08) ** 1.1;
+    dark[i] = clamp01((1 - luminance(sd, i * 4)) * 1.08) ** 1.1;
   }
-  return dark;
+
+  // Duotônico: sombras na tinta da marca, luzes no papel — como uma impressão a duas cores.
+  const image = full.getImageData(0, 0, full.canvas.width, full.canvas.height);
+  const d = image.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const t = clamp01((luminance(d, i) - 0.04) / 0.92) ** 0.95;
+    d[i] = ink[0] + (paper[0] - ink[0]) * t;
+    d[i + 1] = ink[1] + (paper[1] - ink[1]) * t;
+    d[i + 2] = ink[2] + (paper[2] - ink[2]) * t;
+    d[i + 3] = 255;
+  }
+  full.putImageData(image, 0, 0);
+  return { cols, rows, dark, duotone: full.canvas };
 }
 
 /**
- * Foto reproduzida como retícula de impressão: pontos de tinta proporcionais à sombra,
- * revelados numa varredura diagonal. O ponteiro funciona como uma lupa sobre a retícula.
+ * Foto que "se revela": entra como retícula de impressão e, conforme chega ao
+ * centro da tela, os pontos se fundem numa foto duotônica nas cores da marca.
+ * No desktop, o cursor funciona como uma lupa que revela a foto antes.
+ *
+ * Sempre impressa em tinta-sobre-papel (cores fixas da marca), em qualquer tema:
+ * nunca aparece em negativo. Sem animação (modo suave), mostra a foto pronta.
  */
-export function Halftone({ src, alt, className, cell = 9, progress }: HalftoneProps) {
+export function Halftone({ src, alt, className, cell = 8 }: HalftoneProps) {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
-  const gridRef = useRef<Grid | null>(null);
-  const progressRef = useRef(progress);
-  progressRef.current = progress;
-  const startRef = useRef<number | null>(null);
+  const preparedRef = useRef<Prepared | null>(null);
   const lastKeyRef = useRef('');
-  const readColors = useRef(createColorReader()).current;
-
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // A foto só é baixada quando a figura se aproxima da tela (economiza dados no celular).
@@ -112,78 +154,94 @@ export function Halftone({ src, alt, className, cell = 9, progress }: HalftonePr
 
   const ref = useCanvas(
     (ctx, frame) => {
-      const { width, height, pointer, time } = frame;
+      const { width, height, pointer } = frame;
       if (!image) {
         if (frame.first) ctx.clearRect(0, 0, width, height);
         return;
       }
 
-      const cols = Math.ceil(width / cell);
-      const rows = Math.ceil(height / cell);
-      const gridKey = `${image.src}|${cols}x${rows}`;
-      if (!gridRef.current || gridRef.current.key !== gridKey) {
-        const dark = sampleGrid(image, cols, rows);
-        if (!dark) return;
-        gridRef.current = { key: gridKey, cols, rows, dark };
-      }
-      const grid = gridRef.current;
-
-      let reveal: number;
-      const controlled = progressRef.current;
-      if (frame.still) {
-        // Sem loop não há como acompanhar `progress`: com movimento reduzido mostramos a foto inteira.
-        reveal = 1;
-      } else if (controlled !== undefined) {
-        reveal = clamp01(controlled);
-      } else {
-        // O loop só roda com o canvas na viewport, então o 1º quadro animado = 1ª interseção.
-        if (startRef.current === null) startRef.current = time;
-        // Reinício do loop (ex.: mudança de `cell`) zera o tempo; mantém a revelação concluída.
-        else if (time < startRef.current) startRef.current = time - AUTO_DURATION;
-        reveal = easeOutCubic(clamp01((time - startRef.current) / AUTO_DURATION));
+      const dpr = width > 0 ? ctx.canvas.width / width : 1;
+      const key = `${image.src}|${Math.round(width)}x${Math.round(height)}|${cell}|${dpr}`;
+      let p = preparedRef.current;
+      if (!p || p.key !== key) {
+        const style = getComputedStyle(ctx.canvas);
+        const inkCss = style.getPropertyValue('--breu').trim() || '#13261f';
+        const paperCss = style.getPropertyValue('--cal').trim() || '#f7f7f2';
+        const prepared = prepare(image, width, height, dpr, cell, cssToRgb(inkCss, [19, 38, 31]), cssToRgb(paperCss, [247, 247, 242]));
+        if (!prepared) return;
+        p = { ...prepared, key, ink: inkCss, paper: paperCss };
+        preparedRef.current = p;
       }
 
-      // Pula o quadro quando nada visível mudou (revelação completa e ponteiro longe).
-      const px = pointer.active ? Math.round(pointer.x) : -1;
-      const py = pointer.active ? Math.round(pointer.y) : -1;
-      const colors = readColors(ctx.canvas, frame.first);
-      const drawKey = `${grid.key}|${reveal.toFixed(4)}|${px},${py}|${colors.ink}`;
+      // Progresso da revelação pela posição na tela: 0 quando a figura surge
+      // embaixo, 1 quando o centro dela chega a ~55% da altura da janela.
+      let progress = 1;
+      if (!frame.still) {
+        const rect = ctx.canvas.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        progress = clamp01((vh - rect.top) / (vh * 0.45 + rect.height / 2));
+      }
+      const fuse = smoothstep(DOTS_PHASE, 1, progress); // 0 = só retícula, 1 = só foto
+      const sweep = clamp01(progress / DOTS_PHASE); // varredura diagonal dos pontos
+
+      const lensOn = pointer.active && fuse < 1 && window.matchMedia?.('(pointer: fine)').matches;
+      const px = lensOn ? Math.round(pointer.x) : -1;
+      const py = lensOn ? Math.round(pointer.y) : -1;
+      const drawKey = `${key}|${fuse.toFixed(3)}|${sweep.toFixed(3)}|${px},${py}`;
       if (!frame.first && drawKey === lastKeyRef.current) return;
       lastKeyRef.current = drawKey;
 
-      ctx.clearRect(0, 0, width, height);
-      if (reveal <= 0) return;
-      ctx.fillStyle = colors.ink;
-      ctx.beginPath();
-      const maxR = cell * 0.52;
-      const sweep = reveal * (1 + FEATHER);
-      for (let r = 0; r < grid.rows; r++) {
-        const cy = r * cell + cell / 2;
-        for (let c = 0; c < grid.cols; c++) {
-          const d = grid.dark[r * grid.cols + c]!;
-          if (d < 0.04) continue;
-          const cx = c * cell + cell / 2;
-          // Varredura diagonal: 0 no canto superior esquerdo, 1 no inferior direito.
-          const diag = (cx / width + cy / height) / 2;
-          const local = clamp01((sweep - diag) / FEATHER);
-          if (local <= 0) continue;
-          let lens = 1;
-          if (pointer.active) {
-            const dx = cx - pointer.x;
-            const dy = cy - pointer.y;
-            const dist2 = dx * dx + dy * dy;
-            if (dist2 < LENS_RADIUS * LENS_RADIUS) {
-              const k = 1 - Math.sqrt(dist2) / LENS_RADIUS;
-              lens = 1 + LENS_GAIN * k * k * (3 - 2 * k);
-            }
+      // Papel.
+      ctx.fillStyle = p.paper;
+      ctx.fillRect(0, 0, width, height);
+
+      // Retícula (some à medida que a foto se forma).
+      if (fuse < 1) {
+        ctx.globalAlpha = 1 - fuse;
+        ctx.fillStyle = p.ink;
+        ctx.beginPath();
+        // Os pontos crescem ao se fundir, como tinta espalhando no papel.
+        const maxR = cell * (0.52 + 0.35 * fuse);
+        for (let r = 0; r < p.rows; r++) {
+          const cy = r * cell + cell / 2;
+          for (let c = 0; c < p.cols; c++) {
+            const d = p.dark[r * p.cols + c]!;
+            if (d < 0.04) continue;
+            const cx = c * cell + cell / 2;
+            const diag = (cx / width + cy / height) / 2;
+            const local = clamp01((sweep * 1.3 - diag) / 0.3);
+            if (local <= 0) continue;
+            const radius = d * maxR * local;
+            if (radius < 0.3) continue;
+            ctx.moveTo(cx + radius, cy);
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
           }
-          const radius = d * maxR * easeOutCubic(local) * lens;
-          if (radius < 0.25) continue;
-          ctx.moveTo(cx + radius, cy);
-          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
         }
+        ctx.fill();
+        ctx.globalAlpha = 1;
       }
-      ctx.fill();
+
+      // Foto duotônica (aparece por cima conforme se funde).
+      if (fuse > 0) {
+        ctx.globalAlpha = fuse;
+        ctx.drawImage(p.duotone, 0, 0, width, height);
+        ctx.globalAlpha = 1;
+      }
+
+      // Lupa: o cursor revela a foto dentro de um círculo.
+      if (lensOn) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(pointer.x, pointer.y, LENS_RADIUS, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(p.duotone, 0, 0, width, height);
+        ctx.restore();
+        ctx.strokeStyle = p.ink;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(pointer.x, pointer.y, LENS_RADIUS, 0, Math.PI * 2);
+        ctx.stroke();
+      }
     },
     { deps: [image, cell] },
   );

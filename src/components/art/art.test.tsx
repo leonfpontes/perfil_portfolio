@@ -17,8 +17,8 @@ describe('arte generativa', () => {
     expect(screen.getByRole('img', { name: 'Retrato de Leonardo' })).toBeInTheDocument();
   });
 
-  it('Halftone aceita progresso controlado', () => {
-    render(<Halftone src="/foto.jpg" alt="Retrato" progress={0.5} cell={6} />);
+  it('Halftone aceita tamanho de célula próprio', () => {
+    render(<Halftone src="/foto.jpg" alt="Retrato" cell={6} />);
     expect(screen.getByRole('img', { name: 'Retrato' })).toBeInTheDocument();
   });
 
