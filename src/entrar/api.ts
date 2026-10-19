@@ -66,7 +66,10 @@ export const api = {
   me: () => call<Principal>('/me').catch((error: SignInError) => (error.status === 401 ? null : Promise.reject(error))),
   login: (email: string, password: string) => post<SignInResult>('/login', { email, password }),
   twoFactor: (challenge: string, code: string) => post<SignInResult>('/login/two-factor', { challenge, code }),
-  requestLink: (email: string) => post<{ ok: true }>('/magic-link', { email }),
+  /** Manda o link e o código; o requestId volta para o código ser digitado nesta página. */
+  requestLink: (email: string) => post<{ requestId?: string }>('/magic-link', { email }),
+  /** O código de 6 números do e-mail, para o pedido feito nesta página. */
+  verifyCode: (requestId: string, code: string) => post<SignInResult>('/magic-link/code', { requestId, code }),
   verifyLink: (token: string) => post<SignInResult>('/magic-link/verify', { token }),
   logout: () => post<void>('/logout', {}),
 };
