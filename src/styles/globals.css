@@ -249,7 +249,7 @@ html.lenis, html.lenis body { height: auto; }
 
 ::view-transition-group(marca-lp) {
   animation-duration: 650ms;
-  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.22, 0.75, 0.12, 1);
 }
 
 ::view-transition-old(root),

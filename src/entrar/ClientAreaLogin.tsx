@@ -104,8 +104,9 @@ export function ClientAreaLogin() {
 
   return (
     <div className="passagem relative flex min-h-dvh flex-col bg-background text-foreground">
-      {/* A cortina: recua até o painel na chegada e cobre a tela na saída (entrar.css). */}
+      {/* A cortina recua até o painel na chegada, com o fio ocre na borda, e cobre a tela na saída (entrar.css). */}
       <div className="passagem-cortina" aria-hidden />
+      <div className="passagem-fio" aria-hidden />
 
       <a
         href="#formulario"
@@ -254,7 +255,7 @@ function BrandPanel() {
       aria-label="Sobre a Área do cliente"
       className="relative hidden overflow-hidden bg-[var(--anil)] text-[var(--cal)] md:flex md:flex-col"
     >
-      <div className="passagem-surge flex flex-1 flex-col justify-between gap-12 px-10 pt-24 pb-10 lg:px-14">
+      <div className="passagem-surge relative z-20 flex flex-1 flex-col justify-between gap-12 px-10 pt-24 pb-10 lg:px-14">
         <div>
           <p className="label-caps text-[var(--ocre)]">Mentoria 1:1 · Diagnóstico de maturidade</p>
           <p className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight [font-stretch:115%] lg:text-5xl">
