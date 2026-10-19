@@ -7,7 +7,8 @@ import { sairPara } from './passagem';
 
 /**
  * /entrar — a porta da Área do cliente, no site. Mentorados e empresas entram por um link no
- * e-mail (sem senha para lembrar); o mentor, por senha (e o código do 2FA, quando ligado). O link
+ * e-mail (sem senha para lembrar) ou, sem e-mail, pela senha que o mentor deu; o mentor, por senha
+ * (e o código do 2FA, quando ligado). O link
  * que chega por e-mail também abre aqui (`?token=`). Entrou, a cortina fecha e o app abre na área
  * da pessoa (ou no `?next=` que o app pediu).
  *
@@ -320,7 +321,7 @@ function FormStep({
       <p className="mt-3 text-base text-muted-foreground">
         {mode === 'link'
           ? 'Mentorados e empresas: enviamos um link de acesso para o seu e-mail, sem senha.'
-          : 'Acesso do mentor, com senha e verificação em duas etapas.'}
+          : 'Entre com o e-mail e a senha da sua conta. Quem usa a verificação em duas etapas confirma com o código.'}
       </p>
 
       <div role="group" aria-label="Como entrar" className="mt-8 grid grid-cols-2 border border-input p-1">
