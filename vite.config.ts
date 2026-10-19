@@ -18,10 +18,19 @@ export default defineConfig(({ isSsrBuild }) => ({
     rollupOptions: isSsrBuild
       ? {}
       : {
+          // Duas páginas: o site (index.html) e a Área do cliente (entrar.html, sem GSAP nem seções).
+          input: {
+            main: resolve(__dirname, 'index.html'),
+            entrar: resolve(__dirname, 'entrar.html'),
+          },
           output: {
-            manualChunks: {
-              react: ['react', 'react-dom', 'react-dom/client'],
-              motion: ['gsap', 'gsap/ScrollTrigger', 'gsap/SplitText', '@gsap/react', 'lenis'],
+            // Por pacote, não por nome de import: com a lista, o auxiliar CommonJS do React caía no
+            // chunk de animação, e a Área do cliente (sem GSAP) baixava os 53 KB dele.
+            manualChunks(id) {
+              if (!id.includes('/node_modules/')) return undefined;
+              if (/\/node_modules\/(react|react-dom|scheduler)\//.test(id)) return 'react';
+              if (/\/node_modules\/(gsap|@gsap|lenis)\//.test(id)) return 'motion';
+              return undefined;
             },
           },
         },

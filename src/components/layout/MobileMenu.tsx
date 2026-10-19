@@ -51,6 +51,11 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
               {nav.cta}
             </TrackedLink>
           </Button>
+          <Button asChild variant="outline" size="lg" className="mt-3 w-full">
+            <TrackedLink href="/entrar" trackLabel="mobile_client_area">
+              {nav.clientArea}
+            </TrackedLink>
+          </Button>
         </nav>
       </SheetContent>
     </Sheet>

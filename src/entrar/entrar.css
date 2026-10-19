@@ -1,0 +1,200 @@
+/*
+ * A passagem da Área do cliente (src/entrar/passagem.ts) — o desenho da entrada do GiraHub.
+ *
+ * Chegada (computador): a cortina anil cobre a tela e recua até a borda do painel da marca
+ * (5/12 da grade), com o fio ocre correndo da direita até essa borda; a cortina fica ali, como o
+ * próprio painel, e o conteúdo do painel e o formulário surgem por cima. No celular não há
+ * cortina na chegada: só o formulário surge.
+ * Saída: o formulário e o conteúdo do painel se apagam, e a cortina avança da borda do painel
+ * até cobrir a tela, com o fio na frente (no celular, desce do topo); só então a página troca. O cabeçalho fica acima de tudo, para a
+ * marca voar entre as páginas sem ser coberta.
+ * Sem animação para quem pediu menos movimento (o sistema ou o modo suave do site).
+ */
+
+.passagem {
+  --passagem-corte: 41.6667%;
+  --passagem-tempo: 900ms;
+  --passagem-curva: cubic-bezier(0.22, 0.75, 0.12, 1);
+  --passagem-curva-volta: cubic-bezier(0.55, 0, 0.75, 0.2);
+}
+
+.passagem-cortina,
+.passagem-fio {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .passagem-cortina {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: var(--anil);
+    clip-path: inset(0 calc(100% - var(--passagem-corte)) 0 0);
+    animation: passagem-recuar var(--passagem-tempo) var(--passagem-curva) both;
+  }
+
+  .passagem-fio {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--passagem-corte);
+    z-index: 30;
+    width: 3px;
+    margin-left: -1.5px;
+    background: var(--ocre);
+    box-shadow: 0 0 24px 2px color-mix(in oklab, var(--ocre) 35%, transparent);
+    animation: passagem-fio var(--passagem-tempo) var(--passagem-curva) both;
+  }
+
+  .passagem-surge {
+    animation: passagem-surgir 700ms var(--passagem-curva) 250ms both;
+  }
+
+  .passagem-porta {
+    animation: passagem-surgir 700ms var(--passagem-curva)
+      calc(var(--passagem-tempo) * 0.55) both;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .passagem-porta {
+    animation: passagem-surgir 600ms var(--passagem-curva) 120ms both;
+  }
+}
+
+/* Saída (DURACAO_DA_SAIDA_MS): o formulário e o painel se apagam e a cortina avança sobre a tela. */
+html[data-passagem="saindo"] .passagem-porta,
+html[data-passagem="saindo"] .passagem-surge {
+  animation: passagem-apagar 320ms ease-in both;
+}
+
+/* Abaixo do fio e do conteúdo do painel (que se apaga), acima do formulário. */
+html[data-passagem="saindo"] .passagem-cortina {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: var(--anil);
+  animation: passagem-avancar 650ms var(--passagem-curva-volta) both;
+}
+
+html[data-passagem="saindo"] .passagem-fio {
+  animation: passagem-fio-volta 650ms var(--passagem-curva-volta) both;
+}
+
+@media (max-width: 767.98px) {
+  html[data-passagem="saindo"] .passagem-cortina {
+    animation-name: passagem-descer;
+  }
+
+  /* No celular o cabeçalho é claro: a marca e o "Voltar" clareiam com o anil passando por trás. */
+  .passagem > header,
+  .passagem > header a {
+    transition:
+      color 300ms ease-out,
+      border-color 300ms ease-out;
+  }
+
+  html[data-passagem="saindo"] .passagem > header,
+  html[data-passagem="saindo"] .passagem > header a {
+    color: var(--cal);
+    border-color: transparent;
+  }
+}
+
+@keyframes passagem-recuar {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 calc(100% - var(--passagem-corte)) 0 0);
+  }
+}
+
+@keyframes passagem-fio {
+  from {
+    left: 100%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    left: var(--passagem-corte);
+    opacity: 1;
+  }
+}
+
+@keyframes passagem-surgir {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes passagem-avancar {
+  from {
+    clip-path: inset(0 calc(100% - var(--passagem-corte)) 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes passagem-fio-volta {
+  from {
+    left: var(--passagem-corte);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  to {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes passagem-descer {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes passagem-apagar {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Menos movimento: a cortina fica parada no lugar do painel, e nada surge nem se apaga. */
+@media (prefers-reduced-motion: reduce) {
+  .passagem-cortina,
+  .passagem-fio,
+  .passagem-surge,
+  .passagem-porta {
+    animation: none !important;
+  }
+}
+
+.reduced-motion .passagem-cortina,
+.reduced-motion .passagem-fio,
+.reduced-motion .passagem-surge,
+.reduced-motion .passagem-porta {
+  animation: none !important;
+}

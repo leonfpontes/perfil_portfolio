@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Área do cliente · LP | Produto &amp; Portfólio</title>
+    <meta
+      name="description"
+      content="Entre na sua área: mentoria 1:1 e diagnóstico de maturidade com Leonardo Pontes. Próxima sessão, combinados, roadmap e relatórios num lugar só."
+    />
+    <!-- Página de acesso: fora dos buscadores. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f7f7f3" />
+    <link rel="canonical" href="https://www.leopontes.com.br/entrar" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Tema e modo de movimento antes do primeiro paint, como na página inicial (sem "flash"). -->
+    <script>
+      try {
+        var h = document.documentElement;
+        var t = localStorage.getItem('lp:theme');
+        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) h.classList.add('dark');
+        var m = localStorage.getItem('lp:motion') || 'system';
+        var os = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (os) h.classList.add('os-reduced-motion');
+        if (m === 'reduced' || (m === 'system' && os)) h.classList.add('reduced-motion');
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <noscript>A Área do cliente precisa de JavaScript. Contato: leonfpontes@gmail.com</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/entrar/main.tsx"></script>
+  </body>
+</html>
