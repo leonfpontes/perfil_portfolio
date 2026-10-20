@@ -15,7 +15,7 @@ A identidade atual vem do modernismo brasileiro: os painéis de azulejo de Athos
 | Destaque | Bloco de cor atrás da palavra, no lugar do itálico | `highlight` |
 | Rótulos | Caixa alta, levemente expandida e espaçada (sem fonte mono) | `label-caps` |
 | Bordas | Fios de 1px, cantos retos | `--radius: 0` |
-| Arte | Azulejos generativos, fotos que se revelam (retícula → duotônico) e capas por produto | `art/Azulejo`, `art/Halftone`, `art/GenerativeCover` |
+| Arte | Azulejos generativos, campo de fluxo em tinta atrás do retrato, fotos que se revelam (retícula → duotônico) e capas por produto | `art/Azulejo`, `art/FlowField`, `art/Halftone`, `art/GenerativeCover` |
 
 O modo escuro usa um verde-quase-preto. As cenas "mata" se invertem para cal, para manter o contraste entre capítulos.
 
@@ -25,7 +25,7 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 
 | Cena | Tom | Coreografia |
 |---|---|---|
-| Início | papel | Retrato "impresso" de baixo para cima, título por linhas, campo de fluxo em tinta reagindo ao cursor |
+| Início | papel | Retrato "impresso" de baixo para cima sobre um campo de fluxo em tinta (traços de gravura que fogem do cursor), título por linhas |
 | Mentoria | areia | Propostas chegam de lados opostos; preços contam até o valor |
 | Jornada | papel | **Fixa**: a linha dos gates é traçada e cada etapa acende; depois, o que a mentoria não é vai sendo riscado; foto que se revela de retícula em duotônico |
 | Depoimentos | tinta | **Fixa**: um depoimento por passo de scroll; a aspa gigante gira como um carimbo |
@@ -40,7 +40,8 @@ A página não é um scroll infinito: é uma sequência de **cenas**. Cada seç�
 **Tons** (`.tone-*` em `globals.css`) definem só 4 cores: fundo, tinta, sinal e texto-sobre-sinal. Todo o resto da paleta deriva delas com `color-mix`, recalculado em cada seção.
 
 **Arte generativa** (`components/art`):
-- **Azulejos:** painel com módulos geométricos em cores de marca. A composição muda a cada visita, um azulejo gira de tempos em tempos e o que está sob o cursor também gira.
+- **Campo de fluxo:** traços finos em tinta, como linhas de gravura, que correm devagar atrás do retrato do hero e se afastam do cursor (alguns na cor de sinal). Voltou a pedido do Leonardo, no lugar dos azulejos atrás da foto.
+- **Azulejos:** painel com módulos geométricos em cores de marca, atrás do preço no hero das páginas internas, no contato e na 404. A composição muda a cada visita, um azulejo gira de tempos em tempos e o que está sob o cursor também gira.
 - **Fotos que se revelam:**
   - a foto entra como retícula de impressão;
   - ao chegar no centro da tela, os pontos se fundem num duotônico da marca (breu sobre cal);
