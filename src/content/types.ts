@@ -11,8 +11,12 @@ export type Locale = 'pt-BR' | 'en';
 
 export type SectionId =
   | 'inicio'
+  | 'ofertas'
+  | 'perfil'
   | 'mentoria'
   | 'jornada'
+  | 'processo'
+  | 'diagnostico'
   | 'servicos'
   | 'sobre'
   | 'produtos'
@@ -44,8 +48,16 @@ export interface Meta {
   description: string;
 }
 
+/** Item do menu: uma página do site (ou a âncora de contato, presente em todas). */
+export interface NavItem {
+  id: 'mentoring' | 'diagnostic' | 'about' | 'contact';
+  label: string;
+}
+
 export interface Navigation {
-  items: { id: SectionId; label: string }[];
+  items: NavItem[];
+  /** Rótulo da página inicial (trilha de navegação e 404). */
+  home: string;
   cta: string;
   /** Link para a Área do cliente (/entrar), onde mentorados e empresas entram. */
   clientArea: string;
@@ -61,7 +73,8 @@ export interface Hero {
   title: string;
   titleHighlight: string;
   description: string;
-  primaryCta: string;
+  /** Acima das duas "portas" (mentoria e diagnóstico), que vêm de `offer.plans`. */
+  offersLabel: string;
   secondaryCta: string;
   portraitAlt: string;
   availability: string;
@@ -90,10 +103,14 @@ export interface Plan {
   title: string;
   description: string;
   price: string;
+  /** Preço com a unidade, numa linha (ex.: "R$ 997/mês"), para o hero e o SEO. */
+  priceShort: string;
   priceNote: string;
   regularPrice: string;
   features: string[];
   cta: string;
+  /** Link para a página da oferta (na página inicial). */
+  detailCta: string;
   highlighted: boolean;
   whatsappMessage: string;
 }
@@ -103,8 +120,71 @@ export interface Offer extends SectionHeading {
   bookingHint: string;
   founderNote: string;
   plans: Plan[];
-  journey: { title: string; steps: { title: string; description: string }[] };
+}
+
+export interface JourneyStep {
+  title: string;
+  description: string;
+}
+
+/** Etapas em "gates" (G1–G4) e a lista do que a oferta não é. */
+export interface Journey extends SectionHeading {
+  steps: JourneyStep[];
   isNot: { title: string; items: string[] };
+}
+
+/** Abertura das páginas internas: o H1 da página. */
+export interface PageHeroCopy {
+  eyebrow: string;
+  title: string;
+  titleHighlight: string;
+  description: string;
+  primaryCta: string;
+  secondaryCta: string;
+  /** Régua de fatos rápidos abaixo do título (formato, duração, preço…). */
+  facts: { label: string; value: string }[];
+}
+
+export interface MentoringPage {
+  meta: Meta;
+  hero: PageHeroCopy;
+  scope: SectionHeading & {
+    audienceTitle: string;
+    audience: string[];
+    topicsTitle: string;
+    topics: string[];
+  };
+  journey: Journey;
+  faq: Faq;
+}
+
+export interface DiagnosticPage {
+  meta: Meta;
+  hero: PageHeroCopy;
+  process: Journey;
+  deliverables: SectionHeading & {
+    itemsTitle: string;
+    items: { title: string; description: string }[];
+  };
+  faq: Faq;
+}
+
+export interface AboutPage {
+  meta: Meta;
+}
+
+export interface HomePage {
+  meta: Meta;
+  /** "Quem conduz": resumo do perfil, com link para /sobre. */
+  profile: SectionHeading & { cta: string };
+}
+
+export interface NotFoundPage {
+  meta: Meta;
+  eyebrow: string;
+  title: string;
+  description: string;
+  linksTitle: string;
 }
 
 export interface Service {
@@ -254,14 +334,17 @@ export interface UiStrings {
 export interface Footer {
   tagline: string;
   rights: string;
-  builtWith: string;
   imageCredits: string;
 }
 
 export interface SiteContent {
   locale: Locale;
-  meta: Meta;
   nav: Navigation;
+  home: HomePage;
+  mentoringPage: MentoringPage;
+  diagnosticPage: DiagnosticPage;
+  aboutPage: AboutPage;
+  notFound: NotFoundPage;
   hero: Hero;
   offer: Offer;
   services: Services;
@@ -271,7 +354,6 @@ export interface SiteContent {
   skills: Skills;
   education: Education;
   testimonials: Testimonials;
-  faq: Faq;
   contact: Contact;
   footer: Footer;
   ui: UiStrings;

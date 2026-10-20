@@ -8,11 +8,14 @@ import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
 import { cn } from '@/lib/utils';
 
-export function About() {
+/** Em /sobre a seção abre a página: o título vira o H1 e ganha o respiro do cabeçalho fixo. */
+export function About({ asPageHero = false }: { asPageHero?: boolean }) {
   const { about, ui } = useContent();
   const [lead, ...rest] = about.story;
   const ref = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
+  // Abaixo do H1 da página, os pilares são o nível seguinte (h2), não h3.
+  const PillarHeading = asPageHero ? 'h2' : 'h3';
 
   useGSAP(
     () => {
@@ -37,10 +40,10 @@ export function About() {
   );
 
   return (
-    <Scene id="sobre" label={about.eyebrow} tone="cal">
+    <Scene id="sobre" label={about.eyebrow} tone="cal" className={cn(asPageHero && 'pt-24 lg:pt-28')}>
       <Container>
         <div ref={ref}>
-          <SectionHeader id="sobre" heading={about} />
+          <SectionHeader id="sobre" heading={about} level={asPageHero ? 'h1' : 'h2'} />
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               {lead && (
@@ -90,7 +93,7 @@ export function About() {
             {about.pillars.map((pillar, i) => (
               <li key={pillar.title} data-pillar className="bg-background p-4 pt-4 lg:p-6 lg:pt-5">
                 <p className="label-caps text-signal">{String(i + 1).padStart(2, '0')}</p>
-                <h3 className="mt-3 font-display text-2xl lg:mt-6 lg:text-3xl">{pillar.title}</h3>
+                <PillarHeading className="mt-3 font-display text-2xl lg:mt-6 lg:text-3xl">{pillar.title}</PillarHeading>
                 <p className="mt-2 text-sm text-muted-foreground">{pillar.description}</p>
               </li>
             ))}

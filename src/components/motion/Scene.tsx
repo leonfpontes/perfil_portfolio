@@ -56,9 +56,15 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
       const layers = outer.querySelectorAll('[data-scene-body], [data-scene-art]');
       const mm = gsap.matchMedia();
       // Só opacidade: vale também no modo suave (não causa enjoo).
+      // Cena que já nasce dentro da primeira tela (ex.: logo abaixo de um hero curto) não
+      // "entra": presa à rolagem, ela ficaria meio apagada no primeiro quadro. Posição
+      // absoluta: numa troca de página, a rolagem ainda é a da página anterior aqui.
+      const entersFromBelow = outer.getBoundingClientRect().top + window.scrollY >= window.innerHeight * 0.98;
       mm.add(MEDIA.wide, () => {
         // Entrada e saída se sobrepõem: nunca há uma tela vazia entre cenas.
-        gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 60%', scrub: true } });
+        if (entersFromBelow) {
+          gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 60%', scrub: true } });
+        }
         gsap.to(layers, {
           opacity: 0,
           ease: 'none',
@@ -69,6 +75,7 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
       // No celular as seções são mais altas que a tela: só a entrada é animada,
       // para que nada se apague enquanto ainda está sendo lido.
       mm.add(MEDIA.narrow, () => {
+        if (!entersFromBelow) return;
         gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 70%', scrub: true } });
       });
     },

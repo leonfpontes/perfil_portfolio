@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { contentByLocale } from '@/lib/i18n/registry';
 import { en } from './locales/en';
 import { ptBR } from './locales/pt-BR';
-import { SECTION_ORDER, sectionNumber } from './sections';
+import { PAGE_SECTIONS } from '@/lib/router/routes';
+import { sectionCount, sectionNumber } from './sections';
 
 /** Descreve a "forma" de um valor: chaves de objetos e tamanho de arrays, sem o texto. */
 function shape(value: unknown): unknown {
@@ -40,18 +41,26 @@ describe('conteúdo do site', () => {
     expect(invariants(en)).toEqual(invariants(ptBR));
   });
 
-  it('todo item de navegação aponta para uma seção numerada', () => {
-    for (const content of Object.values(contentByLocale)) {
-      for (const item of content.nav.items) {
-        expect(SECTION_ORDER).toContain(item.id);
-      }
+  it('toda página com conteúdo termina no contato (o item "Contato" do menu é uma âncora)', () => {
+    for (const page of ['home', 'mentoring', 'diagnostic', 'about'] as const) {
+      expect(PAGE_SECTIONS[page].at(-1)).toBe('contato');
     }
   });
 
-  it('numera seções com dois dígitos', () => {
-    expect(sectionNumber('mentoria')).toBe('01');
-    expect(sectionNumber('contato')).toBe(String(SECTION_ORDER.length).padStart(2, '0'));
-    expect(sectionNumber('inicio')).toBe('');
+  it('numera seções com dois dígitos, por página', () => {
+    expect(sectionNumber('home', 'ofertas')).toBe('01');
+    expect(sectionNumber('about', 'sobre')).toBe('01');
+    expect(sectionNumber('home', 'contato')).toBe(String(sectionCount('home')).padStart(2, '0'));
+    expect(sectionNumber('home', 'inicio')).toBe('');
+  });
+
+  it('o diagnóstico custa R$ 7.500 (fundador) e R$ 12.000 (cheio) nos dois idiomas, sem os preços antigos', () => {
+    const plan = (c: typeof ptBR) => c.offer.plans.find((p) => p.id === 'diagnostic')!;
+    expect([plan(ptBR).price, plan(ptBR).regularPrice]).toEqual(['R$ 7.500', 'Depois: R$ 12.000']);
+    expect([plan(en).price, plan(en).regularPrice]).toEqual(['R$ 7,500', 'Later: R$ 12,000']);
+    for (const content of Object.values(contentByLocale)) {
+      expect(JSON.stringify(content)).not.toMatch(/R\$ ?(2|3)[.,]500/);
+    }
   });
 
   // Regra de comunicação da mentoria: cases de clientes aparecem generalizados.

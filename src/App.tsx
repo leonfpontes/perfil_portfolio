@@ -1,72 +1,53 @@
-import { Suspense, useEffect, type ComponentType } from 'react';
+import { useEffect, type ComponentType } from 'react';
 import { Arrow } from '@/components/common/Arrow';
+import { DocumentMeta } from '@/components/common/DocumentMeta';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { Footer } from '@/components/layout/Footer';
 import { SceneIndicator } from '@/components/motion/SceneIndicator';
 import { Header } from '@/components/layout/Header';
 import { MotionNotice } from '@/components/layout/MotionControls';
-import { SECTION_ORDER } from '@/content/sections';
 import { ScrollTrigger } from '@/lib/motion/gsap';
-import type { SectionId } from '@/content/types';
 import { useContent } from '@/lib/i18n/LocaleProvider';
+import { useRouter } from '@/lib/router/Router';
+import type { PageId } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
-import { About } from '@/sections/About';
-import { Contact } from '@/sections/Contact';
-import { Education } from '@/sections/Education';
-import { Experience } from '@/sections/Experience';
-import { Faq } from '@/sections/Faq';
-import { Hero } from '@/sections/Hero';
-import { Offer } from '@/sections/Offer';
-import { Products } from '@/sections/Products';
-import { Services } from '@/sections/Services';
-import { Skills } from '@/sections/Skills';
-import { Testimonials } from '@/sections/Testimonials';
+import { AboutPage } from '@/pages/AboutPage';
+import { DiagnosticPage } from '@/pages/DiagnosticPage';
+import { HomePage } from '@/pages/HomePage';
+import { MentoringPage } from '@/pages/MentoringPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
-/**
- * Registro seção → componente. A ordem vem de `SECTION_ORDER` (a mesma que
- * numera os capítulos), então reordenar a página é editar uma única lista.
- * Funil: oferta (+ jornada) → prova social → serviços → quem sou → produtos →
- * trajetória → competências → formação → objeções (FAQ) → ação (contato).
- */
-const sectionComponents: Record<(typeof SECTION_ORDER)[number], ComponentType> = {
-  mentoria: Offer,
-  servicos: Services,
-  sobre: About,
-  produtos: Products,
-  experiencia: Experience,
-  competencias: Skills,
-  formacao: Education,
-  depoimentos: Testimonials,
-  faq: Faq,
-  contato: Contact,
+/** Registro página → componente (as URLs ficam em lib/router/routes.ts). */
+const pages: Record<PageId, ComponentType> = {
+  home: HomePage,
+  mentoring: MentoringPage,
+  diagnostic: DiagnosticPage,
+  about: AboutPage,
+  notFound: NotFoundPage,
 };
 
 export function App() {
   const { contact: copy, hero } = useContent();
   const { contact } = useServices();
+  const { page } = useRouter();
+  const Page = pages[page];
 
   // Depois que tudo montou, recalcula uma vez. Sem ScrollTrigger.sort(): a ordem
   // natural de criação (pins internos antes do gatilho da cena que os contém) é a
   // correta — ordenar pela posição faria a cena ignorar o espaço do próprio pin.
+  // (Nas trocas de página, o roteador recalcula: lib/router/Router.tsx.)
   useEffect(() => {
     ScrollTrigger.refresh();
   }, []);
 
   return (
     <>
+      <DocumentMeta />
       <Header />
-      <main id="conteudo" className="pb-12 sm:pb-0">
-        <Hero />
-        {SECTION_ORDER.map((id: SectionId) => {
-          const Component = sectionComponents[id as (typeof SECTION_ORDER)[number]];
-          // Cada seção é uma fronteira de hidratação: o React hidrata a primeira
-          // tela antes e libera a CPU entre as demais (menos travamento no celular).
-          return (
-            <Suspense key={id} fallback={null}>
-              <Component />
-            </Suspense>
-          );
-        })}
+      {/* tabIndex: o roteador põe o foco aqui ao trocar de página (leitores de tela). */}
+      <main id="conteudo" tabIndex={-1} className="pb-12 outline-none sm:pb-0">
+        {/* `key`: cada página monta do zero, com as próprias cenas e gatilhos. */}
+        <Page key={page} />
       </main>
       <Footer />
       <SceneIndicator />

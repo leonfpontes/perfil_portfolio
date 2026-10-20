@@ -1,24 +1,16 @@
+import { PAGE_SECTIONS, type PageId } from '@/lib/router/routes';
 import type { SectionId } from './types';
 
 /**
- * Ordem canônica das seções numeradas (§ 01, § 02…).
- * Fonte única usada pela página (App) e pelos cabeçalhos de seção.
+ * Número de seção com dois dígitos ("01") dentro da página; string vazia se a
+ * seção não é numerada nessa página (ex.: o hero, "inicio").
  */
-export const SECTION_ORDER = [
-  'mentoria',
-  'depoimentos',
-  'servicos',
-  'sobre',
-  'produtos',
-  'experiencia',
-  'competencias',
-  'formacao',
-  'faq',
-  'contato',
-] as const satisfies readonly SectionId[];
-
-/** Número de seção com dois dígitos ("01"); string vazia se não numerada. */
-export function sectionNumber(id: SectionId): string {
-  const index = (SECTION_ORDER as readonly SectionId[]).indexOf(id);
+export function sectionNumber(page: PageId, id: SectionId): string {
+  const index = PAGE_SECTIONS[page].indexOf(id);
   return index < 0 ? '' : String(index + 1).padStart(2, '0');
+}
+
+/** Quantas seções numeradas a página tem (o "/ 04" do marcador de capítulo). */
+export function sectionCount(page: PageId): number {
+  return PAGE_SECTIONS[page].length;
 }

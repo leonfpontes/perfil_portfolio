@@ -25,14 +25,8 @@ export function LocaleProvider({ children, initialLocale }: { children: ReactNod
     setLocaleState(preferred);
   }, [initialLocale]);
 
+  // <html lang>, título e descrição acompanham idioma e página: components/common/DocumentMeta.tsx.
   const content = contentByLocale[locale];
-
-  // Mantém <html lang>, <title> e meta description sincronizados com o idioma.
-  useEffect(() => {
-    document.documentElement.lang = locale;
-    document.title = content.meta.title;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', content.meta.description);
-  }, [locale, content]);
 
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);

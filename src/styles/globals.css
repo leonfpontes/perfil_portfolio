@@ -257,6 +257,36 @@ html.lenis, html.lenis body { height: auto; }
   animation-duration: 280ms;
 }
 
+/*
+ * Troca entre as páginas do site (/, /mentoria-produto, /diagnostico-pmo, /sobre), sem recarregar:
+ * lib/router/Router.tsx marca o <html> com data-transicao="rota" e chama startViewTransition.
+ * O cabeçalho fica parado; a página antiga se apaga e a nova sobe um pouco enquanto aparece,
+ * como a folha seguinte de um cartaz.
+ */
+:root[data-transicao='rota'] .site-header {
+  view-transition-name: site-header;
+}
+
+:root[data-transicao='rota']::view-transition-group(site-header) {
+  animation: none;
+}
+
+:root[data-transicao='rota']::view-transition-old(root) {
+  animation: 220ms cubic-bezier(0.4, 0, 1, 1) both rota-sai;
+}
+
+:root[data-transicao='rota']::view-transition-new(root) {
+  animation: 520ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both rota-entra;
+}
+
+@keyframes rota-sai {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+@keyframes rota-entra {
+  from { opacity: 0; transform: translateY(24px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   @view-transition {
     navigation: none;

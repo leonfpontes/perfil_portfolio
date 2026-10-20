@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { Button } from '@/components/ui/button';
 import { Azulejo } from '@/components/art/Azulejo';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
@@ -10,10 +9,12 @@ import { SplitReveal } from '@/components/motion/SplitReveal';
 import { profile } from '@/content/profile';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
+import { pathOf } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
+import { cn } from '@/lib/utils';
 
 export function Hero() {
-  const { hero, contact: contactCopy, about, ui } = useContent();
+  const { hero, contact: contactCopy, about, offer, ui } = useContent();
   const { contact } = useServices();
   const ref = useRef<HTMLDivElement>(null);
   const location = about.facts[0]?.value;
@@ -58,7 +59,7 @@ export function Hero() {
             <span data-hero-meta className="hidden sm:inline">
               {location}
             </span>
-            <a data-hero-meta href="#mentoria" className="flex items-center gap-2 text-foreground hover:text-signal">
+            <a data-hero-meta href={pathOf('mentoring')} className="flex items-center gap-2 text-foreground hover:text-signal">
               <span aria-hidden="true" className="size-2 animate-pulse bg-signal" />
               {hero.badge}
             </a>
@@ -67,20 +68,37 @@ export function Hero() {
           <div className="grid gap-8 pt-6 lg:grid-cols-12 lg:gap-8 lg:pt-10">
             <div className="lg:col-span-8">
               <div data-hero-title>
-                <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(2.6rem,6.6vw,6.75rem)] text-balance">
+                <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(2.2rem,4.4vw,4.6rem)] text-balance">
                   {hero.title} <span className="highlight">{hero.titleHighlight}</span>
                 </SplitReveal>
               </div>
               <p data-hero-fade className="mt-6 max-w-xl text-pretty sm:text-xl lg:mt-8">
                 {hero.description}
               </p>
-              <div data-hero-fade className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-                <Button asChild size="lg" className="group h-12 px-6 text-base">
-                  <TrackedLink href="#mentoria" trackLabel="hero_offer">
-                    {hero.primaryCta} <Arrow />
-                  </TrackedLink>
-                </Button>
-                <TrackedLink href={contact.whatsapp(contactCopy.whatsappMessage)} trackLabel="hero_whatsapp" className="link-rule text-base">
+              {/* As duas ofertas logo na primeira tela: para quem é, o que é e quanto custa. */}
+              <div data-hero-fade className="mt-8 max-w-2xl">
+                <p className="label-caps mb-2 text-muted-foreground">{hero.offersLabel}</p>
+                <ul className="border-t border-foreground">
+                  {offer.plans.map((plan) => (
+                    <li key={plan.id} className="border-b border-foreground">
+                      <TrackedLink
+                        href={pathOf(plan.id === 'mentoring' ? 'mentoring' : 'diagnostic')}
+                        trackLabel={`hero_${plan.id}`}
+                        className={cn(
+                          'group grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1 px-3 py-3 transition-colors sm:py-4',
+                          plan.highlighted ? 'bg-signal text-signal-foreground' : 'hover:bg-foreground hover:text-background',
+                        )}
+                      >
+                        <span className="label-caps opacity-80">{plan.tag}</span>
+                        <span className="row-span-2 flex items-center gap-3 font-display text-lg whitespace-nowrap sm:text-2xl">
+                          {plan.priceShort} <Arrow />
+                        </span>
+                        <span className="font-display text-lg leading-tight sm:text-2xl">{plan.title}</span>
+                      </TrackedLink>
+                    </li>
+                  ))}
+                </ul>
+                <TrackedLink href={contact.whatsapp(contactCopy.whatsappMessage)} trackLabel="hero_whatsapp" className="link-rule mt-4 inline-block text-base">
                   {hero.secondaryCta}
                 </TrackedLink>
               </div>

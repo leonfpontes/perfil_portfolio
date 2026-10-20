@@ -5,7 +5,8 @@ import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
 import { useLocale } from '@/lib/i18n/LocaleProvider';
-import { useSceneDirector } from '@/lib/motion/SceneDirector';
+import { useRouter } from '@/lib/router/Router';
+import { navHref, pathOf } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
 import { useTheme } from '@/lib/theme/ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -20,9 +21,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   // O menu só é baixado no primeiro toque (ou ao passar o ponteiro por cima).
   const [menuLoaded, setMenuLoaded] = useState(false);
-  const { active: scene } = useSceneDirector();
-  // Destaca o capítulo atual (a cena "jornada" conta como "mentoria").
-  const active = scene?.chapter ?? null;
+  // Destaca a página atual.
+  const { page } = useRouter();
 
   const changeLocale = (next: typeof locale) => {
     if (next === locale) return;
@@ -36,17 +36,17 @@ export function Header() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md">
+    <header className="site-header fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-foreground focus:px-3 focus:py-2 focus:text-background"
       >
         {nav.skipToContent}
       </a>
-      <Container className="flex h-14 items-center justify-between gap-6">
+      <Container className="flex h-14 items-center justify-between gap-3 sm:gap-6">
         {/* `marca-lp`: a marca voa daqui para o cabeçalho da Área do cliente (globals.css). */}
-        <a href="#inicio" className="marca-lp flex items-baseline gap-3">
-          <span className="font-display text-2xl leading-none whitespace-nowrap">{profile.shortName}</span>
+        <a href={pathOf('home')} className="marca-lp flex items-baseline gap-3">
+          <span className="font-display text-xl leading-none whitespace-nowrap sm:text-2xl">{profile.shortName}</span>
           <span className="label-caps hidden text-muted-foreground 2xl:inline">{profile.brand}</span>
         </a>
 
@@ -55,14 +55,14 @@ export function Header() {
             {nav.items.map((item) => (
               <li key={item.id}>
                 <TrackedLink
-                  href={`#${item.id}`}
+                  href={navHref(item.id)}
                   trackEvent="nav_click"
                   trackLabel={item.id}
-                  aria-current={active === item.id ? 'true' : undefined}
+                  aria-current={page === item.id ? 'page' : undefined}
                   className={cn(
                     'relative py-1 text-sm text-muted-foreground transition-colors hover:text-foreground',
                     'after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-signal after:transition-transform after:duration-500',
-                    active === item.id && 'text-foreground after:scale-x-100',
+                    page === item.id && 'text-foreground after:scale-x-100',
                   )}
                 >
                   {item.label}
@@ -88,15 +88,19 @@ export function Header() {
               </span>
             ))}
           </div>
-          {/* A Área do cliente: página própria (/entrar), aberta com a passagem animada. */}
+          {/*
+            A Área do cliente (/entrar, aberta com a passagem animada): só o ícone, discreto —
+            quem já é cliente sabe onde fica; o destaque do cabeçalho é o convite para conversar.
+            No celular ela fica no menu e no rodapé (o cabeçalho não comporta mais um ícone).
+          */}
           <TrackedLink
             href="/entrar"
             trackLabel="header_client_area"
-            className="inline-flex min-h-11 items-center gap-1.5 px-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            title={nav.clientArea}
+            className="hidden min-h-11 items-center px-2 text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
           >
             <LogIn className="size-4" aria-hidden />
-            <span className="hidden md:inline">{nav.clientArea}</span>
-            <span className="sr-only md:hidden">{nav.clientArea}</span>
+            <span className="sr-only">{nav.clientArea}</span>
           </TrackedLink>
           <Button variant="ghost" size="icon" onClick={onToggleTheme} aria-label={nav.toggleTheme}>
             {/* Os dois ícones vêm no HTML; o CSS escolhe (evita divergência na hidratação). */}

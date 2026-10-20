@@ -7,19 +7,34 @@ import { TrackedLink } from '@/components/common/TrackedLink';
 import { HorizontalTrack } from '@/components/motion/HorizontalTrack';
 import { Scene, sceneSectionOf } from '@/components/motion/Scene';
 import { profile, stockImages } from '@/content/profile';
-import type { Plan } from '@/content/types';
+import type { Journey, Plan, SectionId } from '@/content/types';
 import { useContent } from '@/lib/i18n/LocaleProvider';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
+import { pathOf } from '@/lib/router/routes';
+import type { Tone } from '@/lib/motion/SceneThemeController';
 import { useServices } from '@/lib/services';
 import { cn } from '@/lib/utils';
 
-function PlanSheet({ plan, index, bookingHint }: { plan: Plan; index: number; bookingHint: string }) {
+interface PlanSheetProps {
+  plan: Plan;
+  index: number;
+  bookingHint: string;
+  /** Na página inicial: link para a página da oferta, abaixo do botão. */
+  showDetail?: boolean;
+  /** Painel do trilho horizontal do celular (largura fixa). */
+  inTrack?: boolean;
+}
+
+const PLAN_PAGE = { mentoring: 'mentoring', diagnostic: 'diagnostic' } as const;
+
+export function PlanSheet({ plan, index, bookingHint, showDetail = false, inTrack = false }: PlanSheetProps) {
   const { contact } = useServices();
   return (
     <article
       data-plan={index}
       className={cn(
-        'flex flex-col border-t-4 bg-card p-5 max-lg:w-[86vw] max-lg:shrink-0 max-lg:snap-center sm:p-10',
+        'flex flex-col border-t-4 bg-card p-5 sm:p-10',
+        inTrack && 'max-lg:w-[86vw] max-lg:shrink-0 max-lg:snap-center',
         plan.highlighted ? 'border-signal' : 'border-foreground',
       )}
     >
@@ -55,6 +70,11 @@ function PlanSheet({ plan, index, bookingHint }: { plan: Plan; index: number; bo
           {plan.cta} <Arrow />
         </TrackedLink>
       </Button>
+      {showDetail && (
+        <TrackedLink href={pathOf(PLAN_PAGE[plan.id])} trackLabel={`plan_${plan.id}_detail`} className="group link-rule mt-4 self-center text-sm">
+          {plan.detailCta} <Arrow />
+        </TrackedLink>
+      )}
       {profile.bookingUrl && (
         <TrackedLink href={profile.bookingUrl} trackLabel={`plan_${plan.id}_booking`} className="link-rule mt-3 self-center text-sm">
           {bookingHint}
@@ -64,8 +84,8 @@ function PlanSheet({ plan, index, bookingHint }: { plan: Plan; index: number; bo
   );
 }
 
-/** Cena 1 — os dois planos chegam de lados opostos, como propostas sobre a mesa. */
-function PlansScene() {
+/** Página inicial — os dois planos chegam de lados opostos, como propostas sobre a mesa. */
+export function OffersScene() {
   const { offer } = useContent();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -83,15 +103,15 @@ function PlansScene() {
   );
 
   return (
-    <Scene id="mentoria" label={offer.eyebrow} tone="palha">
+    <Scene id="ofertas" label={offer.eyebrow} tone="palha">
       <Container>
         <div ref={ref}>
-          <SectionHeader id="mentoria" heading={offer} />
+          <SectionHeader id="ofertas" heading={offer} />
           <p className="mb-8 max-w-2xl border-l-2 border-signal pl-5 text-sm text-pretty sm:mb-10 sm:text-base lg:ml-[25%]">{offer.founderNote}</p>
           <div data-plans>
             <HorizontalTrack media="mobile" label={offer.title} className="max-lg:flex max-lg:gap-4 lg:grid lg:grid-cols-2 lg:gap-px lg:bg-border">
               {offer.plans.map((plan, i) => (
-                <PlanSheet key={plan.id} plan={plan} index={i} bookingHint={offer.bookingHint} />
+                <PlanSheet key={plan.id} plan={plan} index={i} bookingHint={offer.bookingHint} showDetail inTrack />
               ))}
             </HorizontalTrack>
           </div>
@@ -102,13 +122,13 @@ function PlansScene() {
 }
 
 /**
- * Cena 2 — a jornada como "gates". A tela fica fixada enquanto a linha é
- * traçada e cada etapa acende; depois, o que a mentoria NÃO é vai sendo riscado.
+ * A jornada como "gates". A tela fica fixada enquanto a linha é traçada e cada
+ * etapa acende; depois, o que a oferta NÃO é vai sendo riscado.
  */
-function JourneyStage() {
-  const { offer, ui } = useContent();
+function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
+  const { ui } = useContent();
   const ref = useRef<HTMLDivElement>(null);
-  const steps = offer.journey.steps;
+  const steps = journey.steps;
 
   useGSAP(
     () => {
@@ -138,16 +158,14 @@ function JourneyStage() {
   return (
     <Container>
       <div ref={ref}>
-        <h2 id="jornada-title" className="display max-w-4xl text-5xl sm:text-6xl">
-          {offer.journey.title}
-        </h2>
+        <SectionHeader id={id} heading={journey} compact />
 
-        <div className="relative mt-10">
+        <div className="relative">
           <div aria-hidden="true" className="absolute top-0 right-0 left-0 hidden h-px bg-foreground/20 lg:block">
             <div data-gate-line className="h-full origin-left scale-x-0 bg-foreground" />
           </div>
           {/* Celular: cada gate é um painel do trilho horizontal, com o número gigante. */}
-          <HorizontalTrack media="mobile" label={offer.journey.title} className="max-lg:flex max-lg:gap-4 lg:grid lg:grid-cols-4 lg:gap-6">
+          <HorizontalTrack media="mobile" label={journey.title} className="max-lg:flex max-lg:gap-4 lg:grid lg:grid-cols-4 lg:gap-6">
             {steps.map((step, i) => (
               <div
                 key={step.title}
@@ -175,9 +193,9 @@ function JourneyStage() {
             </figcaption>
           </figure>
           <div className="lg:col-span-5">
-            <h3 className="display text-4xl">{offer.isNot.title}</h3>
+            <h3 className="display text-4xl">{journey.isNot.title}</h3>
             <ul className="mt-6 divide-y border-y">
-              {offer.isNot.items.map((item) => (
+              {journey.isNot.items.map((item) => (
                 <li key={item} className="flex gap-4 py-4">
                   <span aria-hidden="true" className="font-sans text-signal">
                     ×
@@ -196,14 +214,17 @@ function JourneyStage() {
   );
 }
 
-export function Offer() {
-  const { offer } = useContent();
+interface JourneySceneProps {
+  id: SectionId;
+  journey: Journey;
+  tone: Tone;
+}
+
+/** Cena fixada com as etapas da oferta (mentoria: "jornada"; diagnóstico: "processo"). */
+export function JourneyScene({ id, journey, tone }: JourneySceneProps) {
   return (
-    <>
-      <PlansScene />
-      <Scene id="jornada" chapter="mentoria" label={offer.eyebrow} tone="cal" className="lg:py-16">
-        <JourneyStage />
-      </Scene>
-    </>
+    <Scene id={id} label={journey.eyebrow} tone={tone} className="lg:py-16">
+      <JourneyStage id={id} journey={journey} />
+    </Scene>
   );
 }

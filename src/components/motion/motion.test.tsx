@@ -5,8 +5,8 @@ import { sceneSectionOf } from './Scene';
 
 describe('CountUp — parse/format', () => {
   it.each([
-    ['R$ 2.500', { prefix: 'R$ ', number: 2500, separator: '.', suffix: '' }],
-    ['R$ 2,500', { prefix: 'R$ ', number: 2500, separator: ',', suffix: '' }],
+    ['R$ 7.500', { prefix: 'R$ ', number: 7500, separator: '.', suffix: '' }],
+    ['R$ 12,000', { prefix: 'R$ ', number: 12000, separator: ',', suffix: '' }],
     ['40+', { prefix: '', number: 40, separator: '', suffix: '+' }],
     ['R$ 997', { prefix: 'R$ ', number: 997, separator: '', suffix: '' }],
   ])('interpreta "%s"', (input, expected) => {
@@ -19,7 +19,7 @@ describe('CountUp — parse/format', () => {
 
   it('formata com o separador original', () => {
     expect(formatNumeric(1497.4, '.')).toBe('1.497');
-    expect(formatNumeric(2500, ',')).toBe('2,500');
+    expect(formatNumeric(12000, ',')).toBe('12,000');
     expect(formatNumeric(8, '')).toBe('8');
   });
 });

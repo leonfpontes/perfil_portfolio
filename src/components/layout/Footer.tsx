@@ -3,6 +3,7 @@ import { MotionToggle } from './MotionControls';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
 import { useContent } from '@/lib/i18n/LocaleProvider';
+import { navHref, pathOf } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
 
 export function Footer() {
@@ -19,13 +20,23 @@ export function Footer() {
         </div>
         <nav aria-label="Rodapé" className="md:col-span-4">
           <ul className="grid grid-cols-2 gap-y-2 text-sm">
+            <li>
+              <a href={pathOf('home')} className="text-muted-foreground hover:text-foreground">
+                {nav.home}
+              </a>
+            </li>
             {nav.items.map((item) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className="text-muted-foreground hover:text-foreground">
+                <a href={navHref(item.id)} className="text-muted-foreground hover:text-foreground">
                   {item.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a href="/entrar" className="text-muted-foreground hover:text-foreground">
+                {nav.clientArea}
+              </a>
+            </li>
           </ul>
         </nav>
         <ul className="space-y-2 text-sm md:col-span-3">
@@ -51,9 +62,7 @@ export function Footer() {
           © {year} {profile.name}. {footer.rights}
         </p>
         <MotionToggle />
-        <p>
-          {footer.builtWith} {footer.imageCredits}
-        </p>
+        <p>{footer.imageCredits}</p>
       </Container>
     </footer>
   );

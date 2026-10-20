@@ -7,7 +7,9 @@ export type AnalyticsEvent =
   | 'nav_click'
   | 'language_change'
   | 'theme_change'
-  | 'outbound_click';
+  | 'outbound_click'
+  /** Troca de página sem recarregar (o roteador do site). */
+  | 'page_view';
 
 export type AnalyticsParams = Record<string, string | number | boolean | undefined>;
 
