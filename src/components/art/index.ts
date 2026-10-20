@@ -1,4 +1,3 @@
-export { FlowField, type FlowFieldProps } from './FlowField';
 export { Azulejo, type AzulejoProps } from './Azulejo';
 export { Halftone, type HalftoneProps } from './Halftone';
 export { GenerativeCover, type GenerativeCoverProps } from './GenerativeCover';
