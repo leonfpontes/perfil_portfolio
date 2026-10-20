@@ -1,16 +1,15 @@
 import { ChevronDown } from 'lucide-react';
 import { Container, SectionHeader } from '@/components/common/Section';
 import { Scene } from '@/components/motion/Scene';
-import { useContent } from '@/lib/i18n/LocaleProvider';
+import type { Faq as FaqContent } from '@/content/types';
 
 /**
  * FAQ com <details> nativo: acessível, funciona sem JavaScript e não carrega
  * biblioteca de acordeão. `name` faz com que só uma pergunta fique aberta por vez.
  */
-export function Faq() {
-  const { faq } = useContent();
+export function Faq({ faq }: { faq: FaqContent }) {
   return (
-    <Scene id="faq" label={faq.eyebrow} tone="cal">
+    <Scene id="faq" label={faq.eyebrow} tone="palha">
       <Container>
         <SectionHeader id="faq" heading={faq} />
         <div className="border-b lg:ml-[25%]">

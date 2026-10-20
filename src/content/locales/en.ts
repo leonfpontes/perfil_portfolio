@@ -3,22 +3,14 @@ import type { SiteContent } from '../types';
 export const en: SiteContent = {
   locale: 'en',
 
-  meta: {
-    title: 'Leonardo Pontes · Product, Portfolio, Data & AI | Mentoring and Consulting',
-    description:
-      '1:1 mentoring and consulting in digital product, portfolio governance, PMO, data and AI — by Leonardo Pontes, USP MBA, creator of GiraHub and Portal PMO.',
-  },
-
   nav: {
     items: [
-      { id: 'mentoria', label: 'Mentoring' },
-      { id: 'depoimentos', label: 'Testimonials' },
-      { id: 'servicos', label: 'Services' },
-      { id: 'sobre', label: 'About' },
-      { id: 'produtos', label: 'Products' },
-      { id: 'experiencia', label: 'Experience' },
-      { id: 'contato', label: 'Contact' },
+      { id: 'mentoring', label: 'Mentoring' },
+      { id: 'diagnostic', label: 'Diagnostic' },
+      { id: 'about', label: 'About' },
+      { id: 'contact', label: 'Contact' },
     ],
+    home: 'Home',
     cta: 'Book a call',
     clientArea: 'Client area',
     toggleTheme: 'Toggle light/dark theme',
@@ -27,15 +19,262 @@ export const en: SiteContent = {
     skipToContent: 'Skip to content',
   },
 
+  home: {
+    meta: {
+      title: 'Product Mentoring and PMO Diagnostic | Leonardo Pontes',
+      description:
+        '1:1 mentoring for Product Managers and POs (R$ 997/month) and a PMO and portfolio maturity diagnostic for companies, with Leonardo Pontes, USP MBA.',
+    },
+    profile: {
+      eyebrow: 'Who leads it',
+      title: '8+ years making product and governance work',
+      description:
+        'I have been a Product Owner of 4 digital products, PMO manager of a portfolio with 40+ developers and Technology, Data & AI manager. Today I work in product, data and AI at ATRA and run LP | Product & Portfolio.',
+      cta: 'See the full background',
+    },
+  },
+
+  mentoringPage: {
+    meta: {
+      title: '1:1 Product Mentoring for PMs and POs | Leonardo Pontes',
+      description:
+        'Mentoring for POs and Product Managers: two 60-min sessions a month, WhatsApp support and an individual development plan. R$ 997/month, no lock-in.',
+    },
+    hero: {
+      eyebrow: '1:1 mentoring · for professionals',
+      title: 'Product mentoring for',
+      titleHighlight: 'PMs and POs.',
+      description:
+        'Two sessions a month with someone who has been a Product Owner, PMO manager and Technology, Data & AI manager. You bring the real challenges of your work and leave every session with a clear next step.',
+      primaryCta: 'Claim a founder spot',
+      secondaryCta: 'See how it works',
+      facts: [
+        { label: 'Format', value: '2 sessions/month · 60 min · online' },
+        { label: 'Between sessions', value: 'WhatsApp, within 24–48 business hours' },
+        { label: 'Investment', value: 'R$ 997/month · 5 founder spots' },
+        { label: 'Commitment', value: 'Month to month, no lock-in' },
+      ],
+    },
+    scope: {
+      eyebrow: 'The mentoring',
+      title: 'To grow as a PM, PO or product leader',
+      description: 'Individual, ongoing support, centered on the challenges of your work and your career.',
+      audienceTitle: 'Who it is for',
+      audience: [
+        'Product Owners and Product Managers',
+        'Product Designers and product analysts',
+        'Project managers and PMO analysts',
+        'Tech leads who now look after product',
+      ],
+      topicsTitle: 'What we work on',
+      topics: [
+        'Structuring a portfolio and prioritizing the roadmap',
+        'Putting governance, discovery and rituals that work in place',
+        'Career plan and CV and portfolio review',
+        'Preparing for a promotion, a transition or interviews, with case simulations',
+      ],
+    },
+    journey: {
+      eyebrow: 'How it works',
+      title: 'How the mentoring works',
+      description: 'From the first call to a steady rhythm of sessions.',
+      steps: [
+        {
+          title: 'Intro call',
+          description: 'A free 30-minute conversation to understand where you are, your goals and whether we are a fit.',
+        },
+        {
+          title: 'Individual plan',
+          description: 'We map where you are and where you want to go, and build a development plan with priorities.',
+        },
+        {
+          title: 'Biweekly sessions',
+          description: 'Two 60-minute sessions a month on the real challenges of your work, with reviews of your deliverables.',
+        },
+        {
+          title: 'Between sessions',
+          description: 'Questions and reviews on WhatsApp, answered within 24–48 business hours, plus ready-to-use templates.',
+        },
+      ],
+      isNot: {
+        title: 'What this mentoring is not',
+        items: [
+          'A recorded course or generic info product',
+          'Theory lessons disconnected from your day to day',
+          'A guaranteed promotion',
+        ],
+      },
+    },
+    faq: {
+      eyebrow: 'FAQ',
+      title: 'Questions about the mentoring',
+      description: "Didn't find your answer? Message me on WhatsApp.",
+      items: [
+        {
+          question: 'Who is the 1:1 mentoring for?',
+          answer:
+            'For Product Owners, Product Managers, Product Designers, project managers, PMO analysts and tech leaders who want to accelerate their careers or solve concrete challenges: structuring a portfolio, implementing governance, prioritizing a roadmap, preparing for a promotion or a transition.',
+        },
+        {
+          question: 'What is the "founder spot"?',
+          answer:
+            'These are the first 5 spots, at R$ 997/month (later, R$ 1,497/month), in exchange for an honest testimonial about the experience. The founder price stays in place for as long as your subscription is active.',
+        },
+        {
+          question: 'Is there a lock-in or cancellation fee?',
+          answer: 'No. The mentoring is a month-to-month subscription: you can cancel whenever you want, with no penalty.',
+        },
+        {
+          question: 'How does the WhatsApp support work?',
+          answer:
+            'Between sessions you can send questions, documents and deliverables for review. Replies come within 24–48 business hours.',
+        },
+        {
+          question: 'Are the sessions online?',
+          answer: 'Yes, by video call, at times agreed in advance.',
+        },
+      ],
+    },
+  },
+
+  diagnosticPage: {
+    meta: {
+      title: 'PMO and Portfolio Maturity Diagnostic | Leonardo Pontes',
+      description:
+        'Gate-based PMO and portfolio governance maturity diagnostic: interviews, maturity score, prioritized roadmap and executive presentation in 2 to 3 weeks.',
+    },
+    hero: {
+      eyebrow: 'For companies · Maturity diagnostic',
+      title: 'Maturity diagnostic for your',
+      titleHighlight: 'PMO and portfolio.',
+      description:
+        'For companies with too many projects, competing priorities and little visibility into what creates value. In 2 to 3 weeks you get a gate-by-gate picture of your governance maturity and a prioritized roadmap to improve it.',
+      primaryCta: 'Book a diagnostic',
+      secondaryCta: 'See the steps',
+      facts: [
+        { label: 'Duration', value: '2 to 3 weeks' },
+        { label: 'Method', value: 'Gate-based maturity' },
+        { label: 'Investment', value: 'R$ 7,500 · 3 founder spots' },
+        { label: 'Full price', value: 'R$ 12,000' },
+      ],
+    },
+    process: {
+      eyebrow: 'How it works',
+      title: 'From the first call to guided execution',
+      description: 'Four steps, each with a clear decision before the next one.',
+      steps: [
+        {
+          title: 'Intro call',
+          description: 'A free 30-minute conversation to understand your context, your goals and whether we are a fit.',
+        },
+        {
+          title: 'Diagnostic',
+          description: 'Interviews and analysis of processes and artifacts: we map maturity, bottlenecks and priorities, backed by data.',
+        },
+        {
+          title: 'Action plan',
+          description: "A prioritized roadmap, with rituals, artifacts and metrics adapted to the company's reality.",
+        },
+        {
+          title: 'Guided execution',
+          description: 'If it makes sense, implementation comes by proposal, with support until it becomes routine.',
+        },
+      ],
+      isNot: {
+        title: 'What this diagnostic is not',
+        items: [
+          '"PowerPoint" consulting with no implementation',
+          'An outsourced software factory',
+          'A tool sale or vendor lock-in',
+        ],
+      },
+    },
+    deliverables: {
+      eyebrow: 'Deliverables',
+      title: 'What your company receives',
+      description: 'A low-risk diagnostic before any implementation: the next step is decided with data in hand.',
+      itemsTitle: 'Diagnostic deliverables',
+      items: [
+        {
+          title: 'Interviews and analysis',
+          description: 'Conversations with stakeholders and a review of the processes, artifacts and tools in use.',
+        },
+        {
+          title: 'Gate-by-gate maturity score',
+          description: 'Intake, discovery, planning, execution and closing assessed with the same yardstick.',
+        },
+        {
+          title: 'Report and prioritized roadmap',
+          description: 'Where the bottlenecks are, what to tackle first and what can wait.',
+        },
+        {
+          title: 'Executive presentation',
+          description: 'Findings and roadmap presented to leadership, ready for a decision.',
+        },
+      ],
+    },
+    faq: {
+      eyebrow: 'FAQ',
+      title: 'Questions about the diagnostic',
+      description: "Didn't find your answer? Message me on WhatsApp.",
+      items: [
+        {
+          question: 'How does the diagnostic work?',
+          answer:
+            'Over 2 to 3 weeks I run interviews, analyze processes and artifacts, and apply the gate-based maturity methodology. You receive a report, a prioritized roadmap and an executive presentation. Implementation is optional and quoted separately.',
+        },
+        {
+          question: 'What is the "founder spot"?',
+          answer:
+            'It is for the first 3 companies: the diagnostic costs R$ 7,500 (later, R$ 12,000) in exchange for an honest testimonial about the experience, and implementation gets 15–20% off.',
+        },
+        {
+          question: 'Do I have to hire the implementation?',
+          answer:
+            'No. The report and the roadmap stay with your company, which can carry them out with its own team. Implementation with me is optional and quoted separately.',
+        },
+        {
+          question: 'Do you develop software for my company?',
+          answer:
+            "The consulting is not a software factory. I help you decide what to build, how to govern it and how to measure it, and I can provide technical support on tool selection, architecture review and the security of AI-built solutions.",
+        },
+        {
+          question: 'Is it in person or online?',
+          answer:
+            'Interviews and the presentation can be done by video call. For companies in São Paulo and the Ribeirão Preto region, in-person sessions can be arranged.',
+        },
+      ],
+    },
+  },
+
+  aboutPage: {
+    meta: {
+      title: 'About Leonardo Pontes: Product, PMO, Data and AI',
+      description:
+        "Leonardo Pontes' background: Product Owner, PMO manager and Technology, Data & AI manager. MBA in Project Management from USP and creator of GiraHub.",
+    },
+  },
+
+  notFound: {
+    meta: {
+      title: 'Page not found | Leonardo Pontes',
+      description: 'This page does not exist. See the product mentoring, the PMO diagnostic or Leonardo Pontes’ background.',
+    },
+    eyebrow: 'Error 404',
+    title: 'This page does not exist',
+    description: 'The address may have changed with the new version of the site. Pick one of these paths:',
+    linksTitle: 'Site pages',
+  },
+
   hero: {
     badge: 'Founder mentoring · 5 spots open',
-    greeting: "Hi, I'm Leonardo Pontes",
-    title: 'Product, portfolio and AI that',
+    greeting: 'Leonardo Pontes · Product & Portfolio',
+    title: 'Product mentoring and PMO diagnostics that',
     titleHighlight: 'actually ship.',
     description:
-      "8+ years leading digital products, PMOs and technology, data and AI teams, from the service desk to managing a portfolio with 40+ developers. Today I help professionals and companies implement what works in practice, not just what's in the course textbook.",
-    primaryCta: 'Explore the mentoring',
-    secondaryCta: 'Chat on WhatsApp',
+      'For PMs, POs and product leaders who want to grow their careers, and for companies that need to bring order to their project portfolio. You leave with a clear plan and support to carry it out, from someone who has led products and PMOs for 8+ years.',
+    offersLabel: 'Choose your path',
+    secondaryCta: "I'd rather chat on WhatsApp",
     portraitAlt: 'Portrait of Leonardo Fonseca Pontes',
     availability: 'Open calendar for mentoring and diagnostics',
     stats: [
@@ -49,10 +288,10 @@ export const en: SiteContent = {
   },
 
   offer: {
-    eyebrow: 'LP | Product & Portfolio',
+    eyebrow: 'Offers',
     title: 'Mentoring and consulting for people who need results, not slides',
     description:
-      'Hands-on, close support in portfolio governance, PMO and digital product management, using the methodology I developed and validated leading real teams.',
+      'Two ways to work with me, using the methodology I developed and validated leading real teams: mentoring for those who want to grow in a product career, and a diagnostic for companies that need to organize their portfolio and PMO.',
     bookingHint: 'or book a free 30-minute call',
     founderNote:
       'Founder cohort: a special price for the first clients in exchange for an honest testimonial about the experience.',
@@ -64,6 +303,7 @@ export const en: SiteContent = {
         description:
           'Ongoing support for POs, PMs, project managers and leaders who want to grow their careers and unblock real day-to-day challenges.',
         price: 'R$ 997',
+        priceShort: 'R$ 997/month',
         priceNote: '/month · 5 founder spots',
         regularPrice: 'Later: R$ 1,497/month',
         features: [
@@ -74,6 +314,7 @@ export const en: SiteContent = {
           'Month-to-month subscription, no lock-in',
         ],
         cta: 'Claim a founder spot',
+        detailCta: 'See the mentoring in detail',
         highlighted: true,
         whatsappMessage:
           "Hi, Leonardo! I saw your website and I'd like to know more about the 1:1 Mentoring (founder spot).",
@@ -81,12 +322,13 @@ export const en: SiteContent = {
       {
         id: 'diagnostic',
         tag: 'For companies',
-        title: 'Maturity Diagnostic + Implementation',
+        title: 'PMO & Portfolio Maturity Diagnostic',
         description:
           'For companies that need to structure portfolio governance, PMO or product processes, starting with a low-risk diagnostic before any implementation.',
-        price: 'R$ 2,500',
+        price: 'R$ 7,500',
+        priceShort: 'R$ 7,500',
         priceNote: 'diagnostic · 3 founder spots',
-        regularPrice: 'Later: R$ 3,500',
+        regularPrice: 'Later: R$ 12,000',
         features: [
           '2–3 week diagnostic with interviews and process analysis',
           'Gate-by-gate maturity report and recommended roadmap',
@@ -95,40 +337,12 @@ export const en: SiteContent = {
           '15–20% off implementation for founder clients',
         ],
         cta: 'Book a diagnostic',
+        detailCta: 'See the diagnostic in detail',
         highlighted: false,
         whatsappMessage:
           "Hi, Leonardo! I saw your website and I'd like to talk about the Maturity Diagnostic for my company.",
       },
     ],
-    journey: {
-      title: 'How it works',
-      steps: [
-        {
-          title: 'Intro call',
-          description: 'A free 30-minute conversation to understand your context, your goals and whether we are a fit.',
-        },
-        {
-          title: 'Diagnostic',
-          description: 'We map your starting point: maturity, bottlenecks and priorities, backed by data.',
-        },
-        {
-          title: 'Action plan',
-          description: 'A clear roadmap, with rituals, artifacts and metrics adapted to your reality.',
-        },
-        {
-          title: 'Guided execution',
-          description: 'Recurring sessions, deliverable reviews and adjustments until it becomes routine.',
-        },
-      ],
-    },
-    isNot: {
-      title: 'What this mentoring is not',
-      items: [
-        'A recorded course or generic info product',
-        'An outsourced software factory',
-        '"PowerPoint" consulting with no implementation',
-      ],
-    },
   },
 
   services: {
@@ -572,43 +786,6 @@ export const en: SiteContent = {
     ],
   },
 
-  faq: {
-    eyebrow: 'FAQ',
-    title: 'Frequently asked questions',
-    description: "Didn't find your answer? Message me on WhatsApp.",
-    items: [
-      {
-        question: 'Who is the 1:1 mentoring for?',
-        answer:
-          'For Product Owners, Product Managers, Product Designers, project managers, PMO analysts and tech leaders who want to accelerate their careers or solve concrete challenges: structuring a portfolio, implementing governance, prioritizing a roadmap, preparing for a promotion or a transition.',
-      },
-      {
-        question: 'What is the "founder spot"?',
-        answer:
-          'These are the first spots, at a reduced price (R$ 997/month for mentoring and R$ 2,500 for the diagnostic), in exchange for an honest testimonial about the experience. The founder price stays in place for as long as your subscription is active.',
-      },
-      {
-        question: 'Is there a lock-in or cancellation fee?',
-        answer: 'No. The mentoring is a month-to-month subscription: you can cancel whenever you want, with no penalty.',
-      },
-      {
-        question: 'How does the diagnostic for companies work?',
-        answer:
-          'Over 2 to 3 weeks I run interviews, analyze processes and artifacts, and apply the gate-based maturity methodology. You receive a report, a prioritized roadmap and an executive presentation. Implementation is optional and quoted separately.',
-      },
-      {
-        question: 'Do you develop software for my company?',
-        answer:
-          "The mentoring and consulting are not a software factory. I help you decide what to build, how to govern it and how to measure it, and I can provide technical support on tool selection, architecture review and the security of AI-built solutions.",
-      },
-      {
-        question: 'Are the sessions online?',
-        answer:
-          'Yes, by video call. For companies in São Paulo and the Ribeirão Preto region, in-person workshops and sessions can be arranged.',
-      },
-    ],
-  },
-
   contact: {
     eyebrow: 'Contact',
     title: "Shall we talk about your next step?",
@@ -631,7 +808,6 @@ export const en: SiteContent = {
   footer: {
     tagline: 'Mentoring and consulting in Product, Portfolio, Data & AI.',
     rights: 'All rights reserved.',
-    builtWith: 'Built with React, TypeScript, Tailwind and shadcn/ui.',
     imageCredits: 'Images: Unsplash',
   },
   ui: {

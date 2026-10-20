@@ -3,7 +3,8 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
 import { useContent } from '@/lib/i18n/LocaleProvider';
-import { useSmoothScroll } from '@/lib/motion/SmoothScroll';
+import { useRouter } from '@/lib/router/Router';
+import { navHref, pathOf } from '@/lib/router/routes';
 
 interface MobileMenuProps {
   open: boolean;
@@ -16,7 +17,12 @@ interface MobileMenuProps {
  */
 export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
   const { nav } = useContent();
-  const { scrollTo } = useSmoothScroll();
+  const { page, navigate } = useRouter();
+  const go = (href: string) => {
+    // Fecha o menu antes de navegar: o Sheet trava o scroll enquanto aberto.
+    onOpenChange(false);
+    window.setTimeout(() => navigate(href), 320);
+  };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -27,19 +33,18 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
         </SheetHeader>
         <nav aria-label="Mobile" className="px-4">
           <ul className="divide-y">
-            {nav.items.map((item) => (
+            {[{ id: 'home' as const, label: nav.home }, ...nav.items].map((item) => (
               <li key={item.id}>
                 <TrackedLink
-                  href={`#${item.id}`}
+                  href={item.id === 'home' ? pathOf('home') : navHref(item.id)}
                   trackEvent="nav_click"
                   trackLabel={`mobile_${item.id}`}
+                  aria-current={page === item.id ? 'page' : undefined}
                   onClick={(e) => {
-                    // Fecha o menu antes de rolar: o Sheet trava o scroll enquanto aberto.
                     e.preventDefault();
-                    onOpenChange(false);
-                    window.setTimeout(() => scrollTo(`#${item.id}`), 320);
+                    go(e.currentTarget.getAttribute('href')!);
                   }}
-                  className="flex items-baseline gap-3 py-3"
+                  className="flex items-baseline gap-3 py-3 aria-[current=page]:text-signal"
                 >
                   <span className="font-display text-3xl">{item.label}</span>
                 </TrackedLink>
@@ -47,15 +52,22 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
             ))}
           </ul>
           <Button asChild variant="signal" size="lg" className="mt-6 w-full">
-            <TrackedLink href="#contato" trackLabel="mobile_cta" onClick={() => onOpenChange(false)}>
+            <TrackedLink
+              href={profile.bookingUrl ?? '#contato'}
+              trackLabel="mobile_cta"
+              onClick={(e) => {
+                if (profile.bookingUrl) return onOpenChange(false);
+                e.preventDefault();
+                go('#contato');
+              }}
+            >
               {nav.cta}
             </TrackedLink>
           </Button>
-          <Button asChild variant="outline" size="lg" className="mt-3 w-full">
-            <TrackedLink href="/entrar" trackLabel="mobile_client_area">
-              {nav.clientArea}
-            </TrackedLink>
-          </Button>
+          {/* Para quem já é cliente: um link discreto, abaixo do convite. */}
+          <TrackedLink href="/entrar" trackLabel="mobile_client_area" className="link-rule mt-6 block w-fit text-sm text-muted-foreground">
+            {nav.clientArea}
+          </TrackedLink>
         </nav>
       </SheetContent>
     </Sheet>

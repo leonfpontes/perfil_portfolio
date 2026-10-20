@@ -19,7 +19,9 @@ const HEADER_OFFSET = -56;
 function nativeScrollTo(target: ScrollTarget) {
   if (typeof target === 'number') return window.scrollTo({ top: target });
   const el = typeof target === 'string' ? document.querySelector(target) : target;
-  el?.scrollIntoView();
+  if (!el) return;
+  // Mesmo desconto do cabeçalho fixo que o Lenis aplica.
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + HEADER_OFFSET });
 }
 
 /**
@@ -94,6 +96,8 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const scrollTo = useCallback((target: ScrollTarget, options?: { immediate?: boolean }) => {
     const lenis = lenisRef.current;
     if (!lenis) return nativeScrollTo(target);
+    // Depois de uma troca de página a altura mudou: sem recalcular, o Lenis limitaria o destino.
+    if (options?.immediate) lenis.resize();
     lenis.scrollTo(target, { offset: typeof target === 'number' ? 0 : HEADER_OFFSET, immediate: options?.immediate, duration: 1.4 });
   }, []);
 

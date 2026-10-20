@@ -1,17 +1,19 @@
 import { useRef } from 'react';
-import { SECTION_ORDER, sectionNumber } from '@/content/sections';
+import { sectionCount, sectionNumber } from '@/content/sections';
+import { useRouter } from '@/lib/router/Router';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
 import { useSceneDirector } from '@/lib/motion/SceneDirector';
 
 /**
- * Marcador de capítulo fixo (só em telas ≥ 1536px, onde há margem livre ao lado do conteúdo): "§ 03 / 11 — Serviços" + régua de
+ * Marcador de capítulo fixo (só em telas ≥ 1536px, onde há margem livre ao lado do conteúdo): "§ 02 / 04 — Depoimentos" + régua de
  * progresso da página. Dá a sensação de capítulos, não de scroll infinito.
  */
 export function SceneIndicator() {
   const { active } = useSceneDirector();
+  const { page } = useRouter();
   const rootRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
-  const number = active ? sectionNumber(active.chapter) : '';
+  const number = active ? sectionNumber(page, active.chapter) : '';
 
   // Régua de progresso da página inteira.
   useGSAP(
@@ -51,7 +53,7 @@ export function SceneIndicator() {
       </span>
       <span className="label-caps overflow-hidden text-foreground [writing-mode:vertical-rl] rotate-180">
         <span ref={labelRef} className="inline-block">
-          {active && number ? `§ ${number} / ${String(SECTION_ORDER.length).padStart(2, '0')} — ${active.label}` : ''}
+          {active && number ? `§ ${number} / ${String(sectionCount(page)).padStart(2, '0')} — ${active.label}` : ''}
         </span>
       </span>
     </div>

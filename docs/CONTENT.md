@@ -8,16 +8,19 @@ Todo texto do site fica em `src/content/`. **Nenhum componente precisa ser alter
 |---|---|---|
 | Nome, e-mail, WhatsApp, LinkedIn, GitHub | `src/content/profile.ts` | `profile` |
 | Link da agenda (Google Agenda) | `src/content/profile.ts` | `profile.bookingUrl` |
-| Preços e itens da mentoria/diagnóstico | `src/content/locales/*.ts` | `offer.plans` |
+| Preços e itens da mentoria/diagnóstico | `src/content/locales/*.ts` | `offer.plans` (`price`, `priceShort`, `priceNote`, `regularPrice`); os dados estruturados leem os valores daqui |
+| Páginas da mentoria e do diagnóstico (hero, escopo, etapas, entregáveis, FAQ) | `src/content/locales/*.ts` | `mentoringPage`, `diagnosticPage` |
+| Título e descrição de cada página (SEO) | `src/content/locales/*.ts` | `home.meta`, `mentoringPage.meta`, `diagnosticPage.meta`, `aboutPage.meta`, `notFound.meta` |
+| Cargo nos dados estruturados (Person.jobTitle) | `src/content/profile.ts` | `profile.jobTitle` |
 | Mensagem pré-preenchida do WhatsApp | `src/content/locales/*.ts` | `plans[].whatsappMessage`, `contact.whatsappMessage` |
 | Serviços | `src/content/locales/*.ts` | `services.items` |
 | Produtos | `src/content/locales/*.ts` | `products.items` |
 | Experiências | `src/content/locales/*.ts` | `experience.items` (a mais recente primeiro; `current: true` marca a atual) |
 | Certificações | `src/content/locales/*.ts` | `education.certifications` (`inProgress: true` mostra "em andamento") |
 | Depoimentos | `src/content/locales/*.ts` | `testimonials.items` |
-| Perguntas frequentes | `src/content/locales/*.ts` | `faq.items` |
-| Ordem das seções | `src/content/sections.ts` | `SECTION_ORDER` |
-| Título e descrição para SEO | `src/content/locales/*.ts` + `index.html` | `meta` |
+| Perguntas frequentes | `src/content/locales/*.ts` | `mentoringPage.faq`, `diagnosticPage.faq` (viram `FAQPage` no JSON-LD) |
+| Ordem e numeração das seções de cada página | `src/lib/router/routes.ts` + `src/pages/` | `PAGE_SECTIONS` |
+| Nova página | `src/lib/router/routes.ts`, `src/pages/`, `src/App.tsx`, `src/seo/head.ts` | entra sozinha no prerender e no sitemap |
 
 ## Regras
 

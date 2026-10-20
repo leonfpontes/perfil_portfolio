@@ -9,6 +9,7 @@ import { SplitReveal } from '@/components/motion/SplitReveal';
 import { profile } from '@/content/profile';
 import { sectionNumber } from '@/content/sections';
 import { useContent } from '@/lib/i18n/LocaleProvider';
+import { useRouter } from '@/lib/router/Router';
 import { useServices } from '@/lib/services';
 import { cn } from '@/lib/utils';
 
@@ -16,6 +17,7 @@ import { cn } from '@/lib/utils';
 export function Contact() {
   const { contact: copy } = useContent();
   const { contact } = useServices();
+  const { page } = useRouter();
   const details = [copy.responseTime, copy.location, copy.languages, contact.displayPhone()];
 
   return (
@@ -32,7 +34,7 @@ export function Contact() {
     >
       <Container>
         <p className="label-caps border-t border-foreground/40 pt-5 text-muted-foreground">
-          § {sectionNumber('contato')} — {copy.eyebrow}
+          § {sectionNumber(page, 'contato')} — {copy.eyebrow}
         </p>
         <div className="mt-10 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">

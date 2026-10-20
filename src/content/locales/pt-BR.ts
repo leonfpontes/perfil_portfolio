@@ -3,22 +3,14 @@ import type { SiteContent } from '../types';
 export const ptBR: SiteContent = {
   locale: 'pt-BR',
 
-  meta: {
-    title: 'Leonardo Pontes · Produto, Portfólio, Dados & IA | Mentoria e Consultoria',
-    description:
-      'Mentoria 1:1 e consultoria em produto digital, governança de portfólio, PMO, dados e IA — por Leonardo Pontes, MBA USP, criador do GiraHub e do Portal PMO.',
-  },
-
   nav: {
     items: [
-      { id: 'mentoria', label: 'Mentoria' },
-      { id: 'depoimentos', label: 'Depoimentos' },
-      { id: 'servicos', label: 'Serviços' },
-      { id: 'sobre', label: 'Sobre' },
-      { id: 'produtos', label: 'Produtos' },
-      { id: 'experiencia', label: 'Trajetória' },
-      { id: 'contato', label: 'Contato' },
+      { id: 'mentoring', label: 'Mentoria' },
+      { id: 'diagnostic', label: 'Diagnóstico' },
+      { id: 'about', label: 'Sobre' },
+      { id: 'contact', label: 'Contato' },
     ],
+    home: 'Início',
     cta: 'Agendar conversa',
     clientArea: 'Área do cliente',
     toggleTheme: 'Alternar tema claro/escuro',
@@ -27,15 +19,262 @@ export const ptBR: SiteContent = {
     skipToContent: 'Pular para o conteúdo',
   },
 
+  home: {
+    meta: {
+      title: 'Mentoria de Produto e Diagnóstico de PMO | Leonardo Pontes',
+      description:
+        'Mentoria 1:1 para Product Managers e POs (R$ 997/mês) e diagnóstico de maturidade de PMO e portfólio para empresas, com Leonardo Pontes, MBA USP.',
+    },
+    profile: {
+      eyebrow: 'Quem conduz',
+      title: 'Mais de 8 anos fazendo produto e governança funcionarem',
+      description:
+        'Fui Product Owner de 4 produtos digitais, gerente de PMO de um portfólio com mais de 40 desenvolvedores e gerente de Tecnologia, Dados e IA. Hoje atuo em produto, dados e IA na ATRA e conduzo a LP | Produto & Portfólio.',
+      cta: 'Conhecer a trajetória completa',
+    },
+  },
+
+  mentoringPage: {
+    meta: {
+      title: 'Mentoria de Produto para PM e PO, 1:1 | Leonardo Pontes',
+      description:
+        'Mentoria para PO e Product Manager: 2 sessões de 60 min por mês, suporte no WhatsApp e plano de desenvolvimento individual. R$ 997/mês, sem fidelidade.',
+    },
+    hero: {
+      eyebrow: 'Mentoria 1:1 · para profissionais',
+      title: 'Mentoria de produto para',
+      titleHighlight: 'PMs e POs.',
+      description:
+        'Duas sessões por mês com quem já foi Product Owner, gerente de PMO e gerente de Tecnologia, Dados e IA. Você traz os desafios reais do seu trabalho e sai de cada encontro com o próximo passo claro.',
+      primaryCta: 'Garantir vaga fundador',
+      secondaryCta: 'Ver como funciona',
+      facts: [
+        { label: 'Formato', value: '2 sessões/mês · 60 min · online' },
+        { label: 'Entre as sessões', value: 'WhatsApp, em até 24–48h úteis' },
+        { label: 'Investimento', value: 'R$ 997/mês · 5 vagas fundador' },
+        { label: 'Compromisso', value: 'Mês a mês, sem fidelidade' },
+      ],
+    },
+    scope: {
+      eyebrow: 'A mentoria',
+      title: 'Para crescer como PM, PO ou líder de produto',
+      description: 'Acompanhamento individual e recorrente, centrado nos desafios do seu trabalho e da sua carreira.',
+      audienceTitle: 'Para quem é',
+      audience: [
+        'Product Owners e Product Managers',
+        'Product Designers e analistas de produto',
+        'Gerentes de projeto e analistas de PMO',
+        'Líderes técnicos que passaram a cuidar de produto',
+      ],
+      topicsTitle: 'O que trabalhamos',
+      topics: [
+        'Estruturar um portfólio e priorizar o roadmap',
+        'Implantar governança, discovery e rituais que funcionam',
+        'Plano de carreira e revisão de CV e de portfólio',
+        'Preparação para promoção, transição e entrevistas, com simulação de cases',
+      ],
+    },
+    journey: {
+      eyebrow: 'Como funciona',
+      title: 'Como funciona a mentoria',
+      description: 'Do primeiro contato à rotina de sessões.',
+      steps: [
+        {
+          title: 'Conversa inicial',
+          description: 'Uma conversa gratuita de 30 minutos para entender o seu momento, os seus objetivos e o encaixe.',
+        },
+        {
+          title: 'Plano individual',
+          description: 'Mapeamos onde você está e aonde quer chegar, e montamos um plano de desenvolvimento com prioridades.',
+        },
+        {
+          title: 'Sessões quinzenais',
+          description: 'Duas sessões de 60 minutos por mês sobre os desafios reais do seu trabalho, com revisão dos seus entregáveis.',
+        },
+        {
+          title: 'Entre as sessões',
+          description: 'Dúvidas e revisões pelo WhatsApp, com resposta em até 24–48h úteis, e templates prontos para aplicar.',
+        },
+      ],
+      isNot: {
+        title: 'O que esta mentoria não é',
+        items: [
+          'Curso gravado ou infoproduto genérico',
+          'Aula de teoria desligada do seu dia a dia',
+          'Promessa de promoção garantida',
+        ],
+      },
+    },
+    faq: {
+      eyebrow: 'Dúvidas frequentes',
+      title: 'Perguntas sobre a mentoria',
+      description: 'Não encontrou sua resposta? Me chame no WhatsApp.',
+      items: [
+        {
+          question: 'Para quem é a mentoria 1:1?',
+          answer:
+            'Para Product Owners, Product Managers, Product Designers, gerentes de projeto, analistas de PMO e líderes técnicos que querem acelerar a carreira ou resolver desafios concretos: estruturar um portfólio, implantar governança, priorizar um roadmap, se preparar para uma promoção ou transição.',
+        },
+        {
+          question: 'O que é a “vaga fundador”?',
+          answer:
+            'São as 5 primeiras vagas, a R$ 997/mês (depois, R$ 1.497/mês), em troca de um depoimento sincero sobre a experiência. O preço fundador fica valendo enquanto a assinatura estiver ativa.',
+        },
+        {
+          question: 'Existe fidelidade ou multa?',
+          answer: 'Não. A mentoria é uma assinatura mês a mês: você cancela quando quiser, sem multa.',
+        },
+        {
+          question: 'Como funciona o suporte pelo WhatsApp?',
+          answer:
+            'Entre as sessões você pode mandar dúvidas, documentos e entregáveis para revisão. A resposta vem em até 24–48h úteis.',
+        },
+        {
+          question: 'Os encontros são online?',
+          answer: 'Sim, por videochamada, em horários combinados com antecedência.',
+        },
+      ],
+    },
+  },
+
+  diagnosticPage: {
+    meta: {
+      title: 'Diagnóstico de Maturidade de PMO e Portfólio | Leonardo Pontes',
+      description:
+        'Diagnóstico de maturidade de PMO e governança de portfólio por gates: entrevistas, score, roadmap priorizado e apresentação executiva em 2 a 3 semanas.',
+    },
+    hero: {
+      eyebrow: 'Para empresas · Diagnóstico de maturidade',
+      title: 'Diagnóstico de maturidade de',
+      titleHighlight: 'PMO e portfólio.',
+      description:
+        'Para empresas com projetos demais, prioridades em disputa e pouca visibilidade do que gera valor. Em 2 a 3 semanas você recebe o retrato da maturidade da sua governança, gate a gate, e um roadmap priorizado para evoluir.',
+      primaryCta: 'Agendar diagnóstico',
+      secondaryCta: 'Ver as etapas',
+      facts: [
+        { label: 'Duração', value: '2 a 3 semanas' },
+        { label: 'Método', value: 'Maturidade por gates' },
+        { label: 'Investimento', value: 'R$ 7.500 · 3 vagas fundador' },
+        { label: 'Preço cheio', value: 'R$ 12.000' },
+      ],
+    },
+    process: {
+      eyebrow: 'Como funciona',
+      title: 'Do primeiro contato à execução acompanhada',
+      description: 'Quatro etapas, cada uma com uma decisão clara antes da próxima.',
+      steps: [
+        {
+          title: 'Conversa inicial',
+          description: 'Uma conversa gratuita de 30 minutos para entender o contexto, os objetivos e o encaixe.',
+        },
+        {
+          title: 'Diagnóstico',
+          description: 'Entrevistas e análise de processos e artefatos: mapeamos maturidade, gargalos e prioridades, com dados.',
+        },
+        {
+          title: 'Plano de ação',
+          description: 'Um roadmap priorizado, com rituais, artefatos e métricas adaptados à realidade da empresa.',
+        },
+        {
+          title: 'Execução acompanhada',
+          description: 'Se fizer sentido, a implementação vem sob proposta, com acompanhamento até virar rotina.',
+        },
+      ],
+      isNot: {
+        title: 'O que este diagnóstico não é',
+        items: [
+          'Consultoria de “PowerPoint” sem implementação',
+          'Fábrica de software terceirizada',
+          'Venda de ferramenta ou amarração a fornecedor',
+        ],
+      },
+    },
+    deliverables: {
+      eyebrow: 'Entregáveis',
+      title: 'O que a sua empresa recebe',
+      description: 'Um diagnóstico de baixo risco antes de qualquer implementação: o próximo passo é decidido com dados na mão.',
+      itemsTitle: 'Entregáveis do diagnóstico',
+      items: [
+        {
+          title: 'Entrevistas e análise',
+          description: 'Conversas com stakeholders e leitura dos processos, artefatos e ferramentas em uso.',
+        },
+        {
+          title: 'Score de maturidade por gate',
+          description: 'Intake, descoberta, planejamento, execução e encerramento avaliados com a mesma régua.',
+        },
+        {
+          title: 'Relatório e roadmap priorizado',
+          description: 'Onde estão os gargalos, o que atacar primeiro e o que pode esperar.',
+        },
+        {
+          title: 'Apresentação executiva',
+          description: 'Achados e roadmap apresentados à liderança, prontos para decisão.',
+        },
+      ],
+    },
+    faq: {
+      eyebrow: 'Dúvidas frequentes',
+      title: 'Perguntas sobre o diagnóstico',
+      description: 'Não encontrou sua resposta? Me chame no WhatsApp.',
+      items: [
+        {
+          question: 'Como funciona o diagnóstico?',
+          answer:
+            'Em 2 a 3 semanas faço entrevistas, analiso processos e artefatos e aplico a metodologia de maturidade por gates. Você recebe um relatório, um roadmap priorizado e uma apresentação executiva. A implementação é opcional e orçada à parte.',
+        },
+        {
+          question: 'O que é a “vaga fundador”?',
+          answer:
+            'São as 3 primeiras empresas: o diagnóstico sai por R$ 7.500 (depois, R$ 12.000), em troca de um depoimento sincero sobre a experiência, e a implementação tem 15–20% de desconto.',
+        },
+        {
+          question: 'Preciso contratar a implementação?',
+          answer:
+            'Não. O relatório e o roadmap ficam com a sua empresa, que pode executá-los com o próprio time. A implementação comigo é opcional e orçada à parte.',
+        },
+        {
+          question: 'Você desenvolve o software para a minha empresa?',
+          answer:
+            'A consultoria não é uma fábrica de software. Eu ajudo a decidir o que construir, como governar e como medir, e posso apoiar tecnicamente a escolha de ferramentas, a revisão de arquitetura e a segurança de soluções criadas com IA.',
+        },
+        {
+          question: 'É presencial ou online?',
+          answer:
+            'As entrevistas e a apresentação podem ser por videochamada. Para empresas em São Paulo e na região de Ribeirão Preto, sessões presenciais podem ser combinadas.',
+        },
+      ],
+    },
+  },
+
+  aboutPage: {
+    meta: {
+      title: 'Sobre Leonardo Pontes: Produto, PMO, Dados e IA',
+      description:
+        'Trajetória de Leonardo Pontes: Product Owner, gerente de PMO e de Tecnologia, Dados e IA. MBA em Gestão de Projetos pela USP e criador do GiraHub.',
+    },
+  },
+
+  notFound: {
+    meta: {
+      title: 'Página não encontrada | Leonardo Pontes',
+      description: 'Esta página não existe. Conheça a mentoria de produto, o diagnóstico de PMO ou a trajetória de Leonardo Pontes.',
+    },
+    eyebrow: 'Erro 404',
+    title: 'Esta página não existe',
+    description: 'O endereço pode ter mudado com a nova versão do site. Escolha um destes caminhos:',
+    linksTitle: 'Páginas do site',
+  },
+
   hero: {
     badge: 'Mentoria fundador · 5 vagas abertas',
-    greeting: 'Olá, eu sou o Leonardo Pontes',
-    title: 'Produto, portfólio e IA que',
+    greeting: 'Leonardo Pontes · Produto & Portfólio',
+    title: 'Mentoria de produto e diagnóstico de PMO que',
     titleHighlight: 'saem do papel.',
     description:
-      'Mais de 8 anos liderando produtos digitais, PMOs e times de tecnologia, dados e IA, do service desk à gestão de um portfólio com mais de 40 desenvolvedores. Hoje ajudo profissionais e empresas a implementar o que funciona na prática, e não só a teoria de curso.',
-    primaryCta: 'Conhecer a mentoria',
-    secondaryCta: 'Falar no WhatsApp',
+      'Para PMs, POs e líderes de produto que querem crescer na carreira, e para empresas que precisam pôr ordem no portfólio de projetos. Você sai com um plano claro e apoio para executá-lo, de quem lidera produtos e PMOs há mais de 8 anos.',
+    offersLabel: 'Escolha o seu caminho',
+    secondaryCta: 'Prefiro conversar no WhatsApp',
     portraitAlt: 'Retrato de Leonardo Fonseca Pontes',
     availability: 'Agenda aberta para mentoria e diagnósticos',
     stats: [
@@ -49,10 +288,10 @@ export const ptBR: SiteContent = {
   },
 
   offer: {
-    eyebrow: 'LP | Produto & Portfólio',
+    eyebrow: 'Ofertas',
     title: 'Mentoria e consultoria para quem precisa de resultado, não de slide',
     description:
-      'Um acompanhamento próximo e prático em governança de portfólio, PMO e gestão de produtos digitais, com a metodologia que eu desenvolvi e validei liderando times reais.',
+      'Duas formas de trabalhar comigo, com a metodologia que eu desenvolvi e validei liderando times reais: mentoria para quem quer evoluir na carreira de produto e diagnóstico para empresas que precisam organizar o portfólio e o PMO.',
     bookingHint: 'ou agende uma conversa gratuita de 30 min',
     founderNote:
       'Turma fundadora: preço especial para os primeiros clientes em troca de um depoimento sincero sobre a experiência.',
@@ -64,6 +303,7 @@ export const ptBR: SiteContent = {
         description:
           'Acompanhamento recorrente para POs, PMs, gerentes de projeto e líderes que querem evoluir na carreira e destravar desafios reais do dia a dia.',
         price: 'R$ 997',
+        priceShort: 'R$ 997/mês',
         priceNote: '/mês · 5 vagas fundador',
         regularPrice: 'Depois: R$ 1.497/mês',
         features: [
@@ -74,6 +314,7 @@ export const ptBR: SiteContent = {
           'Assinatura mês a mês, sem fidelidade',
         ],
         cta: 'Garantir vaga fundador',
+        detailCta: 'Ver a mentoria em detalhe',
         highlighted: true,
         whatsappMessage:
           'Olá, Leonardo! Vi seu site e quero saber mais sobre a Mentoria 1:1 (vaga fundador).',
@@ -81,12 +322,13 @@ export const ptBR: SiteContent = {
       {
         id: 'diagnostic',
         tag: 'Para empresas',
-        title: 'Diagnóstico de Maturidade + Implementação',
+        title: 'Diagnóstico de Maturidade de PMO & Portfólio',
         description:
           'Para empresas que precisam estruturar governança de portfólio, PMO ou processos de produto, começando com um diagnóstico de baixo risco antes de qualquer implementação.',
-        price: 'R$ 2.500',
+        price: 'R$ 7.500',
+        priceShort: 'R$ 7.500',
         priceNote: 'diagnóstico · 3 vagas fundador',
-        regularPrice: 'Depois: R$ 3.500',
+        regularPrice: 'Depois: R$ 12.000',
         features: [
           'Diagnóstico de 2–3 semanas com entrevistas e análise de processos',
           'Relatório de maturidade por gates e roadmap recomendado',
@@ -95,40 +337,12 @@ export const ptBR: SiteContent = {
           '15–20% de desconto na implementação para clientes fundadores',
         ],
         cta: 'Agendar diagnóstico',
+        detailCta: 'Ver o diagnóstico em detalhe',
         highlighted: false,
         whatsappMessage:
           'Olá, Leonardo! Vi seu site e quero conversar sobre o Diagnóstico de Maturidade para a minha empresa.',
       },
     ],
-    journey: {
-      title: 'Como funciona',
-      steps: [
-        {
-          title: 'Conversa inicial',
-          description: 'Uma conversa gratuita de 30 minutos para entender o contexto, os objetivos e o encaixe.',
-        },
-        {
-          title: 'Diagnóstico',
-          description: 'Mapeamos o ponto de partida: maturidade, gargalos e prioridades, com dados.',
-        },
-        {
-          title: 'Plano de ação',
-          description: 'Um roadmap claro, com rituais, artefatos e métricas adaptados à sua realidade.',
-        },
-        {
-          title: 'Execução acompanhada',
-          description: 'Sessões recorrentes, revisão de entregas e ajustes até virar rotina.',
-        },
-      ],
-    },
-    isNot: {
-      title: 'O que esta mentoria não é',
-      items: [
-        'Curso gravado ou infoproduto genérico',
-        'Fábrica de software terceirizada',
-        'Consultoria de “PowerPoint” sem implementação',
-      ],
-    },
   },
 
   services: {
@@ -572,43 +786,6 @@ export const ptBR: SiteContent = {
     ],
   },
 
-  faq: {
-    eyebrow: 'Dúvidas frequentes',
-    title: 'Perguntas frequentes',
-    description: 'Não encontrou sua resposta? Me chame no WhatsApp.',
-    items: [
-      {
-        question: 'Para quem é a mentoria 1:1?',
-        answer:
-          'Para Product Owners, Product Managers, Product Designers, gerentes de projeto, analistas de PMO e líderes técnicos que querem acelerar a carreira ou resolver desafios concretos: estruturar um portfólio, implantar governança, priorizar um roadmap, se preparar para uma promoção ou transição.',
-      },
-      {
-        question: 'O que é a “vaga fundador”?',
-        answer:
-          'São as primeiras vagas, com preço reduzido (R$ 997/mês na mentoria e R$ 2.500 no diagnóstico), em troca de um depoimento sincero sobre a experiência. O preço fundador fica valendo enquanto a assinatura estiver ativa.',
-      },
-      {
-        question: 'Existe fidelidade ou multa?',
-        answer: 'Não. A mentoria é uma assinatura mês a mês: você cancela quando quiser, sem multa.',
-      },
-      {
-        question: 'Como funciona o diagnóstico para empresas?',
-        answer:
-          'Em 2 a 3 semanas faço entrevistas, analiso processos e artefatos e aplico a metodologia de maturidade por gates. Você recebe um relatório, um roadmap priorizado e uma apresentação executiva. A implementação é opcional e orçada à parte.',
-      },
-      {
-        question: 'Você desenvolve o software para a minha empresa?',
-        answer:
-          'A mentoria e a consultoria não são uma fábrica de software. Eu ajudo a decidir o que construir, como governar e como medir, e posso apoiar tecnicamente a escolha de ferramentas, a revisão de arquitetura e a segurança de soluções criadas com IA.',
-      },
-      {
-        question: 'Os encontros são online?',
-        answer:
-          'Sim, por videochamada. Para empresas em São Paulo e região de Ribeirão Preto, workshops e sessões presenciais podem ser combinados.',
-      },
-    ],
-  },
-
   contact: {
     eyebrow: 'Contato',
     title: 'Vamos conversar sobre o seu próximo passo?',
@@ -631,7 +808,6 @@ export const ptBR: SiteContent = {
   footer: {
     tagline: 'Mentoria e consultoria em Produto, Portfólio, Dados & IA.',
     rights: 'Todos os direitos reservados.',
-    builtWith: 'Feito com React, TypeScript, Tailwind e shadcn/ui.',
     imageCredits: 'Imagens: Unsplash',
   },
   ui: {

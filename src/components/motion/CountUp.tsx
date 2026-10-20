@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
 
-/** Separa "R$ 2.500/mês" em prefixo, número, separador de milhar e sufixo. */
+/** Separa "R$ 1.497/mês" em prefixo, número, separador de milhar e sufixo. */
 export function parseNumeric(value: string) {
   const match = value.match(/\d[\d.,]*/);
   if (!match || match.index === undefined) return null;
