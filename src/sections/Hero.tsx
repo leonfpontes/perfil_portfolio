@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Azulejo } from '@/components/art/Azulejo';
+import { FlowField } from '@/components/art/FlowField';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -106,9 +106,9 @@ export function Hero() {
 
             <figure data-hero-figure className="relative lg:col-span-4">
               <div className="relative pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
-                {/* Painel de azulejos generativo atrás do retrato (muda a cada visita). */}
-                <div data-hero-block aria-hidden="true" className="absolute inset-0 overflow-hidden">
-                  <Azulejo seed={`hero-${new Date().getDate()}`} size={52} />
+                {/* Campo de fluxo em tinta atrás do retrato: traços que correm devagar e fogem do cursor. */}
+                <div data-hero-block aria-hidden="true" className="absolute inset-0 overflow-hidden text-foreground">
+                  <FlowField seed="leonardo" density={16} />
                 </div>
                 <img
                   data-hero-portrait
