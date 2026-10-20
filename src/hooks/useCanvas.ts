@@ -84,10 +84,21 @@ export function useCanvas(draw: CanvasDraw, options: UseCanvasOptions = {}): Ref
     };
 
     const resize = () => {
-      const rect = canvas.getBoundingClientRect();
+      // Tamanho de layout, não o visual: getBoundingClientRect inclui transformações, e a
+      // entrada do hero começa com o bloco achatado (scaleY 0). Medido nesse instante, o
+      // canvas ficava com altura 0 e era esticado depois (os azulejos viravam faixas).
+      // O ResizeObserver não avisa de mudanças de transform, então o erro não se corrigia.
+      let w = canvas.clientWidth;
+      let h = canvas.clientHeight;
+      if (!w && !h) {
+        // Ambientes sem layout (testes): cai no retângulo medido.
+        const rect = canvas.getBoundingClientRect();
+        w = Math.round(rect.width);
+        h = Math.round(rect.height);
+      }
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-      const w = Math.max(0, Math.round(rect.width));
-      const h = Math.max(0, Math.round(rect.height));
+      w = Math.max(0, Math.round(w));
+      h = Math.max(0, Math.round(h));
       if (w === frame.width && h === frame.height && canvas.width === Math.round(w * dpr)) return;
       frame.width = w;
       frame.height = h;
