@@ -89,3 +89,33 @@ describe('com contexto 2D simulado', () => {
     }
   });
 });
+
+describe('tamanho do canvas', () => {
+  it('usa o tamanho de layout, mesmo com o bloco achatado pela animação de entrada', () => {
+    const getContext = vi
+      .spyOn(HTMLCanvasElement.prototype, 'getContext')
+      .mockImplementation(function (this: HTMLCanvasElement) {
+        const ctx = fakeContext();
+        (ctx as unknown as { canvas: HTMLCanvasElement }).canvas = this;
+        return ctx as never;
+      });
+    // scaleY(0): o retângulo visual tem altura 0, o layout continua com 384 × 608.
+    const rect = vi
+      .spyOn(HTMLCanvasElement.prototype, 'getBoundingClientRect')
+      .mockReturnValue({ width: 384, height: 0, top: 0, left: 0, right: 384, bottom: 0, x: 0, y: 0, toJSON: () => ({}) });
+    const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(384);
+    const clientHeight = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(608);
+    try {
+      const { container } = render(<Azulejo seed="achatado" size={52} />);
+      const canvas = container.querySelector('canvas')!;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      expect(canvas.width).toBe(Math.round(384 * dpr));
+      expect(canvas.height).toBe(Math.round(608 * dpr));
+    } finally {
+      getContext.mockRestore();
+      rect.mockRestore();
+      clientWidth.mockRestore();
+      clientHeight.mockRestore();
+    }
+  });
+});
