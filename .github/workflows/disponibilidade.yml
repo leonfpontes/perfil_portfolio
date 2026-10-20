@@ -1,0 +1,47 @@
+name: Disponibilidade
+
+# Monitor externo do site e da plataforma (scripts/disponibilidade.mjs): a cada 10 minutos,
+# e-mail só quando algo cai e quando volta. O estado da rodada anterior fica no cache do
+# Actions. Segredos: RESEND_API_KEY e ALERTA_EMAIL.
+# O GitHub atrasa agendamentos em horários de pico e desliga workflows agendados depois de
+# 60 dias sem commits no repositório; nesse caso, reative em Actions → Disponibilidade.
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: disponibilidade
+  cancel-in-progress: false
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/disponibilidade.mjs
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: .disponibilidade
+          key: disponibilidade-${{ github.run_id }}
+          restore-keys: disponibilidade-
+
+      - name: Conferir o site e a plataforma
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ALERTA_EMAIL: ${{ secrets.ALERTA_EMAIL }}
+        run: node scripts/disponibilidade.mjs
+
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .disponibilidade
+          key: disponibilidade-${{ github.run_id }}
