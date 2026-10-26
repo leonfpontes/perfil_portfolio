@@ -2,14 +2,22 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { createNoise } from '@/lib/art/noise';
 import { createRandom } from '@/lib/art/random';
-import { Azulejo, GenerativeCover, Halftone, coverPainters, type CoverVariant } from './index';
+import { Funil, GenerativeCover, Halftone, coverPainters, type CoverVariant } from './index';
 
 describe('arte generativa', () => {
-  it('Azulejo renderiza um canvas decorativo', () => {
-    const { container } = render(<Azulejo seed="teste" size={40} className="absolute inset-0" />);
-    const canvas = container.querySelector('canvas');
-    expect(canvas).toBeInTheDocument();
-    expect(canvas).toHaveAttribute('aria-hidden', 'true');
+  it('Funil desenha os quatro gates, as iniciativas e uma linha de sinal, decorativo', () => {
+    const { container } = render(<Funil />);
+    expect(container.firstElementChild).toHaveAttribute('aria-hidden', 'true');
+    const svg = container.querySelector('svg')!;
+    expect(svg.querySelectorAll('.funil-gates line')).toHaveLength(4);
+    expect(svg.querySelectorAll('.funil-sinal')).toHaveLength(1);
+    expect(svg.querySelectorAll('.funil-paradas circle').length).toBeGreaterThan(0);
+    expect(svg).toHaveTextContent('G1 Intake');
+  });
+
+  it('Funil sem rótulos não escreve os nomes dos gates', () => {
+    const { container } = render(<Funil labels={false} />);
+    expect(container.querySelector('text')).toBeNull();
   });
 
   it('Halftone expõe o texto alternativo via role="img"', () => {
@@ -66,7 +74,7 @@ describe('coverPainters', () => {
 });
 
 describe('com contexto 2D simulado', () => {
-  it('Azulejo e GenerativeCover executam o quadro inicial', () => {
+  it('GenerativeCover executa o quadro inicial', () => {
     const getContext = vi
       .spyOn(HTMLCanvasElement.prototype, 'getContext')
       .mockImplementation(function (this: HTMLCanvasElement) {
@@ -78,7 +86,6 @@ describe('com contexto 2D simulado', () => {
       .spyOn(HTMLCanvasElement.prototype, 'getBoundingClientRect')
       .mockReturnValue({ width: 800, height: 600, top: 0, left: 0, right: 800, bottom: 600, x: 0, y: 0, toJSON: () => ({}) });
     try {
-      expect(() => render(<Azulejo seed="mock" />)).not.toThrow();
       for (const variant of Object.keys(coverPainters) as CoverVariant[]) {
         expect(() => render(<GenerativeCover variant={variant} />)).not.toThrow();
       }
@@ -106,7 +113,7 @@ describe('tamanho do canvas', () => {
     const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(384);
     const clientHeight = vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(608);
     try {
-      const { container } = render(<Azulejo seed="achatado" size={52} />);
+      const { container } = render(<GenerativeCover variant="contour" seed="achatado" />);
       const canvas = container.querySelector('canvas')!;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       expect(canvas.width).toBe(Math.round(384 * dpr));

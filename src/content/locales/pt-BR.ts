@@ -5,15 +5,14 @@ export const ptBR: SiteContent = {
 
   nav: {
     items: [
-      { id: 'mentoring', label: 'Mentoria' },
-      { id: 'diagnostic', label: 'Diagnóstico' },
-      { id: 'about', label: 'Sobre' },
-      { id: 'contact', label: 'Contato' },
+      { id: 'mentoring', label: 'Mentoring' },
+      { id: 'diagnostic', label: 'Diagnostic' },
+      { id: 'about', label: 'About' },
+      { id: 'contact', label: 'Contact' },
     ],
     home: 'Início',
-    cta: 'Agendar conversa',
-    clientArea: 'Área do cliente',
-    toggleTheme: 'Alternar tema claro/escuro',
+    cta: 'Book a call',
+    clientArea: 'Client area',
     toggleLanguage: 'Switch to English',
     openMenu: 'Abrir menu',
     skipToContent: 'Pular para o conteúdo',
@@ -26,10 +25,10 @@ export const ptBR: SiteContent = {
         'Mentoria 1:1 para Product Managers e POs (R$ 997/mês) e diagnóstico de maturidade de PMO e portfólio para empresas, com Leonardo Pontes, MBA USP.',
     },
     profile: {
-      eyebrow: 'Quem conduz',
+      eyebrow: 'Your mentor',
       title: 'Mais de 8 anos fazendo produto e governança funcionarem',
       description:
-        'Fui Product Owner de 4 produtos digitais, gerente de PMO de um portfólio com mais de 40 desenvolvedores e gerente de Tecnologia, Dados e IA. Hoje atuo em produto, dados e IA na ATRA e conduzo a LP | Produto & Portfólio.',
+        'Fui Product Owner de 4 produtos digitais, gerente de PMO de um portfólio com mais de 40 desenvolvedores e gerente de Tecnologia, Dados e IA. Hoje atuo em produto, dados e IA na ATRA e conduzo a LP · Product & Portfolio.',
       cta: 'Conhecer a trajetória completa',
     },
   },
@@ -41,7 +40,7 @@ export const ptBR: SiteContent = {
         'Mentoria para PO e Product Manager: 2 sessões de 60 min por mês, suporte no WhatsApp e plano de desenvolvimento individual. R$ 997/mês, sem fidelidade.',
     },
     hero: {
-      eyebrow: 'Mentoria 1:1 · para profissionais',
+      eyebrow: 'Private mentoring · 1:1',
       title: 'Mentoria de produto para',
       titleHighlight: 'PMs e POs.',
       description:
@@ -56,7 +55,7 @@ export const ptBR: SiteContent = {
       ],
     },
     scope: {
-      eyebrow: 'A mentoria',
+      eyebrow: 'The mentoring',
       title: 'Para crescer como PM, PO ou líder de produto',
       description: 'Acompanhamento individual e recorrente, centrado nos desafios do seu trabalho e da sua carreira.',
       audienceTitle: 'Para quem é',
@@ -75,7 +74,7 @@ export const ptBR: SiteContent = {
       ],
     },
     journey: {
-      eyebrow: 'Como funciona',
+      eyebrow: 'How it works',
       title: 'Como funciona a mentoria',
       description: 'Do primeiro contato à rotina de sessões.',
       steps: [
@@ -106,7 +105,7 @@ export const ptBR: SiteContent = {
       },
     },
     faq: {
-      eyebrow: 'Dúvidas frequentes',
+      eyebrow: 'FAQ',
       title: 'Perguntas sobre a mentoria',
       description: 'Não encontrou sua resposta? Me chame no WhatsApp.',
       items: [
@@ -144,7 +143,7 @@ export const ptBR: SiteContent = {
         'Diagnóstico de maturidade de PMO e governança de portfólio por gates: entrevistas, score, roadmap priorizado e apresentação executiva em 2 a 3 semanas.',
     },
     hero: {
-      eyebrow: 'Para empresas · Diagnóstico de maturidade',
+      eyebrow: 'For companies · Portfolio Diagnostic',
       title: 'Diagnóstico de maturidade de',
       titleHighlight: 'PMO e portfólio.',
       description:
@@ -159,7 +158,7 @@ export const ptBR: SiteContent = {
       ],
     },
     process: {
-      eyebrow: 'Como funciona',
+      eyebrow: 'How it works',
       title: 'Do primeiro contato à execução acompanhada',
       description: 'Quatro etapas, cada uma com uma decisão clara antes da próxima.',
       steps: [
@@ -190,7 +189,7 @@ export const ptBR: SiteContent = {
       },
     },
     deliverables: {
-      eyebrow: 'Entregáveis',
+      eyebrow: 'Deliverables',
       title: 'O que a sua empresa recebe',
       description: 'Um diagnóstico de baixo risco antes de qualquer implementação: o próximo passo é decidido com dados na mão.',
       itemsTitle: 'Entregáveis do diagnóstico',
@@ -214,7 +213,7 @@ export const ptBR: SiteContent = {
       ],
     },
     faq: {
-      eyebrow: 'Dúvidas frequentes',
+      eyebrow: 'FAQ',
       title: 'Perguntas sobre o diagnóstico',
       description: 'Não encontrou sua resposta? Me chame no WhatsApp.',
       items: [
@@ -260,7 +259,7 @@ export const ptBR: SiteContent = {
       title: 'Página não encontrada | Leonardo Pontes',
       description: 'Esta página não existe. Conheça a mentoria de produto, o diagnóstico de PMO ou a trajetória de Leonardo Pontes.',
     },
-    eyebrow: 'Erro 404',
+    eyebrow: 'Error 404',
     title: 'Esta página não existe',
     description: 'O endereço pode ter mudado com a nova versão do site. Escolha um destes caminhos:',
     linksTitle: 'Páginas do site',
@@ -268,7 +267,7 @@ export const ptBR: SiteContent = {
 
   hero: {
     badge: 'Mentoria fundador · 5 vagas abertas',
-    greeting: 'Leonardo Pontes · Produto & Portfólio',
+    greeting: 'Leonardo Pontes · Product & Portfolio',
     title: 'Mentoria de produto e diagnóstico de PMO que',
     titleHighlight: 'saem do papel.',
     description:
@@ -288,7 +287,7 @@ export const ptBR: SiteContent = {
   },
 
   offer: {
-    eyebrow: 'Ofertas',
+    eyebrow: 'Offers',
     title: 'Mentoria e consultoria para quem precisa de resultado, não de slide',
     description:
       'Duas formas de trabalhar comigo, com a metodologia que eu desenvolvi e validei liderando times reais: mentoria para quem quer evoluir na carreira de produto e diagnóstico para empresas que precisam organizar o portfólio e o PMO.',
@@ -346,7 +345,7 @@ export const ptBR: SiteContent = {
   },
 
   services: {
-    eyebrow: 'Serviços',
+    eyebrow: 'Services',
     title: 'Como posso gerar valor para você ou sua empresa',
     description:
       'Atuo na ponte entre negócio, produto e engenharia. Escolha o formato que faz sentido para o seu momento.',
@@ -398,13 +397,13 @@ export const ptBR: SiteContent = {
   },
 
   about: {
-    eyebrow: 'Sobre mim',
+    eyebrow: 'About',
     title: 'Do service desk à liderança de produto, dados e IA',
     description: 'Um perfil híbrido: entendo o negócio, falo a língua da engenharia e sei colocar as duas coisas para andar juntas.',
     story: [
       'Comecei no campo, no service desk e em consultoria de automação de varejo. De lá fui para o desenvolvimento de software e, cedo, para projetos de IA conversacional em educação. Essa base técnica nunca me deixou: até hoje eu construo, testo e coloco produtos em produção.',
       'Desde 2018 atuo com produto e projetos, como Project Analyst, Product Owner de 4 produtos digitais, gerente de PMO de um portfólio com mais de 40 desenvolvedores e gerente de Tecnologia, Dados e IA. Hoje sou Product Designer de Produto, Dados & IA na ATRA, uma consultoria com mais de 15 anos de mercado.',
-      'Em paralelo, crio meus próprios produtos (como o GiraHub e o Portal PMO) e ensino o que aprendi. A LP | Produto & Portfólio nasceu disso: levar para outros profissionais e empresas a metodologia que validei na prática.',
+      'Em paralelo, crio meus próprios produtos (como o GiraHub e o Portal PMO) e ensino o que aprendi. A LP · Product & Portfolio nasceu disso: levar para outros profissionais e empresas a metodologia que validei na prática.',
     ],
     pillars: [
       {
@@ -434,7 +433,7 @@ export const ptBR: SiteContent = {
   },
 
   products: {
-    eyebrow: 'Produtos autorais',
+    eyebrow: 'Products',
     title: 'Produtos que eu idealizei, construí e opero',
     description:
       'Da ideia à produção: discovery, design, código, infraestrutura e go-to-market. É a prova prática do que eu ensino.',
@@ -483,7 +482,7 @@ export const ptBR: SiteContent = {
         category: 'SaaS de governança de portfólio (2023–2026)',
         status: 'sunset',
         description:
-          'Ferramenta autoral de gestão de portfólio com governança em 5 gates. Saiu de linha como produto comercial em 2026, e a metodologia virou a base da LP | Produto & Portfólio.',
+          'Ferramenta autoral de gestão de portfólio com governança em 5 gates. Saiu de linha como produto comercial em 2026, e a metodologia virou a base da LP · Product & Portfolio.',
         highlights: [
           'Gates de Intake, Descoberta, Planejamento, Execução e Encerramento',
           'Dashboards executivos com semáforo, KPIs e relatórios automatizados',
@@ -512,7 +511,7 @@ export const ptBR: SiteContent = {
   },
 
   experience: {
-    eyebrow: 'Trajetória',
+    eyebrow: 'Track record',
     title: 'Experiência profissional',
     description:
       'Educação, serviços financeiros, governo e tecnologia: contextos diferentes, sempre com foco em valor mensurável.',
@@ -598,7 +597,7 @@ export const ptBR: SiteContent = {
   },
 
   skills: {
-    eyebrow: 'Competências',
+    eyebrow: 'Expertise',
     title: 'Um repertório completo, do negócio ao deploy',
     description: 'Ferramentas e práticas que uso no dia a dia e que ensino na mentoria.',
     groups: [
@@ -693,7 +692,7 @@ export const ptBR: SiteContent = {
   },
 
   education: {
-    eyebrow: 'Formação',
+    eyebrow: 'Education',
     title: 'Formação acadêmica e aprendizado contínuo',
     description: 'Base sólida em computação e gestão, renovada a cada ano.',
     degreesTitle: 'Formação acadêmica',
@@ -742,7 +741,7 @@ export const ptBR: SiteContent = {
   },
 
   testimonials: {
-    eyebrow: 'Depoimentos',
+    eyebrow: 'Testimonials',
     title: 'O que dizem as pessoas que trabalharam comigo',
     description: 'Recomendações de líderes, pares e liderados de times de produto, engenharia e operações.',
     sourceNote: 'Recomendações públicas no LinkedIn',
@@ -787,7 +786,7 @@ export const ptBR: SiteContent = {
   },
 
   contact: {
-    eyebrow: 'Contato',
+    eyebrow: 'Contact',
     title: 'Vamos conversar sobre o seu próximo passo?',
     description:
       'Conte rapidamente o seu contexto. Respondo pessoalmente e, se fizer sentido, marcamos uma conversa gratuita de 30 minutos.',
@@ -799,7 +798,7 @@ export const ptBR: SiteContent = {
       github: 'Ver GitHub',
     },
     whatsappMessage: 'Olá, Leonardo! Vi seu site e gostaria de conversar sobre mentoria/consultoria.',
-    emailSubject: 'Contato pelo site · LP | Produto & Portfólio',
+    emailSubject: 'Contato pelo site · LP · Product & Portfolio',
     responseTime: 'Resposta em até 24h úteis',
     location: 'Ribeirão Preto · São Paulo · Remoto',
     languages: 'Atendimento em português e inglês',

@@ -1,113 +1,68 @@
-# Sistema visual — modernismo brasileiro
+# Sistema visual — LP Noir
 
-O site precisa parecer **de autor**, e não gerado. A primeira versão (papel creme, laranja-terracota e serifa elegante) caiu justamente na estética padrão das ferramentas de IA de 2026, e foi descartada a partir de feedback real ("esse laranja com essa fonte é super Claude").
+Em outubro de 2026 a identidade "modernismo brasileiro" (cal, palha, mata, ocre e cobalto, azulejos e cantos retos) saiu: não atraía o público que a mentoria quer, profissionais e empresas de renda mais alta, que procuram seriedade. O **LP Noir** é escuro, sóbrio e premium, e é **o mesmo sistema no site e na plataforma** (lp-diagnostico): quem sai de um e entra no outro não deve sentir que mudou de lugar.
 
-A identidade atual vem do modernismo brasileiro: os painéis de azulejo de Athos Bulcão, os cartazes dos anos 60 e a paleta dos jardins e da arquitetura modernista. É pessoal (Brasil, Ribeirão Preto, GiraHub) e não se confunde com template.
+A mudança foi só de identidade. Cenas, pins, trilhos horizontais, transições de rota e o modo suave continuam exatamente como antes (seção "Movimento" abaixo).
 
-## Fundamentos
+## Tokens compartilhados
 
-| Elemento | Escolha | Token / utilitário |
+`src/styles/lp-noir.css` é **idêntico** nos dois repositórios (no app fica em `src/lp-noir.css`), assim como `src/lib/glass-light.ts`. Altere nos dois juntos.
+
+| Elemento | Escolha | Token |
 |---|---|---|
-| Paleta de marca | **cal** (branco de parede), **palha**, **mata** (verde profundo), **ocre**, **cobalto** (azul), **anil** (noite), **breu** (tinta) | `--cal`, `--palha`, `--mata`, `--ocre`, `--azul`, `--anil`, `--breu` |
-| Tons de cena | Cada capítulo assume um tom: cal, palha, mata, ocre, cobalto ou anil | `.tone-*` |
-| Tipografia | **Archivo** (Omnibus-Type, foundry latino-americana), variável em peso e largura | `font-sans`, `font-display` |
-| Títulos | Archivo expandida (118%) e pesada (750), como em cartaz | `display` |
-| Destaque | Bloco de cor atrás da palavra, no lugar do itálico | `highlight` |
-| Rótulos | Caixa alta, levemente expandida e espaçada (sem fonte mono) | `label-caps` |
-| Bordas | Fios de 1px, cantos retos | `--radius: 0` |
-| Arte | Azulejos generativos, fotos que se revelam (retícula → duotônico) e capas por produto | `art/Azulejo`, `art/Halftone`, `art/GenerativeCover` |
+| Fundo | Onyx `#0A0A0B` | `--noir-onyx` |
+| Superfície / elevado | Graphite `#131315` · Smoke `#1B1B1E` | `--noir-graphite`, `--noir-smoke` |
+| Fio | `#2A2A2E` | `--noir-line` |
+| Texto | Ivory `#F1EDE4` · apoio Stone `#9B968C` | `--noir-ivory`, `--noir-stone` |
+| Acento | Champagne `#CFB48A`, no máximo uma vez por tela | `--noir-champagne` |
+| Status | ok `#8FBF9F` · atenção `#D9B26A` · crítico `#E08A7A` | `--noir-ok`, `--noir-warn`, `--noir-crit` |
+| Papel (modo claro do app, e-mails, PDFs) | `#F6F3EC` · tinta `#141416` · bronze `#7A5C2E` | `--noir-paper`, `--noir-ink`, `--noir-bronze` |
+| Raio | 8 px campos e etiquetas · 10 px botões e cards · 12 px painéis e modais. Nada de pílula | `--noir-radius-field`, `-card`, `-panel` |
+| Fonte | **Roboto** (padrão); títulos em 500 com espaçamento justo | `--noir-font-sans` |
+| Destaque | A palavra-chave do título em **Instrument Serif itálica** champagne | `--noir-font-serif`, `highlight` |
 
-O modo escuro usa um verde-quase-preto. As cenas "mata" se invertem para cal, para manter o contraste entre capítulos.
+O site é escuro sempre (não há alternância de tema). As classes `.tone-*` das cenas foram mantidas, mas agora alternam entre tons de preto (onyx, graphite, smoke e um preto profundo): o contraste entre capítulos vem da luz, não da cor.
 
-## Movimento — o site em cenas
+## Vidro (liquid glass)
 
-A página não é um scroll infinito: é uma sequência de **cenas**. Cada seção ocupa a tela, assume um *tom* de cor e, ao sair, recua e se apaga enquanto a próxima sobe.
+`.glass` é o vidro translúcido: fundo que desfoca e satura o que está atrás, borda com reflexo e sombra profunda. Vai só no que **flutua sobre o conteúdo**: header (`.glass-bar`), barra móvel, legenda do retrato, cards em destaque, modais e controles. Texto longo nunca fica em vidro. Com "Reduzir transparência", vira Graphite sólido.
 
-| Cena | Tom | Coreografia |
-|---|---|---|
-| Início | papel | Retrato "impresso" de baixo para cima, título por linhas, campo de fluxo em tinta reagindo ao cursor |
-| Mentoria | areia | Propostas chegam de lados opostos; preços contam até o valor |
-| Jornada | papel | **Fixa**: a linha dos gates é traçada e cada etapa acende; depois, o que a mentoria não é vai sendo riscado; foto que se revela de retícula em duotônico |
-| Depoimentos | tinta | **Fixa**: um depoimento por passo de scroll; a aspa gigante gira como um carimbo |
-| Serviços | sinal (vermelhão) | **Fixa**: numeral-odômetro dentro de um selo circular que gira; um serviço por vez |
-| Sobre | papel | Texto "acende" conforme a leitura; foto que se revela, com lupa no cursor |
-| Produtos | tinta | **Trilho horizontal fixo** com capas generativas por produto |
-| Trajetória | papel | Fichas empilhadas: cada experiência desliza sobre a anterior |
-| Competências | noite | Faixas tipográficas em loop; o impulso do scroll acelera |
-| Formação / FAQ | areia / papel | Entradas escalonadas |
-| Contato | tinta | Título por caracteres, botão magnético, campo de fluxo |
+**Luz no hover.** A construção vem do GlowCard do site da ATRA: a borda acende em champagne, um reflexo branco marca o ponto mais claro, o corpo recebe um lavado de 12% e um halo quente vaza por fora. A diferença, pedida de propósito: **o centro da luz não é o cursor.** Ele fica ancorado atrás do componente, acima do meio, e só se inclina cerca de 30% na direção do mouse, com suavização (`glass-light.ts`). Em toque, nada se move. `.glass-spot` dentro de um `[data-glass-light]` é a luz ambiente ampla que fica atrás do vidro.
 
-**Tons** (`.tone-*` em `globals.css`) definem só 4 cores: fundo, tinta, sinal e texto-sobre-sinal. Todo o resto da paleta deriva delas com `color-mix`, recalculado em cada seção.
+## Arte: o funil de portfólio
 
-**Arte generativa** (`components/art`):
-- **Azulejos:** painel com módulos geométricos em cores de marca. A composição muda a cada visita, um azulejo gira de tempos em tempos e o que está sob o cursor também gira.
-- **Fotos que se revelam:**
-  - a foto entra como retícula de impressão;
-  - ao chegar no centro da tela, os pontos se fundem num duotônico da marca (breu sobre cal);
-  - no desktop, o cursor é uma lupa que mostra a foto antes;
-  - as cores são fixas, então em qualquer tema a foto é uma impressão positiva (nunca negativo);
-  - no modo suave, aparece pronta.
+`components/art/Funil.tsx` (geometria em `funil.ts`, movimento em `funil-motion.ts`). Iniciativas entram espalhadas pela esquerda e atravessam os gates **G1 Intake, G2 Business case, G3 Delivery e G4 Benefits**, a mesma metodologia da mentoria e do diagnóstico. Em cada gate algumas param, e só um feixe estreito chega ao fim, com a linha de sinal em champagne. Nada é aleatório: o desenho é SVG com traço nítido em qualquer tamanho.
 
-  A retícula pura foi descartada porque as pessoas não reconheciam o que as fotos mostravam.
-- **Capas por produto:** selo, gates, radar e curvas de nível.
+Movimento: as linhas se desenham na entrada; depois, iniciativas fluem como cometas curtos, cada gate acende no ponto de passagem, as barradas se apagam num anel e cada rótulo mostra a taxa de aprovação ao vivo. Com o mouse perto de um gate, ele se destaca. No celular os rótulos somem; no modo suave fica só o desenho parado.
 
-Tudo é desenhado em canvas e pausa fora da tela.
+A substituiu os azulejos no hero, no painel das páginas internas, no contato, na 404 e na Área do cliente. As capas por produto (`GenerativeCover`) e as fotos que se revelam (`Halftone`) continuam.
 
-**Transição de cor presa à rolagem:** cada cena pinta o próprio fundo, e a nova cor sobe junto com a seção, como uma folha deslizando sobre a anterior, com sombra na borda.
-- Não há troca por tempo ("estalo") nem mistura intermediária ("cinza lamacento").
-- Só o header e o fundo da página fazem uma dissolução curta para o tom da cena ativa.
+## Inglês nos rótulos, português no conteúdo
 
-**Celular — trilhos horizontais:** no mobile, as seções com vários itens viram trilhos guiados pelo scroll (`HorizontalTrack`):
-- planos, gates da jornada, depoimentos, serviços, produtos e trajetória;
-- cada painel cabe inteiro numa tela e "encaixa" ao soltar o dedo;
-- nada é cortado e um painel custa cerca de meia tela de rolagem.
+Navegação (Mentoring, Diagnostic, About, Contact), botões curtos (Book a call, Client area), eyebrows de seção (How it works, Deliverables, FAQ, Testimonials…) e a marca **LP · Product & Portfolio** ficam em inglês. Títulos, textos, FAQ e metadados de SEO seguem em português.
 
-Também no celular:
-- as cenas não se apagam enquanto você lê (só a entrada é animada);
-- textos longos ficam atrás de "Ler mais";
-- as certificações mostram as 5 primeiras.
+## Movimento — o site em cenas (inalterado)
 
-**Movimento e acessibilidade — modo suave:** quando o sistema pede "Reduzir movimento", o site *não* fica estático.
-- **Desliga o que pode causar enjoo:** parallax, scroll travado (pins), trilhos forçados, Lenis e SplitText.
-- **Mantém o que dá identidade sem deslocar a tela:** troca de cor das cenas (que já acompanha a rolagem), fades e a arte (parada).
-- **Escolha do visitante:** um aviso discreto oferece "Ver animações completas", e o rodapé permite alternar entre completo, suave e "seguir o sistema" (`lp:motion`).
-- **No celular,** só as cenas que cabem na tela ficam fixas.
+A página é uma sequência de **cenas**: cada seção ocupa a tela, assume um tom e, ao sair, recua e se apaga enquanto a próxima sobe (`motion/Scene`, `SceneThemeController`). Seções com vários itens viram trilhos guiados pelo scroll no celular (`HorizontalTrack`). Depoimentos, serviços e a jornada ficam fixos enquanto o conteúdo avança. As páginas trocam com View Transitions.
 
-## Padrões de composição
+**Modo suave:** quando o sistema pede "Reduzir movimento", desliga parallax, pins, trilhos forçados, Lenis e SplitText, e mantém a troca de cor das cenas, fades e a arte parada. O visitante pode escolher no aviso ou no rodapé (`lp:motion`).
 
-- **Seções numeradas** (`§ 01 — Mentoria`): o fio superior escuro abre cada capítulo, e o rótulo fica numa coluna lateral de 3/12.
-- **Listas como tabelas:** serviços, experiências e produtos usam linhas com fios, e não grades de cards.
-- **Gates:** a jornada da mentoria aparece como etapas G1–G4 ligadas por uma linha, a mesma linguagem de governança ensinada na mentoria.
-- **Números como ledger:** os indicadores ficam numa régua com divisórias, em serifa grande.
-- **Uma citação por vez:** os depoimentos são lidos como numa revista, com navegação "Anterior / 01 de 06 / Próximo".
-- **Encerramento invertido:** o contato fica em bloco de tinta, com o e-mail em tipografia grande.
+## O que evitamos
 
-## O que evitamos (anti-genérico)
-
-- A estética padrão das IAs: papel creme com laranja-terracota e serifa "editorial", fontes mono em rótulos, gradiente roxo-azul.
-- Gradientes, texto em gradiente, blobs desfocados e "glassmorphism".
-- Cards idênticos com ícone num quadrado colorido.
-- Badges com ✨, pontos pulsando e emojis decorativos.
-- Fotos de banco coloridas "de sorriso" sem contexto. Também nunca usamos foto de banco como se fosse screenshot de produto.
-- Sombras difusas para criar hierarquia: a hierarquia vem de tipografia, espaço e fios.
-- Botão flutuante de WhatsApp. No mobile há uma barra discreta no rodapé.
-- Movimento gratuito. Toda animação conta algo: traçar gates, riscar o que não somos, empilhar a trajetória.
+- Gradiente roxo-azul, texto em gradiente, blobs coloridos.
+- Spotlight que segue o cursor (a luz do vidro é ambiente).
+- Arte aleatória sem significado: toda linha conta a história dos gates.
+- Cards idênticos com ícone em quadrado colorido, badges com ✨ e emojis decorativos.
+- Botão flutuante de WhatsApp. No mobile há uma barra discreta de vidro no rodapé.
 
 ## Componentes
 
 | Componente | Uso |
 |---|---|
 | `Section` / `SectionHeader` | Toda seção numerada |
-| `Container` | Largura máxima e gutters (`max-w-7xl`) |
-| `motion/Scene` | Cena: tom de cor, entrada e saída coreografadas |
-| `motion/SplitReveal` | Texto por linhas, palavras, caracteres ou "leitura" |
-| `motion/CountUp`, `motion/Magnetic` | Números que contam e botões magnéticos |
-| `motion/HorizontalTrack` | Trilho horizontal guiado pelo scroll (com encaixe), em qualquer breakpoint |
-| `motion/SceneIndicator` | Marcador "§ 03 / 10" e régua de progresso (telas ≥ 1536px) |
-| `art/FlowField`, `art/Halftone`, `art/GenerativeCover` | Arte generativa em canvas |
-| `Reveal` | Entrada discreta (fade + 8px) |
-| `TrackedLink` | Link com evento de analytics e `rel` seguro para links externos |
-| `Arrow` | Seta tipográfica (→ ← ↗) no lugar de ícones |
-| `ui/button` | Variantes shadcn + `signal` |
-| `ui/sheet` | Menu mobile |
-| `ui/accordion` | FAQ |
+| `motion/Scene` | Cena: tom, entrada e saída coreografadas |
+| `motion/SplitReveal`, `CountUp`, `Magnetic`, `HorizontalTrack`, `SceneIndicator` | Movimento (inalterado) |
+| `art/Funil` | Funil de gates (SVG + canvas) |
+| `art/Halftone`, `art/GenerativeCover` | Fotos que se revelam e capas por produto |
+| `ui/button` | Variantes shadcn + `signal` (champagne) e `glass` |
+| `.glass`, `.glass-bar`, `.glass-spot` | Vidro e luz (lp-noir.css) |

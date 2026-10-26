@@ -33,7 +33,7 @@ export function MotionNotice() {
   return (
     <div
       role="status"
-      className="fixed bottom-16 left-4 z-40 flex max-w-sm items-start gap-3 border border-foreground bg-background p-4 text-sm shadow-[6px_6px_0_var(--foreground)] sm:bottom-6"
+      className="fixed bottom-16 left-4 z-40 glass flex max-w-sm items-start gap-3 rounded-xl p-4 text-sm sm:bottom-6"
     >
       <div>
         <p>{ui.motion.gentleNotice}</p>

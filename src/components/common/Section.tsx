@@ -23,7 +23,7 @@ interface SectionHeaderProps {
 export function SectionHeader({ id, heading, compact = false, level = 'h2' }: SectionHeaderProps) {
   const { page } = useRouter();
   return (
-    <Reveal className={cn('grid gap-6 border-t border-foreground pt-5 lg:grid-cols-12', compact ? 'mb-8 lg:mb-10' : 'mb-10 lg:mb-20')}>
+    <Reveal className={cn('grid gap-6 border-t border-border pt-5 lg:grid-cols-12', compact ? 'mb-8 lg:mb-10' : 'mb-10 lg:mb-20')}>
       <p className="label-caps text-muted-foreground lg:col-span-3">
         § {sectionNumber(page, id)} — {heading.eyebrow}
       </p>

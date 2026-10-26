@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from 'react';
 import { ArrowLeft, ArrowRight, Check, KeyRound, Mail } from 'lucide-react';
-import { AzulejoEstatico } from '@/components/art/AzulejoEstatico';
+import { Funil } from '@/components/art/Funil';
 import { cn } from '@/lib/utils';
 import { api, APP_URL, destination, isTwoFactorStep, type Principal, type SignInResult, SignInError } from './api';
 import { sairPara } from './passagem';
@@ -13,7 +13,7 @@ import { caixaDeEntrada, emailLembrado, guardarPedido, lembrarEmail, pedidoEmAnd
  * que chega por e-mail também abre aqui (`?token=`). Entrou, a cortina fecha e o app abre na área
  * da pessoa (ou no `?next=` que o app pediu).
  *
- * Painel da marca à esquerda no computador; no celular, uma coluna com uma faixa de azulejos.
+ * Painel da marca à esquerda no computador; no celular, uma coluna só com o formulário.
  */
 
 type Mode = 'link' | 'senha';
@@ -36,9 +36,9 @@ const BULLETS = [
 const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? '';
 
 const INPUT =
-  'h-12 w-full border border-input bg-background px-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-signal focus-visible:ring-2 focus-visible:ring-signal/30';
+  'h-12 w-full rounded-sm border border-input bg-background px-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-signal focus-visible:ring-2 focus-visible:ring-signal/30';
 const PRIMARY =
-  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 bg-foreground px-5 text-base font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60';
+  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-foreground px-5 text-base font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60';
 const LINK = 'font-semibold text-signal underline-offset-4 hover:underline';
 
 export function ClientAreaLogin() {
@@ -129,7 +129,7 @@ export function ClientAreaLogin() {
 
   return (
     <div className="passagem relative flex min-h-dvh flex-col bg-background text-foreground">
-      {/* A cortina recua até o painel na chegada, com o fio ocre na borda, e cobre a tela na saída (entrar.css). */}
+      {/* A cortina recua até o painel na chegada, com o fio champagne na borda, e cobre a tela na saída (entrar.css). */}
       <div className="passagem-cortina" aria-hidden />
       <div className="passagem-fio" aria-hidden />
 
@@ -145,10 +145,10 @@ export function ClientAreaLogin() {
           href="/"
           onClick={(event) => voltarAoSite(event)}
           aria-label="Leonardo Pontes — voltar ao site"
-          className="marca-lp flex items-baseline gap-3 md:text-[var(--cal)]"
+          className="marca-lp flex items-baseline gap-3"
         >
           <span className="font-display text-2xl leading-none whitespace-nowrap">Leonardo Pontes</span>
-          <span className="label-caps hidden opacity-80 lg:inline">Produto &amp; Portfólio</span>
+          <span className="label-caps hidden opacity-80 lg:inline">Product &amp; Portfolio</span>
         </a>
         <a
           href="/"
@@ -165,8 +165,7 @@ export function ClientAreaLogin() {
 
         <main id="formulario" className="flex flex-1 flex-col items-center px-4 pt-8 pb-12 sm:px-6 md:justify-center md:py-20">
           <div className="passagem-porta w-full max-w-md">
-            <AzulejoEstatico seed="area-do-cliente" cols={12} rows={1} className="mb-8 aspect-[12/1] w-full md:hidden" />
-            <p className="label-caps text-signal">Área do cliente</p>
+            <p className="label-caps text-signal">Client area</p>
             {step.kind === 'form' && (
               <FormStep mode={mode} onMode={setMode} busy={busy} error={error} onFinish={finish} onSent={enviado} run={run} />
             )}
@@ -282,31 +281,35 @@ function voltarAoSite(event: MouseEvent<HTMLAnchorElement>) {
   void sairPara('/');
 }
 
-/** Computador: o painel anil com a parede de azulejos, a promessa e o que há lá dentro. */
+/** Computador: o painel escuro com as curvas de nível, a promessa e o que há lá dentro. */
 function BrandPanel() {
   return (
     <aside
       aria-label="Sobre a Área do cliente"
-      className="relative hidden overflow-hidden bg-[var(--anil)] text-[var(--cal)] md:flex md:flex-col"
+      data-glass-light
+      className="relative hidden overflow-hidden border-r border-white/5 bg-[var(--noir-graphite)] text-foreground md:flex md:flex-col"
     >
+      <div aria-hidden="true" className="absolute inset-0">
+        <div className="glass-spot" />
+        <Funil labels={false} className="opacity-80" />
+      </div>
       <div className="passagem-surge relative z-20 flex flex-1 flex-col justify-between gap-12 px-10 pt-24 pb-10 lg:px-14">
         <div>
-          <p className="label-caps text-[var(--ocre)]">Mentoria 1:1 · Diagnóstico de maturidade</p>
-          <p className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight [font-stretch:115%] lg:text-5xl">
-            Sua mentoria e seus diagnósticos <span className="bg-[var(--ocre)] px-1 text-[var(--breu)]">num lugar só</span>.
+          <p className="label-caps text-signal">Private mentoring · Portfolio Diagnostic</p>
+          <p className="display mt-5 text-4xl lg:text-5xl">
+            Sua mentoria e seus diagnósticos <span className="highlight">num lugar só</span>.
           </p>
           <ul className="mt-10 flex flex-col gap-4 text-base">
             {BULLETS.map((bullet) => (
               <li key={bullet} className="flex items-start gap-3">
-                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center bg-[var(--ocre)] text-[var(--breu)]">
+                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-sm border border-signal/40 text-signal">
                   <Check className="size-3.5" strokeWidth={3} aria-hidden />
                 </span>
-                <span className="opacity-90">{bullet}</span>
+                <span className="text-foreground/85">{bullet}</span>
               </li>
             ))}
           </ul>
         </div>
-        <AzulejoEstatico seed="area-do-cliente" cols={8} rows={3} className="aspect-[8/3] w-full" />
       </div>
     </aside>
   );
@@ -347,7 +350,7 @@ function FormStep({
 
   return (
     <>
-      <h1 className="mt-3 font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%] sm:text-5xl">
+      <h1 className="mt-3 display text-4xl sm:text-5xl">
         Entre na sua área
       </h1>
       <p className="mt-3 text-base text-muted-foreground">
@@ -356,7 +359,7 @@ function FormStep({
           : 'Entre com o e-mail e a senha da sua conta. Quem usa a verificação em duas etapas confirma com o código.'}
       </p>
 
-      <div role="group" aria-label="Como entrar" className="mt-8 grid grid-cols-2 border border-input p-1">
+      <div role="group" aria-label="Como entrar" className="mt-8 grid grid-cols-2 rounded-lg border border-input p-1">
         {(
           [
             ['link', 'Link por e-mail', Mail],
@@ -369,7 +372,7 @@ function FormStep({
             aria-pressed={mode === value}
             onClick={() => onMode(value)}
             className={cn(
-              'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 text-sm font-medium transition-colors',
+              'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-sm text-sm font-medium transition-colors',
               mode === value ? 'bg-foreground text-background' : 'text-muted-foreground hover:text-foreground',
             )}
           >
@@ -460,7 +463,7 @@ function SentStep({
 
   return (
     <>
-      <h1 className="mt-3 font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%]">
+      <h1 className="mt-3 display text-4xl">
         Confira seu e-mail
       </h1>
       <p className="mt-3 text-base text-muted-foreground" id={ids.hint}>
@@ -561,7 +564,7 @@ function ExpiredStep({
   const ids = { error: useId() };
   return (
     <>
-      <h1 className="mt-3 font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%]">
+      <h1 className="mt-3 display text-4xl">
         Este link já não vale
       </h1>
       <p className="mt-3 text-base text-muted-foreground" role="alert">
@@ -599,7 +602,7 @@ function TwoFactorStep({
   const [code, setCode] = useState('');
   return (
     <>
-      <h1 className="mt-3 font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%]">
+      <h1 className="mt-3 display text-4xl">
         Verificação em duas etapas
       </h1>
       <p className="mt-3 text-base text-muted-foreground">
@@ -656,8 +659,8 @@ function Message({
 }) {
   return (
     <div className="mt-6 flex flex-col items-start gap-4" role={live ? 'status' : undefined}>
-      <span className="flex size-12 items-center justify-center bg-signal text-signal-foreground">{icon}</span>
-      <h1 className="font-display text-4xl leading-tight font-bold tracking-tight [font-stretch:112%]">{title}</h1>
+      <span className="flex size-12 items-center justify-center rounded-lg border border-signal/40 text-signal">{icon}</span>
+      <h1 className="display text-4xl">{title}</h1>
       <p className="text-base text-muted-foreground">{body}</p>
       {action}
     </div>

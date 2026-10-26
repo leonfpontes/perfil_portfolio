@@ -1,58 +1,29 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./lp-noir.css";
 
 @custom-variant dark (&:is(.dark *));
 /* Modo suave (ver motionPreference.ts): classe definida no <html> antes do primeiro paint. */
 @custom-variant reduced (&:where(.reduced-motion, .reduced-motion *));
 
 /*
- * Archivo (Omnibus-Type, foundry latino-americana) — fonte variável com eixos de
- * peso (400–800) e largura (100–120%), subconjunto gerado por scripts/subset-font.py:
- * expandida e pesada nos títulos, como nos
- * cartazes brasileiros dos anos 60; normal no texto. Auto-hospedada e pré-carregada.
- */
-@font-face {
-  font-family: "Archivo";
-  font-style: normal;
-  font-weight: 400 800;
-  font-stretch: 100% 120%;
-  font-display: swap;
-  src: url("/fonts/archivo.woff2") format("woff2");
-}
-
-
-/*
- * Design tokens — direção "dossiê editorial".
- *
- * Papel quente + tinta preta + um único acento (vermelhão). Sem gradientes,
- * sem sombras difusas, sem vidro: hierarquia vem de tipografia, fios e espaço.
- * Nomes seguem a convenção do shadcn/ui; `--accent` é a superfície sutil de
- * hover, e o acento de marca é `--signal`.
- */
-/*
- * Identidade "modernismo brasileiro": cal, palha, mata, ocre, cobalto e anil —
- * a paleta de azulejos, cartazes e jardins modernistas, não a de uma IA.
+ * Identidade "LP Noir" (ver lp-noir.css e docs/DESIGN.md): preto quente, marfim e
+ * um único acento champagne. O site é escuro sempre; o modo claro existe só no app.
  *
  * Só 4 cores são "primárias" por cena (fundo, tinta, sinal e texto-sobre-sinal);
- * o resto deriva com color-mix. As cores de marca (--azul, --ocre…) são fixas
- * e usadas pela arte generativa (azulejos).
+ * o resto deriva com color-mix. As cenas alternam entre tons de preto: o contraste
+ * entre capítulos vem da luz, não da cor. Os nomes dos tons ficaram por compatibilidade.
  */
 :root {
-  --radius: 0rem;
-  --cal: oklch(0.975 0.005 100);
-  --palha: oklch(0.93 0.045 92);
-  --mata: oklch(0.34 0.07 163);
-  --ocre: oklch(0.82 0.15 82);
-  --azul: oklch(0.46 0.17 262);
-  --anil: oklch(0.21 0.05 262);
-  --breu: oklch(0.21 0.035 165);
+  --radius: var(--noir-radius-card);
 
-  --background: var(--cal);
-  --foreground: var(--breu);
-  --signal: var(--azul);
-  --signal-foreground: var(--cal);
+  --background: var(--noir-onyx);
+  --foreground: var(--noir-ivory);
+  --signal: var(--noir-champagne);
+  --signal-foreground: var(--noir-champagne-ink);
 
-  --destructive: oklch(0.55 0.2 27);
+  --destructive: var(--noir-crit);
+  color-scheme: dark;
 }
 
 /*
@@ -67,54 +38,48 @@
 .tone-ocre,
 .tone-cobalto,
 .tone-anil {
-  --card: color-mix(in oklab, var(--background) 92%, white);
+  --card: color-mix(in oklab, var(--background) 94%, white);
   --card-foreground: var(--foreground);
-  --popover: var(--background);
+  --popover: var(--noir-graphite);
   --popover-foreground: var(--foreground);
   --primary: var(--foreground);
   --primary-foreground: var(--background);
   --secondary: color-mix(in oklab, var(--background) 92%, var(--foreground));
   --secondary-foreground: var(--foreground);
   --muted: color-mix(in oklab, var(--background) 92%, var(--foreground));
-  --muted-foreground: color-mix(in oklab, var(--foreground) 66%, var(--background));
+  --muted-foreground: var(--noir-stone);
   --accent: color-mix(in oklab, var(--background) 90%, var(--foreground));
   --accent-foreground: var(--foreground);
-  --border: color-mix(in oklab, var(--background) 78%, var(--foreground));
+  --border: color-mix(in oklab, var(--background) 84%, var(--foreground));
   --input: var(--border);
   --ring: var(--signal);
-}
-
-.dark {
-  --background: oklch(0.19 0.03 165);
-  --foreground: var(--cal);
-  --signal: var(--ocre);
-  --signal-foreground: var(--breu);
 }
 
 /*
  * Tons de cena. Cada <section> de cena usa a sua classe `.tone-*` e pinta o
  * próprio fundo: a nova cor chega subindo junto com a seção, presa à rolagem.
  * O SceneThemeController lê os mesmos valores para o header e o fundo da página.
+ * cal = onyx, palha/mata/cobalto = graphite, ocre = smoke, anil = preto profundo.
  */
-.tone-cal { --background: oklch(0.975 0.005 100); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
-.tone-palha { --background: oklch(0.93 0.045 92); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
-.tone-mata { --background: oklch(0.34 0.07 163); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
-.tone-ocre { --background: oklch(0.82 0.15 82); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.46 0.17 262); --signal-foreground: oklch(0.975 0.005 100); }
-.tone-cobalto { --background: oklch(0.46 0.17 262); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
-.tone-anil { --background: oklch(0.21 0.05 262); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
-
-.dark .tone-cal { --background: oklch(0.19 0.03 165); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
-.dark .tone-palha { --background: oklch(0.27 0.035 95); --foreground: oklch(0.975 0.005 100); --signal: oklch(0.82 0.15 82); --signal-foreground: oklch(0.21 0.035 165); }
-/* No escuro, a cena "mata" se inverte para cal — o contraste entre capítulos se mantém. */
-.dark .tone-mata { --background: oklch(0.975 0.005 100); --foreground: oklch(0.21 0.035 165); --signal: oklch(0.34 0.07 163); --signal-foreground: oklch(0.975 0.005 100); }
+.tone-cal { --background: #0a0a0b; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
+.tone-palha { --background: #131315; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
+.tone-mata { --background: #131315; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
+.tone-ocre { --background: #1b1b1e; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
+.tone-cobalto { --background: #131315; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
+.tone-anil { --background: #050506; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
 
 @theme inline {
-  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --radius-sm: var(--radius);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) * 2);
-  --radius-xl: calc(var(--radius) * 3);
+  --font-sans: var(--noir-font-sans);
+  --font-display: var(--noir-font-sans);
+  --font-serif: var(--noir-font-serif);
+  /* Toda a escala do Tailwind cai entre 8 e 12 px (rounded-full continua para círculos). */
+  --radius-xs: var(--noir-radius-field);
+  --radius-sm: var(--noir-radius-field);
+  --radius-md: var(--noir-radius-card);
+  --radius-lg: var(--noir-radius-card);
+  --radius-xl: var(--noir-radius-panel);
+  --radius-2xl: var(--noir-radius-panel);
+  --radius-3xl: var(--noir-radius-panel);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -139,9 +104,8 @@
 
 @layer base {
   .font-display {
-    font-weight: 700;
-    font-stretch: 112%;
-    letter-spacing: -0.025em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
   }
   * {
     @apply border-border outline-ring/50;
@@ -188,27 +152,26 @@ html.lenis, html.lenis body { height: auto; }
   font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 600;
-  font-stretch: 112%;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* Título de cartaz: Archivo expandida e pesada. */
+/* Título: Archivo em largura normal, peso médio e espaçamento justo. */
 @utility display {
   font-family: var(--font-display);
-  font-weight: 750;
-  font-stretch: 118%;
+  font-weight: 500;
   letter-spacing: -0.035em;
-  line-height: 0.95;
+  line-height: 1.02;
 }
 
-/* Destaque de cartaz: a palavra ganha um bloco de cor (no lugar do itálico). */
+/* Destaque: a palavra-chave do título em serifa itálica champagne. */
 @utility highlight {
-  background: var(--signal);
-  color: var(--signal-foreground);
-  padding-inline: 0.12em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--signal);
+  padding-right: 0.04em;
 }
 
 /* Sublinhado de link editorial: fio fino que engrossa no hover. */

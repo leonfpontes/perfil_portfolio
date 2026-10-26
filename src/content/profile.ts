@@ -5,7 +5,7 @@
 export const profile = {
   name: 'Leonardo Fonseca Pontes',
   shortName: 'Leonardo Pontes',
-  brand: 'LP | Produto & Portfólio',
+  brand: 'LP · Product & Portfolio',
   /** Posicionamento nos dados estruturados (Person.jobTitle). O cargo na ATRA fica na trajetória. */
   jobTitle: 'Mentor e consultor em Produto, PMO e Portfólio',
   siteUrl: 'https://www.leopontes.com.br',

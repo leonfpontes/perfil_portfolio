@@ -14,10 +14,10 @@ function StatusMark({ status }: { status: ProductStatus }) {
     <span
       aria-hidden="true"
       className={cn(
-        'inline-block size-2',
+        'inline-block size-2 rounded-full',
         status === 'live' && 'bg-signal',
         (status === 'internal' || status === 'beta') && 'bg-foreground',
-        (status === 'sunset' || status === 'personal') && 'border border-foreground',
+        (status === 'sunset' || status === 'personal') && 'border border-foreground/60',
       )}
     />
   );
@@ -27,7 +27,7 @@ function ProductPanel({ product, index, total }: { product: Product; index: numb
   const { products, ui } = useContent();
   return (
     <article className="grid w-[86vw] shrink-0 snap-center content-start gap-5 lg:w-[min(78vw,1100px)] lg:grid-cols-2 lg:gap-12">
-      <div className="relative aspect-[16/10] overflow-hidden border border-foreground/20 lg:order-2 lg:aspect-auto lg:h-[min(60vh,540px)]">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border lg:order-2 lg:aspect-auto lg:h-[min(60vh,540px)]">
         <div data-parallax className="absolute -inset-x-[10%] inset-y-0">
           <GenerativeCover variant={product.art} seed={product.name} label={product.name} className="absolute inset-0 text-foreground" />
         </div>

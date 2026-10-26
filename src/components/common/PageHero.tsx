@@ -1,6 +1,6 @@
 import { useRef, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
-import { Azulejo } from '@/components/art/Azulejo';
+import { Funil } from '@/components/art/Funil';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -19,17 +19,15 @@ interface PageHeroProps {
   /** Âncora da página (ex.: "#jornada"). */
   secondaryHref: string;
   trackPrefix: string;
-  /** Semente do painel de azulejos (cada página tem o seu). */
-  seed: string;
-  /** Peça grande sobre o painel de azulejos (ex.: o preço). */
+  /** Peça grande em vidro sobre o painel (ex.: o preço). */
   emblem?: ReactNode;
 }
 
 /**
  * Abertura das páginas internas, com a mesma coreografia do hero da página inicial:
- * o bloco de azulejos sobe, o H1 entra por linhas e, ao rolar, o título acelera para cima.
+ * o painel do funil sobe, o H1 entra por linhas e, ao rolar, o título acelera para cima.
  */
-export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix, seed, emblem }: PageHeroProps) {
+export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix, emblem }: PageHeroProps) {
   const { nav } = useContent();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -100,16 +98,14 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
             </div>
 
             <figure data-hero-figure aria-hidden="true" className="relative hidden lg:col-span-4 lg:block">
-              <div data-hero-block className="relative h-full min-h-[22rem] overflow-hidden">
-                <Azulejo seed={seed} size={52} />
-                {emblem && (
-                  <div className="absolute inset-x-0 bottom-0 border-t border-foreground bg-background p-5">{emblem}</div>
-                )}
+              <div data-hero-block className="relative h-full min-h-[22rem] overflow-hidden rounded-xl border border-white/10 bg-[radial-gradient(80%_70%_at_25%_15%,color-mix(in_oklab,var(--signal)_14%,transparent),transparent_70%)]">
+                <Funil labels={false} />
+                {emblem && <div className="glass absolute inset-x-3 bottom-3 rounded-lg p-5">{emblem}</div>}
               </div>
             </figure>
           </div>
 
-          <dl data-hero-fade className="mt-10 grid grid-cols-2 border-t border-foreground md:grid-cols-4 lg:mt-12">
+          <dl data-hero-fade className="mt-10 grid grid-cols-2 border-t border-border md:grid-cols-4 lg:mt-12">
             {copy.facts.map((fact, i) => (
               <div
                 key={fact.label}

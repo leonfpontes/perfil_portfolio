@@ -6,18 +6,17 @@
     <!-- Título, descrição, canônica, Open Graph e JSON-LD: um por página, injetados no build (src/seo/head.ts). -->
     <!--app-head-->
     <meta name="author" content="Leonardo Fonseca Pontes" />
-    <meta name="theme-color" content="#f7f7f3" />
+    <meta name="theme-color" content="#0a0a0b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Fontes do primeiro quadro: pré-carregadas para não "pular" o layout -->
-    <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/roboto.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Tema e modo de movimento aplicados antes do primeiro paint (sem "flash") -->
+    <!-- Tema (sempre escuro) e modo de movimento aplicados antes do primeiro paint (sem "flash") -->
     <script>
       try {
         var h = document.documentElement;
-        var t = localStorage.getItem('lp:theme');
-        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) h.classList.add('dark');
+        h.classList.add('dark');
         var m = localStorage.getItem('lp:motion') || 'system';
         var os = matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (os) h.classList.add('os-reduced-motion');

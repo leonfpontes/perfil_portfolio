@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Azulejo } from '@/components/art/Azulejo';
+import { Funil } from '@/components/art/Funil';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -27,13 +27,13 @@ export function Contact() {
       tone="mata"
       className="pb-36 lg:pb-40"
       art={
-        <div className="absolute inset-x-0 bottom-0 h-20 lg:h-24">
-          <Azulejo seed="contato" size={48} every={0.6} />
+        <div className="absolute inset-0 opacity-80 [mask-image:linear-gradient(to_top,black,transparent_75%)]">
+          <Funil labels={false} />
         </div>
       }
     >
       <Container>
-        <p className="label-caps border-t border-foreground/40 pt-5 text-muted-foreground">
+        <p className="label-caps border-t border-border pt-5 text-muted-foreground">
           § {sectionNumber(page, 'contato')} — {copy.eyebrow}
         </p>
         <div className="mt-10 grid gap-12 lg:grid-cols-12">

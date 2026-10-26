@@ -89,7 +89,7 @@ function ServicesStage() {
               <p className="mt-5 max-w-xl text-lg text-pretty">{service.description}</p>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {service.deliverables.map((d) => (
-                  <li key={d} className="border border-foreground/40 px-3 py-1.5 text-sm">
+                  <li key={d} className="rounded-sm border border-border px-3 py-1.5 text-sm">
                     {d}
                   </li>
                 ))}

@@ -1,42 +1,27 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { safeStorage } from '@/lib/storage';
+import { createContext, useContext, useEffect, type ReactNode } from 'react';
 
-export type Theme = 'light' | 'dark';
-
-const STORAGE_KEY = 'lp:theme';
+/**
+ * O site é escuro sempre (identidade LP Noir, ver docs/DESIGN.md): não há mais
+ * alternância claro/escuro. O provider continua existindo para que quem lê o tema
+ * (SceneDirector, componentes shadcn com `dark:`) tenha um valor estável.
+ */
+export type Theme = 'dark';
 
 interface ThemeContextValue {
   theme: Theme;
-  toggleTheme: () => void;
 }
 
+const VALUE: ThemeContextValue = { theme: 'dark' };
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function getInitialTheme(): Theme {
-  const saved = safeStorage.get(STORAGE_KEY);
-  if (saved === 'light' || saved === 'dark') return saved;
-  return globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
-
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.toggle('dark', theme === 'dark');
-    root.style.colorScheme = theme;
-  }, [theme]);
-
-  const toggleTheme = useCallback(() => {
-    setTheme((current) => {
-      const next = current === 'dark' ? 'light' : 'dark';
-      safeStorage.set(STORAGE_KEY, next);
-      return next;
-    });
+    root.classList.add('dark');
+    root.style.colorScheme = 'dark';
   }, []);
 
-  const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={VALUE}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme(): ThemeContextValue {

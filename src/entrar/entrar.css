@@ -1,8 +1,8 @@
 /*
  * A passagem da Área do cliente (src/entrar/passagem.ts) — o desenho da entrada do GiraHub.
  *
- * Chegada (computador): a cortina anil cobre a tela e recua até a borda do painel da marca
- * (5/12 da grade), com o fio ocre correndo da direita até essa borda; a cortina fica ali, como o
+ * Chegada (computador): a cortina grafite cobre a tela e recua até a borda do painel da marca
+ * (5/12 da grade), com o fio champagne correndo da direita até essa borda; a cortina fica ali, como o
  * próprio painel, e o conteúdo do painel e o formulário surgem por cima. No celular não há
  * cortina na chegada: só o formulário surge.
  * Saída: o formulário e o conteúdo do painel se apagam, e a cortina avança da borda do painel
@@ -30,7 +30,7 @@
     position: absolute;
     inset: 0;
     z-index: 10;
-    background: var(--anil);
+    background: var(--noir-graphite);
     clip-path: inset(0 calc(100% - var(--passagem-corte)) 0 0);
     animation: passagem-recuar var(--passagem-tempo) var(--passagem-curva) both;
   }
@@ -44,8 +44,8 @@
     z-index: 30;
     width: 3px;
     margin-left: -1.5px;
-    background: var(--ocre);
-    box-shadow: 0 0 24px 2px color-mix(in oklab, var(--ocre) 35%, transparent);
+    background: var(--noir-champagne);
+    box-shadow: 0 0 24px 2px color-mix(in oklab, var(--noir-champagne) 35%, transparent);
     animation: passagem-fio var(--passagem-tempo) var(--passagem-curva) both;
   }
 
@@ -77,7 +77,7 @@ html[data-passagem="saindo"] .passagem-cortina {
   position: fixed;
   inset: 0;
   z-index: 10;
-  background: var(--anil);
+  background: var(--noir-graphite);
   animation: passagem-avancar 650ms var(--passagem-curva-volta) both;
 }
 
@@ -90,7 +90,7 @@ html[data-passagem="saindo"] .passagem-fio {
     animation-name: passagem-descer;
   }
 
-  /* No celular o cabeçalho é claro: a marca e o "Voltar" clareiam com o anil passando por trás. */
+  /* No celular o cabeçalho é claro: a marca e o "Voltar" clareiam com o grafite passando por trás. */
   .passagem > header,
   .passagem > header a {
     transition:
@@ -100,7 +100,7 @@ html[data-passagem="saindo"] .passagem-fio {
 
   html[data-passagem="saindo"] .passagem > header,
   html[data-passagem="saindo"] .passagem > header a {
-    color: var(--cal);
+    color: var(--noir-ivory);
     border-color: transparent;
   }
 }
