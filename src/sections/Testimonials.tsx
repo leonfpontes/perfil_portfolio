@@ -19,12 +19,13 @@ function TestimonialStage() {
   const { index, goTo } = useSteppedScene({ count: total, scopeRef: stageRef, stepLength: 45 });
   useStepTransition(stageRef, index);
 
-  // A aspa gigante gira um pouco a cada depoimento — um "carimbo" que acompanha a troca.
+  // A cada depoimento a aspa sobe de novo dentro da própria caixa (overflow-hidden),
+  // então nunca sai do seu espaço nem cobre o título.
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.motion, () => {
-        gsap.to('[data-quote-mark]', { rotate: index * 14 - 6, scale: 1 + (index % 2) * 0.08, duration: 1, ease: 'expo.out' });
+        gsap.fromTo('[data-quote-mark]', { yPercent: 70, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'expo.out', overwrite: true });
         gsap.to('[data-quote-progress]', { scaleX: (index + 1) / total, duration: 0.8, ease: 'expo.out' });
       });
     },
@@ -36,9 +37,11 @@ function TestimonialStage() {
     // (as mesmas 12 colunas do SectionHeader, a partir da 4ª).
     <div ref={stageRef} className="grid gap-6 lg:grid-cols-12">
       <div className="min-w-0 lg:col-span-9 lg:col-start-4">
-        <span data-quote-mark aria-hidden="true" className="hidden h-16 origin-[20%_35%] font-display text-8xl leading-none text-signal lg:block">
-          “
-        </span>
+        <div aria-hidden="true" className="hidden h-16 overflow-hidden lg:block">
+          <span data-quote-mark className="block font-display text-8xl leading-none text-signal">
+            “
+          </span>
+        </div>
         {/* Desktop: um depoimento por vez (empilhados). Celular: trilho horizontal guiado pelo scroll. */}
         <HorizontalTrack media="mobile" label={testimonials.eyebrow} swipeHint={ui.swipeHint} className="max-lg:flex max-lg:gap-5 lg:grid">
           {testimonials.items.map((t, i) => (
