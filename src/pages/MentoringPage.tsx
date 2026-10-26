@@ -21,7 +21,7 @@ export function MentoringPage() {
         primaryHref={contact.whatsapp(plan.whatsappMessage)}
         secondaryHref="#jornada"
         trackPrefix="mentoring"
-        emblem={<PriceEmblem price={plan.price} note={plan.priceNote} regular={plan.regularPrice} />}
+        plan={plan}
       />
       <Lazy>
         <MentoringScope />
@@ -35,19 +35,6 @@ export function MentoringPage() {
       <Lazy>
         <Contact />
       </Lazy>
-    </>
-  );
-}
-
-/** O preço "carimbado" em vidro sobre o painel do hero. */
-export function PriceEmblem({ price, note, regular }: { price: string; note: string; regular: string }) {
-  return (
-    <>
-      <p className="flex flex-wrap items-baseline gap-x-2">
-        <span className="font-display text-5xl leading-none">{price}</span>
-        <span className="label-caps">{note}</span>
-      </p>
-      <p className="label-caps mt-2 text-muted-foreground">{regular}</p>
     </>
   );
 }

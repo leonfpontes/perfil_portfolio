@@ -292,6 +292,7 @@ export const en: SiteContent = {
     description:
       'Two ways to work with me, using the methodology I developed and validated leading real teams: mentoring for those who want to grow in a product career, and a diagnostic for companies that need to organize their portfolio and PMO.',
     bookingHint: 'or book a free 30-minute call',
+    includesTitle: "What's included",
     founderNote:
       'Founder cohort: a special price for the first clients in exchange for an honest testimonial about the experience.',
     plans: [
@@ -311,6 +312,13 @@ export const en: SiteContent = {
           'Individual development plan and deliverable reviews',
           'Governance, discovery and roadmap templates and frameworks',
           'Month-to-month subscription, no lock-in',
+        ],
+        includes: [
+          'Two 60-minute 1:1 sessions a month',
+          'WhatsApp support between sessions',
+          'Individual development plan',
+          'Reviews of your deliverables',
+          'Governance, discovery and roadmap templates',
         ],
         cta: 'Claim a founder spot',
         detailCta: 'See the mentoring in detail',
@@ -334,6 +342,13 @@ export const en: SiteContent = {
           'Executive presentation for leadership',
           'Methodology and tooling implementation by proposal',
           '15–20% off implementation for founder clients',
+        ],
+        includes: [
+          'Interviews with leadership and teams',
+          'Gate-by-gate process analysis (G1–G4)',
+          'Maturity report for each gate',
+          'Prioritized roadmap to evolve',
+          'Executive presentation for leadership',
         ],
         cta: 'Book a diagnostic',
         detailCta: 'See the diagnostic in detail',

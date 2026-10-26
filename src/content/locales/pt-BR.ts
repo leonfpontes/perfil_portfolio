@@ -292,6 +292,7 @@ export const ptBR: SiteContent = {
     description:
       'Duas formas de trabalhar comigo, com a metodologia que eu desenvolvi e validei liderando times reais: mentoria para quem quer evoluir na carreira de produto e diagnóstico para empresas que precisam organizar o portfólio e o PMO.',
     bookingHint: 'ou agende uma conversa gratuita de 30 min',
+    includesTitle: "What's included",
     founderNote:
       'Turma fundadora: preço especial para os primeiros clientes em troca de um depoimento sincero sobre a experiência.',
     plans: [
@@ -311,6 +312,13 @@ export const ptBR: SiteContent = {
           'Plano de desenvolvimento individual e revisão de entregáveis',
           'Templates e frameworks de governança, discovery e roadmap',
           'Assinatura mês a mês, sem fidelidade',
+        ],
+        includes: [
+          '2 sessões 1:1 por mês, de 60 minutos',
+          'Suporte no WhatsApp entre as sessões',
+          'Plano de desenvolvimento individual',
+          'Revisão dos seus entregáveis',
+          'Templates de governança, discovery e roadmap',
         ],
         cta: 'Garantir vaga fundador',
         detailCta: 'Ver a mentoria em detalhe',
@@ -334,6 +342,13 @@ export const ptBR: SiteContent = {
           'Apresentação executiva para a liderança',
           'Implementação de metodologia e ferramentas sob proposta',
           '15–20% de desconto na implementação para clientes fundadores',
+        ],
+        includes: [
+          'Entrevistas com a liderança e os times',
+          'Análise dos processos gate a gate (G1–G4)',
+          'Relatório de maturidade por gate',
+          'Roadmap priorizado para evoluir',
+          'Apresentação executiva para a liderança',
         ],
         cta: 'Agendar diagnóstico',
         detailCta: 'Ver o diagnóstico em detalhe',
