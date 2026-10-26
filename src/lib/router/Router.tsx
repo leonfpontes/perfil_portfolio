@@ -129,6 +129,30 @@ export function RouterProvider({ initialPath, children }: { initialPath?: string
     if (legacy) go(new URL(`${pathOf(legacy.page)}#${legacy.hash}`, window.location.href), 'replace', false);
   }, [go]);
 
+  // Entrada direta numa âncora (/#contato, como no link da assinatura de e-mail): o
+  // navegador pula antes de as cenas fixadas esticarem a página e para no meio do
+  // caminho. Refaz o pulo a cada refresh do ScrollTrigger até a página assentar ou a
+  // pessoa rolar por conta própria.
+  useEffect(() => {
+    const hash = decodeURIComponent(window.location.hash.slice(1));
+    if (!hash || (routeRef.current.path === '/' && LEGACY_ANCHORS[hash])) return;
+    const jump = () => {
+      const target = document.getElementById(hash);
+      if (target) scrollTo(target, { immediate: true });
+    };
+    const userEvents = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
+    const stop = () => {
+      ScrollTrigger.removeEventListener('refresh', jump);
+      userEvents.forEach((type) => window.removeEventListener(type, stop));
+      window.clearTimeout(timer);
+    };
+    ScrollTrigger.addEventListener('refresh', jump);
+    userEvents.forEach((type) => window.addEventListener(type, stop, { passive: true }));
+    const timer = window.setTimeout(stop, 5000);
+    jump();
+    return stop;
+  }, [scrollTo]);
+
   // Página nova: começa do topo (ou da âncora, ou de onde estava ao voltar) e recalcula as cenas.
   useIsomorphicLayoutEffect(() => {
     if (route.key === 0) return;
