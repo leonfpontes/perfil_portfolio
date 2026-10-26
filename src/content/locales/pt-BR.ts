@@ -5,14 +5,14 @@ export const ptBR: SiteContent = {
 
   nav: {
     items: [
-      { id: 'mentoring', label: 'Mentoring' },
-      { id: 'diagnostic', label: 'Diagnostic' },
-      { id: 'about', label: 'About' },
-      { id: 'contact', label: 'Contact' },
+      { id: 'mentoring', label: 'Mentoria' },
+      { id: 'diagnostic', label: 'Diagnóstico' },
+      { id: 'about', label: 'Sobre' },
+      { id: 'contact', label: 'Contato' },
     ],
     home: 'Início',
-    cta: 'Book a call',
-    clientArea: 'Client area',
+    cta: 'Agendar conversa',
+    clientArea: 'Área do cliente',
     toggleLanguage: 'Switch to English',
     openMenu: 'Abrir menu',
     skipToContent: 'Pular para o conteúdo',
@@ -45,7 +45,7 @@ export const ptBR: SiteContent = {
       titleHighlight: 'PMs e POs.',
       description:
         'Duas sessões por mês com quem já foi Product Owner, gerente de PMO e gerente de Tecnologia, Dados e IA. Você traz os desafios reais do seu trabalho e sai de cada encontro com o próximo passo claro.',
-      primaryCta: 'Garantir vaga fundador',
+      primaryCta: 'Garantir vaga',
       secondaryCta: 'Ver como funciona',
       facts: [
         { label: 'Formato', value: '2 sessões/mês · 60 min · online' },
@@ -320,7 +320,7 @@ export const ptBR: SiteContent = {
           'Revisão dos seus entregáveis',
           'Templates de governança, discovery e roadmap',
         ],
-        cta: 'Garantir vaga fundador',
+        cta: 'Garantir vaga',
         detailCta: 'Ver a mentoria em detalhe',
         highlighted: true,
         whatsappMessage:
@@ -764,36 +764,48 @@ export const ptBR: SiteContent = {
       {
         quote:
           'O Leo tem qualidades muito caras a um excelente profissional: integridade, honestidade, capacidade de encorajar o time, foco em resultados e adaptação. Se eu pudesse resumi-lo, diria que ele é um profissional incansável!',
+        name: 'Rebeca Andrade',
+        linkedin: 'https://www.linkedin.com/in/re-beca-andrade/',
         role: 'Learning Experience Designer · L&D Consultant',
         context: 'Trabalhou comigo na Educacross',
       },
       {
         quote:
           'Leo é um grande profissional. Tem genuína preocupação com o bem-estar do time e com a entrega de resultados. É uma pessoa equilibrada que traduz necessidades do produto em resultados excepcionais.',
+        name: 'Endhe Soares',
+        linkedin: 'https://www.linkedin.com/in/endhe-elias/',
         role: 'Head of Engineering · ex-Nubank',
         context: 'Gestor direto na Conexia Educação',
       },
       {
         quote:
           'Leo é um profissional completo. Possui forte capacidade para mentorar Product Owners, mantendo alto alinhamento entre stakeholders e times Scrum.',
+        name: 'Marcel Nascimento',
+        linkedin: 'https://www.linkedin.com/in/marcelfn/',
         role: 'Product Manager · Agile Coach · SAFe',
         context: 'Atuamos em tribos diferentes na Conexia',
       },
       {
         quote:
           'Além de um grande profissional, é uma pessoa inspiradora e proativa. Possui excelente habilidade em coordenação de projetos e liderança de equipe, sempre muito atencioso e organizado.',
+        name: 'Denise Vallone',
+        linkedin: 'https://www.linkedin.com/in/denise-vallone-maggi/',
         role: 'CRM · Business Intelligence · Growth',
         context: 'Parceira de squad',
       },
       {
         quote:
           'Tive a oportunidade de estar ao lado dele por anos, como co-coordenadores de squads. É criativo, orientado a resultados e multidisciplinar.',
+        name: 'Leonardo Brito Bittencourt',
+        linkedin: 'https://www.linkedin.com/in/leobritob/',
         role: 'Senior Software Engineer · Full Stack',
         context: 'Co-liderou squads comigo na Conexia',
       },
       {
         quote:
           'Profissional extremamente competente, focado em ótimas entregas. Domina a gestão de stakeholders, cultiva ritos colaborativos e promove resultados de alto impacto.',
+        name: 'Karen Kroll',
+        linkedin: 'https://www.linkedin.com/in/karen-kroll/',
         role: 'Consultora em Inovação · Governança do Conhecimento',
         context: 'Trabalhou comigo na Conexia Educação',
       },
@@ -840,6 +852,8 @@ export const ptBR: SiteContent = {
     scrollHint: 'Role para explorar',
     illustrativeImage: 'Imagem ilustrativa · Unsplash',
     previous: 'Anterior',
+    step: 'Etapa',
+    swipeHint: 'Deslize para o lado',
     next: 'Próximo',
     of: 'de',
     status: 'Status',

@@ -123,7 +123,7 @@ function ServicesStage() {
 export function Services() {
   const { services } = useContent();
   return (
-    <Scene id="servicos" label={services.eyebrow} tone="ocre" className="lg:py-16">
+    <Scene id="servicos" label={services.eyebrow} tone="ocre" fill className="lg:py-16">
       <Container>
         <SectionHeader id="servicos" heading={services} compact />
         <ServicesStage />

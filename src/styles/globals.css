@@ -51,7 +51,7 @@
   --accent: color-mix(in oklab, var(--background) 90%, var(--foreground));
   --accent-foreground: var(--foreground);
   --border: color-mix(in oklab, var(--background) 84%, var(--foreground));
-  --input: var(--border);
+  --input: var(--noir-field-line);
   --ring: var(--signal);
 }
 
@@ -72,6 +72,37 @@
   --font-sans: var(--noir-font-sans);
   --font-display: var(--noir-font-sans);
   --font-serif: var(--noir-font-serif);
+  /*
+   * Escala do LP Noir (lp-noir.css): as classes do Tailwind caem nos 7 degraus.
+   * xs 12 · sm 14 · base 16 · lg/xl 20 · 2xl/3xl 28 · 4xl/5xl 44 · 6xl/7xl/8xl 72.
+   */
+  --text-xs: var(--noir-text-12);
+  --text-xs--line-height: 1.5;
+  --text-sm: var(--noir-text-14);
+  --text-sm--line-height: 1.5;
+  --text-base: var(--noir-text-16);
+  --text-base--line-height: 1.6;
+  --text-lg: var(--noir-text-20);
+  --text-lg--line-height: 1.5;
+  --text-xl: var(--noir-text-20);
+  --text-xl--line-height: 1.5;
+  --text-2xl: var(--noir-text-28);
+  --text-2xl--line-height: 1.25;
+  --text-3xl: var(--noir-text-28);
+  --text-3xl--line-height: 1.25;
+  --text-4xl: var(--noir-text-44);
+  --text-4xl--line-height: 1.1;
+  --text-5xl: var(--noir-text-44);
+  --text-5xl--line-height: 1.1;
+  --text-6xl: var(--noir-text-72);
+  --text-6xl--line-height: 1.02;
+  --text-7xl: var(--noir-text-72);
+  --text-7xl--line-height: 1.02;
+  --text-8xl: var(--noir-text-72);
+  --text-8xl--line-height: 1;
+  /* Só dois pesos de Roboto: 400 e 500. */
+  --font-weight-semibold: 500;
+  --font-weight-bold: 500;
   /* Toda a escala do Tailwind cai entre 8 e 12 px (rounded-full continua para círculos). */
   --radius-xs: var(--noir-radius-field);
   --radius-sm: var(--noir-radius-field);
@@ -138,8 +169,9 @@
 /* Linha de SplitText com máscara (para revelar linhas "de baixo para cima"). */
 .split-line {
   overflow: clip;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  /* Folga para descendentes (g, j, p, ç) e acentos não serem cortados pela máscara. */
+  padding-block: 0.12em 0.18em;
+  margin-block: -0.12em -0.18em;
 }
 
 /* Lenis */
@@ -150,13 +182,13 @@ html.lenis, html.lenis body { height: auto; }
 /* Rótulo em caixa alta, levemente expandido — metadados, números e legendas. */
 @utility label-caps {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: var(--noir-text-12);
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* Título: Archivo em largura normal, peso médio e espaçamento justo. */
+/* Título: Roboto, peso médio e espaçamento justo. */
 @utility display {
   font-family: var(--font-display);
   font-weight: 500;

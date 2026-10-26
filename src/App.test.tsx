@@ -54,7 +54,7 @@ describe('<App />', () => {
   it('mostra os dois planos com CTA para o WhatsApp e link para a página de cada um', () => {
     renderApp();
     const offer = document.getElementById('ofertas')!;
-    const cta = within(offer).getByRole('link', { name: /garantir vaga fundador/i });
+    const cta = within(offer).getByRole('link', { name: /garantir vaga/i });
     expect(cta).toHaveAttribute('href', expect.stringMatching(/^https:\/\/wa\.me\/5516991091234\?text=/));
     expect(cta).toHaveAttribute('rel', 'noopener noreferrer');
     expect(within(offer).getByRole('link', { name: /ver o diagnóstico em detalhe/i })).toHaveAttribute('href', '/diagnostico-pmo');
@@ -66,11 +66,11 @@ describe('<App />', () => {
     document.documentElement.classList.add('reduced-motion');
     const { user, track } = renderApp();
     const nav = screen.getByRole('navigation', { name: 'Principal' });
-    await user.click(within(nav).getByRole('link', { name: 'Diagnostic' }));
+    await user.click(within(nav).getByRole('link', { name: 'Diagnóstico' }));
     await waitFor(() => expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/diagnóstico de maturidade de PMO e portfólio/i));
     expect(window.location.pathname).toBe('/diagnostico-pmo');
     expect(document.title).toMatch(/Diagnóstico de Maturidade de PMO/);
-    expect(within(nav).getByRole('link', { name: 'Diagnostic' })).toHaveAttribute('aria-current', 'page');
+    expect(within(nav).getByRole('link', { name: 'Diagnóstico' })).toHaveAttribute('aria-current', 'page');
     expect(track).toHaveBeenCalledWith('page_view', expect.objectContaining({ page_path: '/diagnostico-pmo' }));
     document.documentElement.classList.remove('reduced-motion');
   });
@@ -90,10 +90,10 @@ describe('<App />', () => {
   it('a Área do cliente fica no cabeçalho só como ícone, menos chamativa que o convite', () => {
     renderApp();
     const header = screen.getByRole('banner');
-    const clientArea = within(header).getByRole('link', { name: /client area/i });
+    const clientArea = within(header).getByRole('link', { name: /área do cliente/i });
     expect(clientArea).toHaveAttribute('href', '/entrar');
-    expect(clientArea.textContent).toBe('Client area'); // só o texto para leitores de tela
-    expect(within(clientArea).getByText('Client area')).toHaveClass('sr-only');
+    expect(clientArea.textContent).toBe('Área do cliente'); // só o texto para leitores de tela
+    expect(within(clientArea).getByText('Área do cliente')).toHaveClass('sr-only');
   });
 
   it('o rodapé não fala da stack técnica', () => {

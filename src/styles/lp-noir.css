@@ -33,6 +33,8 @@
   --noir-graphite: #131315;
   --noir-smoke: #1b1b1e;
   --noir-line: #2a2a2e;
+  /* Borda de campo (input, select, busca): o limite do campo precisa de 3:1 (WCAG 1.4.11). */
+  --noir-field-line: #6b675f;
   --noir-ivory: #f1ede4;
   --noir-stone: #9b968c;
   --noir-champagne: #cfb48a;
@@ -49,11 +51,24 @@
   --noir-ok-paper: #2f6b4a;
   --noir-warn-paper: #8a5a00;
   --noir-crit-paper: #b3392b;
+  --noir-field-line-paper: #857f75;
 
   /* Raio: levemente arredondado, sempre entre 8 e 12 px (sem pílula). */
   --noir-radius-field: 8px; /* campos, etiquetas, itens de menu */
   --noir-radius-card: 10px; /* botões e cards */
   --noir-radius-panel: 12px; /* painéis grandes, modais, retrato */
+
+  /*
+   * Escala tipográfica: 7 degraus, nada fora dela. Rótulos em caixa alta nunca abaixo de 12 px.
+   * Roboto só em 400 (texto) e 500 (títulos, rótulos, ênfase); o itálico serifado em uma palavra por seção.
+   */
+  --noir-text-12: 0.75rem;
+  --noir-text-14: 0.875rem;
+  --noir-text-16: 1rem;
+  --noir-text-20: 1.25rem;
+  --noir-text-28: 1.75rem;
+  --noir-text-44: 2.75rem;
+  --noir-text-72: 4.5rem;
 
   --noir-font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
   --noir-font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
@@ -209,8 +224,8 @@
 
   /*
    * Funil de portfólio (arte do LP Noir): linhas finas e nítidas, gates tracejados,
-   * linha de sinal em champagne. Desenha uma vez na entrada; o fluxo de iniciativas é
-   * desenhado em canvas por funil-motion.ts. Linhas neutras na cor do texto (currentColor).
+   * linha de sinal em champagne. Desenha uma vez na entrada e fica parado; só um pulso
+   * champagne percorre a linha de sinal (.funil-pulso). Linhas neutras na cor do texto (currentColor).
    */
   .funil {
     color: var(--noir-ivory);
@@ -225,8 +240,7 @@
 
   .funil-gates text {
     fill: var(--noir-stone);
-    fill-opacity: 0.7;
-    font: 600 9px/1 var(--noir-font-sans);
+    font: 500 12px/1 var(--noir-font-sans);
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
@@ -246,7 +260,7 @@
     fill: var(--noir-champagne);
   }
 
-  /* Taxa de aprovação ao vivo, escrita por funil-motion.ts. */
+  /* Taxa de aprovação ao vivo (app: funil-motion.ts). */
   .funil-taxa {
     fill: var(--noir-ivory);
     fill-opacity: 0.85;
@@ -268,6 +282,26 @@
     stroke: var(--noir-champagne);
     stroke-opacity: 0.75;
     stroke-width: 1.4;
+  }
+
+  /* Pulso: um trecho curto de champagne corre pela linha de sinal, em loop lento. */
+  .funil-pulso {
+    fill: none;
+    stroke: var(--noir-champagne);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 0.06 0.94;
+    filter: drop-shadow(0 0 6px var(--noir-champagne));
+    animation: funil-pulso 7s linear 2s infinite both;
+  }
+
+  @keyframes funil-pulso {
+    from {
+      stroke-dashoffset: 0.06;
+    }
+    to {
+      stroke-dashoffset: -0.94;
+    }
   }
 
   .funil-paradas circle {
@@ -296,11 +330,18 @@
     .funil-paradas circle {
       animation: none;
     }
+    .funil-pulso {
+      display: none;
+    }
   }
 
   .reduced-motion .funil-linhas path,
   .reduced-motion .funil-paradas circle {
     animation: none;
+  }
+
+  .reduced-motion .funil-pulso {
+    display: none;
   }
 }
 

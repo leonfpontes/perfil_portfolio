@@ -21,10 +21,9 @@ export function About({ asPageHero = false }: { asPageHero?: boolean }) {
     () => {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.motion, () => {
-        gsap.from('[data-fact]', { opacity: 0, x: -24, stagger: 0.08, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: '[data-facts]', start: 'top 85%' } });
+        gsap.from('[data-fact]', { x: -24, stagger: 0.08, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: '[data-facts]', start: 'top 85%' } });
         gsap.from('[data-pillar]', {
-          yPercent: 30,
-          opacity: 0,
+          yPercent: 20,
           stagger: 0.1,
           duration: 1,
           ease: 'expo.out',

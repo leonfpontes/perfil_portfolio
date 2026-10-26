@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Ban } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Halftone } from '@/components/art/Halftone';
 import { Arrow } from '@/components/common/Arrow';
@@ -49,14 +50,14 @@ export function PlanSheet({ plan, index, bookingHint, showDetail = false, inTrac
         <p className="flex flex-wrap items-baseline gap-x-3">
           {/* Preço não "conta": contador em preço soa como promoção e mostra valores falsos. */}
           <span className="font-display text-5xl leading-none sm:text-7xl">{plan.price}</span>
-          <span className="label-caps">{plan.priceNote}</span>
+          <span className="text-sm text-muted-foreground sm:text-base">{plan.priceNote}</span>
         </p>
         <p className="label-caps mt-3 text-muted-foreground">{plan.regularPrice}</p>
       </div>
 
       <ul className="flex-1 divide-y">
         {plan.features.map((feature) => (
-          <li key={feature} data-feature className="flex gap-3 py-1.5 text-[13px] leading-snug sm:gap-4 sm:py-3 sm:text-sm">
+          <li key={feature} data-feature className="flex gap-3 py-1.5 text-sm leading-snug sm:gap-4 sm:py-3 sm:text-sm">
             <span aria-hidden="true" className="text-signal">
               —
             </span>
@@ -94,9 +95,9 @@ export function OffersScene() {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.desktop, () => {
         const st = { trigger: '[data-plans]', start: 'top 80%', toggleActions: 'play none none reverse' };
-        gsap.from('[data-plan="0"]', { xPercent: -14, rotate: -2, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: st });
-        gsap.from('[data-plan="1"]', { xPercent: 14, rotate: 2, opacity: 0, duration: 1.2, ease: 'expo.out', delay: 0.08, scrollTrigger: st });
-        gsap.from('[data-feature]', { opacity: 0, x: -12, stagger: 0.04, duration: 0.6, delay: 0.4, scrollTrigger: st });
+        gsap.from('[data-plan="0"]', { xPercent: -14, rotate: -2, duration: 1.2, ease: 'expo.out', scrollTrigger: st });
+        gsap.from('[data-plan="1"]', { xPercent: 14, rotate: 2, duration: 1.2, ease: 'expo.out', delay: 0.08, scrollTrigger: st });
+        gsap.from('[data-feature]', { x: -12, stagger: 0.04, duration: 0.6, delay: 0.4, scrollTrigger: st });
       });
     },
     { scope: ref },
@@ -123,7 +124,7 @@ export function OffersScene() {
 
 /**
  * A jornada como "gates". A tela fica fixada enquanto a linha é traçada e cada
- * etapa acende; depois, o que a oferta NÃO é vai sendo riscado.
+ * etapa acende. O bloco "o que a oferta não é" fica legível desde o início.
  */
 function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
   const { ui } = useContent();
@@ -134,22 +135,18 @@ function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
     () => {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.desktop, () => {
-        // Pin curto: os gates acendem em sequência e o bloco "o que não é" já
-        // está na tela desde o início — só os riscos esperam o fim.
+        // Pin curto: os gates acendem em sequência. As etapas futuras ficam em
+        // tom de pedra (legíveis), nunca apagadas: a animação move, não esconde.
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: { trigger: sceneSectionOf(ref.current), pin: true, start: 'top top', end: '+=150%', scrub: 0.6 },
         });
-        gsap.set('[data-step]', { opacity: 0.35 });
+        gsap.set('[data-step]', { opacity: 0.7 });
         steps.forEach((_, i) => {
           tl.to('[data-gate-line]', { scaleX: (i + 1) / steps.length, duration: 1 })
             .to(`[data-node="${i}"]`, { scale: 1.8, backgroundColor: 'var(--signal)', duration: 0.3 }, '<0.7')
             .to(`[data-step="${i}"]`, { opacity: 1, duration: 0.4 }, '<');
         });
-        tl.to('[data-strike]', { scaleX: 1, stagger: 0.4, duration: 0.5 });
-      });
-      mm.add(MEDIA.mobile, () => {
-        gsap.to('[data-strike]', { scaleX: 1, stagger: 0.3, duration: 0.5, scrollTrigger: { trigger: '[data-isnot]', start: 'top 75%' } });
       });
     },
     { scope: ref, dependencies: [steps.length] },
@@ -164,7 +161,8 @@ function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
           <div aria-hidden="true" className="absolute top-0 right-0 left-0 hidden h-px bg-foreground/20 lg:block">
             <div data-gate-line className="h-full origin-left scale-x-0 bg-foreground" />
           </div>
-          {/* Celular: cada gate é um painel do trilho horizontal, com o número gigante. */}
+          {/* Celular: cada etapa é um painel do trilho horizontal, com o número gigante.
+              "Etapa", não "G": G1–G4 são só os gates da metodologia (Intake → Benefits). */}
           <HorizontalTrack media="mobile" label={journey.title} className="max-lg:flex max-lg:gap-4 lg:grid lg:grid-cols-4 lg:gap-6">
             {steps.map((step, i) => (
               <div
@@ -174,9 +172,11 @@ function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
               >
                 <span data-node={i} aria-hidden="true" className="absolute -top-[5px] left-0 size-[9px] bg-foreground max-lg:bg-signal" />
                 <span aria-hidden="true" className="text-outline font-display text-[9rem] leading-none lg:hidden">
-                  G{i + 1}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="label-caps text-muted-foreground max-lg:hidden">G{i + 1}</p>
+                <p className="label-caps text-muted-foreground max-lg:hidden">
+                  {ui.step} {String(i + 1).padStart(2, '0')}
+                </p>
                 <p className="mt-2 font-display text-4xl leading-tight">{step.title}</p>
                 <p className="mt-3 text-sm text-muted-foreground">{step.description}</p>
               </div>
@@ -197,13 +197,9 @@ function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
             <ul className="mt-6 divide-y border-y">
               {journey.isNot.items.map((item) => (
                 <li key={item} className="flex gap-4 py-4">
-                  <span aria-hidden="true" className="font-sans text-signal">
-                    ×
-                  </span>
-                  <span className="relative">
-                    {item}
-                    <span data-strike aria-hidden="true" className="absolute top-1/2 -right-1 -left-1 h-[2px] origin-left scale-x-0 bg-signal" />
-                  </span>
+                  {/* Ícone de "não" + texto normal: riscado atrapalha a leitura e não diz nada ao leitor de tela. */}
+                  <Ban aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-signal" strokeWidth={1.5} />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -223,7 +219,7 @@ interface JourneySceneProps {
 /** Cena fixada com as etapas da oferta (mentoria: "jornada"; diagnóstico: "processo"). */
 export function JourneyScene({ id, journey, tone }: JourneySceneProps) {
   return (
-    <Scene id={id} label={journey.eyebrow} tone={tone} className="lg:py-16">
+    <Scene id={id} label={journey.eyebrow} tone={tone} fill className="lg:py-16">
       <JourneyStage id={id} journey={journey} />
     </Scene>
   );

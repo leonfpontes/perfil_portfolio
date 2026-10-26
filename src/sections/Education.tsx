@@ -15,8 +15,8 @@ export function Education() {
     () => {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.motion, () => {
-        gsap.from('[data-degree]', { opacity: 0, y: 40, stagger: 0.12, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '[data-degrees]', start: 'top 80%' } });
-        gsap.from('[data-cert]', { opacity: 0, x: 30, stagger: 0.05, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '[data-certs]', start: 'top 80%' } });
+        gsap.from('[data-degree]', { y: 40, stagger: 0.12, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '[data-degrees]', start: 'top 80%' } });
+        gsap.from('[data-cert]', { x: 30, stagger: 0.05, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '[data-certs]', start: 'top 80%' } });
       });
     },
     { scope: ref },

@@ -34,7 +34,7 @@ export function NotFoundPage() {
         <p className="label-caps border-b pb-3 text-muted-foreground">{notFound.eyebrow}</p>
         <div className="grid gap-10 pt-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(2.6rem,7vw,7rem)] text-balance">
+            <SplitReveal as="h1" id="inicio-title" immediate className="display text-6xl text-balance">
               {notFound.title}
             </SplitReveal>
             <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground">{notFound.description}</p>

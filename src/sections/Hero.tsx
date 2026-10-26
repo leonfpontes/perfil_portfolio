@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useAfterFirstPaint } from '@/hooks/useAfterFirstPaint';
 import { Funil } from '@/components/art/Funil';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
@@ -18,6 +19,8 @@ export function Hero() {
   const { contact } = useServices();
   const ref = useRef<HTMLDivElement>(null);
   const location = about.facts[0]?.value;
+  // A arte entra depois do primeiro paint: o título é o LCP e não espera o SVG.
+  const showArt = useAfterFirstPaint();
 
   useGSAP(
     () => {
@@ -51,12 +54,13 @@ export function Hero() {
         label={hero.greeting}
         tone="cal"
         customTransition
-        className="pt-24 pb-10"
+        fill
+        className="pt-24 pb-10 lg:pt-24 lg:pb-24"
         art={
           <div data-hero-art className="absolute inset-x-0 top-[8.75rem] bottom-44">
             {/* Luz ambiente champagne atrás do vidro (lp-noir.css): o vidro a desfoca. */}
             <div className="glass-spot" />
-            <Funil className="[mask-image:linear-gradient(90deg,rgb(0_0_0/0.3),black_55%)]" />
+            {showArt && <Funil className="[mask-image:linear-gradient(90deg,rgb(0_0_0/0.3),black_55%)]" />}
           </div>
         }
       >
@@ -75,7 +79,7 @@ export function Hero() {
           <div className="grid gap-8 pt-6 lg:grid-cols-12 lg:gap-8 lg:pt-10">
             <div className="lg:col-span-8">
               <div data-hero-title>
-                <SplitReveal as="h1" id="inicio-title" immediate className="display text-[clamp(2.2rem,4.4vw,4.6rem)] text-balance">
+                <SplitReveal as="h1" id="inicio-title" immediate className="display text-4xl xl:text-6xl text-balance">
                   {hero.title} <span className="highlight">{hero.titleHighlight}</span>
                 </SplitReveal>
               </div>

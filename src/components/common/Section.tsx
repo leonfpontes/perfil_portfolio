@@ -31,7 +31,7 @@ export function SectionHeader({ id, heading, compact = false, level = 'h2' }: Se
         <SplitReveal
           as={level}
           id={`${id}-title`}
-          className={cn('display max-w-4xl text-balance', compact ? 'text-4xl sm:text-5xl' : 'text-[2.6rem] leading-[1] sm:text-6xl lg:text-7xl')}
+          className={cn('display max-w-4xl text-balance', compact ? 'text-4xl sm:text-5xl' : 'text-4xl sm:text-6xl')}
         >
           {heading.title}
         </SplitReveal>

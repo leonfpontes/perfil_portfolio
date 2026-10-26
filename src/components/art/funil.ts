@@ -88,3 +88,4 @@ export function funilLinhas(): FunilLinha[] {
     return { d: curva(pontos), stop: { x: fim[0], y: fim[1] }, ate: ini.ate };
   });
 }
+

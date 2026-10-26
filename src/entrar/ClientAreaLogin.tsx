@@ -38,7 +38,7 @@ const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? '';
 const INPUT =
   'h-12 w-full rounded-sm border border-input bg-background px-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-signal focus-visible:ring-2 focus-visible:ring-signal/30';
 const PRIMARY =
-  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-foreground px-5 text-base font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60';
+  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-signal px-5 text-base font-semibold text-signal-foreground transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60';
 const LINK = 'font-semibold text-signal underline-offset-4 hover:underline';
 
 export function ClientAreaLogin() {
@@ -147,8 +147,10 @@ export function ClientAreaLogin() {
           aria-label="Leonardo Pontes — voltar ao site"
           className="marca-lp flex items-baseline gap-3"
         >
-          <span className="font-display text-2xl leading-none whitespace-nowrap">Leonardo Pontes</span>
-          <span className="label-caps hidden opacity-80 lg:inline">Product &amp; Portfolio</span>
+          <span className="font-display text-2xl leading-none whitespace-nowrap">
+            LP<span className="hidden sm:inline"><span className="text-signal"> · </span><span lang="en">Product &amp; Portfolio</span></span>
+          </span>
+          <span className="hidden font-serif text-lg leading-none italic opacity-80 lg:inline">Leonardo Pontes</span>
         </a>
         <a
           href="/"
@@ -165,7 +167,7 @@ export function ClientAreaLogin() {
 
         <main id="formulario" className="flex flex-1 flex-col items-center px-4 pt-8 pb-12 sm:px-6 md:justify-center md:py-20">
           <div className="passagem-porta w-full max-w-md">
-            <p className="label-caps text-signal">Client area</p>
+            <p lang="en" className="label-caps text-signal">Client area</p>
             {step.kind === 'form' && (
               <FormStep mode={mode} onMode={setMode} busy={busy} error={error} onFinish={finish} onSent={enviado} run={run} />
             )}
@@ -335,10 +337,21 @@ function FormStep({
   const ids = { email: useId(), password: useId(), error: useId() };
   const [email, setEmail] = useState(() => emailLembrado());
   const [password, setPassword] = useState('');
+  // O botão fica sempre ativo; o que falta aparece quando a pessoa clica.
+  const [falta, setFalta] = useState<string | null>(null);
 
   function submit(event: FormEvent) {
     event.preventDefault();
     const address = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) {
+      setFalta(address ? 'Confira o e-mail: ele precisa ter o formato voce@empresa.com.' : 'Digite o seu e-mail para receber o acesso.');
+      return;
+    }
+    if (mode === 'senha' && !password) {
+      setFalta('Digite a sua senha.');
+      return;
+    }
+    setFalta(null);
     void run(async () => {
       if (mode === 'link') {
         onSent(address, (await api.requestLink(address)).requestId);
@@ -382,7 +395,7 @@ function FormStep({
         ))}
       </div>
 
-      <form noValidate onSubmit={submit} className="mt-6 flex flex-col gap-5" aria-describedby={error ? ids.error : undefined}>
+      <form noValidate onSubmit={submit} className="mt-6 flex flex-col gap-5" aria-describedby={falta || error ? ids.error : undefined}>
         <div className="flex flex-col gap-2">
           <label htmlFor={ids.email} className="text-sm font-semibold">
             E-mail
@@ -415,8 +428,8 @@ function FormStep({
             />
           </div>
         )}
-        {error && <ErrorText id={ids.error}>{error}</ErrorText>}
-        <button type="submit" disabled={busy || !email.trim() || (mode === 'senha' && !password)} className={PRIMARY}>
+        {(falta || error) && <ErrorText id={ids.error}>{falta ?? error}</ErrorText>}
+        <button type="submit" disabled={busy} className={PRIMARY}>
           {busy ? <Spinner /> : null}
           {mode === 'link' ? 'Enviar link de acesso' : 'Entrar'}
           {!busy && <ArrowRight className="size-4" aria-hidden />}

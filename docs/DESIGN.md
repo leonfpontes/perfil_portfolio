@@ -31,7 +31,7 @@ O site é escuro sempre (não há alternância de tema). As classes `.tone-*` da
 
 ## Arte: o funil de portfólio
 
-`components/art/Funil.tsx` (geometria em `funil.ts`, movimento em `funil-motion.ts`). Iniciativas entram espalhadas pela esquerda e atravessam os gates **G1 Intake, G2 Business case, G3 Delivery e G4 Benefits**, a mesma metodologia da mentoria e do diagnóstico. Em cada gate algumas param, e só um feixe estreito chega ao fim, com a linha de sinal em champagne. Nada é aleatório: o desenho é SVG com traço nítido em qualquer tamanho.
+`components/art/Funil.tsx` (geometria e taxas em `funil.ts`; SVG parado, só um pulso champagne corre pela linha de sinal, em CSS). Iniciativas entram espalhadas pela esquerda e atravessam os gates **G1 Intake, G2 Business case, G3 Delivery e G4 Benefits**, a mesma metodologia da mentoria e do diagnóstico. Em cada gate algumas param, e só um feixe estreito chega ao fim, com a linha de sinal em champagne. Nada é aleatório: o desenho é SVG com traço nítido em qualquer tamanho.
 
 Movimento: as linhas se desenham na entrada; depois, iniciativas fluem como cometas curtos, cada gate acende no ponto de passagem, as barradas se apagam num anel e cada rótulo mostra a taxa de aprovação ao vivo. Com o mouse perto de um gate, ele se destaca. No celular os rótulos somem; no modo suave fica só o desenho parado.
 
@@ -62,7 +62,7 @@ A página é uma sequência de **cenas**: cada seção ocupa a tela, assume um t
 | `Section` / `SectionHeader` | Toda seção numerada |
 | `motion/Scene` | Cena: tom, entrada e saída coreografadas |
 | `motion/SplitReveal`, `CountUp`, `Magnetic`, `HorizontalTrack`, `SceneIndicator` | Movimento (inalterado) |
-| `art/Funil` | Funil de gates (SVG + canvas) |
+| `art/Funil` | Funil de gates (SVG parado + pulso CSS na linha de sinal) |
 | `art/Halftone`, `art/GenerativeCover` | Fotos que se revelam e capas por produto |
 | `ui/button` | Variantes shadcn + `signal` (champagne) e `glass` |
 | `.glass`, `.glass-bar`, `.glass-spot` | Vidro e luz (lp-noir.css) |

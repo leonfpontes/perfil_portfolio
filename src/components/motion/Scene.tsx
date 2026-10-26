@@ -26,6 +26,8 @@ interface SceneProps {
   /** Desliga a saída/entrada genérica (para cenas que coreografam a própria transição). */
   customTransition?: boolean;
   labelledBy?: string;
+  /** Ocupa a tela inteira no desktop: só para cenas fixadas (pin), que precisam do palco cheio. */
+  fill?: boolean;
 }
 
 /**
@@ -34,7 +36,7 @@ interface SceneProps {
  * enquanto o próximo aparece. O wrapper externo existe para que o gatilho de
  * cena (header, indicador) cubra também o tempo em que a seção fica fixada.
  */
-export function Scene({ id, chapter = id, label, tone, children, art, className, customTransition, labelledBy }: SceneProps) {
+export function Scene({ id, chapter = id, label, tone, children, art, className, customTransition, labelledBy, fill }: SceneProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const { activate } = useSceneDirector();
 
@@ -63,7 +65,7 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
       mm.add(MEDIA.wide, () => {
         // Entrada e saída se sobrepõem: nunca há uma tela vazia entre cenas.
         if (entersFromBelow) {
-          gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 60%', scrub: true } });
+          gsap.fromTo(layers, { opacity: 0.5 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 60%', scrub: true } });
         }
         gsap.to(layers, {
           opacity: 0,
@@ -76,7 +78,7 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
       // para que nada se apague enquanto ainda está sendo lido.
       mm.add(MEDIA.narrow, () => {
         if (!entersFromBelow) return;
-        gsap.fromTo(layers, { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 70%', scrub: true } });
+        gsap.fromTo(layers, { opacity: 0.5 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: outer, start: 'top bottom', end: 'top 70%', scrub: true } });
       });
     },
     { scope: outerRef, dependencies: [activate, tone, label] },
@@ -91,7 +93,10 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
         className={cn(
           // A seção pinta o próprio tom: a troca de cor acompanha a rolagem (a nova
           // cena sobe por cima da anterior, com sombra na borda), sem "estalo".
-          `tone-${tone} relative isolate flex flex-col justify-center overflow-clip bg-background py-12 text-foreground lg:min-h-svh lg:py-24`,
+          // Espaçamento fixo de 96/128 px; altura de tela cheia só nas cenas fixadas,
+          // para não sobrar vão vazio abaixo de seções curtas.
+          `tone-${tone} relative isolate flex flex-col justify-center overflow-clip bg-background py-24 text-foreground lg:py-32`,
+          fill && 'lg:min-h-svh',
           'shadow-[0_-28px_56px_-32px_rgb(0_0_0/0.45)]',
           className,
         )}

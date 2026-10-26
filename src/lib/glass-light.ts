@@ -22,8 +22,18 @@ export function startGlassLight(root: Document = document): () => void {
 
   const tick = () => {
     let moving = false;
-    root.querySelectorAll<HTMLElement>('.glass').forEach((el) => {
-      const r = el.getBoundingClientRect();
+    // Primeiro todas as leituras de layout, depois todas as escritas: intercalar as
+    // duas força o navegador a recalcular o layout a cada elemento.
+    const glasses = [...root.querySelectorAll<HTMLElement>('.glass')].map((el) => ({
+      el,
+      r: el.getBoundingClientRect(),
+    }));
+    const stages = [...root.querySelectorAll<HTMLElement>('[data-glass-light]')].map((stage) => ({
+      stage,
+      r: stage.getBoundingClientRect(),
+    }));
+
+    glasses.forEach(({ el, r }) => {
       const near = px > r.left - REACH && px < r.right + REACH && py > r.top - REACH && py < r.bottom + REACH;
       const homeX = r.width / 2;
       const homeY = -r.height * 0.15;
@@ -39,8 +49,7 @@ export function startGlassLight(root: Document = document): () => void {
       el.style.setProperty('--halo-x', `${(((p.x - homeX) / (r.width / 2 || 1)) * 8).toFixed(1)}px`);
       el.style.setProperty('--halo-y', `${(((p.y - r.height / 2) / (r.height / 2 || 1)) * 8).toFixed(1)}px`);
     });
-    root.querySelectorAll<HTMLElement>('[data-glass-light]').forEach((stage) => {
-      const r = stage.getBoundingClientRect();
+    stages.forEach(({ stage, r }) => {
       if (px < r.left || px > r.right || py < r.top || py > r.bottom) return;
       const spot = stage.querySelector<HTMLElement>('.glass-spot');
       spot?.style.setProperty('--px', (((px - r.left) / r.width) * 2 - 1).toFixed(3));

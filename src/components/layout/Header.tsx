@@ -39,8 +39,12 @@ export function Header() {
       <Container className="flex h-14 items-center justify-between gap-3 sm:gap-6">
         {/* `marca-lp`: a marca voa daqui para o cabeçalho da Área do cliente (globals.css). */}
         <a href={pathOf('home')} className="marca-lp flex items-baseline gap-3">
-          <span className="font-display text-xl leading-none whitespace-nowrap sm:text-2xl">{profile.shortName}</span>
-          <span className="label-caps hidden text-muted-foreground 2xl:inline">{profile.brand}</span>
+          {/* Marca "LP · Product & Portfolio"; "Leonardo Pontes" entra como assinatura. */}
+          <span className="font-display text-xl leading-none whitespace-nowrap sm:text-2xl">
+            LP<span className="text-signal"> · </span>
+            <span lang="en">Product &amp; Portfolio</span>
+          </span>
+          <span className="hidden font-serif text-lg leading-none text-muted-foreground italic 2xl:inline">{profile.shortName}</span>
         </a>
 
         <nav aria-label="Principal" className="hidden lg:block">

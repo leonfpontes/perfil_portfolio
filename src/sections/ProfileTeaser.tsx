@@ -16,9 +16,9 @@ export function ProfileTeaser() {
     () => {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.motion, () => {
+        // Só desloca: o texto fica legível o tempo todo.
         gsap.from('[data-pillar]', {
-          yPercent: 30,
-          opacity: 0,
+          yPercent: 20,
           stagger: 0.1,
           duration: 1,
           ease: 'expo.out',
@@ -38,7 +38,7 @@ export function ProfileTeaser() {
             {about.pillars.map((pillar, i) => (
               <li key={pillar.title} data-pillar className="bg-background p-4 pt-4 lg:p-6 lg:pt-5">
                 <p className="label-caps text-signal">{String(i + 1).padStart(2, '0')}</p>
-                <h3 className="mt-3 font-display text-2xl lg:mt-6 lg:text-3xl">{pillar.title}</h3>
+                <h3 className="mt-3 font-display text-xl">{pillar.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{pillar.description}</p>
               </li>
             ))}
