@@ -6,7 +6,6 @@ import { Faq } from '@/sections/Faq';
 import { JourneyScene } from '@/sections/Offer';
 import { DiagnosticDeliverables } from '@/sections/OfferDetails';
 import { Lazy } from './Lazy';
-import { PriceEmblem } from './MentoringPage';
 
 /** "/diagnostico-pmo" — o diagnóstico para empresas: etapas, entregáveis, preço e dúvidas. */
 export function DiagnosticPage() {
@@ -22,7 +21,7 @@ export function DiagnosticPage() {
         primaryHref={contact.whatsapp(plan.whatsappMessage)}
         secondaryHref="#processo"
         trackPrefix="diagnostic"
-        emblem={<PriceEmblem price={plan.price} note={plan.priceNote} regular={plan.regularPrice} />}
+        plan={plan}
       />
       <Lazy>
         <JourneyScene id="processo" journey={diagnosticPage.process} tone="palha" />

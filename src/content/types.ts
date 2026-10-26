@@ -107,6 +107,8 @@ export interface Plan {
   priceNote: string;
   regularPrice: string;
   features: string[];
+  /** O que o preço inclui, em itens curtos: o quadro de vidro do hero da página da oferta. */
+  includes: string[];
   cta: string;
   /** Link para a página da oferta (na página inicial). */
   detailCta: string;
@@ -118,6 +120,8 @@ export interface Offer extends SectionHeading {
   /** Link curto sob cada plano, para quem prefere marcar uma conversa antes. */
   bookingHint: string;
   founderNote: string;
+  /** Rótulo do quadro "o que o preço inclui" no hero das páginas de oferta. */
+  includesTitle: string;
   plans: Plan[];
 }
 
