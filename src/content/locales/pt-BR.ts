@@ -200,7 +200,7 @@ export const ptBR: SiteContent = {
         },
         {
           title: 'Score de maturidade por gate',
-          description: 'Intake, descoberta, planejamento, execução e encerramento avaliados com a mesma régua.',
+          description: 'G1 Intake, G2 Business case, G3 Delivery e G4 Benefits avaliados com a mesma régua, como um ciclo PDCA.',
         },
         {
           title: 'Relatório e roadmap priorizado',

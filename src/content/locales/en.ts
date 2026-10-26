@@ -200,7 +200,7 @@ export const en: SiteContent = {
         },
         {
           title: 'Gate-by-gate maturity score',
-          description: 'Intake, discovery, planning, execution and closing assessed with the same yardstick.',
+          description: 'G1 Intake, G2 Business case, G3 Delivery and G4 Benefits assessed with the same yardstick, as a PDCA cycle.',
         },
         {
           title: 'Report and prioritized roadmap',
