@@ -32,13 +32,15 @@ function TestimonialStage() {
   );
 
   return (
-    <div ref={stageRef} className="grid gap-8 lg:grid-cols-12">
-      <span data-quote-mark aria-hidden="true" className="hidden h-[0.5em] origin-[50%_35%] font-display text-[11rem] leading-[0.85] text-signal lg:col-span-2 lg:block">
-        “
-      </span>
-      <div className="min-w-0 lg:col-span-10">
+    // Uma coluna só: aspa, citação e navegação começam no mesmo eixo do título da seção
+    // (as mesmas 12 colunas do SectionHeader, a partir da 4ª).
+    <div ref={stageRef} className="grid gap-6 lg:grid-cols-12">
+      <div className="min-w-0 lg:col-span-9 lg:col-start-4">
+        <span data-quote-mark aria-hidden="true" className="hidden h-16 origin-[20%_35%] font-display text-8xl leading-none text-signal lg:block">
+          “
+        </span>
         {/* Desktop: um depoimento por vez (empilhados). Celular: trilho horizontal guiado pelo scroll. */}
-        <HorizontalTrack media="mobile" label={testimonials.eyebrow} className="max-lg:flex max-lg:gap-5 lg:grid">
+        <HorizontalTrack media="mobile" label={testimonials.eyebrow} swipeHint={ui.swipeHint} className="max-lg:flex max-lg:gap-5 lg:grid">
           {testimonials.items.map((t, i) => (
             <figure
               key={t.name}
@@ -51,7 +53,7 @@ function TestimonialStage() {
               <span aria-hidden="true" className="block h-12 font-display text-8xl leading-none text-signal lg:hidden">
                 “
               </span>
-              <blockquote className="display text-2xl leading-snug font-normal text-pretty sm:text-[2rem]">{t.quote}</blockquote>
+              <blockquote className="display text-2xl leading-snug font-normal text-pretty sm:text-2xl">{t.quote}</blockquote>
               <figcaption className="mt-8 border-t pt-4">
                 <p className="text-lg font-medium">
                   <TrackedLink href={t.linkedin} trackEvent="outbound_click" trackLabel="testimonial_author" className="link-rule">
@@ -95,7 +97,7 @@ function TestimonialStage() {
 export function Testimonials() {
   const { testimonials } = useContent();
   return (
-    <Scene id="depoimentos" label={testimonials.eyebrow} tone="mata" className="lg:py-16">
+    <Scene id="depoimentos" label={testimonials.eyebrow} tone="mata" fill className="lg:py-16">
       <Container>
         <SectionHeader id="depoimentos" heading={testimonials} compact />
         <TestimonialStage />

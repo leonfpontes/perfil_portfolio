@@ -28,8 +28,8 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-80 bg-background">
         <SheetHeader className="border-b">
-          <SheetTitle className="font-display text-2xl font-normal">{profile.shortName}</SheetTitle>
-          <SheetDescription className="label-caps">{profile.brand}</SheetDescription>
+          <SheetTitle className="font-display text-2xl font-normal">{profile.brand}</SheetTitle>
+          <SheetDescription className="font-serif text-lg italic">{profile.shortName}</SheetDescription>
         </SheetHeader>
         <nav aria-label="Mobile" className="px-4">
           <ul className="divide-y">

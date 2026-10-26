@@ -77,7 +77,7 @@ function ProductPanel({ product, index, total }: { product: Product; index: numb
 export function Products() {
   const { products } = useContent();
   return (
-    <Scene id="produtos" label={products.eyebrow} tone="cobalto" className="py-16">
+    <Scene id="produtos" label={products.eyebrow} tone="cobalto" fill className="py-16">
       <Container>
         <SectionHeader id="produtos" heading={products} compact />
         {/* Exposição: a área fixa e o trilho corre na horizontal (desktop e celular). */}

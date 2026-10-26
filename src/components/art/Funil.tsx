@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { FUNIL_GATES, FUNIL_VIEWBOX, funilLinhas } from './funil';
-import { startFunilMotion } from './funil-motion';
 
 const LINHAS = funilLinhas();
+const SINAL = LINHAS.find((l) => l.signal)!;
+const ULTIMO = FUNIL_GATES.length - 1;
 
 export interface FunilProps {
   className?: string;
-  /** Mostra os rótulos dos gates (G1 Intake…) com a taxa de aprovação ao vivo. */
+  /** Mostra os rótulos dos gates (G1 Intake…). */
   labels?: boolean;
-  /** Liga o fluxo de iniciativas (canvas). Desligado, fica só o desenho. */
+  /** Liga o pulso champagne que corre pela linha de sinal. Desligado, fica só o desenho. */
   animate?: boolean;
   /** Onde ficam os rótulos: no alto ou embaixo (para não cruzar com um título). */
   labelsAt?: 'top' | 'bottom';
@@ -18,32 +18,22 @@ export interface FunilProps {
 /**
  * Funil de portfólio: iniciativas atravessam os gates G1–G4, algumas param em cada
  * gate e um feixe estreito chega ao fim, com uma linha champagne de sinal.
- * O desenho é SVG (traço nítido em qualquer tamanho) e se desenha na entrada; por cima,
- * um canvas faz as iniciativas fluírem, acende os gates na passagem e atualiza as taxas
- * (funil-motion.ts). No modo suave, fica só o desenho parado.
+ * Tudo é SVG parado (traço nítido, sem custo de CPU); só um pulso champagne percorre a
+ * linha de sinal, em CSS (lp-noir.css). No modo suave, nem o pulso.
+ * As linhas sangram até a borda da tela. Os rótulos são HTML, presos à borda da área
+ * da arte (não ao corte do SVG), então ficam sempre visíveis; o do último gate se alinha
+ * à esquerda da própria linha, para não passar da largura do conteúdo.
  */
 export function Funil({ className, labels = true, animate = true, labelsAt = 'top' }: FunilProps) {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { width, height } = FUNIL_VIEWBOX;
-
-  useEffect(() => {
-    if (!animate || !svgRef.current || !canvasRef.current) return;
-    return startFunilMotion(svgRef.current, canvasRef.current);
-  }, [animate]);
 
   return (
     <div aria-hidden="true" className={cn('funil pointer-events-none relative h-full w-full', className)}>
-      <svg ref={svgRef} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 block h-full w-full">
+      <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 block h-full w-full">
         <g className="funil-gates">
           {FUNIL_GATES.map((g) => (
             <g key={g.id}>
               <line x1={g.x} x2={g.x} y1={40} y2={height - 40} vectorEffect="non-scaling-stroke" />
-              {labels && (
-                <text x={g.x + 10} y={labelsAt === 'top' ? 28 : height - 52}>
-                  <tspan className="funil-gate-id">{g.id}</tspan> {g.label}
-                </text>
-              )}
             </g>
           ))}
         </g>
@@ -65,8 +55,21 @@ export function Funil({ className, labels = true, animate = true, labelsAt = 'to
             <circle key={i} cx={l.stop!.x} cy={l.stop!.y} r={3} style={{ animationDelay: `${1.2 + i * 0.05}s` }} />
           ))}
         </g>
+        {animate && <path className="funil-pulso" d={SINAL.d} pathLength={1} vectorEffect="non-scaling-stroke" />}
       </svg>
-      {animate && <canvas ref={canvasRef} className="absolute inset-0 block h-full w-full" />}
+      {labels && (
+        <ul className={cn('absolute inset-x-0 max-md:hidden', labelsAt === 'top' ? 'top-0' : 'bottom-0')}>
+          {FUNIL_GATES.map((g, i) => (
+            <li
+              key={g.id}
+              className={cn('label-caps absolute whitespace-nowrap text-[var(--noir-stone)]', i === ULTIMO ? '-translate-x-full pr-2.5' : 'pl-2.5')}
+              style={{ left: `${(g.x / width) * 100}%` }}
+            >
+              <span className="text-signal">{g.id}</span> {g.label}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

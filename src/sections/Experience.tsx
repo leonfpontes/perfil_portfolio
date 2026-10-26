@@ -76,7 +76,7 @@ export function Experience() {
                   <div className="relative lg:col-span-8">
                     <h3 className="display text-3xl sm:text-5xl">{item.role}</h3>
                     <p className="mt-3 text-pretty lg:mt-5 lg:max-w-2xl lg:text-lg">{item.summary}</p>
-                    <ul className="mt-3 space-y-1.5 text-[13px] max-lg:[&>li:nth-child(n+4)]:hidden lg:mt-5 lg:max-w-2xl lg:space-y-2 lg:text-base">
+                    <ul className="mt-3 space-y-1.5 text-sm max-lg:[&>li:nth-child(n+4)]:hidden lg:mt-5 lg:max-w-2xl lg:space-y-2 lg:text-base">
                       {item.achievements.map((a) => (
                         <li key={a} className="flex gap-3 text-muted-foreground lg:gap-4">
                           <span aria-hidden="true" className="text-signal">

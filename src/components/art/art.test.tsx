@@ -12,12 +12,12 @@ describe('arte generativa', () => {
     expect(svg.querySelectorAll('.funil-gates line')).toHaveLength(4);
     expect(svg.querySelectorAll('.funil-sinal')).toHaveLength(1);
     expect(svg.querySelectorAll('.funil-paradas circle').length).toBeGreaterThan(0);
-    expect(svg).toHaveTextContent('G1 Intake');
+    expect(container).toHaveTextContent('G1 Intake');
   });
 
   it('Funil sem rótulos não escreve os nomes dos gates', () => {
     const { container } = render(<Funil labels={false} />);
-    expect(container.querySelector('text')).toBeNull();
+    expect(container).not.toHaveTextContent('Intake');
   });
 
   it('Halftone expõe o texto alternativo via role="img"', () => {

@@ -14,8 +14,8 @@ function useDetailChoreography() {
       const mm = gsap.matchMedia();
       mm.add(MEDIA.desktop, () => {
         const st = { trigger: ref.current, start: 'top 75%', toggleActions: 'play none none reverse' };
-        gsap.from('[data-plan]', { xPercent: 12, rotate: 1.5, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: st });
-        gsap.from('[data-detail-item]', { opacity: 0, x: -16, stagger: 0.05, duration: 0.7, ease: 'expo.out', scrollTrigger: st });
+        gsap.from('[data-plan]', { xPercent: 12, rotate: 1.5, duration: 1.2, ease: 'expo.out', scrollTrigger: st });
+        gsap.from('[data-detail-item]', { x: -16, stagger: 0.05, duration: 0.7, ease: 'expo.out', scrollTrigger: st });
       });
     },
     { scope: ref },

@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from 'react';
+import { Children, useRef, useState, type ReactNode } from 'react';
 import { gsap, MEDIA, useGSAP } from '@/lib/motion/gsap';
 import { cn } from '@/lib/utils';
 
@@ -23,6 +23,8 @@ interface HorizontalTrackProps {
   snap?: boolean;
   /** Mostra "01 / 04" e a régua de progresso abaixo do trilho. */
   showProgress?: boolean;
+  /** Dica para o carrossel nativo (sem movimento): pontos + texto, só onde o trilho é horizontal. */
+  swipeHint?: string;
 }
 
 /**
@@ -34,7 +36,7 @@ interface HorizontalTrackProps {
  * devagar (profundidade). Sem movimento permitido, vira um carrossel nativo
  * com swipe e scroll-snap.
  */
-export function HorizontalTrack({ children, media = 'all', className, label, pace = 0.85, snap = true, showProgress = true }: HorizontalTrackProps) {
+export function HorizontalTrack({ children, media = 'all', className, label, pace = 0.85, snap = true, showProgress = true, swipeHint }: HorizontalTrackProps) {
   const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -93,11 +95,21 @@ export function HorizontalTrack({ children, media = 'all', className, label, pac
 
   const pad = (n: number) => String(n).padStart(2, '0');
   const horizontal = count > 0;
+  const total = Children.count(children);
+
+  // Carrossel nativo (modo suave): o ponto ativo segue o swipe.
+  const onNativeScroll = () => {
+    const track = trackRef.current;
+    if (horizontal || !track || total < 2) return;
+    const max = track.scrollWidth - track.clientWidth;
+    if (max > 0) setActive(Math.round((track.scrollLeft / max) * (total - 1)));
+  };
 
   return (
     <div ref={pinRef} role="group" aria-label={label} className="relative min-w-0">
       <div
         ref={trackRef}
+        onScroll={onNativeScroll}
         className={cn(
           className,
           // Sem movimento: carrossel nativo com swipe/scroll horizontal.
@@ -115,6 +127,19 @@ export function HorizontalTrack({ children, media = 'all', className, label, pac
             <span data-track-bar className="block h-full origin-left scale-x-0 bg-signal" />
           </span>
         </div>
+      )}
+      {swipeHint && total > 1 && (
+        <p
+          aria-hidden="true"
+          className={cn('mt-4 hidden items-center gap-3 text-sm text-muted-foreground', !horizontal && 'reduced:flex', media === 'mobile' && 'lg:hidden!')}
+        >
+          <span className="flex gap-1.5">
+            {Array.from({ length: total }, (_, i) => (
+              <span key={i} className={cn('size-1.5 rounded-full', i === active ? 'bg-signal' : 'bg-foreground/30')} />
+            ))}
+          </span>
+          {swipeHint} →
+        </p>
       )}
     </div>
   );

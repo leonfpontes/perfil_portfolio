@@ -852,6 +852,8 @@ export const en: SiteContent = {
     scrollHint: 'Scroll to explore',
     illustrativeImage: 'Illustrative image · Unsplash',
     previous: 'Previous',
+    step: 'Step',
+    swipeHint: 'Swipe sideways',
     next: 'Next',
     of: 'of',
     status: 'Status',

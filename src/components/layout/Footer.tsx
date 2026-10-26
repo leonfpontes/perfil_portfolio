@@ -16,6 +16,7 @@ export function Footer() {
       <Container className="grid gap-10 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <p className="font-display text-4xl leading-none">{profile.brand}</p>
+          <p className="mt-2 font-serif text-xl text-signal italic">{profile.shortName}</p>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">{footer.tagline}</p>
         </div>
         <nav aria-label="Rodapé" className="md:col-span-4">

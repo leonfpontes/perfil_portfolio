@@ -51,7 +51,7 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
 
   return (
     <div ref={ref}>
-      <Scene id="inicio" label={crumb} tone="cal" customTransition className="pt-24 pb-10 lg:min-h-[88svh]">
+      <Scene id="inicio" label={crumb} tone="cal" customTransition className="pt-24 pb-10 lg:min-h-[88svh] lg:pt-24 lg:pb-24">
         <Container>
           <nav aria-label="Trilha" className="label-caps flex flex-wrap items-center justify-between gap-3 border-b pb-3 text-muted-foreground">
             <ol className="flex items-center gap-2">
@@ -78,7 +78,7 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
                 {copy.eyebrow}
               </p>
               <div data-hero-title>
-                <SplitReveal as="h1" id="inicio-title" immediate className="display mt-3 text-[clamp(2.4rem,5vw,5.25rem)] text-balance sm:mt-0">
+                <SplitReveal as="h1" id="inicio-title" immediate className="display mt-3 text-4xl xl:text-6xl text-balance sm:mt-0">
                   {copy.title} <span className="highlight">{copy.titleHighlight}</span>
                 </SplitReveal>
               </div>
@@ -105,7 +105,7 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
                 <p className="mt-2 font-display text-lg leading-snug">{plan.title}</p>
                 <ul className="mt-5 mb-6 flex flex-col gap-3">
                   {plan.includes.map((item) => (
-                    <li key={item} className="flex gap-3 text-[0.95rem] leading-snug">
+                    <li key={item} className="flex gap-3 text-base leading-snug">
                       <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-signal" strokeWidth={2.25} />
                       <span>{item}</span>
                     </li>
@@ -114,7 +114,7 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
                 <div className="mt-auto border-t border-white/10 pt-5">
                   <p className="flex flex-wrap items-baseline gap-x-2 pt-1">
                     <span className="font-display text-4xl leading-none">{plan.price}</span>
-                    <span className="label-caps">{plan.priceNote}</span>
+                    <span className="text-sm text-muted-foreground">{plan.priceNote}</span>
                   </p>
                   <p className="label-caps mt-2 text-muted-foreground">{plan.regularPrice}</p>
                 </div>

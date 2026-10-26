@@ -330,6 +330,10 @@ export interface UiStrings {
   illustrativeImage: string;
   scrollHint: string;
   previous: string;
+  /** Nome das fases da jornada do cliente ("Etapa"): G1–G4 ficam só para os gates da metodologia. */
+  step: string;
+  /** Dica do carrossel no celular (ex.: "Deslize para o lado"). */
+  swipeHint: string;
   next: string;
   of: string;
   status: string;

@@ -5,14 +5,14 @@ export const ptBR: SiteContent = {
 
   nav: {
     items: [
-      { id: 'mentoring', label: 'Mentoring' },
-      { id: 'diagnostic', label: 'Diagnostic' },
-      { id: 'about', label: 'About' },
-      { id: 'contact', label: 'Contact' },
+      { id: 'mentoring', label: 'Mentoria' },
+      { id: 'diagnostic', label: 'Diagnóstico' },
+      { id: 'about', label: 'Sobre' },
+      { id: 'contact', label: 'Contato' },
     ],
     home: 'Início',
-    cta: 'Book a call',
-    clientArea: 'Client area',
+    cta: 'Agendar conversa',
+    clientArea: 'Área do cliente',
     toggleLanguage: 'Switch to English',
     openMenu: 'Abrir menu',
     skipToContent: 'Pular para o conteúdo',
@@ -45,7 +45,7 @@ export const ptBR: SiteContent = {
       titleHighlight: 'PMs e POs.',
       description:
         'Duas sessões por mês com quem já foi Product Owner, gerente de PMO e gerente de Tecnologia, Dados e IA. Você traz os desafios reais do seu trabalho e sai de cada encontro com o próximo passo claro.',
-      primaryCta: 'Garantir vaga fundador',
+      primaryCta: 'Garantir vaga',
       secondaryCta: 'Ver como funciona',
       facts: [
         { label: 'Formato', value: '2 sessões/mês · 60 min · online' },
@@ -320,7 +320,7 @@ export const ptBR: SiteContent = {
           'Revisão dos seus entregáveis',
           'Templates de governança, discovery e roadmap',
         ],
-        cta: 'Garantir vaga fundador',
+        cta: 'Garantir vaga',
         detailCta: 'Ver a mentoria em detalhe',
         highlighted: true,
         whatsappMessage:
@@ -852,6 +852,8 @@ export const ptBR: SiteContent = {
     scrollHint: 'Role para explorar',
     illustrativeImage: 'Imagem ilustrativa · Unsplash',
     previous: 'Anterior',
+    step: 'Etapa',
+    swipeHint: 'Deslize para o lado',
     next: 'Próximo',
     of: 'de',
     status: 'Status',

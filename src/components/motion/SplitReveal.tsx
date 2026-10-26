@@ -38,14 +38,10 @@ export function SplitReveal({ as = 'p', mode: requested = 'lines', children, cla
       const mm = gsap.matchMedia();
       // Celular: sem SplitText (medir cada linha/palavra custa caro na CPU do
       // aparelho). O bloco inteiro sobe uma vez; no hero, nem isso.
-      // Modo suave: só um fade, sem deslocamento.
-      mm.add({ any: 'all', motion: MEDIA.motion }, (ctx) => {
-        if (ctx.conditions?.motion || immediate) return;
-        gsap.from(el, { opacity: 0, duration: 0.6, ease: 'power1.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
-      });
+      // Modo suave: nada se mexe. Regra geral: a animação move, nunca esconde o texto.
       mm.add(MEDIA.mobile, () => {
         if (immediate) return;
-        gsap.from(el, { opacity: 0, y: 24, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+        gsap.from(el, { y: 24, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
       });
       mm.add(MEDIA.desktop, () => {
         const mode = requested;
@@ -53,20 +49,22 @@ export function SplitReveal({ as = 'p', mode: requested = 'lines', children, cla
           // O texto continua no DOM íntegro (só envolto em spans); sem aria-label em <p>.
           aria: 'none',
           type: mode === 'read' ? 'words' : mode === 'chars' ? 'lines,chars' : mode === 'words' ? 'lines,words' : 'lines',
-          mask: mode === 'read' ? undefined : 'lines',
-          linesClass: 'split-line',
+          // Máscara (texto que "sobe" de trás de um corte) só nos caracteres de um título
+          // de uma linha; em linhas e palavras o texto só se desloca, sempre visível.
+          mask: mode === 'chars' ? 'lines' : undefined,
+          linesClass: mode === 'chars' ? 'split-line' : undefined,
           autoSplit: true,
           onSplit(self) {
             if (mode === 'read') {
               return gsap.fromTo(
                 self.words,
-                { opacity: 0.18 },
+                { opacity: 0.55 },
                 { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 78%', end: 'bottom 45%', scrub: true } },
               );
             }
             const targets = mode === 'chars' ? self.chars : mode === 'words' ? self.words : self.lines;
             return gsap.from(targets, {
-              yPercent: 115,
+              yPercent: mode === 'chars' ? 115 : 30,
               rotate: mode === 'chars' ? 6 : 0,
               duration: mode === 'chars' ? 0.9 : 1.1,
               ease: 'expo.out',

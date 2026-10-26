@@ -9,7 +9,7 @@ export const profile = {
   /** Posicionamento nos dados estruturados (Person.jobTitle). O cargo na ATRA fica na trajetória. */
   jobTitle: 'Mentor e consultor em Produto, PMO e Portfólio',
   siteUrl: 'https://www.leopontes.com.br',
-  email: 'leonfpontes@gmail.com',
+  email: 'contato@leopontes.com.br',
   /** Apenas dígitos, com DDI — usado para montar links do WhatsApp. */
   whatsapp: '5516991091234',
   linkedin: 'https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/',
