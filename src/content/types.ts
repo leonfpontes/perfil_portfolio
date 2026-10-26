@@ -281,6 +281,8 @@ export interface Testimonial {
   name: string;
   /** Perfil público de quem recomendou. */
   linkedin: string;
+  /** Foto de perfil em public/testimonials/ (sem ela, aparecem as iniciais). */
+  photo?: string;
   role: string;
   context: string;
 }

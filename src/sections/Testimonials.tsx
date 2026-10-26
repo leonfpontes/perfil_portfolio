@@ -12,6 +12,25 @@ import { cn } from '@/lib/utils';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
+/** Primeira e última inicial do nome ("Leonardo Brito Bittencourt" → "LB"). */
+const initialsOf = (name: string) => {
+  const words = name.trim().split(/\s+/);
+  const first = words[0]?.[0] ?? '';
+  const last = words.length > 1 ? (words.at(-1)?.[0] ?? '') : '';
+  return (first + last).toUpperCase();
+};
+
+/** Foto de quem recomendou; sem foto, as iniciais no mesmo quadrado. Decorativa: o nome vem ao lado. */
+function AuthorPhoto({ name, photo }: { name: string; photo?: string }) {
+  return photo ? (
+    <img src={photo} alt="" width={56} height={56} loading="lazy" decoding="async" className="size-14 shrink-0 rounded-xl object-cover grayscale-[15%]" />
+  ) : (
+    <span aria-hidden="true" className="label-caps grid size-14 shrink-0 place-items-center rounded-xl border text-muted-foreground">
+      {initialsOf(name)}
+    </span>
+  );
+}
+
 function TestimonialStage() {
   const { testimonials, ui } = useContent();
   const stageRef = useRef<HTMLDivElement>(null);
@@ -57,14 +76,17 @@ function TestimonialStage() {
                 “
               </span>
               <blockquote className="display text-2xl leading-snug font-normal text-pretty sm:text-2xl">{t.quote}</blockquote>
-              <figcaption className="mt-8 border-t pt-4">
-                <p className="text-lg font-medium">
-                  <TrackedLink href={t.linkedin} trackEvent="outbound_click" trackLabel="testimonial_author" className="link-rule">
-                    {t.name}
-                  </TrackedLink>
-                </p>
-                <p className="mt-1 text-muted-foreground">{t.role}</p>
-                <p className="label-caps mt-1 text-muted-foreground">{t.context}</p>
+              <figcaption className="mt-8 flex items-center gap-4 border-t pt-4">
+                <AuthorPhoto name={t.name} photo={t.photo} />
+                <div className="min-w-0">
+                  <p className="text-lg font-medium">
+                    <TrackedLink href={t.linkedin} trackEvent="outbound_click" trackLabel="testimonial_author" className="link-rule">
+                      {t.name}
+                    </TrackedLink>
+                  </p>
+                  <p className="mt-1 text-muted-foreground">{t.role}</p>
+                  <p className="label-caps mt-1 text-muted-foreground">{t.context}</p>
+                </div>
               </figcaption>
             </figure>
           ))}
