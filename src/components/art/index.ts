@@ -1,4 +1,4 @@
-export { Azulejo, type AzulejoProps } from './Azulejo';
+export { Funil, type FunilProps } from './Funil';
 export { Halftone, type HalftoneProps } from './Halftone';
 export { GenerativeCover, type GenerativeCoverProps } from './GenerativeCover';
 export { coverPainters, type CoverPainter, type CoverVariant, type CoverContext } from './covers';

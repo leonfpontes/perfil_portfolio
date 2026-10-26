@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Azulejo } from '@/components/art/Azulejo';
+import { Funil } from '@/components/art/Funil';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -45,13 +45,20 @@ export function Hero() {
   );
 
   return (
-    <div ref={ref}>
+    <div ref={ref} data-glass-light>
       <Scene
         id="inicio"
         label={hero.greeting}
         tone="cal"
         customTransition
         className="pt-24 pb-10"
+        art={
+          <div data-hero-art className="absolute inset-x-0 top-[8.75rem] bottom-44">
+            {/* Luz ambiente champagne atrás do vidro (lp-noir.css): o vidro a desfoca. */}
+            <div className="glass-spot" />
+            <Funil className="[mask-image:linear-gradient(90deg,rgb(0_0_0/0.3),black_55%)]" />
+          </div>
+        }
       >
         <Container>
           <div className="label-caps flex flex-wrap items-center justify-between gap-3 border-b pb-3 text-muted-foreground">
@@ -60,7 +67,7 @@ export function Hero() {
               {location}
             </span>
             <a data-hero-meta href={pathOf('mentoring')} className="flex items-center gap-2 text-foreground hover:text-signal">
-              <span aria-hidden="true" className="size-2 animate-pulse bg-signal" />
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-signal" />
               {hero.badge}
             </a>
           </div>
@@ -78,18 +85,18 @@ export function Hero() {
               {/* As duas ofertas logo na primeira tela: para quem é, o que é e quanto custa. */}
               <div data-hero-fade className="mt-8 max-w-2xl">
                 <p className="label-caps mb-2 text-muted-foreground">{hero.offersLabel}</p>
-                <ul className="border-t border-foreground">
+                <ul className="grid gap-2">
                   {offer.plans.map((plan) => (
-                    <li key={plan.id} className="border-b border-foreground">
+                    <li key={plan.id}>
                       <TrackedLink
                         href={pathOf(plan.id === 'mentoring' ? 'mentoring' : 'diagnostic')}
                         trackLabel={`hero_${plan.id}`}
                         className={cn(
-                          'group grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1 px-3 py-3 transition-colors sm:py-4',
-                          plan.highlighted ? 'bg-signal text-signal-foreground' : 'hover:bg-foreground hover:text-background',
+                          'group grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1 rounded-lg px-4 py-3 transition-colors sm:py-4',
+                          plan.highlighted ? 'glass hover:bg-white/10' : 'border border-border hover:border-border hover:bg-white/[0.03]',
                         )}
                       >
-                        <span className="label-caps opacity-80">{plan.tag}</span>
+                        <span className={cn('label-caps', plan.highlighted ? 'text-signal' : 'text-muted-foreground')}>{plan.tag}</span>
                         <span className="row-span-2 flex items-center gap-3 font-display text-lg whitespace-nowrap sm:text-2xl">
                           {plan.priceShort} <Arrow />
                         </span>
@@ -105,11 +112,8 @@ export function Hero() {
             </div>
 
             <figure data-hero-figure className="relative lg:col-span-4">
-              <div className="relative pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
-                {/* Painel de azulejos generativo atrás do retrato (muda a cada visita). */}
-                <div data-hero-block aria-hidden="true" className="absolute inset-0 overflow-hidden">
-                  <Azulejo seed={`hero-${new Date().getDate()}`} size={52} />
-                </div>
+              <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[radial-gradient(70%_60%_at_50%_30%,#2e2c28,#111113_72%)] pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
+                <div data-hero-block aria-hidden="true" className="absolute inset-0" />
                 <img
                   data-hero-portrait
                   src={profile.images.portrait}
@@ -119,15 +123,15 @@ export function Hero() {
                   fetchPriority="high"
                   className="relative mx-auto h-auto w-full grayscale contrast-110 max-lg:max-h-[42svh] max-lg:w-auto"
                 />
+                <figcaption data-hero-fade className="glass absolute inset-x-3 bottom-3 grid gap-0.5 rounded-lg px-4 py-3 text-sm">
+                  <span className="font-medium text-foreground">{profile.name}</span>
+                  <span className="text-muted-foreground">{hero.availability}</span>
+                </figcaption>
               </div>
-              <figcaption data-hero-fade className="label-caps mt-3 flex justify-between gap-3 text-muted-foreground">
-                <span className="text-foreground">{profile.name}</span>
-                <span className="text-right">{hero.availability}</span>
-              </figcaption>
             </figure>
           </div>
 
-          <dl data-hero-fade className="mt-10 grid grid-cols-2 border-t border-foreground md:grid-cols-4 lg:mt-12">
+          <dl data-hero-fade className="mt-10 grid grid-cols-2 border-t border-border md:grid-cols-4 lg:mt-12">
             {hero.stats.map((stat, i) => (
               <div
                 key={stat.label}

@@ -21,7 +21,6 @@ export function MentoringPage() {
         primaryHref={contact.whatsapp(plan.whatsappMessage)}
         secondaryHref="#jornada"
         trackPrefix="mentoring"
-        seed="mentoria"
         emblem={<PriceEmblem price={plan.price} note={plan.priceNote} regular={plan.regularPrice} />}
       />
       <Lazy>
@@ -40,7 +39,7 @@ export function MentoringPage() {
   );
 }
 
-/** O preço "carimbado" sobre o painel de azulejos do hero. */
+/** O preço "carimbado" em vidro sobre o painel do hero. */
 export function PriceEmblem({ price, note, regular }: { price: string; note: string; regular: string }) {
   return (
     <>

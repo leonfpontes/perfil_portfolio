@@ -54,7 +54,7 @@ export function Experience() {
               >
                 <article
                   className={cn(
-                    'relative grid h-full origin-top gap-5 overflow-hidden border-t-4 border-foreground bg-card p-5 sm:p-10 lg:min-h-[54vh] lg:grid-cols-12 lg:gap-6',
+                    'relative grid h-full origin-top gap-5 overflow-hidden rounded-xl border bg-card p-5 sm:p-10 lg:min-h-[54vh] lg:grid-cols-12 lg:gap-6',
                     // Sem sombra desfocada: repintá-la a cada quadro da pilha travava a rolagem.
                     'ring-1 ring-foreground/10 lg:will-change-transform',
                   )}
@@ -66,7 +66,7 @@ export function Experience() {
                     <p className="label-caps">{item.period}</p>
                     {item.current && (
                       <p className="label-caps mt-2 flex items-center gap-2 text-signal">
-                        <span aria-hidden="true" className="size-2 bg-signal" />
+                        <span aria-hidden="true" className="size-1.5 rounded-full bg-signal" />
                         {experience.currentLabel}
                       </p>
                     )}

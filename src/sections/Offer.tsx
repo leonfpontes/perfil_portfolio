@@ -33,9 +33,9 @@ export function PlanSheet({ plan, index, bookingHint, showDetail = false, inTrac
     <article
       data-plan={index}
       className={cn(
-        'flex flex-col border-t-4 bg-card p-5 sm:p-10',
+        'flex flex-col rounded-xl p-5 sm:p-10',
         inTrack && 'max-lg:w-[86vw] max-lg:shrink-0 max-lg:snap-center',
-        plan.highlighted ? 'border-signal' : 'border-foreground',
+        plan.highlighted ? 'glass' : 'border bg-card',
       )}
     >
       <p className="label-caps flex justify-between text-muted-foreground">
@@ -170,7 +170,7 @@ function JourneyStage({ id, journey }: { id: SectionId; journey: Journey }) {
               <div
                 key={step.title}
                 data-step={i}
-                className="relative pt-8 max-lg:flex max-lg:min-h-[52svh] max-lg:w-[78vw] max-lg:shrink-0 max-lg:snap-center max-lg:flex-col max-lg:justify-end max-lg:border-t max-lg:border-foreground"
+                className="relative pt-8 max-lg:flex max-lg:min-h-[52svh] max-lg:w-[78vw] max-lg:shrink-0 max-lg:snap-center max-lg:flex-col max-lg:justify-end max-lg:border-t max-lg:border-border"
               >
                 <span data-node={i} aria-hidden="true" className="absolute -top-[5px] left-0 size-[9px] bg-foreground max-lg:bg-signal" />
                 <span aria-hidden="true" className="text-outline font-display text-[9rem] leading-none lg:hidden">

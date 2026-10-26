@@ -13,7 +13,6 @@ export const en: SiteContent = {
     home: 'Home',
     cta: 'Book a call',
     clientArea: 'Client area',
-    toggleTheme: 'Toggle light/dark theme',
     toggleLanguage: 'Mudar para português',
     openMenu: 'Open menu',
     skipToContent: 'Skip to content',
@@ -29,7 +28,7 @@ export const en: SiteContent = {
       eyebrow: 'Who leads it',
       title: '8+ years making product and governance work',
       description:
-        'I have been a Product Owner of 4 digital products, PMO manager of a portfolio with 40+ developers and Technology, Data & AI manager. Today I work in product, data and AI at ATRA and run LP | Product & Portfolio.',
+        'I have been a Product Owner of 4 digital products, PMO manager of a portfolio with 40+ developers and Technology, Data & AI manager. Today I work in product, data and AI at ATRA and run LP · Product & Portfolio.',
       cta: 'See the full background',
     },
   },
@@ -404,7 +403,7 @@ export const en: SiteContent = {
     story: [
       "I started in the field, on the service desk and in retail automation consulting. From there I moved into software development and, early on, into conversational AI projects in education. That technical foundation never left me: to this day I build, test and ship products to production.",
       "Since 2018 I have worked in product and projects, as a Project Analyst, Product Owner of 4 digital products, PMO manager of a portfolio with 40+ developers, and Technology, Data & AI manager. Today I am a Product, Data & AI Product Designer at ATRA, a consultancy with more than 15 years in the market.",
-      "In parallel, I build my own products (such as GiraHub and Portal PMO) and teach what I have learned. LP | Product & Portfolio was born from that: bringing the methodology I validated in practice to other professionals and companies.",
+      "In parallel, I build my own products (such as GiraHub and Portal PMO) and teach what I have learned. LP · Product & Portfolio was born from that: bringing the methodology I validated in practice to other professionals and companies.",
     ],
     pillars: [
       {
@@ -483,7 +482,7 @@ export const en: SiteContent = {
         category: 'Portfolio governance SaaS (2023–2026)',
         status: 'sunset',
         description:
-          'My own portfolio management tool with 5-gate governance. Retired as a commercial product in 2026, and its methodology became the foundation of LP | Product & Portfolio.',
+          'My own portfolio management tool with 5-gate governance. Retired as a commercial product in 2026, and its methodology became the foundation of LP · Product & Portfolio.',
         highlights: [
           'Intake, Discovery, Planning, Execution and Closing gates',
           'Executive dashboards with traffic lights, KPIs and automated reports',
@@ -799,7 +798,7 @@ export const en: SiteContent = {
       github: 'View GitHub',
     },
     whatsappMessage: "Hi, Leonardo! I saw your website and I'd like to talk about mentoring/consulting.",
-    emailSubject: 'Contact via website · LP | Product & Portfolio',
+    emailSubject: 'Contact via website · LP · Product & Portfolio',
     responseTime: 'Reply within 24 business hours',
     location: 'Ribeirão Preto · São Paulo · Remote',
     languages: 'Available in Portuguese and English',

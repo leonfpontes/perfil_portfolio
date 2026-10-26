@@ -66,11 +66,11 @@ describe('<App />', () => {
     document.documentElement.classList.add('reduced-motion');
     const { user, track } = renderApp();
     const nav = screen.getByRole('navigation', { name: 'Principal' });
-    await user.click(within(nav).getByRole('link', { name: 'Diagnóstico' }));
+    await user.click(within(nav).getByRole('link', { name: 'Diagnostic' }));
     await waitFor(() => expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/diagnóstico de maturidade de PMO e portfólio/i));
     expect(window.location.pathname).toBe('/diagnostico-pmo');
     expect(document.title).toMatch(/Diagnóstico de Maturidade de PMO/);
-    expect(within(nav).getByRole('link', { name: 'Diagnóstico' })).toHaveAttribute('aria-current', 'page');
+    expect(within(nav).getByRole('link', { name: 'Diagnostic' })).toHaveAttribute('aria-current', 'page');
     expect(track).toHaveBeenCalledWith('page_view', expect.objectContaining({ page_path: '/diagnostico-pmo' }));
     document.documentElement.classList.remove('reduced-motion');
   });
@@ -90,10 +90,10 @@ describe('<App />', () => {
   it('a Área do cliente fica no cabeçalho só como ícone, menos chamativa que o convite', () => {
     renderApp();
     const header = screen.getByRole('banner');
-    const clientArea = within(header).getByRole('link', { name: /área do cliente/i });
+    const clientArea = within(header).getByRole('link', { name: /client area/i });
     expect(clientArea).toHaveAttribute('href', '/entrar');
-    expect(clientArea.textContent).toBe('Área do cliente'); // só o texto para leitores de tela
-    expect(within(clientArea).getByText('Área do cliente')).toHaveClass('sr-only');
+    expect(clientArea.textContent).toBe('Client area'); // só o texto para leitores de tela
+    expect(within(clientArea).getByText('Client area')).toHaveClass('sr-only');
   });
 
   it('o rodapé não fala da stack técnica', () => {
@@ -136,11 +136,9 @@ describe('<App />', () => {
     expect(within(section).getByText(/06 de 06/)).toBeInTheDocument();
   });
 
-  it('alterna o tema escuro', async () => {
-    const { user } = renderApp();
-    const toggle = screen.getByRole('button', { name: /alternar tema/i });
-    const wasDark = document.documentElement.classList.contains('dark');
-    await user.click(toggle);
-    expect(document.documentElement.classList.contains('dark')).toBe(!wasDark);
+  it('é escuro sempre, sem alternância de tema (LP Noir)', () => {
+    renderApp();
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(screen.queryByRole('button', { name: /alternar tema/i })).not.toBeInTheDocument();
   });
 });

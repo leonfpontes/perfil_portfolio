@@ -1,4 +1,4 @@
-import { Azulejo } from '@/components/art/Azulejo';
+import { Funil } from '@/components/art/Funil';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -25,8 +25,8 @@ export function NotFoundPage() {
       customTransition
       className="pt-24 pb-16 lg:min-h-[80svh]"
       art={
-        <div className="absolute inset-x-0 bottom-0 h-16 opacity-80 lg:h-20">
-          <Azulejo seed="404" size={40} every={0.6} />
+        <div className="absolute inset-0 opacity-80 [mask-image:linear-gradient(to_top,black,transparent_80%)]">
+          <Funil labels={false} />
         </div>
       }
     >
@@ -40,7 +40,7 @@ export function NotFoundPage() {
             <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground">{notFound.description}</p>
           </div>
           <nav aria-label={notFound.linksTitle} className="lg:col-span-5">
-            <ul className="divide-y border-y border-foreground">
+            <ul className="divide-y border-y border-border">
               {links.map((link) => (
                 <li key={link.page}>
                   <TrackedLink href={pathOf(link.page)} trackLabel={`404_${link.page}`} className="group flex items-baseline justify-between gap-4 py-4 hover:text-signal">

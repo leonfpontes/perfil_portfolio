@@ -22,7 +22,6 @@ export function DiagnosticPage() {
         primaryHref={contact.whatsapp(plan.whatsappMessage)}
         secondaryHref="#processo"
         trackPrefix="diagnostic"
-        seed="diagnostico"
         emblem={<PriceEmblem price={plan.price} note={plan.priceNote} regular={plan.regularPrice} />}
       />
       <Lazy>

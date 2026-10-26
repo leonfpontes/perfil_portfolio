@@ -1,102 +1,122 @@
 """
 Gera public/images/og-image.png (1200x630) — o card exibido quando o link do
 site é compartilhado (LinkedIn, WhatsApp, Slack…). Mesma identidade do site:
-modernismo brasileiro — cal, mata, ocre e cobalto, Archivo expandida e um
-painel de azulejos atrás do retrato.
+LP Noir — preto quente, marfim e champagne, Roboto com o destaque em serifa
+itálica, o funil de gates ao fundo e o retrato em preto e branco.
 
 Uso: python3 scripts/make-og-image.py
 """
-import math
-import random
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
-FONT = ROOT / "public" / "fonts" / "archivo-latin-wdth-normal.woff2"
+SANS = ROOT / "public" / "fonts" / "roboto.woff2"
+SERIF = ROOT / "public" / "fonts" / "instrument-serif-italic.woff2"
 PORTRAIT = ROOT / "scripts" / "assets" / "portrait-cutout.png"
 OUT = ROOT / "public" / "images" / "og-image.png"
 
 W, H = 1200, 630
-CAL = (247, 247, 242)
-BREU = (19, 38, 31)
-MATA = (20, 81, 63)
-OCRE = (240, 180, 41)
-AZUL = (45, 79, 179)
-MUTED = (96, 110, 104)
+ONYX = (10, 10, 11)
+GRAPHITE = (19, 19, 21)
+LINE = (42, 42, 46)
+IVORY = (241, 237, 228)
+STONE = (155, 150, 140)
+CHAMPAGNE = (207, 180, 138)
 
 
-def font(size: int, weight: int, width: int) -> ImageFont.FreeTypeFont:
-    f = ImageFont.truetype(str(FONT), size)
-    f.set_variation_by_axes([weight, width])
+def sans(size: int, weight: int) -> ImageFont.FreeTypeFont:
+    f = ImageFont.truetype(str(SANS), size)
+    f.set_variation_by_axes([weight])
     return f
 
 
-def azulejo_wall(w: int, h: int, size: int, seed: int) -> Image.Image:
-    """Painel de azulejos (mesmos módulos do componente Azulejo.tsx)."""
-    rnd = random.Random(seed)
-    pairs = [(AZUL, CAL), (CAL, AZUL), (OCRE, BREU), (MATA, OCRE), (CAL, MATA), (AZUL, OCRE), (OCRE, AZUL), (CAL, OCRE)]
-    scale = 4  # desenha grande e reduz (bordas suaves)
-    s = size * scale
-    wall = Image.new("RGB", (math.ceil(w / size) * s, math.ceil(h / size) * s))
-    for row in range(math.ceil(h / size)):
-        for col in range(math.ceil(w / size)):
-            bg, fg = rnd.choice(pairs)
-            tile = Image.new("RGB", (s, s), bg)
-            d = ImageDraw.Draw(tile)
-            motif = rnd.randint(0, 5)
-            if motif == 0:
-                d.pieslice((-s, -s, s, s), 0, 90, fill=fg)
-            elif motif == 1:
-                d.pieslice((0, s // 2, s, s + s // 2), 180, 360, fill=fg)
-            elif motif == 2:
-                d.polygon([(0, 0), (s, 0), (0, s)], fill=fg)
-            elif motif == 3:
-                d.pieslice((-s // 2, -s // 2, s // 2, s // 2), 0, 90, fill=fg)
-                d.pieslice((s // 2, s // 2, s + s // 2, s + s // 2), 180, 270, fill=fg)
-            elif motif == 4:
-                r = int(s * 0.3)
-                d.ellipse((s // 2 - r, s // 2 - r, s // 2 + r, s // 2 + r), fill=fg)
-            else:
-                d.rectangle((0, 0, s, s // 2), fill=fg)
-            wall.paste(tile.rotate(90 * rnd.randint(0, 3)), (col * s, row * s))
-    wall = wall.resize((wall.width // scale, wall.height // scale), Image.LANCZOS)
-    return wall.crop((0, 0, w, h))
+def serif(size: int) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(str(SERIF), size)
 
 
-img = Image.new("RGB", (W, H), CAL)
+def bezier(p0, p1, p2, p3, steps=40):
+    pts = []
+    for i in range(steps + 1):
+        t = i / steps
+        a = (1 - t) ** 3
+        b = 3 * (1 - t) ** 2 * t
+        c = 3 * (1 - t) * t**2
+        d = t**3
+        pts.append((a * p0[0] + b * p1[0] + c * p2[0] + d * p3[0], a * p0[1] + b * p1[1] + c * p2[1] + d * p3[1]))
+    return pts
+
+
+def funil(w: int, h: int, scale: int = 3) -> Image.Image:
+    """O funil de gates (mesma geometria de src/components/art/funil.ts, encaixada no card)."""
+    S = scale
+    layer = Image.new("RGBA", (w * S, h * S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    gates = [0.36, 0.53, 0.70, 0.87]
+    aperto = [1, 0.62, 0.38, 0.2, 0.08]
+    focus = 0.5
+    linhas = [(0.09, 0), (0.16, 1), (0.24, 4), (0.31, 0), (0.37, 2), (0.44, 4), (0.5, 1), (0.56, 4), (0.62, 3), (0.69, 0), (0.76, 4), (0.83, 2), (0.9, 1)]
+    sobreviventes = [y for y, a in linhas if a == 4]
+    sinal = min(sobreviventes, key=lambda y: abs(y - focus))
+    for g in gates:
+        x = g * w * S
+        for y in range(0, h * S, 8 * S):
+            d.line([(x, y), (x, y + 2 * S)], fill=(*IVORY, 26), width=S)
+    for y0, ate in linhas:
+        pts = [(-0.03, y0)]
+        for g in range(min(ate, 3) + 1):
+            pts.append((gates[g], focus + (y0 - focus) * aperto[g + 1]))
+        if ate == 4:
+            pts.append((1.03, focus + (y0 - focus) * aperto[4]))
+        path = []
+        for (xa, ya), (xb, yb) in zip(pts, pts[1:]):
+            k = (xb - xa) * 0.5
+            path += bezier((xa * w * S, ya * h * S), ((xa + k) * w * S, ya * h * S), ((xb - k) * w * S, yb * h * S), (xb * w * S, yb * h * S))
+        is_sinal = ate == 4 and y0 == sinal
+        d.line(path, fill=(*CHAMPAGNE, 200) if is_sinal else (*IVORY, 46), width=int(1.6 * S) if is_sinal else S, joint="curve")
+        if ate < 4:
+            x, y = path[-1]
+            r = 3 * S
+            d.ellipse((x - r, y - r, x + r, y + r), fill=(*ONYX, 255), outline=(*IVORY, 90), width=S)
+    return layer.resize((w, h), Image.LANCZOS)
+
+
+img = Image.new("RGB", (W, H), ONYX)
+# Luz ambiente champagne atrás do retrato.
+glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+ImageDraw.Draw(glow).ellipse((700, 40, 1260, 600), fill=(*CHAMPAGNE, 46))
+img.paste(glow.filter(ImageFilter.GaussianBlur(120)), (0, 0), glow.filter(ImageFilter.GaussianBlur(120)))
+img.paste(funil(W, H), (0, 0), funil(W, H))
 d = ImageDraw.Draw(img)
 M = 64
 
-# Painel de azulejos + retrato em P&B por cima (mesma composição do hero).
-panel = (812, 0, W, H)
-img.paste(azulejo_wall(panel[2] - panel[0], H, 56, seed=7), (panel[0], 0))
+# Painel do retrato: cantos de 12 px, borda grafite, retrato em P&B.
+panel = (820, 56, W - 56, H - 56)
+mask = Image.new("L", (W, H), 0)
+ImageDraw.Draw(mask).rounded_rectangle(panel, radius=12, fill=255)
+card = Image.new("RGB", (W, H), GRAPHITE)
 portrait = Image.open(PORTRAIT).convert("RGBA")
 gray = ImageOps.autocontrast(ImageOps.grayscale(portrait.convert("RGB")), cutoff=1)
 bw = Image.merge("RGBA", (gray, gray, gray, portrait.getchannel("A")))
-target_h = H - 70
+target_h = panel[3] - panel[1] - 24
 bw = bw.resize((round(bw.width * target_h / bw.height), target_h), Image.LANCZOS)
-img.paste(bw, (panel[0] + (panel[2] - panel[0] - bw.width) // 2, H - target_h), bw)
+card.paste(bw, (panel[0] + (panel[2] - panel[0] - bw.width) // 2, panel[3] - target_h), bw)
+img.paste(card, (0, 0), mask)
+d.rounded_rectangle(panel, radius=12, outline=LINE, width=2)
 
-# Rótulo e fio, como no cabeçalho do site.
-d.text((M, 54), "LP  |  PRODUTO & PORTFÓLIO", font=font(19, 650, 112), fill=MUTED)
-d.rectangle((M, 92, 760, 94), fill=BREU)
+d.text((M, 64), "LP · PRODUCT & PORTFOLIO", font=sans(18, 600), fill=STONE)
+d.line((M, 100, 760, 100), fill=LINE, width=2)
 
-# Título de cartaz: Archivo expandida e pesada, destaque em bloco cobalto.
-title = font(70, 800, 116)
-d.text((M - 3, 116), "Produto,", font=title, fill=BREU)
-d.text((M - 3, 190), "portfólio e IA que", font=title, fill=BREU)
-hl = "saem do papel."
-x0, y0 = M - 3, 270
-bbox = d.textbbox((x0, y0), hl, font=title)
-d.rectangle((bbox[0] - 10, bbox[1] - 10, bbox[2] + 10, bbox[3] + 14), fill=AZUL)
-d.text((x0, y0), hl, font=title, fill=CAL)
+title = sans(66, 500)
+d.text((M - 2, 128), "Produto, portfólio", font=title, fill=IVORY)
+d.text((M - 2, 204), "e IA que", font=title, fill=IVORY)
+x = M - 2 + d.textlength("e IA que ", font=title)
+d.text((x, 196), "saem do papel.", font=serif(76), fill=CHAMPAGNE)
 
-# Oferta + quem.
-d.rectangle((M, 452, M + 14, 466), fill=OCRE)
-d.text((M + 28, 448), "MENTORIA 1:1 · CONSULTORIA · VAGAS FUNDADOR", font=font(17, 650, 112), fill=BREU)
-d.text((M, 510), "Leonardo Pontes", font=font(40, 750, 115), fill=BREU)
-d.text((M, 566), "leopontes.com.br", font=font(19, 500, 100), fill=MUTED)
+d.ellipse((M, 456, M + 10, 466), fill=CHAMPAGNE)
+d.text((M + 24, 450), "PRIVATE MENTORING · PORTFOLIO DIAGNOSTIC", font=sans(17, 600), fill=IVORY)
+d.text((M, 506), "Leonardo Pontes", font=sans(40, 500), fill=IVORY)
+d.text((M, 562), "leopontes.com.br", font=sans(19, 400), fill=STONE)
 
 img.save(OUT, optimize=True)
 print(f"{OUT.relative_to(ROOT)} — {OUT.stat().st_size // 1024} KiB")

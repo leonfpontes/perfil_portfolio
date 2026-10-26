@@ -72,10 +72,12 @@ recarregar, com View Transitions: o cabeçalho fica parado e a página nova sobe
 | `/entrar` | Área do cliente: entrada na plataforma por código ou link por e-mail (`noindex`) |
 | qualquer outra | 404 de verdade (`noindex`) |
 
-**Identidade: modernismo brasileiro.** Azulejos generativos no espírito de Athos Bulcão, paleta
-de cal, palha, mata, ocre, cobalto e anil, Archivo expandida como num cartaz e cantos retos. A
-plataforma usa os mesmos tokens. Cada capítulo da página é uma **cena** que muda o fundo, as
-cores e a arte enquanto você rola. Quem pede menos movimento vê uma versão suave, sem parallax.
+**Identidade: LP Noir.** Preto quente, marfim e um único acento champagne; Roboto, com a palavra
+de destaque em serifa itálica; cantos de 8 a 12 px; vidro translúcido com luz de borda no que
+flutua; rótulos e botões em inglês, conteúdo em português. A arte é um funil de portfólio que
+atravessa os gates G1–G4. A plataforma (lp-diagnostico) usa os mesmos tokens
+(`src/styles/lp-noir.css`). Cada capítulo da página continua sendo uma **cena** que muda o fundo
+enquanto você rola. Quem pede menos movimento vê uma versão suave, sem parallax.
 
 **SEO.** Título e H1 por página mirando as buscas da oferta. O JSON-LD traz `Person`,
 `ProfessionalService`, `Service` + `Offer` com os preços reais (lidos do conteúdo), `FAQPage` onde
@@ -183,7 +185,6 @@ Merge na `main` → a Vercel publica sozinha. Pull requests ganham um preview.
 | `npm test` / `test:watch` / `test:coverage` | Testes |
 | `scripts/lh-median.sh <url> [rodadas]` | Mediana de várias rodadas do Lighthouse mobile (uma rodada só oscila muito) |
 | `python3 scripts/make-og-image.py` | Gera a imagem de compartilhamento (`public/images/og-image.png`, 1200×630) |
-| `python3 scripts/subset-font.py` | Recorta a Archivo para o que o site usa (`public/fonts/archivo.woff2`) |
 
 ### Onde mexer
 

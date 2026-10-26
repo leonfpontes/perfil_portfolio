@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react';
-import { LogIn, Menu, Moon, Sun } from 'lucide-react';
+import { LogIn, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/common/Section';
 import { TrackedLink } from '@/components/common/TrackedLink';
@@ -8,14 +8,12 @@ import { useLocale } from '@/lib/i18n/LocaleProvider';
 import { useRouter } from '@/lib/router/Router';
 import { navHref, pathOf } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
-import { useTheme } from '@/lib/theme/ThemeProvider';
 import { cn } from '@/lib/utils';
 
 const MobileMenu = lazy(() => import('./MobileMenu'));
 
 export function Header() {
   const { content, locale, setLocale } = useLocale();
-  const { theme, toggleTheme } = useTheme();
   const { analytics } = useServices();
   const { nav } = content;
   const [open, setOpen] = useState(false);
@@ -30,13 +28,8 @@ export function Header() {
     setLocale(next);
   };
 
-  const onToggleTheme = () => {
-    analytics.track('theme_change', { label: theme === 'dark' ? 'light' : 'dark' });
-    toggleTheme();
-  };
-
   return (
-    <header className="site-header fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur-md">
+    <header className="site-header glass-bar fixed inset-x-0 top-0 z-50 border-b border-white/5">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-foreground focus:px-3 focus:py-2 focus:text-background"
@@ -102,11 +95,6 @@ export function Header() {
             <LogIn className="size-4" aria-hidden />
             <span className="sr-only">{nav.clientArea}</span>
           </TrackedLink>
-          <Button variant="ghost" size="icon" onClick={onToggleTheme} aria-label={nav.toggleTheme}>
-            {/* Os dois ícones vêm no HTML; o CSS escolhe (evita divergência na hidratação). */}
-            <Sun className="hidden dark:block" />
-            <Moon className="dark:hidden" />
-          </Button>
           <Button asChild variant="signal" className="ml-2 hidden sm:inline-flex lg:hidden xl:inline-flex">
             {/* Leva direto à agenda quando ela existe; senão, à seção de contato. */}
             <TrackedLink href={profile.bookingUrl ?? '#contato'} trackLabel="header_cta">

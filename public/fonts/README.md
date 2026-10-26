@@ -1,9 +1,10 @@
-Fonte auto-hospedada.
+Fontes auto-hospedadas (LP Noir, ver docs/DESIGN.md). Os mesmos arquivos existem no lp-diagnostico.
 
-- `archivo.woff2` — Archivo (Omnibus-Type), SIL Open Font License 1.1.
-  Subconjunto gerado por `scripts/subset-font.py` a partir de
-  `scripts/assets/archivo-latin-wdth-normal.source.woff2` (pacote
-  @fontsource-variable/archivo 5.3.0): eixos peso 400–800 e largura 100–120%,
-  latim + acentos do português + símbolos usados no site.
+- `roboto.woff2` — Roboto (Google), SIL Open Font License 1.1. Fonte padrão.
+  Variável em peso (100–900), subconjunto latino do pacote @fontsource-variable/roboto 5.x
+  (`roboto-latin-wght-normal.woff2`).
+- `instrument-serif-italic.woff2` — Instrument Serif itálica, SIL Open Font License 1.1.
+  Só nas palavras de destaque dos títulos. Subconjunto latino do pacote
+  @fontsource/instrument-serif 5.3.0 (`instrument-serif-latin-400-italic.woff2`).
 
-Pré-carregada no index.html para não haver "salto" de layout na troca de fonte.
+A Roboto é pré-carregada no index.html e no entrar.html para não haver "salto" de layout.
