@@ -764,36 +764,48 @@ export const en: SiteContent = {
       {
         quote:
           'Leo has qualities that are rare in an excellent professional: integrity, honesty, the ability to encourage the team, a focus on results and adaptability. If I had to sum him up, I would say he is a tireless professional!',
+        name: 'Rebeca Andrade',
+        linkedin: 'https://www.linkedin.com/in/re-beca-andrade/',
         role: 'Learning Experience Designer · L&D Consultant',
         context: 'Worked with me at Educacross',
       },
       {
         quote:
           'Leo is a great professional. He genuinely cares about the well-being of the team and about delivering results. He is a balanced person who translates product needs into exceptional outcomes.',
+        name: 'Endhe Soares',
+        linkedin: 'https://www.linkedin.com/in/endhe-elias/',
         role: 'Head of Engineering · ex-Nubank',
         context: 'Direct manager at Conexia Educação',
       },
       {
         quote:
           'Leo is a well-rounded professional. He has a strong ability to mentor Product Owners, keeping stakeholders and Scrum teams closely aligned.',
+        name: 'Marcel Nascimento',
+        linkedin: 'https://www.linkedin.com/in/marcelfn/',
         role: 'Product Manager · Agile Coach · SAFe',
         context: 'We worked in different tribes at Conexia',
       },
       {
         quote:
           'Besides being a great professional, he is an inspiring and proactive person. He has excellent skills in project coordination and team leadership, and is always very attentive and organized.',
+        name: 'Denise Vallone',
+        linkedin: 'https://www.linkedin.com/in/denise-vallone-maggi/',
         role: 'CRM · Business Intelligence · Growth',
         context: 'Squad partner',
       },
       {
         quote:
           'I had the opportunity to work alongside him for years, as squad co-coordinators. He is creative, results-driven and multidisciplinary.',
+        name: 'Leonardo Brito Bittencourt',
+        linkedin: 'https://www.linkedin.com/in/leobritob/',
         role: 'Senior Software Engineer · Full Stack',
         context: 'Co-led squads with me at Conexia',
       },
       {
         quote:
           'An extremely competent professional, focused on great deliveries. He masters stakeholder management, cultivates collaborative rituals and drives high-impact results.',
+        name: 'Karen Kroll',
+        linkedin: 'https://www.linkedin.com/in/karen-kroll/',
         role: 'Innovation Consultant · Knowledge Governance',
         context: 'Worked with me at Conexia Educação',
       },

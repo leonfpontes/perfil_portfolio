@@ -277,6 +277,10 @@ export interface Education extends SectionHeading {
 
 export interface Testimonial {
   quote: string;
+  /** Nome de quem recomendou, como aparece no LinkedIn. */
+  name: string;
+  /** Perfil público de quem recomendou. */
+  linkedin: string;
   role: string;
   context: string;
 }

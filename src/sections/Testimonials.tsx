@@ -41,7 +41,7 @@ function TestimonialStage() {
         <HorizontalTrack media="mobile" label={testimonials.eyebrow} className="max-lg:flex max-lg:gap-5 lg:grid">
           {testimonials.items.map((t, i) => (
             <figure
-              key={t.role}
+              key={t.name}
               data-step-item
               className={cn(
                 'max-lg:w-[84vw] max-lg:shrink-0 max-lg:snap-center lg:[grid-area:1/1]',
@@ -51,9 +51,14 @@ function TestimonialStage() {
               <span aria-hidden="true" className="block h-12 font-display text-8xl leading-none text-signal lg:hidden">
                 “
               </span>
-              <blockquote className="display text-2xl leading-tight [font-weight:560] text-pretty sm:text-5xl">{t.quote}</blockquote>
+              <blockquote className="display text-2xl leading-snug font-normal text-pretty sm:text-[2rem]">{t.quote}</blockquote>
               <figcaption className="mt-8 border-t pt-4">
-                <p className="font-medium">{t.role}</p>
+                <p className="text-lg font-medium">
+                  <TrackedLink href={t.linkedin} trackEvent="outbound_click" trackLabel="testimonial_author" className="link-rule">
+                    {t.name}
+                  </TrackedLink>
+                </p>
+                <p className="mt-1 text-muted-foreground">{t.role}</p>
                 <p className="label-caps mt-1 text-muted-foreground">{t.context}</p>
               </figcaption>
             </figure>
