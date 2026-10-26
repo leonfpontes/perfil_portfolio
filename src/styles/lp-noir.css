@@ -65,8 +65,7 @@
   --glass-rim-low: rgb(255 255 255 / 0.05);
   --glass-blur: blur(22px) saturate(170%);
   --glass-shadow:
-    0 18px 50px -20px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.14),
-    inset 0 -1px 0 rgb(255 255 255 / 0.03);
+    0 18px 50px -20px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 -1px 0 rgb(255 255 255 / 0.03);
   --glass-solid: var(--noir-graphite);
 }
 
@@ -142,7 +141,11 @@
 
   /* Reflexo branco no ponto mais claro da borda. */
   .glass::after {
-    background-image: radial-gradient(150px circle at var(--lx) var(--ly), rgb(255 255 255 / calc(0.2 * var(--lit))), transparent 100%);
+    background-image: radial-gradient(
+      150px circle at var(--lx) var(--ly),
+      rgb(255 255 255 / calc(0.2 * var(--lit))),
+      transparent 100%
+    );
   }
 
   @media (hover: hover) {
@@ -170,7 +173,12 @@
     position: absolute;
     inset: -20%;
     pointer-events: none;
-    background: radial-gradient(70% 60% at var(--spot-x, 70%) var(--spot-y, 30%), rgb(207 180 138 / 0.2), rgb(207 180 138 / 0.06) 45%, transparent 75%);
+    background: radial-gradient(
+      70% 60% at var(--spot-x, 70%) var(--spot-y, 30%),
+      rgb(207 180 138 / 0.2),
+      rgb(207 180 138 / 0.06) 45%,
+      transparent 75%
+    );
     opacity: 0.6;
     transform: translate(calc(var(--px, 0) * 18px), calc(var(--py, 0) * 12px));
     transition:
@@ -224,7 +232,9 @@
   }
 
   .funil-gates text {
-    transition: fill 0.3s ease, fill-opacity 0.3s ease;
+    transition:
+      fill 0.3s ease,
+      fill-opacity 0.3s ease;
   }
 
   .funil-gates text.is-ativo {
