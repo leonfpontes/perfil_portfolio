@@ -24,8 +24,14 @@ export function startGlassLight(root: Document = document): () => void {
     let moving = false;
     // Primeiro todas as leituras de layout, depois todas as escritas: intercalar as
     // duas força o navegador a recalcular o layout a cada elemento.
-    const glasses = [...root.querySelectorAll<HTMLElement>('.glass')].map((el) => ({ el, r: el.getBoundingClientRect() }));
-    const stages = [...root.querySelectorAll<HTMLElement>('[data-glass-light]')].map((stage) => ({ stage, r: stage.getBoundingClientRect() }));
+    const glasses = [...root.querySelectorAll<HTMLElement>('.glass')].map((el) => ({
+      el,
+      r: el.getBoundingClientRect(),
+    }));
+    const stages = [...root.querySelectorAll<HTMLElement>('[data-glass-light]')].map((stage) => ({
+      stage,
+      r: stage.getBoundingClientRect(),
+    }));
 
     glasses.forEach(({ el, r }) => {
       const near = px > r.left - REACH && px < r.right + REACH && py > r.top - REACH && py < r.bottom + REACH;
