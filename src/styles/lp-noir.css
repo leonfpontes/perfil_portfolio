@@ -54,6 +54,8 @@
   --noir-navy: #14213d;
   --noir-navy-deep: #0f1a31;
   --noir-bronze: #7a5c2e;
+  /* Bronze para texto sobre fundo tingido (chips do app): ≥4,5:1 também sobre bronze a 15%. */
+  --noir-bronze-deep: #6a4e25;
   --noir-ok-paper: #2f6b4a;
   --noir-warn-paper: #8a5a00;
   --noir-crit-paper: #b3392b;
