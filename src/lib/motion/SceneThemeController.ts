@@ -1,10 +1,10 @@
 import { gsap } from './gsap';
 
-/** Tons de cena — a paleta do modernismo brasileiro (ver globals.css). */
+/** Tons de cena — papel e faixas marinho (ver globals.css). */
 export type Tone = 'cal' | 'palha' | 'mata' | 'ocre' | 'cobalto' | 'anil';
 
 /** As únicas variáveis interpoladas — o restante da paleta deriva delas (globals.css). */
-const TONE_VARS = ['--background', '--foreground', '--signal', '--signal-foreground'] as const;
+const TONE_VARS = ['--background', '--foreground', '--signal', '--signal-foreground', '--action', '--action-foreground'] as const;
 type ToneVar = (typeof TONE_VARS)[number];
 export type ToneColors = Record<ToneVar, string>;
 

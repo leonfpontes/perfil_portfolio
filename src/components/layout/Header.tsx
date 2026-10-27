@@ -29,7 +29,7 @@ export function Header() {
   };
 
   return (
-    <header className="site-header glass-bar fixed inset-x-0 top-0 z-50 border-b border-white/5">
+    <header className="site-header glass-bar fixed inset-x-0 top-0 z-50 border-b border-border">
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-foreground focus:px-3 focus:py-2 focus:text-background"

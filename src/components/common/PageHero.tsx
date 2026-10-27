@@ -111,7 +111,7 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto border-t border-white/10 pt-5">
+                <div className="mt-auto border-t border-border pt-5">
                   <p className="flex flex-wrap items-baseline gap-x-2 pt-1">
                     <span className="font-display text-4xl leading-none">{plan.price}</span>
                     <span className="text-sm text-muted-foreground">{plan.priceNote}</span>

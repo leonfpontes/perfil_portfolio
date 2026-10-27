@@ -38,7 +38,7 @@ const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? '';
 const INPUT =
   'h-12 w-full rounded-sm border border-input bg-background px-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-signal focus-visible:ring-2 focus-visible:ring-signal/30';
 const PRIMARY =
-  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-signal px-5 text-base font-semibold text-signal-foreground transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60';
+  'inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-action px-5 text-base font-semibold text-action-foreground transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60';
 const LINK = 'font-semibold text-signal underline-offset-4 hover:underline';
 
 export function ClientAreaLogin() {
@@ -145,10 +145,10 @@ export function ClientAreaLogin() {
           href="/"
           onClick={(event) => voltarAoSite(event)}
           aria-label="Leonardo Pontes — voltar ao site"
-          className="marca-lp flex items-baseline gap-3"
+          className="marca-lp flex items-baseline gap-3 md:text-[var(--noir-ivory)]"
         >
           <span className="font-display text-2xl leading-none whitespace-nowrap">
-            LP<span className="hidden sm:inline"><span className="text-signal"> · </span><span lang="en">Product &amp; Portfolio</span></span>
+            LP<span className="hidden sm:inline"><span className="text-signal md:text-[var(--noir-champagne)]"> · </span><span lang="en">Product &amp; Portfolio</span></span>
           </span>
           <span className="hidden font-serif text-lg leading-none italic opacity-80 lg:inline">Leonardo Pontes</span>
         </a>
@@ -289,7 +289,7 @@ function BrandPanel() {
     <aside
       aria-label="Sobre a Área do cliente"
       data-glass-light
-      className="relative hidden overflow-hidden border-r border-white/5 bg-[var(--noir-graphite)] text-foreground md:flex md:flex-col"
+      className="tone-anil relative hidden overflow-hidden border-r border-border bg-background text-foreground md:flex md:flex-col"
     >
       <div aria-hidden="true" className="absolute inset-0">
         <div className="glass-spot" />

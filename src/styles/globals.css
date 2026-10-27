@@ -7,29 +7,32 @@
 @custom-variant reduced (&:where(.reduced-motion, .reduced-motion *));
 
 /*
- * Identidade "LP Noir" (ver lp-noir.css e docs/DESIGN.md): preto quente, marfim e
- * um único acento champagne. O site é escuro sempre; o modo claro existe só no app.
+ * Identidade "Papel & Marinho" (ver lp-noir.css e docs/DESIGN.md): fundo papel, texto e
+ * ação em azul-marinho, destaque em bronze. Algumas cenas viram faixas marinho (marfim +
+ * champagne) para marcar o ritmo entre capítulos.
  *
- * Só 4 cores são "primárias" por cena (fundo, tinta, sinal e texto-sobre-sinal);
- * o resto deriva com color-mix. As cenas alternam entre tons de preto: o contraste
- * entre capítulos vem da luz, não da cor. Os nomes dos tons ficaram por compatibilidade.
+ * Só 6 cores são "primárias" por cena (fundo, tinta, sinal, ação e o texto sobre a ação);
+ * o resto deriva com color-mix. Sinal = destaques (palavra em serifa, rótulos, marcadores,
+ * barras de progresso); ação = botão principal. Os nomes dos tons ficaram por compatibilidade.
  */
 :root {
   --radius: var(--noir-radius-card);
 
-  --background: var(--noir-onyx);
-  --foreground: var(--noir-ivory);
-  --signal: var(--noir-champagne);
-  --signal-foreground: var(--noir-champagne-ink);
+  --background: var(--noir-paper);
+  --foreground: var(--noir-navy);
+  --signal: var(--noir-bronze);
+  --signal-foreground: var(--noir-paper);
+  --action: var(--noir-navy);
+  --action-foreground: var(--noir-paper);
 
-  --destructive: var(--noir-crit);
-  color-scheme: dark;
+  --destructive: var(--noir-crit-paper);
+  color-scheme: light;
 }
 
 /*
  * Cores derivadas — declaradas na raiz E em cada tom de cena. Custom properties
  * herdam o valor já calculado, então cada seção com `.tone-*` precisa recalcular
- * as derivadas a partir das suas próprias 4 cores primárias.
+ * as derivadas a partir das suas próprias cores primárias.
  */
 :root,
 .tone-cal,
@@ -38,35 +41,67 @@
 .tone-ocre,
 .tone-cobalto,
 .tone-anil {
-  --card: color-mix(in oklab, var(--background) 94%, white);
+  --card: color-mix(in oklab, var(--background) 70%, white);
   --card-foreground: var(--foreground);
-  --popover: var(--noir-graphite);
+  --popover: color-mix(in oklab, var(--background) 60%, white);
   --popover-foreground: var(--foreground);
   --primary: var(--foreground);
   --primary-foreground: var(--background);
   --secondary: color-mix(in oklab, var(--background) 92%, var(--foreground));
   --secondary-foreground: var(--foreground);
   --muted: color-mix(in oklab, var(--background) 92%, var(--foreground));
-  --muted-foreground: var(--noir-stone);
+  /* Texto secundário: ≥4.5:1 no papel e no marinho. */
+  --muted-foreground: color-mix(in oklab, var(--foreground) 70%, var(--background));
   --accent: color-mix(in oklab, var(--background) 90%, var(--foreground));
   --accent-foreground: var(--foreground);
   --border: color-mix(in oklab, var(--background) 84%, var(--foreground));
-  --input: var(--noir-field-line);
-  --ring: var(--signal);
+  /* Borda de campo: ≥3:1 (WCAG 1.4.11) nos dois fundos. */
+  --input: color-mix(in oklab, var(--foreground) 55%, var(--background));
+  --ring: var(--action);
+  /* Cores da retícula (Halftone): tinta e papel da cena. */
+  --breu: var(--foreground);
+  --cal: var(--background);
 }
 
 /*
  * Tons de cena. Cada <section> de cena usa a sua classe `.tone-*` e pinta o
  * próprio fundo: a nova cor chega subindo junto com a seção, presa à rolagem.
  * O SceneThemeController lê os mesmos valores para o header e o fundo da página.
- * cal = onyx, palha/mata/cobalto = graphite, ocre = smoke, anil = preto profundo.
+ * cal = papel, palha = papel claro, ocre = papel fundo; mata/cobalto = marinho, anil = marinho profundo.
  */
-.tone-cal { --background: #0a0a0b; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
-.tone-palha { --background: #131315; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
-.tone-mata { --background: #131315; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
-.tone-ocre { --background: #1b1b1e; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
-.tone-cobalto { --background: #131315; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
-.tone-anil { --background: #050506; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; }
+.tone-cal { --background: #f6f3ec; --foreground: #14213d; --signal: #7a5c2e; --signal-foreground: #f6f3ec; --action: #14213d; --action-foreground: #f6f3ec; }
+.tone-palha { --background: #fbf9f4; --foreground: #14213d; --signal: #7a5c2e; --signal-foreground: #fbf9f4; --action: #14213d; --action-foreground: #fbf9f4; }
+.tone-ocre { --background: #ece7dc; --foreground: #14213d; --signal: #7a5c2e; --signal-foreground: #ece7dc; --action: #14213d; --action-foreground: #ece7dc; }
+.tone-mata { --background: #14213d; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; --action: #cfb48a; --action-foreground: #17130c; }
+.tone-cobalto { --background: #14213d; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; --action: #cfb48a; --action-foreground: #17130c; }
+.tone-anil { --background: #0f1a31; --foreground: #f1ede4; --signal: #cfb48a; --signal-foreground: #17130c; --action: #cfb48a; --action-foreground: #17130c; }
+
+/* Vidro no papel: branco leitoso, fio marinho discreto e sombra curta. */
+:root,
+.tone-cal,
+.tone-palha,
+.tone-ocre {
+  --glass-fill: rgb(255 255 255 / 0.55);
+  --glass-fill-strong: rgb(255 255 255 / 0.75);
+  --glass-rim: rgb(255 255 255 / 0.9);
+  --glass-rim-low: rgb(20 33 61 / 0.1);
+  --glass-shadow:
+    0 14px 40px -22px rgb(20 33 61 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.8), inset 0 -1px 0 rgb(20 33 61 / 0.04);
+  --glass-solid: var(--noir-paper-raised);
+}
+
+/* Vidro nas faixas marinho: o vidro escuro original do LP Noir. */
+.tone-mata,
+.tone-cobalto,
+.tone-anil {
+  --glass-fill: rgb(255 255 255 / 0.055);
+  --glass-fill-strong: rgb(255 255 255 / 0.09);
+  --glass-rim: rgb(255 255 255 / 0.16);
+  --glass-rim-low: rgb(255 255 255 / 0.05);
+  --glass-shadow:
+    0 18px 50px -20px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 -1px 0 rgb(255 255 255 / 0.03);
+  --glass-solid: var(--noir-navy);
+}
 
 @theme inline {
   --font-sans: var(--noir-font-sans);
@@ -127,6 +162,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-signal: var(--signal);
   --color-signal-foreground: var(--signal-foreground);
+  --color-action: var(--action);
+  --color-action-foreground: var(--action-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
@@ -149,8 +186,8 @@
     font-feature-settings: "tnum";
   }
   ::selection {
-    background: var(--signal);
-    color: var(--signal-foreground);
+    background: var(--action);
+    color: var(--action-foreground);
   }
   /* Modo suave: sem animações CSS em loop nem deslocamentos; transições curtas de cor/opacidade continuam. */
   .reduced-motion *, .reduced-motion *::before, .reduced-motion *::after {
@@ -196,7 +233,7 @@ html.lenis, html.lenis body { height: auto; }
   line-height: 1.02;
 }
 
-/* Destaque: a palavra-chave do título em serifa itálica champagne. */
+/* Destaque: a palavra-chave do título em serifa itálica (bronze no papel, champagne no marinho). */
 @utility highlight {
   font-family: var(--font-serif);
   font-style: italic;

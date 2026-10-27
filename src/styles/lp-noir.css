@@ -4,9 +4,12 @@
  * repositórios: altere nos dois juntos, para quem sai do site e entra no app
  * continuar no mesmo sistema. CSS puro (sem diretivas do Tailwind) de propósito.
  *
- * Preto quente, marfim e um único acento champagne usado com parcimônia;
- * cantos levemente arredondados em tudo (8 a 12 px); vidro translúcido ("liquid glass") só no que
- * flutua sobre o conteúdo — header, menus, controles, cards sobre arte e modais.
+ * Papel & Marinho (desde 27/10/2026, escolha do Leonardo a partir do feedback de clientes):
+ * fundo papel, texto e ação em azul-marinho, destaque em bronze; faixas em marinho com
+ * marfim e champagne marcam o ritmo entre capítulos. O preto (Noir) continua disponível
+ * como modo escuro do app. Cantos levemente arredondados em tudo (8 a 12 px); vidro
+ * translúcido ("liquid glass") só no que flutua sobre o conteúdo — header, menus,
+ * controles, cards sobre arte e modais.
  */
 
 /* Roboto (Google, SIL OFL 1.1): fonte padrão, variável em peso (100–900), latim. Títulos em 500. */
@@ -43,11 +46,16 @@
   --noir-warn: #d9b26a;
   --noir-crit: #e08a7a;
 
-  /* Papel (claro): o modo claro do app, os e-mails e os PDFs impressos. */
+  /* Papel & Marinho (padrão do site; modo claro do app, e-mails e PDFs). */
   --noir-paper: #f6f3ec;
   --noir-paper-raised: #fbf9f4;
-  --noir-ink: #141416;
+  --noir-paper-deep: #ece7dc;
+  --noir-ink: #14213d;
+  --noir-navy: #14213d;
+  --noir-navy-deep: #0f1a31;
   --noir-bronze: #7a5c2e;
+  /* Bronze para texto sobre fundo tingido (chips do app): ≥4,5:1 também sobre bronze a 15%. */
+  --noir-bronze-deep: #6a4e25;
   --noir-ok-paper: #2f6b4a;
   --noir-warn-paper: #8a5a00;
   --noir-crit-paper: #b3392b;
@@ -175,7 +183,7 @@
 
   /* Vidro de barra (header, rodapé móvel): sem reflexo na borda, só o fio inferior. */
   .glass-bar {
-    background: rgb(10 10 11 / 0.62);
+    background: color-mix(in oklab, var(--background, var(--noir-onyx)) 70%, transparent);
     -webkit-backdrop-filter: var(--glass-blur);
     backdrop-filter: var(--glass-blur);
   }
@@ -228,7 +236,7 @@
    * champagne percorre a linha de sinal (.funil-pulso). Linhas neutras na cor do texto (currentColor).
    */
   .funil {
-    color: var(--noir-ivory);
+    color: var(--foreground, var(--noir-ivory));
   }
 
   .funil-gates line {
@@ -239,7 +247,7 @@
   }
 
   .funil-gates text {
-    fill: var(--noir-stone);
+    fill: var(--muted-foreground, var(--noir-stone));
     font: 500 12px/1 var(--noir-font-sans);
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -252,17 +260,17 @@
   }
 
   .funil-gates text.is-ativo {
-    fill: var(--noir-ivory);
+    fill: currentColor;
     fill-opacity: 1;
   }
 
   .funil-gate-id {
-    fill: var(--noir-champagne);
+    fill: var(--signal, var(--noir-champagne));
   }
 
   /* Taxa de aprovação ao vivo (app: funil-motion.ts). */
   .funil-taxa {
-    fill: var(--noir-ivory);
+    fill: currentColor;
     fill-opacity: 0.85;
     font-variant-numeric: tabular-nums;
   }
@@ -279,7 +287,7 @@
   }
 
   .funil-linhas path.funil-sinal {
-    stroke: var(--noir-champagne);
+    stroke: var(--signal, var(--noir-champagne));
     stroke-opacity: 0.75;
     stroke-width: 1.4;
   }
@@ -287,11 +295,11 @@
   /* Pulso: um trecho curto de champagne corre pela linha de sinal, em loop lento. */
   .funil-pulso {
     fill: none;
-    stroke: var(--noir-champagne);
+    stroke: var(--signal, var(--noir-champagne));
     stroke-width: 2.4;
     stroke-linecap: round;
     stroke-dasharray: 0.06 0.94;
-    filter: drop-shadow(0 0 6px var(--noir-champagne));
+    filter: drop-shadow(0 0 6px var(--signal, var(--noir-champagne)));
     animation: funil-pulso 7s linear 2s infinite both;
   }
 
@@ -305,7 +313,7 @@
   }
 
   .funil-paradas circle {
-    fill: var(--noir-onyx);
+    fill: var(--background, var(--noir-onyx));
     stroke: currentColor;
     stroke-opacity: 0.35;
     stroke-width: 1;
