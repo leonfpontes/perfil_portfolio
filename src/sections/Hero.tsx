@@ -97,7 +97,7 @@ export function Hero() {
                         trackLabel={`hero_${plan.id}`}
                         className={cn(
                           'group grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1 rounded-lg px-4 py-3 transition-colors sm:py-4',
-                          plan.highlighted ? 'glass hover:bg-white/10' : 'border border-border hover:border-border hover:bg-white/[0.03]',
+                          plan.highlighted ? 'glass hover:bg-foreground/[0.04]' : 'border border-border hover:border-border hover:bg-foreground/[0.03]',
                         )}
                       >
                         <span className={cn('label-caps', plan.highlighted ? 'text-signal' : 'text-muted-foreground')}>{plan.tag}</span>
@@ -116,7 +116,7 @@ export function Hero() {
             </div>
 
             <figure data-hero-figure className="relative lg:col-span-4">
-              <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[radial-gradient(70%_60%_at_50%_30%,#2e2c28,#111113_72%)] pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
+              <div className="relative overflow-hidden rounded-xl border border-border bg-[radial-gradient(70%_60%_at_50%_30%,var(--card),var(--muted)_72%)] pt-8 max-lg:mx-auto max-lg:w-3/4 max-lg:pt-5">
                 <div data-hero-block aria-hidden="true" className="absolute inset-0" />
                 <img
                   data-hero-portrait
@@ -125,9 +125,9 @@ export function Hero() {
                   width={408}
                   height={612}
                   fetchPriority="high"
-                  className="relative mx-auto h-auto w-full grayscale contrast-110 max-lg:max-h-[42svh] max-lg:w-auto"
+                  className="relative mx-auto h-auto w-full max-lg:max-h-[42svh] max-lg:w-auto"
                 />
-                <figcaption data-hero-fade className="glass absolute inset-x-3 bottom-3 grid gap-0.5 rounded-lg px-4 py-3 text-sm">
+                <figcaption data-hero-fade className="glass absolute inset-x-3 bottom-3 grid gap-0.5 rounded-lg bg-card/85 px-4 py-3 text-sm">
                   <span className="font-medium text-foreground">{profile.name}</span>
                   <span className="text-muted-foreground">{hero.availability}</span>
                 </figcaption>

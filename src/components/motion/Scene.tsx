@@ -97,7 +97,7 @@ export function Scene({ id, chapter = id, label, tone, children, art, className,
           // para não sobrar vão vazio abaixo de seções curtas.
           `tone-${tone} relative isolate flex flex-col justify-center overflow-clip bg-background py-24 text-foreground lg:py-32`,
           fill && 'lg:min-h-svh',
-          'shadow-[0_-28px_56px_-32px_rgb(0_0_0/0.45)]',
+          'shadow-[0_-28px_56px_-32px_rgb(20_33_61/0.18)]',
           className,
         )}
       >

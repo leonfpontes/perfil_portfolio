@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { SceneThemeController, type Tone, type ToneColors } from './SceneThemeController';
 
 const palette: Record<Tone, ToneColors> = {
-  cal: { '--background': 'white', '--foreground': 'black', '--signal': 'blue', '--signal-foreground': 'white' },
-  mata: { '--background': 'black', '--foreground': 'white', '--signal': 'orange', '--signal-foreground': 'black' },
-  palha: { '--background': 'tan', '--foreground': 'black', '--signal': 'blue', '--signal-foreground': 'white' },
-  ocre: { '--background': 'gold', '--foreground': 'black', '--signal': 'blue', '--signal-foreground': 'white' },
-  cobalto: { '--background': 'navy', '--foreground': 'white', '--signal': 'orange', '--signal-foreground': 'black' },
-  anil: { '--background': 'indigo', '--foreground': 'white', '--signal': 'orange', '--signal-foreground': 'black' },
+  cal: { '--background': 'white', '--foreground': 'black', '--signal': 'blue', '--signal-foreground': 'white', '--action': 'navy', '--action-foreground': 'white' },
+  mata: { '--background': 'black', '--foreground': 'white', '--signal': 'orange', '--signal-foreground': 'black', '--action': 'navy', '--action-foreground': 'white' },
+  palha: { '--background': 'tan', '--foreground': 'black', '--signal': 'blue', '--signal-foreground': 'white', '--action': 'navy', '--action-foreground': 'white' },
+  ocre: { '--background': 'gold', '--foreground': 'black', '--signal': 'blue', '--signal-foreground': 'white', '--action': 'navy', '--action-foreground': 'white' },
+  cobalto: { '--background': 'navy', '--foreground': 'white', '--signal': 'orange', '--signal-foreground': 'black', '--action': 'navy', '--action-foreground': 'white' },
+  anil: { '--background': 'indigo', '--foreground': 'white', '--signal': 'orange', '--signal-foreground': 'black', '--action': 'navy', '--action-foreground': 'white' },
 };
 
 function setup() {

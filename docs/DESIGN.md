@@ -2,6 +2,18 @@
 
 Em outubro de 2026 a identidade "modernismo brasileiro" (cal, palha, mata, ocre e cobalto, azulejos e cantos retos) saiu: não atraía o público que a mentoria quer, profissionais e empresas de renda mais alta, que procuram seriedade. O **LP Noir** é escuro, sóbrio e premium, e é **o mesmo sistema no site e na plataforma** (lp-diagnostico): quem sai de um e entra no outro não deve sentir que mudou de lugar.
 
+**Atualização (27/10/2026): paleta Papel & Marinho.** Depois do feedback de clientes ("preto e branco" soava frio; pediram uma cor que transmita sobriedade e segurança), o Leonardo escolheu a versão clara entre cinco propostas: fundo papel `#F6F3EC`, texto e botão principal em azul-marinho `#14213D`, destaque (palavra em serifa, rótulos, marcadores) em bronze `#7A5C2E`. Algumas cenas viram faixas marinho (`#14213D` e `#0F1A31`) com marfim e champagne, para marcar o ritmo entre capítulos. O retrato do hero passou a ser colorido. Tipografia, raio, vidro, logo e movimento não mudaram. A tabela abaixo descreve os tokens Noir, que continuam valendo nas faixas marinho e no modo escuro do app.
+
+| Papel & Marinho | Valor | Token |
+|---|---|---|
+| Fundo (cenas `cal` · `palha` · `ocre`) | `#F6F3EC` · `#FBF9F4` · `#ECE7DC` | `--noir-paper`, `--noir-paper-raised`, `--noir-paper-deep` |
+| Texto e ação | Marinho `#14213D` (14:1 no papel) | `--noir-navy` / `--action` |
+| Destaque no papel | Bronze `#7A5C2E` (5,5:1) | `--noir-bronze` / `--signal` |
+| Faixas marinho (cenas `mata` · `cobalto` · `anil`) | `#14213D` · `#0F1A31`, texto marfim, ação e destaque champagne | `--noir-navy`, `--noir-navy-deep` |
+| Texto secundário e borda de campo | derivados da tinta da cena (≥4,5:1 e ≥3:1) | `--muted-foreground`, `--input` |
+
+`--signal` é o destaque; `--action` é a cor do botão principal (`Button variant="signal"`). Os dois são interpolados entre cenas junto com fundo e tinta (SceneThemeController).
+
 A mudança foi só de identidade. Cenas, pins, trilhos horizontais, transições de rota e o modo suave continuam exatamente como antes (seção "Movimento" abaixo).
 
 ## Tokens compartilhados

@@ -136,9 +136,9 @@ describe('<App />', () => {
     expect(within(section).getByText(/06 de 06/)).toBeInTheDocument();
   });
 
-  it('é escuro sempre, sem alternância de tema (LP Noir)', () => {
+  it('é claro sempre (Papel & Marinho), sem alternância de tema', () => {
     renderApp();
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
     expect(screen.queryByRole('button', { name: /alternar tema/i })).not.toBeInTheDocument();
   });
 });

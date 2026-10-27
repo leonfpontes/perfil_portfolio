@@ -57,7 +57,7 @@ export function App() {
       <TrackedLink
         href={contact.whatsapp(copy.whatsappMessage)}
         trackLabel="mobile_bar_whatsapp"
-        className="group fixed inset-x-0 bottom-0 z-40 glass-bar flex items-center justify-between gap-4 border-t border-white/10 px-4 py-3 text-foreground sm:hidden"
+        className="group fixed inset-x-0 bottom-0 z-40 glass-bar flex items-center justify-between gap-4 border-t border-border px-4 py-3 text-foreground sm:hidden"
       >
         <span className="label-caps truncate text-signal">{hero.badge}</span>
         <span className="shrink-0 text-sm font-medium whitespace-nowrap">
