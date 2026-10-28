@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Banner LinkedIn</title>
+<style>
+  @font-face {
+    font-family: "Archivo";
+    font-weight: 400 800;
+    font-stretch: 100% 120%;
+    src: url("archivo.woff2") format("woff2");
+  }
+  :root {
+    --cal: oklch(0.975 0.005 100);
+    --palha: oklch(0.93 0.045 92);
+    --mata: oklch(0.34 0.07 163);
+    --ocre: oklch(0.82 0.15 82);
+    --azul: oklch(0.46 0.17 262);
+    --anil: oklch(0.21 0.05 262);
+    --breu: oklch(0.21 0.035 165);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1584px; height: 396px; overflow: hidden; background: var(--azul); }
+  body { font-family: "Archivo", sans-serif; color: var(--breu); }
+
+  .banner { position: relative; width: 1584px; height: 396px; }
+  .layer { position: absolute; inset: 0; }
+  .layer svg { display: block; width: 100%; height: 100%; }
+
+  /*
+   * O balão: retângulo com cauda à esquerda, apontando para o canto inferior
+   * esquerdo, onde o LinkedIn pousa a foto de perfil (círculo ~ x 49–367, y 205+).
+   * Coordenadas do conteúdo batem com o retângulo do path (BX, BY, BW, BH).
+   */
+  .bubble {
+    position: absolute; left: 452px; top: 24px; width: 1092px; height: 306px;
+    padding: 24px 34px 26px 38px;
+    display: flex; flex-direction: column;
+  }
+  .eyebrow {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: color-mix(in oklab, var(--breu) 66%, var(--cal));
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--breu);
+  }
+  .eyebrow b { color: var(--breu); }
+  .eyebrow .sq { display: inline-block; width: 10px; height: 10px; background: var(--ocre); margin-right: 10px; }
+
+  h1 {
+    margin-top: 16px;
+    font-size: 52px; line-height: 1.02; font-weight: 800; font-stretch: 116%;
+    letter-spacing: -0.03em; white-space: nowrap;
+  }
+  h1 .hl { display: inline-block; background: var(--azul); color: var(--cal); padding: 0 12px 4px; margin-left: -12px; margin-top: 4px; }
+
+  .bottom { margin-top: auto; display: flex; align-items: stretch; justify-content: space-between; gap: 24px; }
+  .stats { display: flex; gap: 24px; }
+  .stat { display: flex; flex-direction: column; gap: 3px; }
+  .stat .v { font-size: 30px; font-weight: 800; font-stretch: 116%; letter-spacing: -0.02em; line-height: 1; color: var(--azul); }
+  .stat .l { font-size: 12.5px; font-weight: 600; line-height: 1.25; max-width: 122px; color: color-mix(in oklab, var(--breu) 75%, var(--cal)); }
+  .stat + .stat { padding-left: 24px; border-left: 1px solid color-mix(in oklab, var(--cal) 75%, var(--breu)); }
+
+  .cta {
+    flex: none;
+    background: var(--breu); color: var(--cal);
+    padding: 10px 20px 10px 18px;
+    display: flex; flex-direction: column; justify-content: center; gap: 3px;
+    border-left: 8px solid var(--ocre);
+  }
+  .cta .k { font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ocre); }
+  .cta .url { font-size: 25px; font-weight: 800; font-stretch: 112%; letter-spacing: -0.01em; line-height: 1.05; }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="layer" id="wall"></div>
+  <div class="layer">
+    <svg viewBox="0 0 1584 396">
+      <!-- sombra dura (cartaz, sem desfoque) + balão com contorno -->
+      <path id="shape" transform="translate(12 12)" fill="var(--ocre)" stroke="var(--breu)" stroke-width="4" stroke-linejoin="miter"
+        d="M452 24 H1544 V330 H452 V292 L366 318 L452 226 Z"/>
+      <path fill="var(--cal)" stroke="var(--breu)" stroke-width="4" stroke-linejoin="miter"
+        d="M452 24 H1544 V330 H452 V292 L366 318 L452 226 Z"/>
+    </svg>
+  </div>
+  <div class="bubble">
+    <div class="eyebrow">
+      <span><b>LP</b> &nbsp;|&nbsp; Produto &amp; Portfólio</span>
+      <span><span class="sq"></span>Mentoria 1:1 · Diagnóstico de PMO</span>
+    </div>
+    <h1>Estratégia que não vira entrega<br><span class="hl">é só opinião.</span></h1>
+    <div class="bottom">
+      <div class="stats">
+        <div class="stat"><span class="v">8+</span><span class="l">anos liderando produto e PMO</span></div>
+        <div class="stat"><span class="v">40+</span><span class="l">devs em portfólio gerido</span></div>
+        <div class="stat"><span class="v">30+</span><span class="l">projetos digitais entregues</span></div>
+        <div class="stat"><span class="v">2</span><span class="l">SaaS próprios criados do zero</span></div>
+      </div>
+      <div class="cta">
+        <span class="k">Comece por aqui</span>
+        <span class="url">leopontes.com.br</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Mesma lógica de src/components/art/AzulejoEstatico.tsx (painéis à la Athos Bulcão).
+  const MOTIFS = [
+    'M0 0 L1 0 A1 1 0 0 1 0 1 Z',
+    'M0 1 A0.5 0.5 0 0 1 1 1 Z',
+    'M0 0 L1 0 L0 1 Z',
+    'M0 0 L0.5 0 A0.5 0.5 0 0 1 0 0.5 Z M1 1 L0.5 1 A0.5 0.5 0 0 1 1 0.5 Z',
+    'M0.5 0.2 A0.3 0.3 0 1 1 0.5 0.8 A0.3 0.3 0 1 1 0.5 0.2 Z',
+    'M0 0 H1 V0.5 H0 Z',
+  ];
+  const PAIRS = [['azul','cal'],['cal','azul'],['ocre','breu'],['mata','ocre'],['cal','mata'],['azul','ocre'],['ocre','azul'],['cal','ocre']];
+  function random(seed) {
+    let s = 7;
+    for (const c of seed) s = (s * 31 + c.charCodeAt(0)) % 2147483647;
+    if (s === 0) s = 1;
+    const next = () => { s = (s * 48271) % 2147483647; return s / 2147483647; };
+    for (let i = 0; i < 12; i++) next();
+    return next;
+  }
+  // Parede inteira atrás do balão: módulos de 72px, 22 × 5,5.
+  const cols = 22, rows = 5.5;
+  const next = random(new URLSearchParams(location.search).get('seed') || 'linkedin');
+  const pick = (n) => Math.floor(next() * n);
+  let g = '';
+  for (let y = 0; y < Math.ceil(rows); y++) for (let x = 0; x < cols; x++) {
+    const [bg, fg] = PAIRS[pick(PAIRS.length)];
+    const m = MOTIFS[pick(MOTIFS.length)];
+    const a = pick(4) * 90;
+    g += `<g transform="translate(${x} ${y}) rotate(${a} 0.5 0.5)"><rect x="-0.01" y="-0.01" width="1.02" height="1.02" fill="var(--${bg})"/><path d="${m}" fill="var(--${fg})"/></g>`;
+  }
+  document.getElementById('wall').innerHTML =
+    `<svg viewBox="0 0 ${cols} ${rows}" preserveAspectRatio="xMidYMid slice" shape-rendering="geometricPrecision">${g}</svg>`;
+</script>
+</body>
+</html>
