@@ -18,7 +18,8 @@
  *
  * Variáveis: IG_TOKEN_<CONTA> (ex.: IG_TOKEN_PONTES_BRAIN), RESEND_API_KEY, ALERTA_EMAIL,
  * MIDIA_BASE (padrão: raw da main), AGORA (ISO, só para teste), SOMENTE (id de um post para
- * publicar já, ignorando a hora), SIMULAR=1 (não chama a API, só mostra o que faria).
+ * publicar já, ignorando a hora), SIMULAR=1 (não chama a API, só mostra o que faria),
+ * VERIFICAR=1 (só confere o token de cada conta na API e a cota de publicação; não publica).
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -135,8 +136,30 @@ async function enviarEmail(assunto, texto) {
   if (!resposta.ok) console.error(`Resend ${resposta.status}: ${await resposta.text()}`);
 }
 
+/** Confere o token de cada conta da agenda sem publicar nada. */
+async function verificar(agenda) {
+  let ok = true;
+  for (const conta of Object.keys(agenda.contas ?? {})) {
+    const nome = tokenEnv(conta);
+    const token = process.env[nome];
+    if (!token) { console.log(`${conta}: sem o segredo ${nome}`); ok = false; continue; }
+    try {
+      const me = await api("GET", "/me", { fields: "user_id,username,account_type" }, token);
+      const cota = await api("GET", `/${me.user_id}/content_publishing_limit`, { fields: "quota_usage,config" }, token)
+        .then((r) => r.data?.[0]).catch(() => null);
+      const usado = cota ? `, cota de hoje ${cota.quota_usage}/${cota.config?.quota_total ?? "?"}` : "";
+      console.log(`${conta}: token OK, conta @${me.username} (${me.account_type})${usado}`);
+    } catch (error) {
+      console.log(`${conta}: token recusado (${error.message})`);
+      ok = false;
+    }
+  }
+  if (!ok) process.exitCode = 1;
+}
+
 async function main() {
   const agenda = JSON.parse(fs.readFileSync(AGENDA, "utf8"));
+  if (process.env.VERIFICAR === "1") return verificar(agenda);
   const fila = devidos(agenda);
   if (!fila.length) return console.log(`Nada para publicar (${agora.toISOString()}).`);
   let mudou = false;
