@@ -7,7 +7,7 @@
   },
   "GiraHub": {
    "usuario": "@girahuboficial",
-   "publicador": "postiz"
+   "publicador": "proprio"
   }
  },
  "posts": [
@@ -48,6 +48,49 @@
    "postizId": "cmvrewqtg42o9p71civ7xhxoj"
   },
   {
+   "id": "gh-1028-1900",
+   "conta": "GiraHub",
+   "quando": "2026-10-28T19:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Duplas da noite: médium e cambone na Porta",
+   "legenda": "Médium e cambone: quem trabalha com quem hoje à noite? Agora isso fica combinado na Porta, antes de abrir a gira.\n\nQuem cuida da porta marca os médiuns que estão trabalhando e escolhe o cambone de cada um. Na hora de chamar a senha, toca no médium e o cambone já vem junto.\n\nDá pra ver quantas senhas cada médium já atendeu, copiar as duplas da última gira e receber sugestão de cambone pelo histórico da casa.\n\nManda pra quem monta as duplas aí na sua casa. 👇\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1028-1900-01.jpg",
+    "midia/girahub/gh-1028-1900-02.jpg",
+    "midia/girahub/gh-1028-1900-03.jpg",
+    "midia/girahub/gh-1028-1900-04.jpg",
+    "midia/girahub/gh-1028-1900-05.jpg"
+   ],
+   "postizId": "cmvi8q2i90i9rta0yjxjmczve"
+  },
+  {
+   "id": "gh-1028-2000",
+   "conta": "GiraHub",
+   "quando": "2026-10-28T20:00:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — qua 28/10",
+   "midia": [
+    "midia/girahub/gh-1028-2000-01.jpg"
+   ],
+   "postizId": "cmvi89e560i0yta0y9x7pvd9o"
+  },
+  {
+   "id": "gh-1028-2100",
+   "conta": "GiraHub",
+   "quando": "2026-10-28T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 28/10 — Mensalidade dos médiuns sem constrangimento",
+   "legenda": "Mensalidade do terreiro sem constrangimento: ninguém precisa ser cobrado na frente da corrente.\n\nO mês da casa num olhar: quanto era esperado, quanto entrou e o que está em aberto.\nCada médium com o seu cartão: pago, isento ou pendente, registrado pela direção.\n\nManda pra quem cuida das mensalidades da sua casa 🤍\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1028-2100.mp4"
+   ],
+   "postizId": "cmvkz9k8b0wpwmk0y5hbx0rp8",
+   "capa": "midia/girahub/gh-1028-2100-capa.jpg"
+  },
+  {
    "id": "so2",
    "conta": "pontes_brain",
    "quando": "2026-10-29T07:30:00-03:00",
@@ -56,6 +99,35 @@
    "titulo": "Story do dia",
    "midia": [],
    "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "gh-1029-0830",
+   "conta": "GiraHub",
+   "quando": "2026-10-29T08:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — qui 29/10",
+   "midia": [
+    "midia/girahub/gh-1029-0830-01.jpg"
+   ],
+   "postizId": "cmvi89fgy0i10ta0y0rurahd5"
+  },
+  {
+   "id": "gh-1029-1200",
+   "conta": "GiraHub",
+   "quando": "2026-10-29T12:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Financeiro do terreiro: 5 hábitos",
+   "legenda": "Financeiro do terreiro: quando o dinheiro da casa se mistura com o seu, ninguém sabe quanto sobrou no fim do mês.\n\n5 hábitos que evitam dor de cabeça:\n1. Uma conta só para a casa\n2. Anotar toda saída no dia, até a vela de cinco reais\n3. Contas fixas com dia certo: luz, água, aluguel\n4. Fechar o mês: quanto entrou, quanto saiu, quanto sobrou\n5. Guardar nota e comprovante de tudo\n\nNo GiraHub isso fica num lugar só: contas a pagar e a receber, fluxo de caixa e a mensalidade paga entrando sozinha nas contas a receber (plano Premium).\n\n🔖 Salva e manda pra quem cuida do caixa da casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1029-1200-01.jpg",
+    "midia/girahub/gh-1029-1200-02.jpg",
+    "midia/girahub/gh-1029-1200-03.jpg",
+    "midia/girahub/gh-1029-1200-04.jpg",
+    "midia/girahub/gh-1029-1200-05.jpg"
+   ],
+   "postizId": "cmvi8q5vv0i6yoh0y7b3zb3ms"
   },
   {
    "id": "o02",
@@ -76,6 +148,45 @@
    "postizId": "cmvrewuqb42okp71c507ovz0v"
   },
   {
+   "id": "gh-1029-1230",
+   "conta": "GiraHub",
+   "quando": "2026-10-29T12:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — qui 29/10",
+   "midia": [
+    "midia/girahub/gh-1029-1230-01.jpg"
+   ],
+   "postizId": "cmvi89h860i11ta0yls4e0hr9"
+  },
+  {
+   "id": "gh-1029-1900",
+   "conta": "GiraHub",
+   "quando": "2026-10-29T19:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Imagem — Acabou a vela no meio da gira?",
+   "legenda": "Estoque do terreiro: acabou a vela no meio da gira, de novo? 🕯️\n\nCom o estoque no GiraHub, você anota o que entra e o que sai (velas, ervas, bebidas, charutos) e define o mínimo de cada item. Quando chega perto do fim, a casa vê antes de faltar.\n\nO estoque é do plano Premium, e dá para testar 30 dias sem cartão.\n\nE aí, o que mais acaba na sua casa? Conta aqui embaixo. 👇\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1029-1900-01.jpg"
+   ],
+   "postizId": "cmvi8q8ey0i79oh0yl28iduon"
+  },
+  {
+   "id": "gh-1029-2100",
+   "conta": "GiraHub",
+   "quando": "2026-10-29T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 29/10 — Relatório da gira: quem veio, quem atendeu",
+   "legenda": "Quantos vieram na gira de sábado? E quantos faltaram?\n\nO relatório da gira do GiraHub responde na hora: total de senhas, quem foi atendido, quem não veio e quem chegou sem senha.\nCada atendimento com o médium e o cambone da noite. E baixa em PDF para guardar na pasta da casa.\n\nManda pra quem cuida da secretaria do terreiro.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1029-2100.mp4"
+   ],
+   "postizId": "cmvkz9omj0wq3mk0yklo1zjfi",
+   "capa": "midia/girahub/gh-1029-2100-capa.jpg"
+  },
+  {
    "id": "so3",
    "conta": "pontes_brain",
    "quando": "2026-10-30T07:30:00-03:00",
@@ -84,6 +195,35 @@
    "titulo": "Story do dia",
    "midia": [],
    "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "gh-1030-0830",
+   "conta": "GiraHub",
+   "quando": "2026-10-30T08:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — sex 30/10",
+   "midia": [
+    "midia/girahub/gh-1030-0830-01.jpg"
+   ],
+   "postizId": "cmvi89j5o0i12ta0yrjmzjeyj"
+  },
+  {
+   "id": "gh-1030-1200",
+   "conta": "GiraHub",
+   "quando": "2026-10-30T12:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Gira lotou: fila de espera e horário marcado",
+   "legenda": "Senha de gira esgotada em minutos? Dois jeitos de ninguém ficar perdido quando a gira lota.\n\n1. Fila de espera: acabaram as senhas, quem chega pelo link entra na espera. Se alguém cancela, o próximo recebe aviso para confirmar. Não confirmou a tempo, a vaga passa para o seguinte.\n2. Horário marcado: a casa divide as vagas por horário e cada consulente escolhe o seu. Ninguém precisa chegar de madrugada.\n\nFila de espera e horário marcado são do plano Premium, e dá para testar 30 dias sem cartão.\n\nManda pra quem vive dizendo \"acabou a senha\". 😅\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1030-1200-01.jpg",
+    "midia/girahub/gh-1030-1200-02.jpg",
+    "midia/girahub/gh-1030-1200-03.jpg",
+    "midia/girahub/gh-1030-1200-04.jpg",
+    "midia/girahub/gh-1030-1200-05.jpg"
+   ],
+   "postizId": "cmvi8q9cr0i7coh0yrvqcqvb8"
   },
   {
    "id": "o03",
@@ -97,6 +237,48 @@
     "midia/o03-2026-10-30.jpg"
    ],
    "postizId": "cmvrewvt242b3pi1cjs6o3bpt"
+  },
+  {
+   "id": "gh-1030-1900",
+   "conta": "GiraHub",
+   "quando": "2026-10-30T19:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Site do terreiro: o que não pode faltar",
+   "legenda": "Site do terreiro: quando alguém procura a sua casa na internet, encontra o quê?\n\nO que não pode faltar na página da casa:\n1. Endereço e como chegar\n2. Dias e horários das giras\n3. Um botão para pegar a senha\n4. Quem é a casa, contado com as palavras de vocês\n5. Um jeito fácil de falar com a casa\n\nNo GiraHub, o site do terreiro já traz a agenda das próximas giras com o botão \"Retire sua senha\" em cada uma (a partir do plano Pro).\n\n🔖 Salva pra montar a página da sua casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1030-1900-01.jpg",
+    "midia/girahub/gh-1030-1900-02.jpg",
+    "midia/girahub/gh-1030-1900-03.jpg",
+    "midia/girahub/gh-1030-1900-04.jpg"
+   ],
+   "postizId": "cmvi8qap90i7eoh0yxw35vohr"
+  },
+  {
+   "id": "gh-1030-2000",
+   "conta": "GiraHub",
+   "quando": "2026-10-30T20:00:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — sex 30/10",
+   "midia": [
+    "midia/girahub/gh-1030-2000-01.jpg"
+   ],
+   "postizId": "cmvi89kst0i15ta0yzzv1io6y"
+  },
+  {
+   "id": "gh-1030-2100",
+   "conta": "GiraHub",
+   "quando": "2026-10-30T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 30/10 — Associados: quem ajuda a casa sem ser da corrente",
+   "legenda": "O nome de quem ajuda a casa sem ser da corrente ainda tá no caderno?\n\nNo GiraHub, os associados têm cadastro próprio: nome, e-mail e telefone num lugar só.\nNa gira, o relatório mostra separado quantos associados foram atendidos.\n\nManda pra quem cuida da tesouraria e dos amigos da casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1030-2100.mp4"
+   ],
+   "postizId": "cmvkz9qzt3kl8lh0y0urhdiqj",
+   "capa": "midia/girahub/gh-1030-2100-capa.jpg"
   },
   {
    "id": "so4",
@@ -122,6 +304,77 @@
    "postizId": "cmvrewx0y42osp71cmqwgxk0p"
   },
   {
+   "id": "gh-1031-1000",
+   "conta": "GiraHub",
+   "quando": "2026-10-31T10:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Inscrição de curso sem papelada",
+   "legenda": "Curso de desenvolvimento na casa? A inscrição pode sair da folha de papel. ✍️\n\n1. Abra o curso: nome, datas, vagas, local e valor.\n2. Mande o link: a pessoa preenche a ficha de inscrição pelo celular. Dado de saúde só fica guardado com a autorização dela.\n3. Acompanhe: lista de participantes e pagamento de cada um, à vista ou em mensalidade do curso.\n\nOs cursos vêm junto com o site do terreiro no GiraHub, a partir do plano Pro.\n\nManda pra quem cuida dos cursos e desenvolvimentos aí na casa. 🤍\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1031-1000-01.jpg",
+    "midia/girahub/gh-1031-1000-02.jpg",
+    "midia/girahub/gh-1031-1000-03.jpg",
+    "midia/girahub/gh-1031-1000-04.jpg",
+    "midia/girahub/gh-1031-1000-05.jpg"
+   ],
+   "postizId": "cmvi8qbjt0i7foh0yskszkg9f"
+  },
+  {
+   "id": "gh-1031-1030",
+   "conta": "GiraHub",
+   "quando": "2026-10-31T10:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — sáb 31/10",
+   "midia": [
+    "midia/girahub/gh-1031-1030-01.jpg"
+   ],
+   "postizId": "cmvi89mey0hwqoh0yoxdqewkg"
+  },
+  {
+   "id": "gh-1031-1700",
+   "conta": "GiraHub",
+   "quando": "2026-10-31T17:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Gestão de terreiro não cabe numa pessoa só",
+   "legenda": "Gestão de terreiro não cabe numa pessoa só. Tem quem fica na porta, quem cuida do dinheiro, quem dirige a casa.\n\nNo GiraHub, cada um entra com o próprio acesso e vê o que precisa: a porta vê a Porta, a tesouraria vê o financeiro, a direção vê tudo. Ninguém precisa dividir a mesma senha de login.\n\nE os usuários são ilimitados em todos os planos, até no grátis. Não tem cobrança por pessoa.\n\nMarca aqui quem segura as pontas com você. 🤝\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1031-1700-01.jpg",
+    "midia/girahub/gh-1031-1700-02.jpg",
+    "midia/girahub/gh-1031-1700-03.jpg",
+    "midia/girahub/gh-1031-1700-04.jpg"
+   ],
+   "postizId": "cmvi8qcc80ia8ta0ywkcumlum"
+  },
+  {
+   "id": "gh-1031-1730",
+   "conta": "GiraHub",
+   "quando": "2026-10-31T17:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — sáb 31/10",
+   "midia": [
+    "midia/girahub/gh-1031-1730-01.jpg"
+   ],
+   "postizId": "cmvi89p2a0i19ta0yumv1qpdf"
+  },
+  {
+   "id": "gh-1031-2100",
+   "conta": "GiraHub",
+   "quando": "2026-10-31T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 31/10 — Senha com horário marcado",
+   "legenda": "Gira marcada pras sete e todo mundo chega às sete na porta?\n\nCom a senha com horário marcado do GiraHub, o consulente escolhe a hora de ser atendido na hora de pegar a senha. Cada horário tem suas vagas e, quando enche, fecha sozinho.\nA assistência chega espalhada e a porta fica em paz.\n\nSalva pra mostrar na próxima reunião da casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1031-2100.mp4"
+   ],
+   "postizId": "cmvkz9tdw3kljlh0yogzjnqpi",
+   "capa": "midia/girahub/gh-1031-2100-capa.jpg"
+  },
+  {
    "id": "so5",
    "conta": "pontes_brain",
    "quando": "2026-11-01T07:30:00-03:00",
@@ -130,6 +383,60 @@
    "titulo": "Story do dia",
    "midia": [],
    "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "gh-1101-1000",
+   "conta": "GiraHub",
+   "quando": "2026-11-01T10:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Associados: quem ajuda a casa sem ser da corrente",
+   "legenda": "Associados do terreiro: aquele consulente fiel, a família de médium, o amigo que contribui todo mês. Eles também merecem um lugar organizado.\n\nNo GiraHub, a casa cadastra os associados e controla a mensalidade deles separada da corrente: quem pagou, quem está em aberto e quem é isento, sem expor ninguém.\n\nE no dia de gira, o associado aparece com estrela na Porta, com a senha começando com P.\n\nAssociados é do plano Premium, e dá para testar 30 dias sem cartão.\n\nManda pra quem cuida dos associados da sua casa. 🤍\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1101-1000-01.jpg",
+    "midia/girahub/gh-1101-1000-02.jpg",
+    "midia/girahub/gh-1101-1000-03.jpg",
+    "midia/girahub/gh-1101-1000-04.jpg",
+    "midia/girahub/gh-1101-1000-05.jpg"
+   ],
+   "postizId": "cmvi8qf240iaata0yzh2xd04c"
+  },
+  {
+   "id": "gh-1101-1030",
+   "conta": "GiraHub",
+   "quando": "2026-11-01T10:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — dom 01/11",
+   "midia": [
+    "midia/girahub/gh-1101-1030-01.jpg"
+   ],
+   "postizId": "cmvi89qvz0hwroh0y72yke4sv"
+  },
+  {
+   "id": "gh-1101-1400",
+   "conta": "GiraHub",
+   "quando": "2026-11-01T14:00:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — dom 01/11",
+   "midia": [
+    "midia/girahub/gh-1101-1400-01.jpg"
+   ],
+   "postizId": "cmvi89stc0hwsoh0ybb0q0wbf"
+  },
+  {
+   "id": "gh-1101-1800",
+   "conta": "GiraHub",
+   "quando": "2026-11-01T18:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Imagem — Qual trabalho da gira ninguém vê?",
+   "legenda": "Dia de gira tem trabalho que a assistência nunca vê. 🤍\n\nA faxina do salão antes de abrir, o café da corrente, quem fica na porta do começo ao fim, quem acende e apaga as velas, quem lava a roupa branca...\n\nQual trabalho da sua casa ninguém vê, mas sem ele a gira não acontece? Conta aqui e marca essa pessoa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1101-1800-01.jpg"
+   ],
+   "postizId": "cmvi8qhg00i7koh0ylo3ep757"
   },
   {
    "id": "o05",
@@ -145,6 +452,20 @@
    "postizId": "cmvrex0cj42b6pi1c6qa9wf4f"
   },
   {
+   "id": "gh-1101-2100",
+   "conta": "GiraHub",
+   "quando": "2026-11-01T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 01/11 — Site do terreiro",
+   "legenda": "\"Que dia tem gira mesmo?\" Quantas vezes essa pergunta aparece no grupo da casa?\n\nCom o site do terreiro do GiraHub, a casa ganha uma página própria com as próximas giras, o botão de retirar senha e como chegar.\nO site já vem montado com o que a casa tem no GiraHub. É só escolher as cores e publicar.\n\nManda pra quem responde o WhatsApp do terreiro.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1101-2100.mp4"
+   ],
+   "postizId": "cmvkz9vqt3kltlh0yz15pqav6",
+   "capa": "midia/girahub/gh-1101-2100-capa.jpg"
+  },
+  {
    "id": "s01",
    "conta": "pontes_brain",
    "quando": "2026-11-02T07:30:00-03:00",
@@ -153,6 +474,31 @@
    "titulo": "Enquete",
    "midia": [],
    "nota": "Story de abertura do dia, com enquete. Às 12h15, repostar o post do feed com o sticker \"post novo\"."
+  },
+  {
+   "id": "gh-1102-1000",
+   "conta": "GiraHub",
+   "quando": "2026-11-02T10:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Imagem — Finados",
+   "legenda": "Hoje é Dia de Finados.\n\nDia de lembrar, com carinho e respeito, de quem já fez a passagem. Às famílias de axé que hoje acendem uma vela pelos seus, nosso respeito e a nossa luz junto com a de vocês. 🕯️\n\n🌐 girahub.com.br (link na bio)\n\n#Finados #Umbanda #Candomblé",
+   "midia": [
+    "midia/girahub/gh-1102-1000-01.jpg"
+   ],
+   "postizId": "cmvi8qk5x0iajta0yyw2a8j11"
+  },
+  {
+   "id": "gh-1102-1030",
+   "conta": "GiraHub",
+   "quando": "2026-11-02T10:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — seg 02/11 (Finados)",
+   "midia": [
+    "midia/girahub/gh-1102-1030-01.jpg"
+   ],
+   "postizId": "cmvi89ufl0hwtoh0yzw390fx2"
   },
   {
    "id": "d01",
@@ -168,6 +514,22 @@
    "postizId": "cmvr1k0rj3iu2pi1cdxux569c"
   },
   {
+   "id": "gh-1102-1900",
+   "conta": "GiraHub",
+   "quando": "2026-11-02T19:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Primeira vez na gira: como acolher quem chega",
+   "legenda": "Primeira vez na gira: todo mundo já foi o novato sentado na assistência sem saber direito o que fazer.\n\n5 jeitos de acolher quem chega:\n1. Alguém na porta para dar boas-vindas\n2. Explicar, antes de começar, como a gira funciona\n3. Combinar o básico com carinho: celular no silencioso e nada de foto\n4. Mostrar onde esperar e mais ou menos quanto tempo leva\n5. Depois do atendimento, perguntar se ficou alguma dúvida\n\nQuem é bem recebido na primeira vez, volta.\n\n🔖 Salva e manda pra quem fica na porta da sua casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1102-1900-01.jpg",
+    "midia/girahub/gh-1102-1900-02.jpg",
+    "midia/girahub/gh-1102-1900-03.jpg",
+    "midia/girahub/gh-1102-1900-04.jpg"
+   ],
+   "postizId": "cmvi8qmio0i7ooh0y6vwl1y1i"
+  },
+  {
    "id": "s03",
    "conta": "pontes_brain",
    "quando": "2026-11-02T20:30:00-03:00",
@@ -176,6 +538,20 @@
    "titulo": "Apresentação",
    "midia": [],
    "nota": "Story de apresentação do Leo 3D (10 s). Fixar nos Destaques como \"Leo\"."
+  },
+  {
+   "id": "gh-1102-2100",
+   "conta": "GiraHub",
+   "quando": "2026-11-02T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 02/11 — A casa é feita de muitas mãos",
+   "legenda": "Nenhuma casa se sustenta numa pessoa só.\n\nHoje, dia de lembrar com carinho de quem veio antes, a gente agradece também a cada mão que cuida da casa agora: quem abre a porta, quem anota, quem cuida da tesouraria.\nNo GiraHub, cada pessoa tem o próprio acesso e vê só o que cuida, com grupos de permissão. E os usuários são ilimitados em todos os planos, inclusive no Gratuito.\n\nManda pra quem divide com você o cuidado da casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1102-2100.mp4"
+   ],
+   "postizId": "cmvkz9yga3km3lh0yfk5npnx0",
+   "capa": "midia/girahub/gh-1102-2100-capa.jpg"
   },
   {
    "id": "d02",
@@ -194,6 +570,77 @@
     "midia/d02-2026-11-03-06.jpg"
    ],
    "postizId": "cmvr2gm9c3l0ppi1c0j94o56p"
+  },
+  {
+   "id": "gh-1103-1200",
+   "conta": "GiraHub",
+   "quando": "2026-11-03T12:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — A senha com a cara da sua casa",
+   "legenda": "Senha de gira com a cara da sua casa: o consulente vê o nome, a logo e as cores do terreiro, não a gente. 🎨\n\nE quando ele pega a senha, chega um e-mail com o número, a gira, o dia, o endereço e um botão para cancelar se não puder ir. Menos gente perguntando a mesma coisa no grupo.\n\nLogo e cores da casa e o e-mail da senha estão no GiraHub a partir do plano Pro.\n\nManda pra quem cuida da comunicação aí na sua casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1103-1200-01.jpg",
+    "midia/girahub/gh-1103-1200-02.jpg",
+    "midia/girahub/gh-1103-1200-03.jpg",
+    "midia/girahub/gh-1103-1200-04.jpg"
+   ],
+   "postizId": "cmvi8qp7s0ialta0yhozm5prs"
+  },
+  {
+   "id": "gh-1103-1230",
+   "conta": "GiraHub",
+   "quando": "2026-11-03T12:30:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — ter 03/11",
+   "midia": [
+    "midia/girahub/gh-1103-1230-01.jpg"
+   ],
+   "postizId": "cmvi89war0hwuoh0yp22od50m"
+  },
+  {
+   "id": "gh-1103-1900",
+   "conta": "GiraHub",
+   "quando": "2026-11-03T19:00:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Carrossel — Ficha espiritual do médium, com cuidado",
+   "legenda": "Ficha espiritual do médium: orixá de cabeça, guia de frente, batismo, obrigações. É a história de cada filho da casa, e merece cuidado.\n\nNo GiraHub, a ficha tem modelo de Umbanda e de Candomblé, e a casa ajusta os campos do seu jeito. A caminhada fica em linha do tempo: entrada na casa, batismo, coroação, obrigações.\n\nE nada é guardado sem a autorização do médium. Só quem a casa liberar vê a ficha.\n\nFicha espiritual a partir do plano Pro.\n\nManda pra quem guarda a história da corrente. 🤍\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1103-1900-01.jpg",
+    "midia/girahub/gh-1103-1900-02.jpg",
+    "midia/girahub/gh-1103-1900-03.jpg",
+    "midia/girahub/gh-1103-1900-04.jpg",
+    "midia/girahub/gh-1103-1900-05.jpg"
+   ],
+   "postizId": "cmvi8qrit0iaota0ypdeq454v"
+  },
+  {
+   "id": "gh-1103-2000",
+   "conta": "GiraHub",
+   "quando": "2026-11-03T20:00:00-03:00",
+   "formato": "story",
+   "status": "agendado",
+   "titulo": "Stories — ter 03/11",
+   "midia": [
+    "midia/girahub/gh-1103-2000-01.jpg"
+   ],
+   "postizId": "cmvi89y9i0hwvoh0yc4bd29cr"
+  },
+  {
+   "id": "gh-1103-2100",
+   "conta": "GiraHub",
+   "quando": "2026-11-03T21:00:00-03:00",
+   "formato": "reel",
+   "status": "agendado",
+   "titulo": "Reels 03/11 — Relatórios de atendimento",
+   "legenda": "A assistência da casa cresceu ou caiu nos últimos meses?\n\nOs relatórios de atendimento do GiraHub mostram quantas senhas saíram, quantas foram usadas, a taxa de uso e quem chegou sem senha, por período ou por gira.\nEscolhe 7, 30 ou 90 dias e compara, sem montar planilha.\n\nSalva pra levar na próxima reunião da casa.\n\n🌐 girahub.com.br (link na bio)\n\n#GestãoDeTerreiro #Umbanda #GiraHub",
+   "midia": [
+    "midia/girahub/gh-1103-2100.mp4"
+   ],
+   "postizId": "cmvkza0sd3km9lh0ytea2hhyf",
+   "capa": "midia/girahub/gh-1103-2100-capa.jpg"
   },
   {
    "id": "d03",
