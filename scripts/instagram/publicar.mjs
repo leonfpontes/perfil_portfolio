@@ -115,7 +115,17 @@ async function montar(post, token) {
   return (await api("POST", "/me/media", { media_type: "CAROUSEL", children: filhos.join(","), caption: post.legenda }, token)).id;
 }
 
+/** Já está no perfil? Evita post duplicado se outro publicador (ex.: Postiz) soltou antes. */
+async function jaPublicado(post, token) {
+  if (!post.legenda || post.formato?.startsWith("story")) return null;
+  const inicio = post.legenda.trim().slice(0, 80);
+  const { data = [] } = await api("GET", "/me/media", { fields: "id,caption,permalink,timestamp", limit: "15" }, token);
+  return data.find((m) => (m.caption ?? "").trim().startsWith(inicio)) ?? null;
+}
+
 async function publicar(post, token) {
+  const existente = await jaPublicado(post, token);
+  if (existente) return { midiaId: existente.id, link: existente.permalink ?? null, nota: "já estava no perfil" };
   const container = await montar(post, token);
   await aguardarContainer(container, token);
   const { id } = await api("POST", "/me/media_publish", { creation_id: container }, token);
