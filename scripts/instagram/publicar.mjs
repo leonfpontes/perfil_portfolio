@@ -119,7 +119,7 @@ async function montar(post, token) {
 async function jaPublicado(post, token) {
   if (!post.legenda || post.formato?.startsWith("story")) return null;
   const inicio = post.legenda.trim().slice(0, 80);
-  const { data = [] } = await api("GET", "/me/media", { fields: "id,caption,permalink,timestamp", limit: "15" }, token);
+  const { data = [] } = await api("GET", "/me/media", { fields: "id,caption,permalink,timestamp", limit: "15" }, token).catch(() => ({}));
   return data.find((m) => (m.caption ?? "").trim().startsWith(inicio)) ?? null;
 }
 
