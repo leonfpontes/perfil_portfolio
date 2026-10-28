@@ -86,15 +86,7 @@ async function insightsMidia(m, token) {
       }
     }
   }
-  if (tipo !== "STORY" && !recusadas.has(`${tipo}:follow_type`)) {
-    try {
-      const q = quebra(await api(`/${m.id}/insights`, { metric: "reach", breakdown: "follow_type", metric_type: "total_value" }, token));
-      if (Object.keys(q).length) insights.porSeguidor = q;
-    } catch (error) {
-      recusadas.add(`${tipo}:follow_type`);
-      avisos.push(`${tipo}:follow_type recusada: ${error.message}`);
-    }
-  }
+  // Seguidores × não seguidores por post: a API recusa follow_type na mídia; só há o da conta.
   return { insights };
 }
 
