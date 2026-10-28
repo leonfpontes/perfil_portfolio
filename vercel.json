@@ -1,5 +1,4 @@
 {
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!instagram' ':!scripts/instagram' ':!.github'",
   "cleanUrls": true,
   "trailingSlash": false,
   "buildCommand": "npm run build",
