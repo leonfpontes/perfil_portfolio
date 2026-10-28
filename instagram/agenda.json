@@ -1,0 +1,853 @@
+{
+ "_leia": "Agenda única do Instagram. O publicador (scripts/instagram/publicar.mjs) só publica contas com publicador 'proprio'. status: agendado | publicado | falhou | manual (story que o Leonardo posta à mão). quando: horário de Brasília com fuso. midia: caminhos dentro de instagram/, em JPEG.",
+ "contas": {
+  "pontes_brain": {
+   "usuario": "@pontes_brain",
+   "publicador": "postiz"
+  },
+  "GiraHub": {
+   "usuario": "@girahuboficial",
+   "publicador": "postiz"
+  }
+ },
+ "posts": [
+  {
+   "id": "so1",
+   "conta": "pontes_brain",
+   "quando": "2026-10-28T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "o06",
+   "conta": "pontes_brain",
+   "quando": "2026-10-28T12:15:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Agenda cheia, quadro lotado, todo mundo correndo. E no fim do mês, pouca coisa chegou de f",
+   "legenda": "Agenda cheia, quadro lotado, todo mundo correndo. E no fim do mês, pouca coisa chegou de fato ao cliente.\n\nOcupação mede esforço. Entrega mede valor.\n\nUm teste rápido para o almoço de hoje:\n1. Quantos projetos o seu time começou este mês?\n2. Quantos terminou?\nSe o primeiro número é bem maior que o segundo, o problema não é falta de gente. É excesso de coisa em andamento.\n\nComeçar menos para terminar mais. Qual foi o placar do seu time? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #produtividade #lideranca",
+   "midia": [
+    "midia/o06-2026-10-28.jpg"
+   ],
+   "postizId": "cmvs6qlh5010cle1cnco6ies7"
+  },
+  {
+   "id": "o01",
+   "conta": "pontes_brain",
+   "quando": "2026-10-28T19:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Duas pessoas fizeram o mesmo trabalho na sprint. Uma disse \"entreguei 8 histórias\". A outr",
+   "legenda": "Duas pessoas fizeram o mesmo trabalho na sprint. Uma disse \"entreguei 8 histórias\". A outra disse \"reduzimos em 20% os chamados de suporte\".\n\nAdivinha quem foi lembrada na avaliação de desempenho?\n\nNa próxima reunião, troque a lista de tarefas por uma frase de impacto:\no que mudou + para quem + quanto.\n\nQual resultado seu merece ser contado assim? Escreve aqui 👇\n\n👉 Quer acelerar sua carreira em produto? Conheça a mentoria 1:1: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira",
+   "midia": [
+    "midia/o01-2026-10-28.jpg"
+   ],
+   "postizId": "cmvrewqtg42o9p71civ7xhxoj"
+  },
+  {
+   "id": "so2",
+   "conta": "pontes_brain",
+   "quando": "2026-10-29T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "o02",
+   "conta": "pontes_brain",
+   "quando": "2026-10-29T12:15:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Portfólio no limite não avisa. Ele vai travando aos poucos: todo mundo ocupado, nada termi",
+   "legenda": "Portfólio no limite não avisa. Ele vai travando aos poucos: todo mundo ocupado, nada terminando.\n\n4 sinais: gente em 4 projetos, projeto entrando sem nenhum sair, status de atividade em vez de resultado e ninguém sabendo o que é mais importante.\n\nQuantos você marcou? Comenta de 0 a 4 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca",
+   "midia": [
+    "midia/o02-2026-10-29-01.jpg",
+    "midia/o02-2026-10-29-02.jpg",
+    "midia/o02-2026-10-29-03.jpg",
+    "midia/o02-2026-10-29-04.jpg",
+    "midia/o02-2026-10-29-05.jpg",
+    "midia/o02-2026-10-29-06.jpg"
+   ],
+   "postizId": "cmvrewuqb42okp71c507ovz0v"
+  },
+  {
+   "id": "so3",
+   "conta": "pontes_brain",
+   "quando": "2026-10-30T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "o03",
+   "conta": "pontes_brain",
+   "quando": "2026-10-30T18:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Todo mundo já ouviu. Ninguém nunca viu um \"ajuste rapidinho\" que fosse rapidinho. 😅",
+   "legenda": "Todo mundo já ouviu. Ninguém nunca viu um \"ajuste rapidinho\" que fosse rapidinho. 😅\n\nO antídoto não é dizer não para tudo. É ter um combinado claro de como mudanças entram:\n1. Quem pede, explica o impacto.\n2. O time estima antes de aceitar.\n3. Algo sai do plano para a mudança entrar.\n\nMarca aquele colega especialista em \"só um ajuste\" 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#sextou #gestaodeprojetos #produtividade #pmo #humor",
+   "midia": [
+    "midia/o03-2026-10-30.jpg"
+   ],
+   "postizId": "cmvrewvt242b3pi1cjs6o3bpt"
+  },
+  {
+   "id": "so4",
+   "conta": "pontes_brain",
+   "quando": "2026-10-31T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "o04",
+   "conta": "pontes_brain",
+   "quando": "2026-10-31T10:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Estratégia é escolha. E toda escolha de verdade deixa alguma coisa boa de fora.",
+   "legenda": "Estratégia é escolha. E toda escolha de verdade deixa alguma coisa boa de fora.\n\nQual projeto você deixaria de fazer amanhã, se pudesse? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#estrategia #priorizacao #lideranca #gestaodeportfolio",
+   "midia": [
+    "midia/o04-2026-10-31.jpg"
+   ],
+   "postizId": "cmvrewx0y42osp71cmqwgxk0p"
+  },
+  {
+   "id": "so5",
+   "conta": "pontes_brain",
+   "quando": "2026-11-01T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story manual com sticker interativo (publicar no app, sem som da Postiz). No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "o05",
+   "conta": "pontes_brain",
+   "quando": "2026-11-01T19:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Amanhã começa a série de novembro: um post por dia sobre portfólio, PMO e carreira em prod",
+   "legenda": "Amanhã começa a série de novembro: um post por dia sobre portfólio, PMO e carreira em produto.\n\nAntes de começar, quero ouvir você. O que você quer aprender primeiro?\nA) Priorizar projetos sem briga\nB) Montar um business case que a diretoria aprova\nC) Medir o benefício depois da entrega\nD) Crescer na carreira de produto\n\nResponde com a letra 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira",
+   "midia": [
+    "midia/o05-2026-11-01.jpg"
+   ],
+   "postizId": "cmvrex0cj42b6pi1c6qa9wf4f"
+  },
+  {
+   "id": "s01",
+   "conta": "pontes_brain",
+   "quando": "2026-11-02T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Enquete",
+   "midia": [],
+   "nota": "Story de abertura do dia, com enquete. Às 12h15, repostar o post do feed com o sticker \"post novo\"."
+  },
+  {
+   "id": "d01",
+   "conta": "pontes_brain",
+   "quando": "2026-11-02T12:15:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Quantos projetos o seu time está tocando agora? Não vale contar só os oficiais.",
+   "legenda": "Quantos projetos o seu time está tocando agora? Não vale contar só os oficiais.\n\nQuando a resposta passa de \"alguns\", o quadro costuma ser o mesmo: todo mundo ocupado, nada terminando e a diretoria perguntando por que nada sai.\n\n3 sinais de que o portfólio está entupido:\n1. Projeto entra sem ninguém dizer qual sai.\n2. A mesma pessoa está em 4 frentes \"prioritárias\".\n3. O status fala de atividade, não de resultado.\n\nO antídoto não é trabalhar mais. É ter uma porta de entrada (o G1 Intake) que obriga a escolher.\n\nComenta aqui: quantos projetos em paralelo você tem hoje? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca",
+   "midia": [
+    "midia/d01-2026-11-02.jpg"
+   ],
+   "postizId": "cmvr1k0rj3iu2pi1cdxux569c"
+  },
+  {
+   "id": "s03",
+   "conta": "pontes_brain",
+   "quando": "2026-11-02T20:30:00-03:00",
+   "formato": "story-video",
+   "status": "manual",
+   "titulo": "Apresentação",
+   "midia": [],
+   "nota": "Story de apresentação do Leo 3D (10 s). Fixar nos Destaques como \"Leo\"."
+  },
+  {
+   "id": "d02",
+   "conta": "pontes_brain",
+   "quando": "2026-11-03T07:45:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Os 4 gates do portfólio, em 6 slides.",
+   "legenda": "Os 4 gates do portfólio, em 6 slides.\n\nG1 Intake e G2 Business case planejam. G3 Delivery faz. G4 Benefits confere e corrige o rumo. É o velho PDCA, aplicado a projetos.\n\nA maioria das empresas tem um G3 razoável e quase nenhum G4. Resultado: entrega muito e não sabe o que ganhou.\n\nEm qual gate o seu portfólio trava? Comenta o número. 👇\nSalva este post para usar na próxima reunião de priorização.\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #pdca",
+   "midia": [
+    "midia/d02-2026-11-03-01.jpg",
+    "midia/d02-2026-11-03-02.jpg",
+    "midia/d02-2026-11-03-03.jpg",
+    "midia/d02-2026-11-03-04.jpg",
+    "midia/d02-2026-11-03-05.jpg",
+    "midia/d02-2026-11-03-06.jpg"
+   ],
+   "postizId": "cmvr2gm9c3l0ppi1c0j94o56p"
+  },
+  {
+   "id": "d03",
+   "conta": "pontes_brain",
+   "quando": "2026-11-04T19:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Troque \"responsável pelo backlog\" por \"reduzi o lead time de 30 para 12 dias reorganizando",
+   "legenda": "Troque \"responsável pelo backlog\" por \"reduzi o lead time de 30 para 12 dias reorganizando o backlog com o time\".\n\nA fórmula que eu uso com mentorados:\nverbo + o que mudou + número + contexto.\n\nNão tem número? Use antes e depois: \"o time passou a fechar a sprint com escopo estável\".\n\nReescreve uma linha do seu CV hoje e manda no direct. Eu dou um pitaco nas primeiras que chegarem.\n\n👉 Quer acelerar sua carreira em produto? Conheça a mentoria 1:1: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira #curriculo",
+   "midia": [
+    "midia/d03-2026-11-04.jpg"
+   ],
+   "postizId": "cmvr2go4n3l0vpi1cdsysawrh"
+  },
+  {
+   "id": "d04",
+   "conta": "pontes_brain",
+   "quando": "2026-11-05T12:15:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "PMO não nasceu para cobrar planilha. Nasceu para ajudar a empresa a escolher bem onde colo",
+   "legenda": "PMO não nasceu para cobrar planilha. Nasceu para ajudar a empresa a escolher bem onde colocar gente e dinheiro.\n\nQuando o PMO só controla cronograma, ele vira custo. Quando ajuda a decidir, vira vantagem.\n\nQual dos dois existe na sua empresa? Conta nos comentários, sem citar nomes 😅\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca",
+   "midia": [
+    "midia/d04-2026-11-05-01.jpg",
+    "midia/d04-2026-11-05-02.jpg",
+    "midia/d04-2026-11-05-03.jpg",
+    "midia/d04-2026-11-05-04.jpg",
+    "midia/d04-2026-11-05-05.jpg"
+   ],
+   "postizId": "cmvr2gsq537rlp71cm1qwhl0g"
+  },
+  {
+   "id": "d05",
+   "conta": "pontes_brain",
+   "quando": "2026-11-06T18:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Quem nunca? 😅",
+   "legenda": "Quem nunca? 😅\n\nStatus bom responde só 3 perguntas:\n1. O que mudou desde a última vez?\n2. O que está em risco?\n3. Que decisão eu preciso de você?\n\nO resto é anexo.\n\nMarca aquele colega que ama uma reunião de status.\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeprojetos #reunioes #produtividade #pmo #sextou",
+   "midia": [
+    "midia/d05-2026-11-06.jpg"
+   ],
+   "postizId": "cmvr1keef3ivfpi1crpa2il3f"
+  },
+  {
+   "id": "s02",
+   "conta": "pontes_brain",
+   "quando": "2026-11-06T20:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Caixinha",
+   "midia": [],
+   "nota": "Caixinha de perguntas. As respostas viram o post de sexta da semana 2."
+  },
+  {
+   "id": "d06",
+   "conta": "pontes_brain",
+   "quando": "2026-11-07T10:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Data no roadmap vira compromisso na cabeça de quem lê. Critério vira conversa.",
+   "legenda": "Data no roadmap vira compromisso na cabeça de quem lê. Critério vira conversa.\n\nPrefiro um roadmap que diz \"por que isto vem antes daquilo\" a um que diz \"entrega em 15/03\".\n\nConcorda ou discorda? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#roadmap #produtodigital #productmanagement #priorizacao",
+   "midia": [
+    "midia/d06-2026-11-07.jpg"
+   ],
+   "postizId": "cmvr1kg6w3ivkpi1cbh5b6xny"
+  },
+  {
+   "id": "d07",
+   "conta": "pontes_brain",
+   "quando": "2026-11-08T19:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Domingo é dia de olhar para trás antes de abrir a agenda da semana.",
+   "legenda": "Domingo é dia de olhar para trás antes de abrir a agenda da semana.\n\nQual foi a decisão mais difícil que você tomou este ano no trabalho? Cancelar um projeto, dizer não a um diretor, mudar de área?\n\nEu começo nos comentários. 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#carreira #lideranca #decisao #productmanager #gestaodeprojetos",
+   "midia": [
+    "midia/d07-2026-11-08.jpg"
+   ],
+   "postizId": "cmvr1ki6h3ivqpi1cs7deatwg"
+  },
+  {
+   "id": "s04",
+   "conta": "pontes_brain",
+   "quando": "2026-11-09T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d08",
+   "conta": "pontes_brain",
+   "quando": "2026-11-09T12:15:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Todo portfólio tem um projeto zumbi. Ninguém lembra por que começou, ninguém quer ser o re",
+   "legenda": "Todo portfólio tem um projeto zumbi. Ninguém lembra por que começou, ninguém quer ser o responsável por encerrar, e ele segue consumindo gente.\n\nComo encerrar sem drama:\n1. Dê uma data de revisão a todo projeto, já no G1 Intake.\n2. Defina antes o critério de saída: \"se até março não tivermos X, paramos\".\n3. Comunique o encerramento como ganho: \"liberamos 3 pessoas para o projeto Y\".\n\nEncerrar não é fracasso. Fracasso é gastar mais um semestre fingindo que não viu.\n\nTem um zumbi aí? Conta sem citar nome 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca",
+   "midia": [
+    "midia/d08-2026-11-09.jpg"
+   ],
+   "postizId": "cmvr2gz123l1cpi1clamclb9c"
+  },
+  {
+   "id": "s05",
+   "conta": "pontes_brain",
+   "quando": "2026-11-10T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d09",
+   "conta": "pontes_brain",
+   "quando": "2026-11-10T07:45:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Business case não precisa de 40 slides. Precisa caber em uma página e terminar pedindo uma",
+   "legenda": "Business case não precisa de 40 slides. Precisa caber em uma página e terminar pedindo uma decisão.\n\nOs 5 blocos: problema, aposta, custo, benefício e decisão.\n\nComenta UMA PÁGINA que eu te mando o modelo no direct. 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #businesscase",
+   "midia": [
+    "midia/d09-2026-11-10-01.jpg",
+    "midia/d09-2026-11-10-02.jpg",
+    "midia/d09-2026-11-10-03.jpg",
+    "midia/d09-2026-11-10-04.jpg",
+    "midia/d09-2026-11-10-05.jpg",
+    "midia/d09-2026-11-10-06.jpg",
+    "midia/d09-2026-11-10-07.jpg"
+   ],
+   "postizId": "cmvr2h5se3l1xpi1cljh8c8ix"
+  },
+  {
+   "id": "s06",
+   "conta": "pontes_brain",
+   "quando": "2026-11-11T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d10",
+   "conta": "pontes_brain",
+   "quando": "2026-11-11T19:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "O erro mais comum em entrevista de PM: ouvir o case e já sair desenhando a feature.",
+   "legenda": "O erro mais comum em entrevista de PM: ouvir o case e já sair desenhando a feature.\n\nO que o entrevistador quer ver é o caminho:\n1. Entender o problema e o contexto.\n2. Perguntar quem é o usuário.\n3. Definir como medir sucesso.\n4. Levantar hipóteses e priorizar.\n5. Só então propor a solução, com os riscos.\n\nNa mentoria a gente simula cases assim, com feedback na hora.\n\nSalva para a próxima entrevista. 📌\n\n👉 Quer acelerar sua carreira em produto? Conheça a mentoria 1:1: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira #entrevista",
+   "midia": [
+    "midia/d10-2026-11-11.jpg"
+   ],
+   "postizId": "cmvr2h7rw37rup71cqioajqgj"
+  },
+  {
+   "id": "s26",
+   "conta": "pontes_brain",
+   "quando": "2026-11-11T20:30:00-03:00",
+   "formato": "story-video",
+   "status": "manual",
+   "titulo": "Leo explica",
+   "midia": [],
+   "nota": "Story animado do Leo falando, com trilha calma (Como encerrar um projeto zumbi). Repostar o post do dia com o sticker \"post novo\"."
+  },
+  {
+   "id": "s07",
+   "conta": "pontes_brain",
+   "quando": "2026-11-12T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d11",
+   "conta": "pontes_brain",
+   "quando": "2026-11-12T12:15:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "A diretoria não quer saber se o projeto está 73% concluído. Quer saber se o dinheiro está ",
+   "legenda": "A diretoria não quer saber se o projeto está 73% concluído. Quer saber se o dinheiro está indo para o lugar certo.\n\n5 métricas que respondem isso: lead time, % estratégico, projetos em paralelo, benefício realizado e projetos encerrados a tempo.\n\nQuantas você mede hoje? Comenta o número 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #metricas",
+   "midia": [
+    "midia/d11-2026-11-12-01.jpg",
+    "midia/d11-2026-11-12-02.jpg",
+    "midia/d11-2026-11-12-03.jpg",
+    "midia/d11-2026-11-12-04.jpg",
+    "midia/d11-2026-11-12-05.jpg",
+    "midia/d11-2026-11-12-06.jpg",
+    "midia/d11-2026-11-12-07.jpg"
+   ],
+   "postizId": "cmvr2hdtq37rzp71c95oqh5mo"
+  },
+  {
+   "id": "s08",
+   "conta": "pontes_brain",
+   "quando": "2026-11-13T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d12",
+   "conta": "pontes_brain",
+   "quando": "2026-11-13T18:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Pergunta da caixinha: \"como eu digo não para um pedido do diretor?\"",
+   "legenda": "Pergunta da caixinha: \"como eu digo não para um pedido do diretor?\"\n\nVocê não diz \"não\". Você mostra o custo do \"sim\":\n\"Se a gente puxar isso agora, o projeto X atrasa 3 semanas. Prefere trocar a prioridade ou colocar isso para o próximo ciclo?\"\n\nDados na mão + duas opções = a decisão volta para quem tem autoridade, e você sai como parceiro, não como obstáculo.\n\nManda a sua pergunta na caixinha dos stories. As melhores viram post. 🎯\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#lideranca #gestaodeprojetos #productowner #carreira #comunicacao",
+   "midia": [
+    "midia/d12-2026-11-13.jpg"
+   ],
+   "postizId": "cmvr1l2gv36xgp71c1w7t62tm"
+  },
+  {
+   "id": "s09",
+   "conta": "pontes_brain",
+   "quando": "2026-11-14T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d13",
+   "conta": "pontes_brain",
+   "quando": "2026-11-14T10:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Quando discovery vira \"fase\", ela acaba. E aí o time passa meses construindo em cima do qu",
+   "legenda": "Quando discovery vira \"fase\", ela acaba. E aí o time passa meses construindo em cima do que achava no começo.\n\nUma conversa com usuário por semana já muda o jogo.\n\nSeu time conversa com usuário toda semana? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#discovery #produtodigital #productmanagement #ux",
+   "midia": [
+    "midia/d13-2026-11-14.jpg"
+   ],
+   "postizId": "cmvr1l48t36xjp71ci0esgq60"
+  },
+  {
+   "id": "s10",
+   "conta": "pontes_brain",
+   "quando": "2026-11-15T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d14",
+   "conta": "pontes_brain",
+   "quando": "2026-11-15T19:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Daily que vira status, refinamento de 2 horas, reunião de alinhamento do alinhamento...",
+   "legenda": "Daily que vira status, refinamento de 2 horas, reunião de alinhamento do alinhamento...\n\nSe você pudesse cortar um ritual do seu time amanhã, qual seria? E o que colocaria no lugar?\n\nOs comentários desta semana viram conteúdo. 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#agil #scrum #produtividade #gestaodeprojetos #productowner",
+   "midia": [
+    "midia/d14-2026-11-15.jpg"
+   ],
+   "postizId": "cmvr1l6103ix8pi1cd1wtxiia"
+  },
+  {
+   "id": "s11",
+   "conta": "pontes_brain",
+   "quando": "2026-11-16T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d15",
+   "conta": "pontes_brain",
+   "quando": "2026-11-16T12:15:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Um projeto que deveria gerar R$ 100 mil por mês e atrasa 3 meses custou R$ 300 mil. Ningué",
+   "legenda": "Um projeto que deveria gerar R$ 100 mil por mês e atrasa 3 meses custou R$ 300 mil. Ninguém lança isso em lugar nenhum.\n\nÉ o custo do atraso. E ele muda a conversa de priorização:\nem vez de \"qual é mais importante?\", a pergunta vira \"qual custa mais esperar?\".\n\nFaz a conta com o projeto mais atrasado da sua empresa. Assusta? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #custodoatraso",
+   "midia": [
+    "midia/d15-2026-11-16.jpg"
+   ],
+   "postizId": "cmvr1l8163ixfpi1c4i2md5va"
+  },
+  {
+   "id": "s12",
+   "conta": "pontes_brain",
+   "quando": "2026-11-17T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d16",
+   "conta": "pontes_brain",
+   "quando": "2026-11-17T07:45:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "PO e PM não são degraus da mesma escada. São ênfases diferentes do mesmo trabalho.",
+   "legenda": "PO e PM não são degraus da mesma escada. São ênfases diferentes do mesmo trabalho.\n\nPO: sprint, \"como?\", time, entrega.\nPM: trimestre, \"por quê?\", mercado, resultado.\n\nEm empresa pequena, a mesma pessoa faz os dois. E tudo bem, desde que saiba qual chapéu está usando.\n\nVocê é mais PO ou mais PM hoje? 👇\n\n👉 Quer acelerar sua carreira em produto? Conheça a mentoria 1:1: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira",
+   "midia": [
+    "midia/d16-2026-11-17-01.jpg",
+    "midia/d16-2026-11-17-02.jpg",
+    "midia/d16-2026-11-17-03.jpg",
+    "midia/d16-2026-11-17-04.jpg",
+    "midia/d16-2026-11-17-05.jpg",
+    "midia/d16-2026-11-17-06.jpg"
+   ],
+   "postizId": "cmvr2hjeo37s6p71cb8f5yfvv"
+  },
+  {
+   "id": "s13",
+   "conta": "pontes_brain",
+   "quando": "2026-11-18T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d17",
+   "conta": "pontes_brain",
+   "quando": "2026-11-18T19:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Trabalhar mais horas mostra dedicação. Assumir um problema maior mostra que você está pron",
+   "legenda": "Trabalhar mais horas mostra dedicação. Assumir um problema maior mostra que você está pronto para o próximo nível.\n\n3 jeitos de aumentar o escopo sem pedir permissão:\n1. Resolva um problema que fica entre dois times.\n2. Traga dados que ninguém pediu, mas todo mundo usa.\n3. Ensine o que você faz bem para outra pessoa.\n\nQual dos três você consegue começar esta semana? 👇\n\n👉 Quer acelerar sua carreira em produto? Conheça a mentoria 1:1: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira #promocao",
+   "midia": [
+    "midia/d17-2026-11-18.jpg"
+   ],
+   "postizId": "cmvr2hlse3l2zpi1c8z1sh2xj"
+  },
+  {
+   "id": "s27",
+   "conta": "pontes_brain",
+   "quando": "2026-11-18T20:30:00-03:00",
+   "formato": "story-video",
+   "status": "manual",
+   "titulo": "Leo explica",
+   "midia": [],
+   "nota": "Story animado do Leo falando, com trilha calma (Do status ao benefício). Repostar o post do dia com o sticker \"post novo\"."
+  },
+  {
+   "id": "s14",
+   "conta": "pontes_brain",
+   "quando": "2026-11-19T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d18",
+   "conta": "pontes_brain",
+   "quando": "2026-11-19T12:15:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "G4 Benefits é o gate que quase toda empresa pula. Entrega, comemora e nunca confere se o b",
+   "legenda": "G4 Benefits é o gate que quase toda empresa pula. Entrega, comemora e nunca confere se o benefício veio.\n\nOs 5 passos para trocar o status report por um painel de benefícios estão no carrossel.\n\nSua empresa mede o que foi prometido no business case? Sim, não ou \"às vezes\"? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #pdca",
+   "midia": [
+    "midia/d18-2026-11-19-01.jpg",
+    "midia/d18-2026-11-19-02.jpg",
+    "midia/d18-2026-11-19-03.jpg",
+    "midia/d18-2026-11-19-04.jpg",
+    "midia/d18-2026-11-19-05.jpg",
+    "midia/d18-2026-11-19-06.jpg",
+    "midia/d18-2026-11-19-07.jpg"
+   ],
+   "postizId": "cmvr2ht5f37sap71c8z03jz3x"
+  },
+  {
+   "id": "s15",
+   "conta": "pontes_brain",
+   "quando": "2026-11-20T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d19",
+   "conta": "pontes_brain",
+   "quando": "2026-11-20T18:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Como é um diagnóstico de maturidade por dentro:",
+   "legenda": "Como é um diagnóstico de maturidade por dentro:\n\nSemana 1: entrevistas com liderança e times, leitura de processos, artefatos e ferramentas.\nSemana 2: score de cada gate (G1 a G4) com a mesma régua e mapa de gargalos.\nSemana 3: roadmap priorizado e apresentação executiva para a liderança.\n\nSem consultoria de PowerPoint: o relatório fica com a empresa, que pode executar com o próprio time.\n\nQuer ver se faz sentido para a sua? Link na bio. 🔗\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #consultoria",
+   "midia": [
+    "midia/d19-2026-11-20.jpg"
+   ],
+   "postizId": "cmvr2hvh23l3tpi1cbk50i87e"
+  },
+  {
+   "id": "s16",
+   "conta": "pontes_brain",
+   "quando": "2026-11-21T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d20",
+   "conta": "pontes_brain",
+   "quando": "2026-11-21T10:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Lista de prioridades com 12 itens não é lista de prioridades. É lista de desejos.",
+   "legenda": "Lista de prioridades com 12 itens não é lista de prioridades. É lista de desejos.\n\nO que você disse não esta semana para proteger o que importa? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#priorizacao #lideranca #produtividade #gestao",
+   "midia": [
+    "midia/d20-2026-11-21.jpg"
+   ],
+   "postizId": "cmvr1lomi3iyspi1cbk68pbey"
+  },
+  {
+   "id": "s17",
+   "conta": "pontes_brain",
+   "quando": "2026-11-22T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d21",
+   "conta": "pontes_brain",
+   "quando": "2026-11-22T19:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "O meu me ensinou a perguntar \"o que você precisa de mim?\" antes de cobrar qualquer coisa.",
+   "legenda": "O meu me ensinou a perguntar \"o que você precisa de mim?\" antes de cobrar qualquer coisa.\n\nE o seu? Qual foi o melhor líder que você teve, e o que ele fazia diferente?\n\nVale marcar a pessoa. 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#lideranca #carreira #gestaodepessoas #productmanager",
+   "midia": [
+    "midia/d21-2026-11-22.jpg"
+   ],
+   "postizId": "cmvr1lqnl3iyupi1cgez6igsx"
+  },
+  {
+   "id": "s18",
+   "conta": "pontes_brain",
+   "quando": "2026-11-23T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d22",
+   "conta": "pontes_brain",
+   "quando": "2026-11-23T12:15:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Toda empresa tem aquela ideia que \"todo mundo acha ótima\" e que está no backlog há dois an",
+   "legenda": "Toda empresa tem aquela ideia que \"todo mundo acha ótima\" e que está no backlog há dois anos.\n\nO problema raramente é a ideia. É que ninguém é dono dela.\n\nNo G1 Intake, nenhuma ideia entra sem:\n• um dono com nome e sobrenome;\n• um problema claro;\n• uma data para ser decidida (sim ou não).\n\nQual é a ideia eterna do seu backlog? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca",
+   "midia": [
+    "midia/d22-2026-11-23.jpg"
+   ],
+   "postizId": "cmvr1lsje36y0p71ccbpmdd99"
+  },
+  {
+   "id": "s19",
+   "conta": "pontes_brain",
+   "quando": "2026-11-24T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d23",
+   "conta": "pontes_brain",
+   "quando": "2026-11-24T07:45:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Não existe melhor método de priorização. Existe o método certo para cada pergunta.",
+   "legenda": "Não existe melhor método de priorização. Existe o método certo para cada pergunta.\n\nRICE: muitas ideias pequenas.\nMoSCoW: escopo de uma entrega com prazo fixo.\nCusto do atraso: sequência de projetos no portfólio.\n\nE a regra de ouro: combine o critério antes da disputa começar.\n\nQual vocês usam? Vale responder \"o mais barulhento ganha\" 😅 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #rice #moscow",
+   "midia": [
+    "midia/d23-2026-11-24-01.jpg",
+    "midia/d23-2026-11-24-02.jpg",
+    "midia/d23-2026-11-24-03.jpg",
+    "midia/d23-2026-11-24-04.jpg",
+    "midia/d23-2026-11-24-05.jpg",
+    "midia/d23-2026-11-24-06.jpg"
+   ],
+   "postizId": "cmvr2i1d537sep71cz9xxtp6s"
+  },
+  {
+   "id": "s20",
+   "conta": "pontes_brain",
+   "quando": "2026-11-25T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d24",
+   "conta": "pontes_brain",
+   "quando": "2026-11-25T19:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Muita gente quer \"virar PM\" e começa pelo curso. Eu começaria pelo problema.",
+   "legenda": "Muita gente quer \"virar PM\" e começa pelo curso. Eu começaria pelo problema.\n\n3 passos para a transição:\n1. Ache um problema real no seu trabalho atual que afete clientes.\n2. Investigue com dados e conversas, e proponha uma solução pequena.\n3. Conte essa história no LinkedIn e nas entrevistas: problema, hipótese, resultado.\n\nEsse caso vale mais que três certificados.\n\nVocê está em transição? Conta de onde está vindo 👇\n\n👉 Quer acelerar sua carreira em produto? Conheça a mentoria 1:1: leopontes.com.br/mentoria-produto (link na bio)\n\n#productmanager #productowner #carreiraemproduto #mentoria #produtodigital #carreira #transicaodecarreira",
+   "midia": [
+    "midia/d24-2026-11-25.jpg"
+   ],
+   "postizId": "cmvr2i3pz3l4jpi1cqdtnv8p2"
+  },
+  {
+   "id": "s28",
+   "conta": "pontes_brain",
+   "quando": "2026-11-25T20:30:00-03:00",
+   "formato": "story-video",
+   "status": "manual",
+   "titulo": "Leo explica",
+   "midia": [],
+   "nota": "Story animado do Leo falando, com trilha calma (Vagas fundador). Repostar o post do dia com o sticker \"post novo\"."
+  },
+  {
+   "id": "s21",
+   "conta": "pontes_brain",
+   "quando": "2026-11-26T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d25",
+   "conta": "pontes_brain",
+   "quando": "2026-11-26T12:15:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Todo mundo quer IA no PMO. Pouca gente tem a base para ela funcionar.",
+   "legenda": "Todo mundo quer IA no PMO. Pouca gente tem a base para ela funcionar.\n\nAntes de comprar ferramenta: dados num lugar só, status padronizado, critérios escritos, dono da governança e um caso de uso pequeno.\n\nQuantos você marcou de 0 a 5? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #ia #inteligenciaartificial",
+   "midia": [
+    "midia/d25-2026-11-26-01.jpg",
+    "midia/d25-2026-11-26-02.jpg",
+    "midia/d25-2026-11-26-03.jpg",
+    "midia/d25-2026-11-26-04.jpg",
+    "midia/d25-2026-11-26-05.jpg",
+    "midia/d25-2026-11-26-06.jpg",
+    "midia/d25-2026-11-26-07.jpg"
+   ],
+   "postizId": "cmvr2ia393l54pi1cmnwkabyf"
+  },
+  {
+   "id": "s22",
+   "conta": "pontes_brain",
+   "quando": "2026-11-27T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d26",
+   "conta": "pontes_brain",
+   "quando": "2026-11-27T18:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Pergunta da caixinha: \"vale a pena tirar a certificação PMP?\"",
+   "legenda": "Pergunta da caixinha: \"vale a pena tirar a certificação PMP?\"\n\nVale se você precisa provar vocabulário e método para entrar em empresas que exigem (setor público, grandes corporações, consultorias).\n\nNão resolve sozinha se o que falta é experiência em decidir prioridade, negociar escopo e medir resultado. Isso se prova com casos.\n\nCertificação abre a porta. Caso de verdade faz você ficar.\n\nManda a sua dúvida na caixinha dos stories. 🎯\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#pmp #gerenciamentodeprojetos #carreira #certificacao #pmo",
+   "midia": [
+    "midia/d26-2026-11-27.jpg"
+   ],
+   "postizId": "cmvr1m74v3j0epi1cua3p2ix2"
+  },
+  {
+   "id": "s23",
+   "conta": "pontes_brain",
+   "quando": "2026-11-28T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d27",
+   "conta": "pontes_brain",
+   "quando": "2026-11-28T10:00:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "O go-live é o meio do caminho. O fim é quando você confere se o benefício prometido aparec",
+   "legenda": "O go-live é o meio do caminho. O fim é quando você confere se o benefício prometido apareceu.\n\nQuando foi a última vez que você mediu algo 90 dias depois de entregar? 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeprojetos #produtodigital #metricas #pdca",
+   "midia": [
+    "midia/d27-2026-11-28.jpg"
+   ],
+   "postizId": "cmvr1m8vp3j0jpi1cy2rlrt33"
+  },
+  {
+   "id": "s24",
+   "conta": "pontes_brain",
+   "quando": "2026-11-29T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d28",
+   "conta": "pontes_brain",
+   "quando": "2026-11-29T19:30:00-03:00",
+   "formato": "post",
+   "status": "agendado",
+   "titulo": "Um mês de conteúdo por aqui. Se fez sentido para você, dá para ir além:",
+   "legenda": "Um mês de conteúdo por aqui. Se fez sentido para você, dá para ir além:\n\n🎯 Mentoria 1:1 para PMs, POs e líderes de produto\n2 sessões de 60 min por mês + WhatsApp entre as sessões.\nR$ 997/mês nas 5 vagas fundador, sem fidelidade.\n\n🏢 Diagnóstico de maturidade de PMO e portfólio\n2 a 3 semanas, score por gate, roadmap priorizado e apresentação executiva.\nR$ 7.500 nas 3 vagas fundador.\n\nA conversa inicial de 30 minutos é gratuita. Link na bio ou me chama no direct.\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#mentoria #pmo #productmanager #consultoria #gestaodeportfolio",
+   "midia": [
+    "midia/d28-2026-11-29.jpg"
+   ],
+   "postizId": "cmvr2icbb3l5bpi1cfr0hxlba"
+  },
+  {
+   "id": "s25",
+   "conta": "pontes_brain",
+   "quando": "2026-11-30T07:30:00-03:00",
+   "formato": "story",
+   "status": "manual",
+   "titulo": "Story do dia",
+   "midia": [],
+   "nota": "Story de abertura do dia com sticker interativo. No horário do post do feed, repostar com o sticker \"post novo\"."
+  },
+  {
+   "id": "d29",
+   "conta": "pontes_brain",
+   "quando": "2026-11-30T12:15:00-03:00",
+   "formato": "carrossel",
+   "status": "agendado",
+   "titulo": "Novembro em 4 gates. Obrigado por acompanhar o primeiro mês do @pontes_brain!",
+   "legenda": "Novembro em 4 gates. Obrigado por acompanhar o primeiro mês do @pontes_brain!\n\nQual gate você quer aprofundar em dezembro? Comenta G1, G2, G3 ou G4. O mais votado puxa a série do mês que vem. 👇\n\n👉 Mentoria 1:1 para PMs, POs e líderes de PMO: leopontes.com.br/mentoria-produto (link na bio)\n\n#gestaodeportfolio #pmo #gestaodeprojetos #priorizacao #governanca #lideranca #pdca",
+   "midia": [
+    "midia/d29-2026-11-30-01.jpg",
+    "midia/d29-2026-11-30-02.jpg",
+    "midia/d29-2026-11-30-03.jpg",
+    "midia/d29-2026-11-30-04.jpg",
+    "midia/d29-2026-11-30-05.jpg",
+    "midia/d29-2026-11-30-06.jpg"
+   ],
+   "postizId": "cmvr2ihqj37spp71cnusneyyj"
+  }
+ ]
+}
