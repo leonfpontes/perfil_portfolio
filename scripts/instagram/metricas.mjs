@@ -48,8 +48,8 @@ function valores(json) {
 // Números extras, que nem todo tipo de post ou versão da API aceita: pedidos à parte, um a um,
 // para que a recusa de um não apague os outros.
 const EXTRAS = {
-  FEED: ["follows", "profile_visits", "reposts", "likes", "comments"],
-  REELS: ["follows", "profile_visits", "reposts", "likes", "comments", "ig_reels_video_view_total_time"],
+  FEED: ["follows", "profile_visits", "likes", "comments"],
+  REELS: ["likes", "comments", "ig_reels_video_view_total_time"],
   STORY: ["follows", "profile_visits", "navigation"],
 };
 const recusadas = new Set();
@@ -88,7 +88,7 @@ async function insightsMidia(m, token) {
   }
   if (tipo !== "STORY" && !recusadas.has(`${tipo}:follow_type`)) {
     try {
-      const q = quebra(await api(`/${m.id}/insights`, { metric: "views,reach", breakdown: "follow_type", metric_type: "total_value" }, token));
+      const q = quebra(await api(`/${m.id}/insights`, { metric: "reach", breakdown: "follow_type", metric_type: "total_value" }, token));
       if (Object.keys(q).length) insights.porSeguidor = q;
     } catch (error) {
       recusadas.add(`${tipo}:follow_type`);
