@@ -45,13 +45,57 @@ function valores(json) {
   return out;
 }
 
+// Números extras, que nem todo tipo de post ou versão da API aceita: pedidos à parte, um a um,
+// para que a recusa de um não apague os outros.
+const EXTRAS = {
+  FEED: ["follows", "profile_visits", "reposts", "likes", "comments"],
+  REELS: ["follows", "profile_visits", "reposts", "likes", "comments", "ig_reels_video_view_total_time"],
+  STORY: ["follows", "profile_visits", "navigation"],
+};
+const recusadas = new Set();
+export const avisos = [];
+
+/** Quebra (ex.: seguidores × não seguidores) de uma métrica, quando a API aceita. */
+function quebra(json) {
+  const out = {};
+  for (const m of json.data ?? []) {
+    for (const r of m.total_value?.breakdowns?.[0]?.results ?? []) out[`${m.name}:${r.dimension_values?.join("/")}`] = r.value;
+  }
+  return out;
+}
+
 async function insightsMidia(m, token) {
   const tipo = m.media_product_type === "REELS" ? "REELS" : m.media_product_type === "STORY" ? "STORY" : "FEED";
+  const extras = EXTRAS[tipo].filter((x) => !recusadas.has(`${tipo}:${x}`));
+  let insights;
   try {
-    return { insights: valores(await api(`/${m.id}/insights`, { metric: METRICAS[tipo] }, token)) };
-  } catch (error) {
-    return { erroInsights: error.message };
+    // Uma chamada só, no caso comum; se a API recusar alguma métrica, cai para uma a uma.
+    insights = valores(await api(`/${m.id}/insights`, { metric: [METRICAS[tipo], ...extras].join(",") }, token));
+  } catch {
+    try {
+      insights = valores(await api(`/${m.id}/insights`, { metric: METRICAS[tipo] }, token));
+    } catch (error) {
+      return { erroInsights: error.message };
+    }
+    for (const metrica of extras) {
+      try {
+        Object.assign(insights, valores(await api(`/${m.id}/insights`, { metric: metrica }, token)));
+      } catch (error) {
+        recusadas.add(`${tipo}:${metrica}`);
+        avisos.push(`${tipo}:${metrica} recusada: ${error.message}`);
+      }
+    }
   }
+  if (tipo !== "STORY" && !recusadas.has(`${tipo}:follow_type`)) {
+    try {
+      const q = quebra(await api(`/${m.id}/insights`, { metric: "views,reach", breakdown: "follow_type", metric_type: "total_value" }, token));
+      if (Object.keys(q).length) insights.porSeguidor = q;
+    } catch (error) {
+      recusadas.add(`${tipo}:follow_type`);
+      avisos.push(`${tipo}:follow_type recusada: ${error.message}`);
+    }
+  }
+  return { insights };
 }
 
 function resumoMidia(m) {
@@ -68,6 +112,39 @@ function resumoMidia(m) {
     // Link temporário (expira em dias): o painel copia a imagem para ele na sincronização.
     imagem: m.thumbnail_url ?? (m.media_type === "VIDEO" ? null : m.media_url) ?? null,
   };
+}
+
+/**
+ * Linha do tempo dos números de um post: o Instagram só dá o valor de agora, então cada coleta
+ * acrescenta um ponto. De hora em hora nas primeiras 48 h (quando o post mais cresce), depois um
+ * ponto por dia, até 60 dias.
+ */
+function serie(anterior = [], item) {
+  if (!item.insights && item.curtidas == null) return anterior;
+  const agora = Date.now();
+  const ponto = {
+    t: new Date(agora).toISOString().slice(0, 16) + "Z",
+    views: item.insights?.views ?? null,
+    reach: item.insights?.reach ?? null,
+    curtidas: item.curtidas,
+    comentarios: item.comentarios,
+    saved: item.insights?.saved ?? null,
+    shares: item.insights?.shares ?? null,
+    total_interactions: item.insights?.total_interactions ?? null,
+    follows: item.insights?.follows ?? null,
+    profile_visits: item.insights?.profile_visits ?? null,
+  };
+  const idade = (t) => new Date(t) - new Date(item.quando);
+  const pontos = [...anterior.filter((p) => p.t !== ponto.t), ponto]
+    .filter((p) => agora - new Date(p.t) < 60 * 86400_000);
+  // Depois de 48 h de vida do post, fica só o último ponto de cada dia.
+  const porDia = new Map();
+  const saida = [];
+  for (const p of pontos) {
+    if (idade(p.t) < 48 * 3600_000) saida.push(p);
+    else porDia.set(p.t.slice(0, 10), p);
+  }
+  return [...saida, ...porDia.values()].sort((a, b) => a.t.localeCompare(b.t));
 }
 
 async function resumoConta(userId, token, dias) {
@@ -111,7 +188,17 @@ async function coletar(conta, token, anterior) {
   r.posts = [];
   for (const m of midia) {
     const item = resumoMidia(m);
-    if (new Date(m.timestamp) >= limite) Object.assign(item, await insightsMidia(m, token));
+    item.quando = m.timestamp;
+    // Posts de até 30 dias: toda hora. Mais velhos (até 90 dias): uma vez por dia, de madrugada,
+    // para não gastar a cota de chamadas da API com números que quase não mudam.
+    const antes = anterior?.posts?.find((p) => p.id === m.id);
+    const recente = Date.now() - new Date(m.timestamp) < 30 * 86400_000;
+    const madrugada = new Date().getUTCHours() === 6;
+    if (new Date(m.timestamp) >= limite) {
+      if (recente || madrugada || !antes?.insights) Object.assign(item, await insightsMidia(m, token));
+      else Object.assign(item, { insights: antes.insights });
+    }
+    item.serie = serie(antes?.serie, item);
     r.posts.push(item);
   }
 
@@ -129,6 +216,44 @@ async function coletar(conta, token, anterior) {
   r.storiesRecentes = [...vistos.values()]
     .filter((s) => Date.now() - new Date(s.quando) < 30 * 86400_000)
     .sort((a, b) => b.quando.localeCompare(a.quando));
+
+  // Série diária da conta (o Instagram guarda até 30 dias por consulta).
+  r.diario = {};
+  for (const metrica of ["reach", "follower_count"]) {
+    try {
+      const until = Math.floor(Date.now() / 1000);
+      const json = await api(`/${perfil.user_id}/insights`, { metric: metrica, period: "day", since: String(until - 29 * 86400), until: String(until) }, token);
+      r.diario[metrica] = (json.data?.[0]?.values ?? []).map((v) => ({ dia: v.end_time?.slice(0, 10), valor: v.value }));
+    } catch (error) {
+      r.diario[metrica] = { erro: error.message };
+    }
+  }
+
+  // Público da conta: seguidores × não seguidores nos últimos 7 dias e perfil demográfico.
+  r.publico = {};
+  try {
+    const until = Math.floor(Date.now() / 1000);
+    r.publico.porSeguidor = quebra(await api(`/${perfil.user_id}/insights`, {
+      metric: "reach,views", period: "day", metric_type: "total_value", breakdown: "follow_type",
+      since: String(until - 7 * 86400), until: String(until),
+    }, token));
+  } catch (error) {
+    r.publico.erroPorSeguidor = error.message;
+  }
+  for (const [nome, metrica] of [["seguidores", "follower_demographics"], ["engajados", "engaged_audience_demographics"]]) {
+    r.publico[nome] = {};
+    for (const corte of ["age", "gender", "city", "country"]) {
+      try {
+        r.publico[nome][corte] = quebra(await api(`/${perfil.user_id}/insights`, {
+          metric: metrica, period: "lifetime", metric_type: "total_value", breakdown: corte,
+          ...(nome === "engajados" ? { timeframe: "this_month" } : {}),
+        }, token));
+      } catch (error) {
+        r.publico[nome].erro = error.message;
+        break;
+      }
+    }
+  }
 
   r.resumo = {};
   for (const dias of [7, 28]) {
@@ -164,12 +289,16 @@ async function main() {
       const erro = c.posts.find((p) => p.erroInsights)?.erroInsights;
       if (erro) console.log(`${conta}: insights de post recusados (${erro})`);
       for (const [k, v] of Object.entries(c.resumo)) console.log(`${conta} ${k}: ${JSON.stringify(v)}`);
+      if (c.publico?.erroPorSeguidor) console.log(`${conta}: seguidores × não seguidores recusado (${c.publico.erroPorSeguidor})`);
+      if (c.publico?.seguidores?.erro) console.log(`${conta}: demografia recusada (${c.publico.seguidores.erro})`);
+      for (const [k, v] of Object.entries(c.diario ?? {})) console.log(`${conta} diário ${k}: ${Array.isArray(v) ? v.length + " dias" : v.erro}`);
       if (c.erroStories) console.log(`${conta}: stories recusados (${c.erroStories})`);
     } catch (error) {
       saida.contas[conta] = { ...anterior.contas?.[conta], erro: error.message };
       console.log(`${conta}: falhou (${error.message})`);
     }
   }
+  for (const aviso of new Set(avisos)) console.log(aviso);
   fs.writeFileSync(SAIDA, JSON.stringify(saida, null, 1) + "\n");
 }
 
