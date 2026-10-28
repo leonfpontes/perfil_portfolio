@@ -43,7 +43,13 @@ grava("agenda.json", {
   }),
 });
 
-const semImagem = ({ imagem, ...resto }) => resto;
+// A série de cada post vai compacta (o documento do painel tem limite de 256 KB):
+// [hora, views, alcance, curtidas, interações, salvos, compartilhamentos, comentários].
+const SERIE = ["t", "views", "reach", "curtidas", "total_interactions", "saved", "shares", "comentarios"];
+const semImagem = ({ imagem, serie, ...resto }) => ({
+  ...resto,
+  ...(serie?.length ? { serie: serie.map((p) => SERIE.map((k) => p[k] ?? null)) } : {}),
+});
 for (const [conta, c] of Object.entries(metricas.contas ?? {})) {
   grava(`metricas-${conta}.json`, {
     geradoEm: metricas.geradoEm,
@@ -54,6 +60,8 @@ for (const [conta, c] of Object.entries(metricas.contas ?? {})) {
     posts: (c.posts ?? []).map(semImagem),
     stories: (c.storiesRecentes ?? []).map(semImagem),
     historico: c.historico ?? [],
+    diario: c.diario ?? {},
+    publico: c.publico ?? {},
   });
 }
 
