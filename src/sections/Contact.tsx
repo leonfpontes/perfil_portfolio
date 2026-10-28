@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Funil } from '@/components/art/Funil';
 import { Arrow } from '@/components/common/Arrow';
 import { Container } from '@/components/common/Section';
+import { SocialIcon } from '@/components/common/SocialIcon';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { Magnetic } from '@/components/motion/Magnetic';
 import { Scene } from '@/components/motion/Scene';
@@ -71,6 +72,7 @@ export function Contact() {
                   className={cn('group w-full text-base', profile.bookingUrl ? 'h-12 bg-transparent' : 'h-16')}
                 >
                   <TrackedLink href={contact.whatsapp(copy.whatsappMessage)} trackLabel="contact_whatsapp">
+                    <SocialIcon name="whatsapp" />
                     {copy.channels.whatsapp} <Arrow />
                   </TrackedLink>
                 </Button>
@@ -83,11 +85,17 @@ export function Contact() {
                 </li>
               ))}
             </ul>
-            <div className="flex gap-6 text-sm">
-              <TrackedLink href={profile.linkedin} trackEvent="outbound_click" trackLabel="contact_linkedin" className="group underline underline-offset-4 hover:text-signal">
+            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+              <TrackedLink href={profile.instagram} trackEvent="outbound_click" trackLabel="contact_instagram" className="group inline-flex items-center gap-2 underline underline-offset-4 hover:text-signal">
+                <SocialIcon name="instagram" className="size-4" />
+                {copy.channels.instagram} <Arrow direction="up-right" />
+              </TrackedLink>
+              <TrackedLink href={profile.linkedin} trackEvent="outbound_click" trackLabel="contact_linkedin" className="group inline-flex items-center gap-2 underline underline-offset-4 hover:text-signal">
+                <SocialIcon name="linkedin" className="size-4" />
                 {copy.channels.linkedin} <Arrow direction="up-right" />
               </TrackedLink>
-              <TrackedLink href={profile.github} trackEvent="outbound_click" trackLabel="contact_github" className="group underline underline-offset-4 hover:text-signal">
+              <TrackedLink href={profile.github} trackEvent="outbound_click" trackLabel="contact_github" className="group inline-flex items-center gap-2 underline underline-offset-4 hover:text-signal">
+                <SocialIcon name="github" className="size-4" />
                 {copy.channels.github} <Arrow direction="up-right" />
               </TrackedLink>
             </div>

@@ -304,6 +304,7 @@ export interface Contact extends SectionHeading {
     email: string;
     linkedin: string;
     github: string;
+    instagram: string;
   };
   whatsappMessage: string;
   emailSubject: string;

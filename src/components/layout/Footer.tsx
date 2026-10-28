@@ -1,5 +1,6 @@
 import { Container } from '@/components/common/Section';
 import { MotionToggle } from './MotionControls';
+import { SocialIcon, type SocialNetwork } from '@/components/common/SocialIcon';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { profile } from '@/content/profile';
 import { useContent } from '@/lib/i18n/LocaleProvider';
@@ -7,9 +8,14 @@ import { navHref, pathOf } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
 
 export function Footer() {
-  const { footer, nav } = useContent();
+  const { footer, nav, contact: contactCopy } = useContent();
   const { contact } = useServices();
   const year = new Date().getFullYear();
+  const socials: { name: SocialNetwork; href: string; label: string }[] = [
+    { name: 'instagram', href: profile.instagram, label: `Instagram ${profile.instagramHandle}` },
+    { name: 'whatsapp', href: contact.whatsapp(contactCopy.whatsappMessage), label: 'WhatsApp' },
+    { name: 'linkedin', href: profile.linkedin, label: 'LinkedIn' },
+  ];
 
   return (
     <footer className="border-t border-border">
@@ -18,6 +24,22 @@ export function Footer() {
           <p className="font-display text-4xl leading-none">{profile.brand}</p>
           <p className="mt-2 font-serif text-xl text-signal italic">{profile.shortName}</p>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">{footer.tagline}</p>
+          <ul className="mt-6 flex gap-3">
+            {socials.map((s) => (
+              <li key={s.name}>
+                <TrackedLink
+                  href={s.href}
+                  trackEvent={s.name === 'whatsapp' ? undefined : 'outbound_click'}
+                  trackLabel={`footer_icon_${s.name}`}
+                  aria-label={s.label}
+                  title={s.label}
+                  className="glass flex size-11 items-center justify-center rounded-[10px] text-foreground transition-colors hover:text-signal"
+                >
+                  <SocialIcon name={s.name} />
+                </TrackedLink>
+              </li>
+            ))}
+          </ul>
         </div>
         <nav aria-label="Rodapé" className="md:col-span-4">
           <ul className="grid grid-cols-2 gap-y-2 text-sm">
@@ -44,6 +66,16 @@ export function Footer() {
           <li>
             <TrackedLink href={contact.email()} trackLabel="footer_email" className="link-rule">
               {profile.email}
+            </TrackedLink>
+          </li>
+          <li>
+            <TrackedLink href={contact.whatsapp(contactCopy.whatsappMessage)} trackLabel="footer_whatsapp" className="link-rule">
+              WhatsApp
+            </TrackedLink>
+          </li>
+          <li>
+            <TrackedLink href={profile.instagram} trackEvent="outbound_click" trackLabel="footer_instagram" className="link-rule">
+              Instagram {profile.instagramHandle}
             </TrackedLink>
           </li>
           <li>

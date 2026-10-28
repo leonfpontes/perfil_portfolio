@@ -829,6 +829,7 @@ export const en: SiteContent = {
       email: 'Send an email',
       linkedin: 'Connect on LinkedIn',
       github: 'View GitHub',
+      instagram: 'Follow on Instagram',
     },
     whatsappMessage: "Hi, Leonardo! I saw your website and I'd like to talk about mentoring/consulting.",
     emailSubject: 'Contact via website · LP · Product & Portfolio',

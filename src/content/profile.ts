@@ -14,6 +14,9 @@ export const profile = {
   whatsapp: '5516991091234',
   linkedin: 'https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/',
   github: 'https://github.com/leonfpontes',
+  /** Perfil profissional (@pontes_brain): conteúdo diário sobre produto e portfólio. */
+  instagram: 'https://www.instagram.com/pontes_brain/',
+  instagramHandle: '@pontes_brain',
   /**
    * Página de agendamento do Google Agenda ("Agenda de horários" → compartilhar
    * → link). Com `null`, os botões de agenda não aparecem e o site usa só

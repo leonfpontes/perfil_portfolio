@@ -141,4 +141,16 @@ describe('<App />', () => {
     expect(document.documentElement.classList.contains('dark')).toBe(false);
     expect(screen.queryByRole('button', { name: /alternar tema/i })).not.toBeInTheDocument();
   });
+
+  it('a página da mentoria leva ao Instagram @pontes_brain e ao WhatsApp no contato e no rodapé', () => {
+    renderApp('/mentoria-produto');
+    const instagram = 'https://www.instagram.com/pontes_brain/';
+    const contact = document.getElementById('contato')!;
+    expect(within(contact).getByRole('link', { name: /seguir no instagram/i })).toHaveAttribute('href', instagram);
+    const footer = screen.getByRole('contentinfo');
+    for (const link of within(footer).getAllByRole('link', { name: 'Instagram @pontes_brain' })) {
+      expect(link).toHaveAttribute('href', instagram);
+    }
+    expect(within(footer).getAllByRole('link', { name: /whatsapp/i })[0]).toHaveAttribute('href', expect.stringContaining('wa.me'));
+  });
 });

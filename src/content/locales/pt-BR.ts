@@ -829,6 +829,7 @@ export const ptBR: SiteContent = {
       email: 'Enviar e-mail',
       linkedin: 'Conectar no LinkedIn',
       github: 'Ver GitHub',
+      instagram: 'Seguir no Instagram',
     },
     whatsappMessage: 'Olá, Leonardo! Vi seu site e gostaria de conversar sobre mentoria/consultoria.',
     emailSubject: 'Contato pelo site · LP · Product & Portfolio',
