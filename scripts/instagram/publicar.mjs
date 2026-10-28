@@ -14,7 +14,7 @@
  * - Até 3 tentativas por post; na terceira falha, e-mail de alerta (Resend, como o monitor de
  *   disponibilidade).
  * - Imagens precisam estar numa URL pública em JPEG: usamos o arquivo do próprio repositório
- *   (raw.githubusercontent.com), então a mídia tem de estar commitada na main antes da hora.
+ *   (jsDelivr no commit da rodada), então a mídia tem de estar commitada na main antes da hora.
  *
  * Variáveis: IG_TOKEN_<CONTA> (ex.: IG_TOKEN_PONTES_BRAIN), RESEND_API_KEY, ALERTA_EMAIL,
  * MIDIA_BASE (padrão: raw da main), AGORA (ISO, só para teste), SOMENTE (id de um post para
@@ -25,9 +25,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 const AGENDA = process.env.AGENDA_ARQUIVO ?? "instagram/agenda.json";
+// jsDelivr no commit exato da rodada: devolve o tipo certo (video/mp4, image/jpeg), que o raw
+// do GitHub não manda para vídeo, e um commit fixo nunca fica preso em cache velho.
 const MIDIA_BASE =
   process.env.MIDIA_BASE ??
-  "https://raw.githubusercontent.com/leonfpontes/perfil_portfolio/main/instagram/";
+  (process.env.GITHUB_SHA
+    ? `https://cdn.jsdelivr.net/gh/leonfpontes/perfil_portfolio@${process.env.GITHUB_SHA}/instagram/`
+    : "https://raw.githubusercontent.com/leonfpontes/perfil_portfolio/main/instagram/");
 const GRAPH = "https://graph.instagram.com/v23.0";
 const JANELA_HORAS = Number(process.env.JANELA_HORAS ?? 6);
 const MAX_TENTATIVAS = 3;
