@@ -20,6 +20,10 @@ on:
         description: "Só mostrar o que faria, sem publicar"
         type: boolean
         default: false
+      verificar:
+        description: "Só conferir os tokens das contas, sem publicar"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -49,6 +53,7 @@ jobs:
           ALERTA_EMAIL: ${{ secrets.ALERTA_EMAIL }}
           SOMENTE: ${{ inputs.post }}
           SIMULAR: ${{ inputs.simular && '1' || '' }}
+          VERIFICAR: ${{ inputs.verificar && '1' || '' }}
         run: node scripts/instagram/publicar.mjs
 
       - name: Gravar o resultado na agenda
