@@ -59,7 +59,7 @@ function person(): Json {
     alumniOf: ['Universidade de São Paulo', 'Estácio', 'Instituto Federal de São Paulo'],
     knowsAbout: ['Gestão de produtos digitais', 'PMO', 'Governança de portfólio', 'Product Discovery', 'Dados e IA'],
     address: { '@type': 'PostalAddress', addressLocality: 'Ribeirão Preto', addressRegion: 'SP', addressCountry: 'BR' },
-    sameAs: [profile.linkedin, profile.github],
+    sameAs: [profile.linkedin, profile.github, profile.instagram],
   };
 }
 
@@ -78,7 +78,7 @@ function business(content: SiteContent): Json {
     priceRange: `R$ ${Math.min(...prices).toLocaleString('pt-BR')} – R$ ${Math.max(...prices).toLocaleString('pt-BR')}`,
     address: { '@type': 'PostalAddress', addressLocality: 'Ribeirão Preto', addressRegion: 'SP', addressCountry: 'BR' },
     areaServed: { '@type': 'Country', name: 'Brasil' },
-    sameAs: [profile.linkedin],
+    sameAs: [profile.linkedin, profile.instagram],
   };
 }
 

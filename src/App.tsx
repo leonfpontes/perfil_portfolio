@@ -1,6 +1,7 @@
 import { useEffect, type ComponentType } from 'react';
 import { Arrow } from '@/components/common/Arrow';
 import { DocumentMeta } from '@/components/common/DocumentMeta';
+import { SocialIcon } from '@/components/common/SocialIcon';
 import { TrackedLink } from '@/components/common/TrackedLink';
 import { Footer } from '@/components/layout/Footer';
 import { SceneIndicator } from '@/components/motion/SceneIndicator';
@@ -60,7 +61,8 @@ export function App() {
         className="group fixed inset-x-0 bottom-0 z-40 glass-bar flex items-center justify-between gap-4 border-t border-border px-4 py-3 text-foreground sm:hidden"
       >
         <span className="label-caps truncate text-signal">{hero.badge}</span>
-        <span className="shrink-0 text-sm font-medium whitespace-nowrap">
+        <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium whitespace-nowrap">
+          <SocialIcon name="whatsapp" className="size-4" />
           WhatsApp <Arrow />
         </span>
       </TrackedLink>
