@@ -87,6 +87,7 @@ jobs:
             scripts/instagram
             instagram/agenda.json
             instagram/metricas.json
+            instagram/perfil
           sparse-checkout-cone-mode: false
 
       - name: Coletar métricas
@@ -95,12 +96,16 @@ jobs:
           IG_TOKEN_GIRAHUB: ${{ secrets.IG_TOKEN_GIRAHUB }}
         run: node scripts/instagram/metricas.mjs
 
+      - name: Mostrar as métricas (fora da main, para teste)
+        if: github.ref != 'refs/heads/main'
+        run: cat instagram/metricas.json; for f in instagram/perfil/*.jpg; do echo "$f"; base64 -w0 "$f"; echo; done
+
       - name: Gravar as métricas
         if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "agenda-instagram"
           git config user.email "agenda-instagram@users.noreply.github.com"
-          git add instagram/metricas.json
+          git add instagram/metricas.json instagram/perfil
           git diff --cached --quiet && exit 0
           git commit -m "[instagram] atualiza métricas"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done

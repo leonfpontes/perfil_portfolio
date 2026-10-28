@@ -17,6 +17,7 @@ import { tokenEnv } from "./publicar.mjs";
 
 const AGENDA = process.env.AGENDA_ARQUIVO ?? "instagram/agenda.json";
 const SAIDA = process.env.METRICAS_ARQUIVO ?? "instagram/metricas.json";
+const PERFIS = "instagram/perfil";
 const GRAPH = "https://graph.instagram.com/v23.0";
 const MAX_POSTS = 50;
 const DIAS_INSIGHTS = 90;
@@ -83,8 +84,22 @@ async function resumoConta(userId, token, dias) {
 
 async function coletar(conta, token, anterior) {
   const r = { coletadoEm: new Date().toISOString() };
-  const perfil = await api("/me", { fields: "user_id,username,name,account_type,followers_count,follows_count,media_count" }, token);
-  r.perfil = perfil;
+  const perfil = await api("/me", { fields: "user_id,username,name,account_type,biography,website,profile_picture_url,followers_count,follows_count,media_count" }, token);
+  // O link da foto do perfil expira em poucos dias: guarda uma cópia no repositório.
+  const { profile_picture_url: foto, ...resto } = perfil;
+  r.perfil = resto;
+  if (foto) {
+    try {
+      const resposta = await fetch(foto, { signal: AbortSignal.timeout(30_000) });
+      if (resposta.ok) {
+        fs.mkdirSync(PERFIS, { recursive: true });
+        fs.writeFileSync(`${PERFIS}/${conta}.jpg`, Buffer.from(await resposta.arrayBuffer()));
+        r.perfil.foto = `perfil/${conta}.jpg`;
+      }
+    } catch (error) {
+      console.log(`${conta}: não baixei a foto do perfil (${error.message})`);
+    }
+  }
 
   const { data: midia = [] } = await api("/me/media", {
     fields: "id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count,children{id}",
