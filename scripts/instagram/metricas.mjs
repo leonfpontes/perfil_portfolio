@@ -65,6 +65,8 @@ function resumoMidia(m) {
     curtidas: m.like_count ?? null,
     comentarios: m.comments_count ?? null,
     itens: m.children?.data?.length ?? null,
+    // Link temporário (expira em dias): o painel copia a imagem para ele na sincronização.
+    imagem: m.thumbnail_url ?? (m.media_type === "VIDEO" ? null : m.media_url) ?? null,
   };
 }
 
@@ -102,7 +104,7 @@ async function coletar(conta, token, anterior) {
   }
 
   const { data: midia = [] } = await api("/me/media", {
-    fields: "id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count,children{id}",
+    fields: "id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count,media_url,thumbnail_url,children{id}",
     limit: String(MAX_POSTS),
   }, token);
   const limite = Date.now() - DIAS_INSIGHTS * 86400_000;
@@ -114,7 +116,7 @@ async function coletar(conta, token, anterior) {
   }
 
   try {
-    const { data: stories = [] } = await api("/me/stories", { fields: "id,media_type,media_product_type,permalink,timestamp" }, token);
+    const { data: stories = [] } = await api("/me/stories", { fields: "id,media_type,media_product_type,permalink,timestamp,media_url,thumbnail_url" }, token);
     r.stories = [];
     for (const s of stories) r.stories.push({ ...resumoMidia({ ...s, media_product_type: "STORY" }), ...(await insightsMidia({ ...s, media_product_type: "STORY" }, token)) });
   } catch (error) {
