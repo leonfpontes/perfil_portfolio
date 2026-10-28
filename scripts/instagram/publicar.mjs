@@ -99,7 +99,8 @@ async function montar(post, token) {
     return (await api("POST", "/me/media", { media_type: "STORIES", ...midiaParams(arquivos[0]) }, token)).id;
   }
   if (post.formato === "reel") {
-    return (await api("POST", "/me/media", { media_type: "REELS", caption: post.legenda, ...midiaParams(arquivos[0]) }, token)).id;
+    const capa = post.capa ? { cover_url: urlMidia(post.capa) } : {};
+    return (await api("POST", "/me/media", { media_type: "REELS", caption: post.legenda, ...capa, ...midiaParams(arquivos[0]) }, token)).id;
   }
   if (arquivos.length === 1) {
     return (await api("POST", "/me/media", { caption: post.legenda, ...midiaParams(arquivos[0]) }, token)).id;
@@ -206,7 +207,7 @@ async function main() {
     }
     mudou = true;
   }
-  if (mudou) fs.writeFileSync(AGENDA, JSON.stringify(agenda, null, 1) + "\n");
+  if (mudou && !SIMULAR) fs.writeFileSync(AGENDA, JSON.stringify(agenda, null, 1) + "\n");
   if (falhas.length) {
     await enviarEmail(
       `Instagram: ${falhas.length} post(s) não saíram`,
