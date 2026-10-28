@@ -2,7 +2,9 @@ name: Instagram
 
 # Publicador próprio do Instagram (scripts/instagram/publicar.mjs), no lugar do Postiz.
 # A cada 10 minutos publica o que chegou na hora em instagram/agenda.json e grava o resultado
-# de volta na main (commit "[instagram]", que a Vercel ignora). Toda segunda renova os tokens.
+# de volta na main (commit "[instagram]", que a Vercel ignora). De hora em hora grava as métricas
+# das contas em instagram/metricas.json (scripts/instagram/metricas.mjs). Toda segunda renova os
+# tokens.
 # Segredos: IG_TOKEN_PONTES_BRAIN, IG_TOKEN_GIRAHUB, RESEND_API_KEY, ALERTA_EMAIL e, para
 # gravar token renovado, GH_SECRETS_TOKEN (token fino com permissão "Secrets: write").
 # O GitHub pode atrasar o agendamento alguns minutos em horário de pico.
@@ -11,6 +13,7 @@ on:
   schedule:
     - cron: "*/10 * * * *"
     - cron: "0 12 * * 1"
+    - cron: "7 * * * *"
   workflow_dispatch:
     inputs:
       post:
@@ -24,17 +27,20 @@ on:
         description: "Só conferir os tokens das contas, sem publicar"
         type: boolean
         default: false
+      metricas:
+        description: "Só atualizar as métricas, sem publicar"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
-concurrency:
-  group: instagram
-  cancel-in-progress: false
-
 jobs:
   publicar:
-    if: github.event.schedule != '0 12 * * 1'
+    if: github.event.schedule != '0 12 * * 1' && github.event.schedule != '7 * * * *' && !inputs.metricas
+    concurrency:
+      group: instagram
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -57,13 +63,46 @@ jobs:
         run: node scripts/instagram/publicar.mjs
 
       - name: Gravar o resultado na agenda
-        if: always()
+        if: always() && github.ref == 'refs/heads/main'
         run: |
           git diff --quiet -- instagram/agenda.json && exit 0
           git config user.name "agenda-instagram"
           git config user.email "agenda-instagram@users.noreply.github.com"
           git add instagram/agenda.json
           git commit -m "[instagram] atualiza status da agenda"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1
+
+  metricas:
+    if: github.event.schedule == '7 * * * *' || inputs.metricas
+    concurrency:
+      group: instagram-metricas
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/instagram
+            instagram/agenda.json
+            instagram/metricas.json
+          sparse-checkout-cone-mode: false
+
+      - name: Coletar métricas
+        env:
+          IG_TOKEN_PONTES_BRAIN: ${{ secrets.IG_TOKEN_PONTES_BRAIN }}
+          IG_TOKEN_GIRAHUB: ${{ secrets.IG_TOKEN_GIRAHUB }}
+        run: node scripts/instagram/metricas.mjs
+
+      - name: Gravar as métricas
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "agenda-instagram"
+          git config user.email "agenda-instagram@users.noreply.github.com"
+          git add instagram/metricas.json
+          git diff --cached --quiet && exit 0
+          git commit -m "[instagram] atualiza métricas"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
           exit 1
 
