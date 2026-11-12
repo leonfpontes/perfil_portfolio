@@ -1,6 +1,6 @@
 <div align="center">
 
-# Leonardo Pontes · LP | Produto & Portfólio
+# Leonardo Pontes · LP · Product & Portfolio
 
 **Mentoria de produto e diagnóstico de PMO que saem do papel.**
 
@@ -10,6 +10,7 @@ para empresas, por quem lidera produtos e PMOs há mais de 8 anos.
 [**leopontes.com.br**](https://www.leopontes.com.br) ·
 [Área do cliente](https://www.leopontes.com.br/entrar) ·
 [LinkedIn](https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/) ·
+[Instagram](https://www.instagram.com/pontes_brain/) ·
 [WhatsApp](https://wa.me/5516991091234)
 
 ![Página inicial: as duas ofertas com preço logo na primeira tela](docs/assets/readme/home.jpg)
@@ -47,7 +48,7 @@ Quem já é cliente acompanha tudo pela plataforma
 
 | Mentoria de produto | Diagnóstico de PMO |
 |---|---|
-| ![Página da mentoria: título, preço e formato](docs/assets/readme/mentoria.jpg) | ![Página do diagnóstico: título, preço e etapas](docs/assets/readme/diagnostico.jpg) |
+| ![Página da mentoria: título e o quadro com o que o preço inclui](docs/assets/readme/mentoria.jpg) | ![Página do diagnóstico: título, o que o preço inclui e os números da oferta](docs/assets/readme/diagnostico.jpg) |
 
 | Início, no celular | Diagnóstico, no celular | Área do cliente |
 |---|---|---|
@@ -72,12 +73,17 @@ recarregar, com View Transitions: o cabeçalho fica parado e a página nova sobe
 | `/entrar` | Área do cliente: entrada na plataforma por código ou link por e-mail (`noindex`) |
 | qualquer outra | 404 de verdade (`noindex`) |
 
-**Identidade: LP Noir.** Preto quente, marfim e um único acento champagne; Roboto, com a palavra
-de destaque em serifa itálica; cantos de 8 a 12 px; vidro translúcido com luz de borda no que
-flutua; rótulos e botões em inglês, conteúdo em português. A arte é um funil de portfólio que
-atravessa os gates G1–G4. A plataforma (lp-diagnostico) usa os mesmos tokens
-(`src/styles/lp-noir.css`). Cada capítulo da página continua sendo uma **cena** que muda o fundo
-enquanto você rola. Quem pede menos movimento vê uma versão suave, sem parallax.
+**Identidade: Papel & Marinho, sobre a base LP Noir.** Fundo papel, texto e botão principal em
+azul-marinho, destaque em bronze, e faixas marinho com marfim e champagne para marcar o ritmo entre
+capítulos. Roboto, com a palavra de destaque em Instrument Serif itálica; cantos de 8 a 12 px;
+vidro translúcido com luz de borda no que flutua; rótulos e botões em inglês, conteúdo em
+português. A arte é um funil de portfólio que atravessa os gates G1–G4. A plataforma
+(lp-diagnostico) usa os mesmos tokens (`src/styles/lp-noir.css`). Cada capítulo da página é uma
+**cena** que muda o fundo enquanto você rola. Quem pede menos movimento vê uma versão suave, sem
+parallax. A história das identidades e os tokens estão em [`docs/DESIGN.md`](docs/DESIGN.md).
+
+**Prova social.** Os depoimentos são recomendações do LinkedIn, com nome, foto e link para o perfil
+de quem recomendou.
 
 **SEO.** Título e H1 por página mirando as buscas da oferta. O JSON-LD traz `Person`,
 `ProfessionalService`, `Service` + `Offer` com os preços reais (lidos do conteúdo), `FAQPage` onde
@@ -100,6 +106,9 @@ flowchart LR
   E -- "fetch com cookie (CORS)<br/>/api/auth/*" --> APP["app.leopontes.com.br<br/>LP Diagnóstico"]
   E -- "login certo: cortina e navegação" --> APP
   GH["GitHub · main"] -- "deploy automático" --> W
+  MON["GitHub Actions<br/>monitor a cada 10 min"] -- "/, /entrar, /healthz" --> W
+  MON --> APP
+  MON -- "caiu / voltou<br/>(Resend)" --> L
 ```
 
 - **Hospedagem**: Vercel, servindo `dist/` com URLs limpas (`/sobre` → `sobre.html`), cache
@@ -109,18 +118,25 @@ flowchart LR
   `https://app.leopontes.com.br`). O cookie de sessão funciona entre `www` e `app` porque os dois
   são o mesmo site, `leopontes.com.br`. O desenho completo está no repositório da plataforma, em
   `docs/publicacao.md`.
+- **Monitor de disponibilidade**: um workflow do GitHub Actions
+  ([`disponibilidade.yml`](.github/workflows/disponibilidade.yml)) confere o site, o `/entrar` e o
+  `/healthz` da plataforma a cada 10 minutos, fora da Vercel. Só manda e-mail (Resend) quando algo
+  cai e quando volta. Segredos: `RESEND_API_KEY` e `ALERTA_EMAIL`.
+- **Assinatura de e-mail**: as imagens (foto, logo e marca LP) são servidas pelo site, em
+  `public/images/email/`.
 
 ## Stack
 
 | Camada | Escolha |
 |---|---|
 | Interface | React 19 + TypeScript `strict` |
-| Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix) |
-| Movimento | GSAP (ScrollTrigger, SplitText) + Lenis; azulejos e arte generativa em canvas, com PRNG determinístico |
+| Estilo | Tailwind CSS 4 + componentes [shadcn/ui](https://ui.shadcn.com) (Radix); tokens LP Noir divididos com a plataforma |
+| Tipografia | Roboto e Instrument Serif itálica, auto-hospedadas em `public/fonts/` |
+| Movimento | GSAP (ScrollTrigger, SplitText) + Lenis; funil de gates em SVG, fotos que se revelam e capas generativas em canvas, com PRNG determinístico |
 | Navegação | Roteador próprio com View Transitions, sem dependência nova; voltar e avançar restauram a rolagem |
 | Build | Vite com pré-renderização: `vite build`, `vite build --ssr` e `scripts/prerender.mjs`, que gera um HTML por rota e o sitemap |
 | Conteúdo | Modelo tipado, em pt-BR e EN, separado da apresentação |
-| Testes | Vitest + Testing Library (100 testes): rotas, HTML de cada página, SEO e JSON-LD, navegação, conteúdo nos dois idiomas |
+| Testes | Vitest + Testing Library (103 testes): rotas, HTML de cada página, SEO e JSON-LD, navegação, conteúdo nos dois idiomas |
 | Qualidade | Lighthouse 100 em acessibilidade, boas práticas e SEO |
 | Deploy | Vercel, ligado ao GitHub |
 | Analytics | Google Analytics 4 atrás de uma interface própria (`AnalyticsTracker`) |
@@ -136,6 +152,10 @@ estrutura e que nenhum cliente confidencial é citado.
 ### 1. Preparar
 
 Requisitos: Node 20 ou mais novo (o projeto é desenvolvido no **Node 24**) e npm.
+
+> **No macOS**, `src/components/art/Funil.tsx` e `funil.ts` colidem num disco sem distinção de
+> maiúsculas, e `typecheck`, `test` e `build` quebram localmente (na Vercel, que roda em Linux,
+> funciona). Detalhes em [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#testes).
 
 ```bash
 git clone git@github.com:leonfpontes/perfil_portfolio.git
@@ -185,22 +205,26 @@ Merge na `main` → a Vercel publica sozinha. Pull requests ganham um preview.
 | `npm test` / `test:watch` / `test:coverage` | Testes |
 | `scripts/lh-median.sh <url> [rodadas]` | Mediana de várias rodadas do Lighthouse mobile (uma rodada só oscila muito) |
 | `python3 scripts/make-og-image.py` | Gera a imagem de compartilhamento (`public/images/og-image.png`, 1200×630) |
+| `node scripts/disponibilidade.mjs` | Roda o monitor de disponibilidade uma vez (sem `RESEND_API_KEY`, só registra) |
 
 ### Onde mexer
 
 | Para mudar | Arquivo |
 |---|---|
 | Textos, preços, FAQ, depoimentos | `src/content/locales/pt-BR.ts` e `en.ts` (veja [`docs/CONTENT.md`](docs/CONTENT.md)) |
+| Fotos de quem recomendou | `public/testimonials/` |
 | Contatos, links e identidade | `src/content/profile.ts` |
 | Rotas, seções de cada página e âncoras antigas | `src/lib/router/routes.ts` |
 | Título, descrição e JSON-LD de cada página | `src/seo/head.ts` |
-| Cores, tipografia e tokens | `src/styles/globals.css` (os mesmos tokens da plataforma: mude os dois juntos) |
+| Tokens compartilhados (cores LP Noir, raios, vidro, funil) | `src/styles/lp-noir.css` e `src/lib/glass-light.ts`: idênticos no lp-diagnostico, mude os dois juntos |
+| Tons de cena e estilos só do site | `src/styles/globals.css` |
 
 ## Documentação
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): páginas, camadas, fluxo de dados e decisões.
 - [`docs/CONTENT.md`](docs/CONTENT.md): como editar textos, preços, produtos e idiomas.
-- [`docs/DESIGN.md`](docs/DESIGN.md): o sistema visual "modernismo brasileiro".
+- [`docs/DESIGN.md`](docs/DESIGN.md): o sistema visual Papel & Marinho, a base LP Noir e a história das identidades.
+- [`AGENTS.md`](AGENTS.md) e [`CLAUDE.md`](CLAUDE.md): guia para agentes de código (Claude Code, Codex e outros) trabalharem no repositório.
 
 ---
 
@@ -210,6 +234,6 @@ Merge na `main` → a Vercel publica sozinha. Pull requests ganham um preview.
 
 [Fale comigo no WhatsApp](https://wa.me/5516991091234) · [Conecte-se no LinkedIn](https://www.linkedin.com/in/leonardo-fonseca-pontes-465740103/)
 
-<sub>© Leonardo Fonseca Pontes · LP | Produto & Portfólio</sub>
+<sub>© Leonardo Fonseca Pontes · LP · Product & Portfolio</sub>
 
 </div>

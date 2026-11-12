@@ -6,9 +6,10 @@ Todo texto do site fica em `src/content/`. **Nenhum componente precisa ser alter
 
 | Quero mudar… | Arquivo | Campo |
 |---|---|---|
-| Nome, e-mail, WhatsApp, LinkedIn, GitHub | `src/content/profile.ts` | `profile` |
+| Nome, marca, e-mail, WhatsApp, LinkedIn, GitHub, Instagram | `src/content/profile.ts` | `profile` (`instagram` e `instagramHandle` também vão ao `sameAs` do JSON-LD) |
 | Link da agenda (Google Agenda) | `src/content/profile.ts` | `profile.bookingUrl` |
-| Preços e itens da mentoria/diagnóstico | `src/content/locales/*.ts` | `offer.plans` (`price`, `priceShort`, `priceNote`, `regularPrice`); os dados estruturados leem os valores daqui |
+| Preços e itens da mentoria/diagnóstico | `src/content/locales/*.ts` | `offer.plans` (`price`, `priceShort`, `priceNote`, `regularPrice`, `features`); os dados estruturados leem os valores daqui |
+| "O que o preço inclui" (quadro de vidro no hero da página da oferta) | `src/content/locales/*.ts` | `offer.plans[].includes` (itens curtos) e `offer.includesTitle` (rótulo) |
 | Páginas da mentoria e do diagnóstico (hero, escopo, etapas, entregáveis, FAQ) | `src/content/locales/*.ts` | `mentoringPage`, `diagnosticPage` |
 | Título e descrição de cada página (SEO) | `src/content/locales/*.ts` | `home.meta`, `mentoringPage.meta`, `diagnosticPage.meta`, `aboutPage.meta`, `notFound.meta` |
 | Cargo nos dados estruturados (Person.jobTitle) | `src/content/profile.ts` | `profile.jobTitle` |
@@ -17,7 +18,8 @@ Todo texto do site fica em `src/content/`. **Nenhum componente precisa ser alter
 | Produtos | `src/content/locales/*.ts` | `products.items` |
 | Experiências | `src/content/locales/*.ts` | `experience.items` (a mais recente primeiro; `current: true` marca a atual) |
 | Certificações | `src/content/locales/*.ts` | `education.certifications` (`inProgress: true` mostra "em andamento") |
-| Depoimentos | `src/content/locales/*.ts` | `testimonials.items` |
+| Depoimentos | `src/content/locales/*.ts` | `testimonials.items` (`quote`, `name`, `linkedin`, `photo`, `role`, `context`) |
+| Foto de quem recomendou | `public/testimonials/<nome>.jpg` | caminho em `testimonials.items[].photo`; sem foto, aparecem as iniciais |
 | Perguntas frequentes | `src/content/locales/*.ts` | `mentoringPage.faq`, `diagnosticPage.faq` (viram `FAQPage` no JSON-LD) |
 | Ordem e numeração das seções de cada página | `src/lib/router/routes.ts` + `src/pages/` | `PAGE_SECTIONS` |
 | Nova página | `src/lib/router/routes.ts`, `src/pages/`, `src/App.tsx`, `src/seo/head.ts` | entra sozinha no prerender e no sitemap |
@@ -26,8 +28,10 @@ Todo texto do site fica em `src/content/`. **Nenhum componente precisa ser alter
 
 1. **Edite os dois idiomas.** O `npm test` falha se `pt-BR.ts` e `en.ts` tiverem estruturas diferentes, como um item a mais em uma lista.
 2. **Confidencialidade:** cases de clientes aparecem generalizados (ex.: "instituição financeira de médio porte"). O teste `content.test.ts` bloqueia nomes de clientes confidenciais. Para incluir novos nomes proibidos, edite a lista no teste.
-3. **Imagens de banco** ficam em `public/images/` e são registradas em `stockImages` (`profile.ts`). Use sempre o componente `Figure`, que aplica o tratamento de impressão e a legenda "imagem ilustrativa". Nunca use foto de banco para representar um produto real.
-4. **Preço fundador:** quando as vagas acabarem, atualize `price`, `priceNote` e `regularPrice` em cada plano, além do `hero.badge`.
+3. **Imagens de banco** ficam em `public/images/` e são registradas em `stockImages` (`profile.ts`). Mostre-as sempre pelo componente `Halftone` (a foto que se revela de retícula), com a legenda "imagem ilustrativa" (`ui.illustrativeImage`), como em `sections/About.tsx` e `sections/Offer.tsx`. Nunca use foto de banco para representar um produto real.
+4. **Rótulos em inglês, conteúdo em português** (no `pt-BR.ts`): navegação, botões curtos, eyebrows de seção e a marca (`LP · Product & Portfolio`) ficam em inglês; títulos, textos, FAQ e SEO em português. Na jornada do cliente, use "Etapa" (`ui.step`): G1–G4 ficam só para os gates da metodologia. Veja [`DESIGN.md`](DESIGN.md).
+5. **Depoimentos são recomendações reais do LinkedIn:** nome como aparece lá, link para o perfil e, se houver, a foto em `public/testimonials/` (JPG pequeno, quadrado).
+6. **Preço fundador:** quando as vagas acabarem, atualize `price`, `priceNote` e `regularPrice` em cada plano, além do `hero.badge`.
 
 ## Adicionando um idioma
 
