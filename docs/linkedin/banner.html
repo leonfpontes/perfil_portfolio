@@ -5,11 +5,15 @@
 <title>Banner LinkedIn</title>
 <!--
   Capa do LinkedIn (1584×396) na identidade do site: Papel & Marinho sobre os tokens LP Noir
-  (docs/DESIGN.md). O funil de gates é o mesmo desenho de src/components/art/funil.ts, esticado
-  para a faixa da capa: as iniciativas entram atrás da foto de perfil e só a linha de sinal chega
-  à faixa marinho, onde está o endereço do site.
-  O canto inferior esquerdo (x < 430, y > 190) fica livre: é onde o LinkedIn pousa a foto.
-  Como gerar as imagens: docs/linkedin/README.md.
+  (docs/DESIGN.md). Como gerar as imagens: docs/linkedin/README.md.
+
+  O texto mora só nos espaços que a foto de perfil deixa livres (medido no LinkedIn real):
+  - foto no desktop: círculo x 50–368, y 205 para baixo (capa a 74% do tamanho);
+  - foto no celular: círculo x 66–492, y 198 para baixo (capa a 45% do tamanho);
+  - botão de editar (só para o dono): canto superior direito, x > 1370, y < 215 no celular.
+  Por isso: o título ocupa a faixa de cima (y < 195), e o endereço fica embaixo, à direita
+  da foto. Nenhum texto abaixo de 26 px, que no celular ainda vira ~12 px.
+  Os gates (src/components/art/funil.ts) viram anéis que irradiam da foto; o sinal chega ao endereço.
 -->
 <style>
   @font-face {
@@ -27,13 +31,8 @@
     --paper: #f6f3ec;
     --paper-raised: #fbf9f4;
     --navy: #14213d;
-    --navy-deep: #0f1a31;
     --bronze: #7a5c2e;
-    --ivory: #f1ede4;
-    --champagne: #cfb48a;
-    --muted: color-mix(in oklab, var(--navy) 68%, var(--paper));
-    --line: color-mix(in oklab, var(--navy) 16%, var(--paper));
-    --band-x: 1160px;
+    --muted: color-mix(in oklab, var(--navy) 72%, var(--paper));
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1584px; height: 396px; overflow: hidden; background: var(--paper); }
@@ -41,159 +40,81 @@
     font-family: "Roboto", system-ui, sans-serif; color: var(--navy);
     -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
   }
-
   .banner { position: relative; width: 1584px; height: 396px; overflow: hidden; }
   .layer { position: absolute; inset: 0; }
   .layer svg { display: block; width: 100%; height: 100%; }
-
-  /* Luz ambiente suave atrás do título, como o .glass-spot do site. */
   .spot {
-    position: absolute; left: 380px; top: -160px; width: 900px; height: 620px;
-    background: radial-gradient(closest-side, var(--paper-raised), transparent 70%);
+    position: absolute; left: 200px; top: -260px; width: 1200px; height: 560px;
+    background: radial-gradient(closest-side, var(--paper-raised), transparent 75%);
   }
 
-  /* Faixa marinho à direita, como as cenas mata/cobalto/anil. */
-  .band {
-    position: absolute; top: 0; bottom: 0; left: var(--band-x); right: 0;
-    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-  }
-
-  .content {
-    position: absolute; left: 468px; top: 34px; width: 644px; height: 330px;
-    display: flex; flex-direction: column;
-  }
-  .caps {
-    font-size: 13px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-  }
-  .eyebrow {
-    display: flex; justify-content: space-between; align-items: center;
-    color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--line);
-  }
-  .eyebrow .on { color: var(--navy); }
-  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--bronze); margin-right: 10px; vertical-align: 2px; }
-
+  /* Faixa de cima: livre em qualquer tela. */
   h1 {
-    margin-top: 22px;
-    font-size: 49px; line-height: 1.04; font-weight: 500; letter-spacing: -0.025em;
+    position: absolute; left: 64px; top: 30px;
+    font-size: 62px; line-height: 1; font-weight: 500; letter-spacing: -0.028em; white-space: nowrap;
   }
+  h1 .l2 { display: block; margin-top: 8px; }
   h1 em {
     font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400;
-    font-size: 1.14em; letter-spacing: -0.01em; color: var(--bronze);
+    font-size: 1.2em; letter-spacing: -0.01em; color: var(--bronze);
   }
 
-  .stats { margin-top: auto; display: flex; border-top: 1px solid var(--line); }
-  .stat { flex: 1; padding: 12px 16px 0 0; display: flex; flex-direction: column; gap: 5px; }
-  .stat + .stat { padding-left: 16px; border-left: 1px solid var(--line); }
-  .stat .v { font-size: 30px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
-  .stat .l { font-size: 13px; line-height: 1.3; color: var(--muted); max-width: 136px; }
-
-  .cta {
-    position: absolute; left: calc(var(--band-x) + 46px); top: 0; bottom: 0; right: 40px;
-    display: flex; flex-direction: column; justify-content: center; gap: 10px;
-    color: var(--ivory);
-  }
-  .cta .k { color: var(--champagne); }
-  .cta .url { font-size: 32px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
-  .cta .s { font-size: 15px; line-height: 1.4; color: color-mix(in oklab, var(--ivory) 72%, var(--navy)); }
-  .cta .s em { font-family: "Instrument Serif", Georgia, serif; font-size: 1.2em; color: var(--champagne); }
-  .cta .rule { width: 44px; height: 1px; background: var(--champagne); opacity: 0.7; margin: 4px 0; }
-
-  .gate-label {
-    position: absolute; top: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
-    text-transform: uppercase; color: color-mix(in oklab, var(--navy) 45%, var(--paper)); white-space: nowrap;
-    padding-left: 8px;
-  }
-  .gate-label b { color: var(--bronze); font-weight: 500; }
+  /* Embaixo, à direita da foto: onde o funil chega. */
+  .cta { position: absolute; left: 1100px; top: 262px; display: flex; flex-direction: column; gap: 12px; }
+  .url { font-size: 48px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+  .what { font-size: 26px; line-height: 1.15; color: var(--muted); }
 </style>
 </head>
 <body>
 <div class="banner">
   <div class="spot"></div>
-  <div class="band"></div>
   <div class="layer"><svg id="funil" viewBox="0 0 1584 396"></svg></div>
-  <div id="labels"></div>
-
-  <div class="content">
-    <div class="eyebrow caps">
-      <span class="on">LP · Product &amp; Portfolio</span>
-      <span><span class="dot"></span>Mentoria 1:1 · Diagnóstico de PMO</span>
-    </div>
-    <h1>Mentoria de produto e<br>diagnóstico de PMO que<br><em>saem do papel.</em></h1>
-    <div class="stats">
-      <div class="stat"><span class="v">8+</span><span class="l">anos em produto e projetos</span></div>
-      <div class="stat"><span class="v">40+</span><span class="l">devs em portfólio gerido</span></div>
-      <div class="stat"><span class="v">30+</span><span class="l">projetos digitais entregues</span></div>
-      <div class="stat"><span class="v">2</span><span class="l">SaaS próprios criados do zero</span></div>
-    </div>
-  </div>
-
+  <h1>Mentoria de produto e diagnóstico de PMO<span class="l2">que <em>saem do papel.</em></span></h1>
   <div class="cta">
-    <span class="k caps">Book a call</span>
     <span class="url">leopontes.com.br</span>
-    <span class="rule"></span>
-    <span class="s">Do intake ao benefício:<br>portfólio que <em>chega ao fim.</em></span>
+    <span class="what">Mentoria 1:1 · Diagnóstico de PMO</span>
   </div>
 </div>
 <script>
-  // Mesma lógica de src/components/art/funil.ts, em coordenadas da capa.
-  const W = 1584, H = 396, BAND = 1160;
-  const START_X = -30, END_X = BAND + 28, FOCUS_Y = 206;
+  // A foto de perfil é o centro: os gates da metodologia (funil.ts) viram anéis que irradiam dela.
+  // Muitas iniciativas no G1, cada vez menos para fora; a linha de sinal sai da foto, cruza os
+  // quatro gates e chega ao endereço. Centro entre o círculo do desktop (209,364) e o do celular
+  // (279,411); o primeiro anel (r 270) fica fora dos dois.
+  const CX = 240, CY = 392;
   const GATES = [
-    { id: 'G1', label: 'Intake', x: 452 },
-    { id: 'G2', label: 'Business case', x: 690 },
-    { id: 'G3', label: 'Delivery', x: 910 },
-    { id: 'G4', label: 'Benefits', x: 1112 },
+    { id: 'G1', label: 'Intake', r: 290, n: 11 },
+    { id: 'G2', label: 'Business case', r: 450, n: 6 },
+    { id: 'G3', label: 'Delivery', r: 645, n: 3 },
+    { id: 'G4', label: 'Benefits', r: 795, n: 1 },
   ];
-  // y de entrada (0–800 do funil original, reescalado para a altura da capa) e gate onde para.
-  const INICIATIVAS = [
-    [70, 0], [130, 1], [190, 4], [245, 0], [300, 2], [350, 4], [400, 1],
-    [450, 4], [500, 3], [555, 0], [610, 4], [665, 2], [725, 1],
-  ].map(([y, ate]) => ({ y: 14 + (y / 800) * (H - 28) + (FOCUS_Y - 198), ate }));
-  const APERTO = [1, 0.62, 0.38, 0.2, 0.08];
-  const yNoGate = (y0, g) => FOCUS_Y + (y0 - FOCUS_Y) * APERTO[g];
-  function curva(p) {
-    let d = `M${p[0][0]},${p[0][1].toFixed(1)}`;
-    for (let i = 1; i < p.length; i++) {
-      const [x0, y0] = p[i - 1], [x1, y1] = p[i], k = (x1 - x0) * 0.5;
-      d += ` C${(x0 + k).toFixed(1)},${y0.toFixed(1)} ${(x1 - k).toFixed(1)},${y1.toFixed(1)} ${x1},${y1.toFixed(1)}`;
+  const END = { x: 1074, y: 291 };
+  const ANG = Math.atan2(CY - END.y, END.x - CX); // direção do sinal
+  const pt = (r, a) => [CX + r * Math.cos(a), CY - r * Math.sin(a)];
+  let svg = '';
+  for (const g of GATES) {
+    svg += `<circle cx="${CX}" cy="${CY}" r="${g.r}" fill="none" stroke="#14213d" stroke-opacity="0.2" stroke-width="1.4"/>`;
+    // Iniciativas no anel, só no setor livre (abaixo do título: y > 214), afastadas do sinal.
+    const maxA = Math.asin(Math.min(1, (CY - 222) / g.r));
+    const minA = Math.asin((CY - 352) / g.r);
+    for (let i = 0; i < g.n; i++) {
+      const a = g.n === 1 ? ANG : minA + ((maxA - minA) * (i + 0.5)) / g.n;
+      if (g.n > 1 && Math.abs(a - ANG) < 0.035) continue;
+      const [x, y] = pt(g.r, a);
+      svg += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="#14213d" fill-opacity="0.38"/>`;
     }
-    return d;
+    // Rótulo do gate onde o anel encontra a base da capa.
+    const lx = CX + Math.sqrt(g.r * g.r - 16 * 16);
+    svg += `<text x="${(lx + 9).toFixed(0)}" y="384" font-family="Roboto" font-weight="500" font-size="17" letter-spacing="1.4" fill="#14213d" fill-opacity="0.6"><tspan fill="#7a5c2e" fill-opacity="1">${g.id}</tspan> ${g.label.toUpperCase()}</text>`;
   }
-  const sobrev = INICIATIVAS.filter((i) => i.ate === 4);
-  const sinal = sobrev.reduce((a, b) => (Math.abs(b.y - FOCUS_Y) < Math.abs(a.y - FOCUS_Y) ? b : a));
-
-  let gates = '', linhas = '', paradas = '', sinalD = '', sinalFim = null;
-  for (const g of GATES)
-    gates += `<line x1="${g.x}" x2="${g.x}" y1="34" y2="${H - 14}" stroke="#14213d" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="2 6"/>`;
-  for (const ini of INICIATIVAS) {
-    const p = [[START_X, ini.y]];
-    const ultimo = Math.min(ini.ate, 3);
-    for (let g = 0; g <= ultimo; g++) p.push([GATES[g].x, yNoGate(ini.y, g + 1)]);
-    if (ini.ate === 4) {
-      p.push([END_X, yNoGate(ini.y, 4)]);
-      if (ini === sinal) { sinalD = curva(p); sinalFim = p[p.length - 1]; continue; }
-      linhas += `<path d="${curva(p)}" fill="none" stroke="#14213d" stroke-opacity="0.2" stroke-width="1.1"/>`;
-    } else {
-      const [x, y] = p[p.length - 1];
-      linhas += `<path d="${curva(p)}" fill="none" stroke="#14213d" stroke-opacity="0.13" stroke-width="1"/>`;
-      paradas += `<circle cx="${x}" cy="${y.toFixed(1)}" r="2.6" fill="#14213d" fill-opacity="0.32"/>`;
-    }
+  // Sinal: da borda da foto até o endereço, um marco bronze em cada gate.
+  const [sx, sy] = pt(214, ANG);
+  svg += `<line x1="${sx.toFixed(1)}" y1="${sy.toFixed(1)}" x2="${END.x}" y2="${END.y}" stroke="#7a5c2e" stroke-width="2.4" stroke-linecap="round"/>`;
+  for (const g of GATES) {
+    const [x, y] = pt(g.r, ANG);
+    svg += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" fill="#f6f3ec" stroke="#7a5c2e" stroke-width="2.4"/>`;
   }
-  // Na faixa marinho, as sobreviventes seguem em marfim; o sinal em champagne.
-  const clipPapel = `<clipPath id="papel"><rect x="0" y="0" width="${BAND}" height="${H}"/></clipPath>`;
-  const clipFaixa = `<clipPath id="faixa"><rect x="${BAND}" y="0" width="${W - BAND}" height="${H}"/></clipPath>`;
-  const faixa = linhas.replaceAll('#14213d', '#f1ede4');
-  document.getElementById('funil').innerHTML = `
-    <defs>${clipPapel}${clipFaixa}</defs>
-    <g clip-path="url(#papel)">${gates}${linhas}${paradas}
-      <path d="${sinalD}" fill="none" stroke="#7a5c2e" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>
-    </g>
-    <g clip-path="url(#faixa)">${faixa}
-      <path d="${sinalD}" fill="none" stroke="#cfb48a" stroke-width="1.8" stroke-linecap="round"/>
-    </g>
-    <circle cx="${sinalFim[0]}" cy="${sinalFim[1].toFixed(1)}" r="3.4" fill="#cfb48a"/>`;
-  document.getElementById('labels').innerHTML = GATES.map((g) =>
-    `<span class="gate-label" style="left:${g.x}px;display:none"><b>${g.id}</b> ${g.label}</span>`).join('');
+  svg += `<circle cx="${END.x}" cy="${END.y}" r="7" fill="#7a5c2e"/>`;
+  document.getElementById('funil').innerHTML = svg;
 </script>
 </body>
 </html>
