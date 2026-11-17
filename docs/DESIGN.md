@@ -87,6 +87,7 @@ Seções com vários itens viram trilhos guiados pelo scroll no celular (`Horizo
 - **Gates e etapas:** a jornada aparece como etapas ligadas por uma linha, a mesma linguagem de governança ensinada na mentoria.
 - **Hero das ofertas:** preço com o quadro de vidro "o que o preço inclui" (`plans[].includes`).
 - **Uma citação por vez:** cada depoimento traz nome, foto (ou iniciais) e link para o LinkedIn de quem recomendou; a aspa sobe dentro da própria caixa.
+- **Capturas de produto:** tela real do app num quadro de vidro (`Shot` em `sections/Brain.tsx`): raio 12 px no quadro e 8 px na imagem, com a luz ambiente (`.glass-spot`) atrás. Só dados fictícios; a legenda diz de onde vêm.
 - **Redes com a própria marca:** Instagram, WhatsApp, LinkedIn e GitHub em ícones de traço único (`common/SocialIcon`), no contato, no rodapé e na barra móvel.
 
 ## O que evitamos

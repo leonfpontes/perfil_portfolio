@@ -257,65 +257,172 @@ export const ptBR: SiteContent = {
 
   brainPage: {
     meta: {
-      title: 'Brain: suas notas com um assistente que lê, organiza e lembra | Leonardo Pontes',
+      title: 'Brain Copilot: seu vault do Obsidian como um cérebro 3D, com uma equipe de agentes | Leonardo Pontes',
       description:
-        'O Brain é um app web que transforma suas notas em Markdown num grafo navegável, com um assistente que responde a partir delas, organiza sua agenda e usa só os arquivos do Google Drive que você escolher.',
+        'O Brain Copilot transforma as notas do Obsidian num cérebro 3D navegável. O Barão conversa a partir das suas notas, da agenda e do e-mail, e uma equipe de agentes acende ao vivo o que está lendo ou escrevendo.',
     },
     hero: {
-      eyebrow: 'Product · Brain',
-      title: 'Suas notas, sua agenda e seus arquivos num só lugar, com um',
-      titleHighlight: 'assistente que lembra.',
+      eyebrow: 'Product · Brain Copilot',
+      title: 'Um segundo cérebro que você enxerga, com uma equipe de',
+      titleHighlight: 'agentes trabalhando nele.',
       description:
-        'O Brain é um app web criado por Leonardo Pontes. Ele mostra suas notas como um grafo navegável e traz o Barão, um assistente que responde a partir do que você escreveu, prepara o seu dia e só mexe na agenda ou nos arquivos quando você confirma.',
-      primaryCta: 'Entrar no Brain',
-      secondaryCta: 'Ver o que ele faz',
+        'O Brain Copilot transforma o vault do Obsidian num cérebro 3D: cada nota é um ponto de luz na região que guarda aquele tipo de memória. O Barão conversa a partir do que você escreveu, e cada agente acende, ao vivo, as notas que está lendo.',
+      primaryCta: 'Quero um Brain assim',
+      secondaryCta: 'Ver o produto',
       facts: [
-        { label: 'Formato', value: 'App web' },
-        { label: 'Notas', value: 'Markdown, no seu vault' },
-        { label: 'Assistente', value: 'Claude, com a sua chave' },
-        { label: 'Google', value: 'Opcional, por permissão' },
+        { label: 'Notas', value: 'Obsidian, ao vivo' },
+        { label: 'Assistente', value: 'Barão, com Claude' },
+        { label: 'Equipe', value: '15 agentes' },
+        { label: 'Onde', value: 'Navegador e celular' },
       ],
+      shot: {
+        src: '/images/brain/cerebro.webp',
+        alt: 'O Brain Copilot em modo cinema: um cérebro 3D azul com centenas de notas como pontos de luz e os agentes Barão e Curador acesos, lendo notas.',
+        width: 1920,
+        height: 1200,
+      },
+      shotCaption: 'Captura real do app, com um vault fictício',
     },
-    panel: {
-      title: 'What you connect',
-      heading: 'Você liga só o que quiser usar.',
+    tour: {
+      eyebrow: 'Product',
+      title: 'Quatro telas que mudam o jeito de usar as próprias notas',
+      description:
+        'O Brain não é mais um lugar para guardar texto. É um painel para ver o que você sabe, perguntar a partir disso e delegar o trabalho repetitivo.',
       items: [
-        'Suas notas em Markdown (vault do Obsidian)',
-        'Google Agenda, para ver e criar eventos',
-        'Arquivos do Google Drive que você escolher',
-        'Sua chave da API do Claude',
-        'GitHub e outros conectores, se quiser',
+        {
+          label: 'Cérebro',
+          title: 'O vault como um cérebro de verdade',
+          description:
+            'Atas no hipocampo, pessoas no giro fusiforme, projetos no pré-frontal. Você enxerga onde está o peso do que anotou e o que ficou esquecido.',
+          points: [
+            'Lentes de cor: área, recência, confiança, tipo, grupos e pontes',
+            'Grupos descobertos sozinhos, com nome e legenda',
+            'Mapa 2D da nota e trilha com voltar e avançar',
+          ],
+          shot: {
+            src: '/images/brain/lentes.webp',
+            alt: 'Lente Grupos ligada: as notas do cérebro coloridas por tema, com a legenda dos grupos descobertos no canto.',
+            width: 1600,
+            height: 1000,
+          },
+        },
+        {
+          label: 'Barão',
+          title: 'Um assistente que responde a partir do que você escreveu',
+          description:
+            'O Barão lê o vault, a agenda, o e-mail, o Drive e a internet. Cada resposta traz as notas de onde ele tirou a informação, e qualquer ação com efeito espera o seu ok na tela.',
+          points: [
+            'Comandos com /, agentes com @ e notas com [[',
+            'Anexos, prints e voz',
+            'Fontes clicáveis que acendem a nota no cérebro',
+          ],
+          shot: {
+            src: '/images/brain/barao.webp',
+            alt: 'Console do Barão aberto: ele responde sobre a reunião do dia seguinte citando duas notas como fonte, com uma ordem do Curador esperando aprovação.',
+            width: 1600,
+            height: 1000,
+          },
+        },
+        {
+          label: 'Equipe',
+          title: 'Uma equipe de agentes que você vê trabalhando',
+          description:
+            'Cada agente tem ícone, órbita e um feixe até as notas que está lendo ou escrevendo. Você sabe quem está trabalhando agora, no quê, e aprova as ordens antes de elas rodarem.',
+          points: [
+            'Perfil, linha do tempo e quadro de ordens por etapa',
+            'Modo acompanhar: a câmera segue o agente',
+            'Atividade por minuto da última hora',
+          ],
+          shot: {
+            src: '/images/brain/equipe.webp',
+            alt: 'Painel Equipe com quinze agentes, dois trabalhando agora, e o gráfico de leituras por minuto; no cérebro, Barão e Curador acesos.',
+            width: 1600,
+            height: 1000,
+          },
+        },
+        {
+          label: 'Hoje',
+          title: 'O dia pronto quando você abre',
+          description:
+            'O painel Hoje junta agenda, e-mails, ordens esperando o seu ok e sinais que você não teria visto: nota central parada há meses, região quente, o que mudou enquanto você esteve fora.',
+          points: [
+            'Sinais proativos com um botão para resolver',
+            'Aprovar ou cancelar ordens num toque',
+            'Atalhos para pedir um resumo ao Barão',
+          ],
+          shot: {
+            src: '/images/brain/hoje.webp',
+            alt: 'Painel Hoje com saudação, dois sinais (dados do vault desatualizados e notas centrais paradas), uma ordem do Curador para aprovar e a equipe do dia.',
+            width: 1600,
+            height: 1000,
+          },
+        },
       ],
     },
     features: {
       eyebrow: 'Features',
-      title: 'O que o Brain faz',
-      description: 'Ferramentas para pensar com as próprias notas, sem trocar de app a cada pergunta.',
+      title: 'E o que vem junto',
+      description: 'Detalhes que fazem o Brain ser usado todo dia, e não só na semana em que foi instalado.',
       itemsTitle: 'Recursos',
       items: [
         {
-          title: 'Grafo das notas',
-          description: 'Cada nota vira um ponto e cada link vira uma ligação. Você navega por área, pessoa ou projeto.',
+          title: 'Vault ao vivo',
+          description: 'O Mac publica cada mudança do Obsidian em até um minuto. A nota nova aparece no cérebro sem você fazer nada.',
         },
         {
-          title: 'Assistente com memória',
-          description: 'O Barão responde a partir das suas notas e diz de onde tirou cada resposta.',
+          title: 'Qualquer Claude acende o cérebro',
+          description: 'Pelo conector MCP e pelos ganchos do Claude Code, o que o Claude lê ou edita em outra conversa também acende aqui.',
         },
         {
-          title: 'Seu dia preparado',
-          description: 'Com a agenda ligada, ele mostra os compromissos do dia e o que você anotou sobre cada um.',
+          title: 'Busca que acende',
+          description: 'Ctrl K procura notas e ações. O que aparece pulsa dentro do cérebro, no lugar onde está.',
         },
         {
-          title: 'Ação só com confirmação',
-          description: 'Criar evento, salvar arquivo ou rascunhar e-mail sempre passa por um botão de confirmar.',
+          title: 'Tela limpa quando você quiser',
+          description: 'Camadas ligam e desligam cada parte da tela. Os modos foco e cinema deixam só o cérebro.',
         },
         {
-          title: 'Arquivos que você escolhe',
-          description: 'No Drive, o Brain só enxerga os arquivos que você seleciona no seletor do Google ou que ele mesmo criou.',
+          title: 'Captura rápida e cenas salvas',
+          description: 'N anota uma ideia sem sair do lugar. De 1 a 9 você guarda enquadramentos e volta para eles.',
         },
         {
-          title: 'Configuração no próprio app',
-          description: 'Chaves, conectores e permissões ficam numa tela de configurações. Dá para desligar tudo a qualquer hora.',
+          title: 'Guia com "Experimentar"',
+          description: 'Todos os recursos num guia com busca e um botão que mostra cada um funcionando. A cada versão, um cartão com as novidades.',
+        },
+      ],
+    },
+    mobile: {
+      eyebrow: 'Mobile',
+      title: 'O mesmo cérebro no bolso',
+      description:
+        'No celular, o Brain ganha barra de abas e folhas deslizantes. Perguntar como está o dia ou aprovar uma ordem leva segundos.',
+      shots: [
+        {
+          src: '/images/brain/celular.webp',
+          alt: 'O Brain no celular: o cérebro 3D com os agentes acesos e a barra de abas Cérebro, Atividade, Barão, Equipe e Mais.',
+          width: 786,
+          height: 1704,
+        },
+        {
+          src: '/images/brain/celular-barao.webp',
+          alt: 'O Barão no celular respondendo como está o dia, com uma ordem do Curador esperando aprovação.',
+          width: 786,
+          height: 1704,
+        },
+      ],
+      stepsTitle: 'Como funciona',
+      steps: [
+        {
+          title: 'Você escreve no Obsidian',
+          description: 'Nada muda no seu jeito de anotar. As notas continuam em Markdown, no seu computador.',
+        },
+        {
+          title: 'O Brain monta o cérebro',
+          description: 'Cada nota vai para a região certa, com as ligações, os grupos e o que mudou desde a última visita.',
+        },
+        {
+          title: 'A equipe trabalha e você aprova',
+          description: 'Os agentes leem, resumem e organizam. O que tem efeito fora do vault espera o seu ok.',
         },
       ],
     },
@@ -348,13 +455,20 @@ export const ptBR: SiteContent = {
     },
     access: {
       eyebrow: 'Sign in',
-      title: 'Entre no Brain',
-      description: 'Use a conta que você recebeu no convite. O primeiro acesso leva você às configurações para ligar as notas e o assistente.',
+      title: 'Já usa o Brain?',
+      description: 'Entre com a conta que você recebeu no convite. O primeiro acesso leva você às configurações para ligar as notas e o assistente.',
       cta: 'Entrar no Brain',
       privacy: 'Política de privacidade',
       terms: 'Termos de uso',
       note:
         'Brain is a web app by Leonardo Fonseca Pontes that turns Markdown notes into a navigable graph with an AI assistant. With your permission it reads your Google Calendar and creates events you confirm, and it opens only the Google Drive files you pick (drive.file). Google user data is used only to provide these features, is never sold or used for ads, and follows the Google API Services User Data Policy, including the Limited Use requirements.',
+    },
+    contact: {
+      title: 'Quer um Brain para o seu trabalho?',
+      description:
+        'O Brain nasceu como o meu segundo cérebro. Se você quer algo assim para você ou para o seu time, me conte o seu contexto e eu respondo pessoalmente.',
+      whatsappMessage: 'Olá, Leonardo! Vi a página do Brain Copilot e quero conversar sobre ele.',
+      emailSubject: 'Brain Copilot · contato pelo site',
     },
   },
 

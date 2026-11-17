@@ -176,8 +176,9 @@ export function structuredData(content: SiteContent, page: PageId): Json | null 
         {
           '@type': 'SoftwareApplication',
           '@id': `${canonicalUrl(page)}#app`,
-          name: 'Brain',
+          name: 'Brain Copilot',
           applicationCategory: 'ProductivityApplication',
+          screenshot: `${profile.siteUrl}${content.brainPage.hero.shot.src}`,
           operatingSystem: 'Web',
           url: profile.brain.url,
           description: content.brainPage.meta.description,
