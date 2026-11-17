@@ -13,6 +13,7 @@ import { useRouter } from '@/lib/router/Router';
 import type { PageId } from '@/lib/router/routes';
 import { useServices } from '@/lib/services';
 import { AboutPage } from '@/pages/AboutPage';
+import { BrainPage } from '@/pages/BrainPage';
 import { DiagnosticPage } from '@/pages/DiagnosticPage';
 import { HomePage } from '@/pages/HomePage';
 import { MentoringPage } from '@/pages/MentoringPage';
@@ -24,6 +25,7 @@ const pages: Record<PageId, ComponentType> = {
   mentoring: MentoringPage,
   diagnostic: DiagnosticPage,
   about: AboutPage,
+  brain: BrainPage,
   notFound: NotFoundPage,
 };
 

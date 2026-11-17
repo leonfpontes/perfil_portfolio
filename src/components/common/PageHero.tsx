@@ -20,14 +20,16 @@ interface PageHeroProps {
   secondaryHref: string;
   trackPrefix: string;
   /** A oferta da página: o quadro ao lado do título mostra o que o preço inclui. */
-  plan: Plan;
+  plan?: Plan;
+  /** Sem oferta (ex.: /brain), o quadro mostra uma lista própria no lugar do preço. */
+  panel?: { title: string; heading: string; items: string[] };
 }
 
 /**
  * Abertura das páginas internas, com a mesma coreografia do hero da página inicial:
  * o quadro da oferta sobe, o H1 entra por linhas e, ao rolar, o título acelera para cima.
  */
-export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix, plan }: PageHeroProps) {
+export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix, plan, panel }: PageHeroProps) {
   const { nav, offer } = useContent();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -100,24 +102,26 @@ export function PageHero({ copy, crumb, primaryHref, secondaryHref, trackPrefix,
             <aside data-hero-figure aria-labelledby="oferta-inclui" className="lg:col-span-4" data-glass-light>
               <div data-hero-block className="glass flex h-full flex-col rounded-xl p-6">
                 <p id="oferta-inclui" className="label-caps text-signal">
-                  {offer.includesTitle}
+                  {plan ? offer.includesTitle : panel?.title}
                 </p>
-                <p className="mt-2 font-display text-lg leading-snug">{plan.title}</p>
+                <p className="mt-2 font-display text-lg leading-snug">{plan ? plan.title : panel?.heading}</p>
                 <ul className="mt-5 mb-6 flex flex-col gap-3">
-                  {plan.includes.map((item) => (
+                  {(plan ? plan.includes : (panel?.items ?? [])).map((item) => (
                     <li key={item} className="flex gap-3 text-base leading-snug">
                       <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-signal" strokeWidth={2.25} />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto border-t border-border pt-5">
-                  <p className="flex flex-wrap items-baseline gap-x-2 pt-1">
-                    <span className="font-display text-4xl leading-none">{plan.price}</span>
-                    <span className="text-sm text-muted-foreground">{plan.priceNote}</span>
-                  </p>
-                  <p className="label-caps mt-2 text-muted-foreground">{plan.regularPrice}</p>
-                </div>
+                {plan && (
+                  <div className="mt-auto border-t border-border pt-5">
+                    <p className="flex flex-wrap items-baseline gap-x-2 pt-1">
+                      <span className="font-display text-4xl leading-none">{plan.price}</span>
+                      <span className="text-sm text-muted-foreground">{plan.priceNote}</span>
+                    </p>
+                    <p className="label-caps mt-2 text-muted-foreground">{plan.regularPrice}</p>
+                  </div>
+                )}
               </div>
             </aside>
           </div>

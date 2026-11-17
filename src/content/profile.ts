@@ -23,6 +23,13 @@ export const profile = {
    * WhatsApp e e-mail.
    */
   bookingUrl: null as string | null,
+  /** O Brain (app de notas com assistente): endereço do app, onde fica o login. */
+  brain: {
+    url: 'https://brain.leopontes.com.br',
+    login: 'https://brain.leopontes.com.br/entrar',
+    privacy: 'https://brain.leopontes.com.br/privacidade',
+    terms: 'https://brain.leopontes.com.br/termos',
+  },
   images: {
     portrait: '/images/leonardo-portrait.webp',
     avatar: '/images/leonardo-avatar.webp',

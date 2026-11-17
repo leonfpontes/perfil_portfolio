@@ -20,6 +20,8 @@ export function pageMeta(content: SiteContent, page: PageId): Meta {
       return content.diagnosticPage.meta;
     case 'about':
       return content.aboutPage.meta;
+    case 'brain':
+      return content.brainPage.meta;
     case 'notFound':
       return content.notFound.meta;
   }
@@ -167,6 +169,22 @@ export function structuredData(content: SiteContent, page: PageId): Json | null 
       graph.push(
         { '@type': 'ProfilePage', '@id': `${canonicalUrl(page)}#pagina`, url: canonicalUrl(page), name: content.aboutPage.meta.title, mainEntity: { '@id': ids.person } },
         breadcrumb(content, page, navLabel(content, 'about')),
+      );
+      break;
+    case 'brain':
+      graph.push(
+        {
+          '@type': 'SoftwareApplication',
+          '@id': `${canonicalUrl(page)}#app`,
+          name: 'Brain',
+          applicationCategory: 'ProductivityApplication',
+          operatingSystem: 'Web',
+          url: profile.brain.url,
+          description: content.brainPage.meta.description,
+          publisher: { '@id': ids.business },
+        },
+        faqPage(content.brainPage.faq, page),
+        breadcrumb(content, page, content.nav.brain),
       );
       break;
   }

@@ -25,6 +25,8 @@ export type SectionId =
   | 'formacao'
   | 'depoimentos'
   | 'faq'
+  | 'recursos'
+  | 'acesso'
   | 'contato';
 
 export interface Link {
@@ -61,6 +63,8 @@ export interface Navigation {
   cta: string;
   /** Link para a Área do cliente (/entrar), onde mentorados e empresas entram. */
   clientArea: string;
+  /** Link do rodapé para a página do Brain (/brain). */
+  brain: string;
   toggleLanguage: string;
   openMenu: string;
   skipToContent: string;
@@ -159,6 +163,27 @@ export interface MentoringPage {
   };
   journey: Journey;
   faq: Faq;
+}
+
+/** "/brain": a página inicial pública do Brain (app de notas com assistente) e a porta de entrada dele. */
+export interface BrainPage {
+  meta: Meta;
+  hero: PageHeroCopy;
+  /** Quadro ao lado do título: o que a pessoa liga no Brain. */
+  panel: { title: string; heading: string; items: string[] };
+  features: SectionHeading & {
+    itemsTitle: string;
+    items: { title: string; description: string }[];
+  };
+  /** Como o Brain usa a Conta do Google: perguntas e respostas (também vira FAQPage no schema.org). */
+  faq: Faq;
+  access: SectionHeading & {
+    cta: string;
+    privacy: string;
+    terms: string;
+    /** Resumo em inglês para quem revisa o app (o Google pede o propósito claro). */
+    note: string;
+  };
 }
 
 export interface DiagnosticPage {
@@ -358,6 +383,7 @@ export interface SiteContent {
   mentoringPage: MentoringPage;
   diagnosticPage: DiagnosticPage;
   aboutPage: AboutPage;
+  brainPage: BrainPage;
   notFound: NotFoundPage;
   hero: Hero;
   offer: Offer;

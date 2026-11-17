@@ -4,7 +4,7 @@ import type { SectionId } from '@/content/types';
  * As páginas do site. Cada uma tem a própria URL, o próprio HTML pré-renderizado
  * (scripts/prerender.mjs) e os próprios metadados de SEO (src/seo/head.ts).
  */
-export type PageId = 'home' | 'mentoring' | 'diagnostic' | 'about' | 'notFound';
+export type PageId = 'home' | 'mentoring' | 'diagnostic' | 'about' | 'brain' | 'notFound';
 
 export interface PageRoute {
   id: PageId;
@@ -20,6 +20,7 @@ export const ROUTES: readonly PageRoute[] = [
   { id: 'mentoring', path: '/mentoria-produto', file: 'mentoria-produto.html', indexable: true },
   { id: 'diagnostic', path: '/diagnostico-pmo', file: 'diagnostico-pmo.html', indexable: true },
   { id: 'about', path: '/sobre', file: 'sobre.html', indexable: true },
+  { id: 'brain', path: '/brain', file: 'brain.html', indexable: true },
   // A Vercel serve 404.html, com status 404, para qualquer caminho desconhecido.
   { id: 'notFound', path: '/404', file: '404.html', indexable: false },
 ];
@@ -62,6 +63,7 @@ export const PAGE_SECTIONS: Record<PageId, readonly SectionId[]> = {
   mentoring: ['mentoria', 'jornada', 'faq', 'contato'],
   diagnostic: ['processo', 'diagnostico', 'faq', 'contato'],
   about: ['sobre', 'produtos', 'experiencia', 'competencias', 'formacao', 'servicos', 'contato'],
+  brain: ['recursos', 'faq', 'acesso'],
   notFound: [],
 };
 

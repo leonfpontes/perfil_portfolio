@@ -56,6 +56,11 @@ export function Footer() {
               </li>
             ))}
             <li>
+              <a href={pathOf('brain')} className="text-muted-foreground hover:text-foreground">
+                {nav.brain}
+              </a>
+            </li>
+            <li>
               <a href="/entrar" className="text-muted-foreground hover:text-foreground">
                 {nav.clientArea}
               </a>
