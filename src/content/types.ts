@@ -54,7 +54,7 @@ export interface Meta {
 
 /** Item do menu: uma página do site (ou a âncora de contato, presente em todas). */
 export interface NavItem {
-  id: 'mentoring' | 'diagnostic' | 'about' | 'contact';
+  id: 'mentoring' | 'diagnostic' | 'about' | 'brain' | 'contact';
   label: string;
 }
 
