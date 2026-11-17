@@ -13,10 +13,15 @@ import { useContent } from '@/lib/i18n/LocaleProvider';
 import { useRouter } from '@/lib/router/Router';
 import { useServices } from '@/lib/services';
 import { cn } from '@/lib/utils';
+import type { Contact as ContactCopy } from '@/content/types';
+
+/** Texto que uma página pode trocar no convite (ex.: /brain fala do produto, não da mentoria). */
+export type ContactOverride = Partial<Pick<ContactCopy, 'title' | 'description' | 'whatsappMessage' | 'emailSubject'>>;
 
 /** Encerramento: a página "escurece" e o convite fica sozinho no palco. */
-export function Contact() {
-  const { contact: copy } = useContent();
+export function Contact({ override }: { override?: ContactOverride } = {}) {
+  const { contact: base } = useContent();
+  const copy = { ...base, ...override };
   const { contact } = useServices();
   const { page } = useRouter();
   const details = [copy.responseTime, copy.location, copy.languages, contact.displayPhone()];

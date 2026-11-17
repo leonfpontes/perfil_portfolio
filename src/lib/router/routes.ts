@@ -63,7 +63,7 @@ export const PAGE_SECTIONS: Record<PageId, readonly SectionId[]> = {
   mentoring: ['mentoria', 'jornada', 'faq', 'contato'],
   diagnostic: ['processo', 'diagnostico', 'faq', 'contato'],
   about: ['sobre', 'produtos', 'experiencia', 'competencias', 'formacao', 'servicos', 'contato'],
-  brain: ['recursos', 'faq', 'acesso'],
+  brain: ['produto', 'recursos', 'celular', 'faq', 'acesso', 'contato'],
   notFound: [],
 };
 

@@ -11,7 +11,7 @@ Site estático em React 19 + TypeScript, com build do Vite e deploy na Vercel. S
 | `/diagnostico-pmo` | `diagnostico-pmo.html` | `pages/DiagnosticPage` | Hero com "o que o preço inclui" · `processo` · `diagnostico` · `faq` · `contato` |
 | `/sobre` | `sobre.html` | `pages/AboutPage` | `sobre` · `produtos` · `experiencia` · `competencias` · `formacao` · `servicos` · `contato` |
 | qualquer outra | `404.html` | `pages/NotFoundPage` | 404 (a Vercel responde com status 404), `noindex` |
-| `/brain` | `brain.html` | `pages/BrainPage` | `recursos` · `faq` · `acesso`. Página inicial pública do Brain (exigida pelo Google na verificação do app); o botão leva a `brain.leopontes.com.br/entrar` |
+| `/brain` | `brain.html` | `pages/BrainPage` | `produto` · `recursos` · `celular` · `faq` · `acesso` · `contato`. Página de produto do Brain Copilot, com capturas reais do app (vault fictício, em `public/images/brain/`). Também é a página inicial pública que o Google confere na verificação do app: o FAQ da Conta do Google e o resumo em inglês ficam em `faq` e `acesso`. Termina no contato, com o texto do Brain |
 | `/entrar` | `entrar.html` | `entrar/` | Área do cliente: outro documento, `noindex` |
 
 As rotas, a numeração das seções de cada página (§ 01, § 02…) e o mapa das âncoras antigas (`/#produtos` → `/sobre#produtos`) ficam em `lib/router/routes.ts`.

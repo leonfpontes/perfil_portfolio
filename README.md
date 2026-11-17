@@ -70,7 +70,7 @@ recarregar, com View Transitions: o cabeçalho fica parado e a página nova sobe
 | `/mentoria-produto` | Para quem é, o que trabalhamos, preço, como funciona, perguntas frequentes |
 | `/diagnostico-pmo` | Etapas (Conversa inicial → Diagnóstico → Plano de ação → Execução acompanhada), entregáveis, preço, perguntas frequentes |
 | `/sobre` | História, produtos autorais, trajetória, competências, formação |
-| `/brain` | Página pública do Brain (app de notas com assistente): o que faz, como usa a Conta do Google e o botão para entrar em `brain.leopontes.com.br`. É a página inicial que o Google confere na verificação do app |
+| `/brain` | Página de produto do Brain Copilot (o vault do Obsidian como um cérebro 3D, com o Barão e a equipe de agentes): capturas reais do app, recursos, celular, como usa a Conta do Google, o login em `brain.leopontes.com.br` e, no fim, o convite para conversar. É também a página inicial que o Google confere na verificação do app |
 | `/entrar` | Área do cliente: entrada na plataforma por código ou link por e-mail (`noindex`) |
 | qualquer outra | 404 de verdade (`noindex`) |
 

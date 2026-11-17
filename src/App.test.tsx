@@ -153,4 +153,22 @@ describe('<App />', () => {
     }
     expect(within(footer).getAllByRole('link', { name: /whatsapp/i })[0]).toHaveAttribute('href', expect.stringContaining('wa.me'));
   });
+
+  it('a /brain é uma página de produto com capturas reais, o login do app e, no fim, o contato', () => {
+    renderApp('/brain');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/agentes trabalhando nele/i);
+    const ids = ['produto', 'recursos', 'celular', 'faq', 'acesso', 'contato'];
+    const sections = [...document.querySelectorAll('section[id]')].map((s) => s.id);
+    expect(sections.filter((id) => ids.includes(id))).toEqual(ids);
+    expect(sections.at(-1)).toBe('contato');
+    for (const img of document.querySelectorAll<HTMLImageElement>('#inicio img, #produto img, #celular img')) {
+      expect(img.getAttribute('src')).toMatch(/^\/images\/brain\/.+\.webp$/);
+      expect(img.alt.length).toBeGreaterThan(20);
+    }
+    expect(screen.getByRole('link', { name: /quero um brain assim/i })).toHaveAttribute('href', '#contato');
+    expect(screen.getByRole('link', { name: /^entrar no brain/i })).toHaveAttribute('href', 'https://brain.leopontes.com.br/entrar');
+    const contact = document.getElementById('contato')!;
+    expect(within(contact).getByRole('heading', { level: 2 })).toHaveTextContent(/quer um brain para o seu trabalho/i);
+    expect(within(contact).getByRole('link', { name: /whatsapp/i })).toHaveAttribute('href', expect.stringContaining('Brain%20Copilot'));
+  });
 });

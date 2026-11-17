@@ -25,7 +25,9 @@ export type SectionId =
   | 'formacao'
   | 'depoimentos'
   | 'faq'
+  | 'produto'
   | 'recursos'
+  | 'celular'
   | 'acesso'
   | 'contato';
 
@@ -165,15 +167,35 @@ export interface MentoringPage {
   faq: Faq;
 }
 
-/** "/brain": a página inicial pública do Brain (app de notas com assistente) e a porta de entrada dele. */
+/** Uma captura real do app, com o texto alternativo (o que a imagem mostra). */
+export interface Screenshot {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+/** "/brain": a página de produto do Brain Copilot, que também é a página inicial pública do app. */
 export interface BrainPage {
   meta: Meta;
-  hero: PageHeroCopy;
-  /** Quadro ao lado do título: o que a pessoa liga no Brain. */
-  panel: { title: string; heading: string; items: string[] };
+  hero: PageHeroCopy & {
+    shot: Screenshot;
+    /** Legenda de vidro sobre a captura (de onde vêm os dados mostrados). */
+    shotCaption: string;
+  };
+  /** O produto em quatro telas: cada uma com captura, título e o que ela resolve. */
+  tour: SectionHeading & {
+    items: { label: string; title: string; description: string; points: string[]; shot: Screenshot }[];
+  };
   features: SectionHeading & {
     itemsTitle: string;
     items: { title: string; description: string }[];
+  };
+  /** No celular e como funciona: as telas do celular e os três passos do vault até a tela. */
+  mobile: SectionHeading & {
+    shots: Screenshot[];
+    stepsTitle: string;
+    steps: { title: string; description: string }[];
   };
   /** Como o Brain usa a Conta do Google: perguntas e respostas (também vira FAQPage no schema.org). */
   faq: Faq;
@@ -184,6 +206,8 @@ export interface BrainPage {
     /** Resumo em inglês para quem revisa o app (o Google pede o propósito claro). */
     note: string;
   };
+  /** O convite final: mesmo bloco de contato do site, com o texto do Brain. */
+  contact: Pick<Contact, 'title' | 'description' | 'whatsappMessage' | 'emailSubject'>;
 }
 
 export interface DiagnosticPage {
