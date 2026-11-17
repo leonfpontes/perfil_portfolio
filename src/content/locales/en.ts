@@ -13,6 +13,7 @@ export const en: SiteContent = {
     home: 'Home',
     cta: 'Book a call',
     clientArea: 'Client area',
+    brain: 'Brain',
     toggleLanguage: 'Mudar para português',
     openMenu: 'Open menu',
     skipToContent: 'Skip to content',
@@ -251,6 +252,109 @@ export const en: SiteContent = {
       title: 'About Leonardo Pontes: Product, PMO, Data and AI',
       description:
         "Leonardo Pontes' background: Product Owner, PMO manager and Technology, Data & AI manager. MBA in Project Management from USP and creator of GiraHub.",
+    },
+  },
+
+  brainPage: {
+    meta: {
+      title: 'Brain: your notes with an assistant that reads, organizes and remembers | Leonardo Pontes',
+      description:
+        'Brain is a web app that turns your Markdown notes into a navigable graph, with an assistant that answers from them, organizes your calendar and only uses the Google Drive files you choose.',
+    },
+    hero: {
+      eyebrow: 'Product · Brain',
+      title: 'Your notes, calendar and files in one place, with an',
+      titleHighlight: 'assistant that remembers.',
+      description:
+        'Brain is a web app built by Leonardo Pontes. It shows your notes as a navigable graph and brings Barão, an assistant that answers from what you wrote, prepares your day and only touches your calendar or files after you confirm.',
+      primaryCta: 'Sign in to Brain',
+      secondaryCta: 'See what it does',
+      facts: [
+        { label: 'Format', value: 'Web app' },
+        { label: 'Notes', value: 'Markdown, in your vault' },
+        { label: 'Assistant', value: 'Claude, with your key' },
+        { label: 'Google', value: 'Optional, by permission' },
+      ],
+    },
+    panel: {
+      title: 'What you connect',
+      heading: 'You only connect what you want to use.',
+      items: [
+        'Your Markdown notes (Obsidian vault)',
+        'Google Calendar, to see and create events',
+        'Google Drive files you pick',
+        'Your Claude API key',
+        'GitHub and other connectors, if you want',
+      ],
+    },
+    features: {
+      eyebrow: 'Features',
+      title: 'What Brain does',
+      description: 'Tools to think with your own notes, without switching apps for every question.',
+      itemsTitle: 'Features',
+      items: [
+        {
+          title: 'Note graph',
+          description: 'Each note becomes a point and each link a connection. Browse by area, person or project.',
+        },
+        {
+          title: 'Assistant with memory',
+          description: 'Barão answers from your notes and tells you where each answer came from.',
+        },
+        {
+          title: 'Your day, prepared',
+          description: 'With the calendar connected, it shows today’s meetings and what you wrote about each one.',
+        },
+        {
+          title: 'Actions only after you confirm',
+          description: 'Creating an event, saving a file or drafting an email always goes through a confirm button.',
+        },
+        {
+          title: 'Files you choose',
+          description: 'In Drive, Brain only sees the files you select in Google’s picker or the ones it created.',
+        },
+        {
+          title: 'Set up inside the app',
+          description: 'Keys, connectors and permissions live in a settings screen. You can turn everything off at any time.',
+        },
+      ],
+    },
+    faq: {
+      eyebrow: 'Google data',
+      title: 'How Brain uses your Google Account',
+      description: 'The full privacy policy is at brain.leopontes.com.br/privacidade.',
+      items: [
+        {
+          question: 'Why does Brain ask for access to my Google Account?',
+          answer:
+            'So the assistant can see your calendar and create events when you ask, and read or save the Drive files you choose. Without the connection, Brain keeps working with your notes only.',
+        },
+        {
+          question: 'Which permissions does it ask for?',
+          answer:
+            'Calendar: see your calendars and create or edit events. Files: access only to the files you select or that Brain creates (drive.file), never your whole Drive. Gmail is a separate request that only appears if you decide to turn it on.',
+        },
+        {
+          question: 'What is stored and who sees it?',
+          answer:
+            'Brain stores the Google access token encrypted, tied to your workspace, to keep the connection. Google data is used only to answer what you asked at that moment. It is not sold, not used for ads and does not train AI models.',
+        },
+        {
+          question: 'How do I disconnect?',
+          answer:
+            'In Settings > Connectors > Google, tap Disconnect. Brain revokes the permission at Google and deletes the token. You can also remove access at myaccount.google.com/permissions.',
+        },
+      ],
+    },
+    access: {
+      eyebrow: 'Sign in',
+      title: 'Sign in to Brain',
+      description: 'Use the account from your invitation. Your first visit takes you to settings to connect your notes and the assistant.',
+      cta: 'Sign in to Brain',
+      privacy: 'Privacy policy',
+      terms: 'Terms of use',
+      note:
+        'Brain is a web app by Leonardo Fonseca Pontes that turns Markdown notes into a navigable graph with an AI assistant. With your permission it reads your Google Calendar and creates events you confirm, and it opens only the Google Drive files you pick (drive.file). Google user data is used only to provide these features, is never sold or used for ads, and follows the Google API Services User Data Policy, including the Limited Use requirements.',
     },
   },
 

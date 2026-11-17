@@ -70,6 +70,7 @@ recarregar, com View Transitions: o cabeçalho fica parado e a página nova sobe
 | `/mentoria-produto` | Para quem é, o que trabalhamos, preço, como funciona, perguntas frequentes |
 | `/diagnostico-pmo` | Etapas (Conversa inicial → Diagnóstico → Plano de ação → Execução acompanhada), entregáveis, preço, perguntas frequentes |
 | `/sobre` | História, produtos autorais, trajetória, competências, formação |
+| `/brain` | Página pública do Brain (app de notas com assistente): o que faz, como usa a Conta do Google e o botão para entrar em `brain.leopontes.com.br`. É a página inicial que o Google confere na verificação do app |
 | `/entrar` | Área do cliente: entrada na plataforma por código ou link por e-mail (`noindex`) |
 | qualquer outra | 404 de verdade (`noindex`) |
 
@@ -97,7 +98,7 @@ flowchart LR
   C[Cliente] --> W
 
   subgraph W["www.leopontes.com.br · Vercel"]
-    H["HTML pré-renderizado por rota<br/>/, /mentoria-produto, /diagnostico-pmo, /sobre, 404"]
+    H["HTML pré-renderizado por rota<br/>/, /mentoria-produto, /diagnostico-pmo, /sobre, /brain, 404"]
     E["/entrar<br/>Área do cliente"]
   end
 
