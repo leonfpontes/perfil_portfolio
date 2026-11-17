@@ -84,6 +84,6 @@ export const LEGACY_ANCHORS: Partial<Record<string, { page: PageId; hash: string
 };
 
 /** Destino de um item do menu: a página, ou a âncora de contato (que encerra todas as páginas). */
-export function navHref(id: 'mentoring' | 'diagnostic' | 'about' | 'contact'): string {
+export function navHref(id: 'mentoring' | 'diagnostic' | 'about' | 'brain' | 'contact'): string {
   return id === 'contact' ? '#contato' : pathOf(id);
 }

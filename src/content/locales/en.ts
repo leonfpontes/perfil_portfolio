@@ -8,6 +8,7 @@ export const en: SiteContent = {
       { id: 'mentoring', label: 'Mentoring' },
       { id: 'diagnostic', label: 'Diagnostic' },
       { id: 'about', label: 'About' },
+      { id: 'brain', label: 'Brain' },
       { id: 'contact', label: 'Contact' },
     ],
     home: 'Home',

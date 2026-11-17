@@ -8,6 +8,7 @@ export const ptBR: SiteContent = {
       { id: 'mentoring', label: 'Mentoria' },
       { id: 'diagnostic', label: 'Diagnóstico' },
       { id: 'about', label: 'Sobre' },
+      { id: 'brain', label: 'Brain' },
       { id: 'contact', label: 'Contato' },
     ],
     home: 'Início',
